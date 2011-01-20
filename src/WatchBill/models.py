@@ -312,7 +312,6 @@ ATTEND_STATUS_CHOICES = (
                          ('A','Absent'),
                          ('U','Unauthorized Absent'),
                          ('E','Excused'),
-                         ('')
                          )
 
 #WATCHBILL_TYPE_CHOICES = ()
