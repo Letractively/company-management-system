@@ -307,7 +307,13 @@ EVENT_TYPE_CHOICES = (
                      ('OTH','Other Special Event'),
                     )
 
-#ATTEND_STATUS_CHOICES = ()
+ATTEND_STATUS_CHOICES = (
+                         ('P','Present'),
+                         ('A','Absent'),
+                         ('U','Unauthorized Absent'),
+                         ('E','Excused'),
+                         ('')
+                         )
 
 #WATCHBILL_TYPE_CHOICES = ()
 
