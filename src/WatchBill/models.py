@@ -296,9 +296,16 @@ class Report0800(models.Model):
                                 )
     Force_Protection_Condition = models.CharField(max_length=1, choices=FORCE_PROTECTION_CHOICES)
 
-#EVENT_TYPE_CHOICES = (
- #                     ('MMF','Morning Meal')
-  #                    )
+EVENT_TYPE_CHOICES = (
+                     ('MMF','Morning Meal'),
+                     ('NMF','Noon Meal Formation'),
+                     ('EMF','Evening Meal Formation'),
+                     ('TAP','TAPS'),
+                     ('FOR','Forrestal Lecture'),
+                     ('DRL','Drill'),
+                     ('CAL','Officers Call')
+                     ('OTH','Other Special Event'),
+                    )
 
 #ATTEND_STATUS_CHOICES = ()
 
@@ -307,9 +314,9 @@ class Report0800(models.Model):
 #WATCH_TYPE_CHOICES = ()
 
 #class Event(models.Model):
- #   DateTime = 
- #   Type
- #   Location
+#   DateTime = 
+#   Type
+#   Location
     
 #class Attendance(models.Model):
 #    Event = 
