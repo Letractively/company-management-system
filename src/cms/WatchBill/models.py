@@ -303,7 +303,7 @@ EVENT_TYPE_CHOICES = (
                      ('TAP','TAPS'),
                      ('FOR','Forrestal Lecture'),
                      ('DRL','Drill'),
-                     ('CAL','Officers Call')
+                     ('CAL','Officers Call'),
                      ('OTH','Other Special Event'),
                     )
 
