@@ -91,6 +91,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'WatchBill',
+    'Accountability',
+    'Brovo_Inspection',
+    'Company_BLog',
+    'Company_Watch',
+    'MID',
+    'ORM',
+    'Report_0800',
+    'SpecialRequestChit',
+    'Uniform_Inspection',
+    'Weekends',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
