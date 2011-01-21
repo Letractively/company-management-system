@@ -76,7 +76,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'CMS.urls'
+# mlaws 1-21.  i removed the CMS because that's one part where the tutorial leads you astray according to nate. 
+# look at the currently active poll project on the linode.
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
