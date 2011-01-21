@@ -314,9 +314,15 @@ ATTEND_STATUS_CHOICES = (
                          ('E','Excused'),
                          )
 
-#WATCHBILL_TYPE_CHOICES = ()
+WATCHBILL_TYPE_CHOICES = (
+                          
+                          )
 
-#WATCH_TYPE_CHOICES = ()
+WATCH_TYPE_CHOICES = (
+                      ('CMDO','Company Mate of the Deck'),
+                      ('ACDO','Asistant Company Duty Officer'),
+                      ('CDO','Company Duty Officer'),
+                      )
 
 #class Event(models.Model):
 #   DateTime = 
