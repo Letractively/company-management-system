@@ -92,7 +92,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'WatchBill',
     'Accountability',
     'Brovo_Inspection',
     'Company_BLog',
