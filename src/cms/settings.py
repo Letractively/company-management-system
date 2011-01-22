@@ -94,7 +94,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'Accountability',
     'Brovo_Inspection',
-    'Company_BLog',
+    'Company_Blog',
     'Company_Watch',
     'MID',
     'ORM',
