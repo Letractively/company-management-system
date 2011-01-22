@@ -1,3 +1,5 @@
+#summary CMS basis and index page
+
 = Introduction =
 
 Company Management System (CMS) is a web-based application developed for the U.S. Naval Academy for the purpose of streamlining and simplifying the required administrative paperwork.The application employs a number of distinct modules with the database backend for easy data storage, management and retrieval.  
