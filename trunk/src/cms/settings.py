@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'm112802',                      # Or path to database file if using sqlite3.
+        'NAME': '',                      # Or path to database file if using sqlite3.
 # i made cms/cms12#$ mysql user/pass on the linode.
         'USER': 'm112802',                      # Not used with sqlite3.
         'PASSWORD': 'm1128024321',                  # Not used with sqlite3.
@@ -93,7 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'Accountability',
-    'Brovo_Inspection',
+    'Bravo_Inspection',
     'Company_Blog',
     'Company_Watch',
     'MID',
