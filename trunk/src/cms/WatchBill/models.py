@@ -123,11 +123,11 @@ CHIT_REQUEST_LEVEL = (
                    ('CO','LT K. Igawa, USN'),
                    ('CSEL','AECS Morring, USN'),
                    )
-"""
+
 class Room(models.Model):
     RoomNumber = models.CharField(max_length=4,primary_key=True,choices=ROOM_CHOICES)
     maxOccupants = models.CharField(max_length=1)
-"""
+
 class Mid(models.Model):
     Alpha = models.CharField(max_length=6,primary_key=True)
     L_Name = models.CharField(max_length=30)
