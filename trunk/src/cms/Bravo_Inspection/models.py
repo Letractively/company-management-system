@@ -1,5 +1,5 @@
 from django.db import models
-from MID import MID
+from MID import Mid
 # Create your models here.
 
 class Brovo_Inspection(models.Model):
