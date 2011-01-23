@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-BILLET_CHOICES = (
+"""BILLET_CHOICES = (
     ('CC','Company Commander'),
     ('XO','Executive Officer'),
     ('HA','Honor Advisor'),
@@ -123,11 +123,11 @@ CHIT_REQUEST_LEVEL = (
                    ('CO','LT K. Igawa, USN'),
                    ('CSEL','AECS Morring, USN'),
                    )
-
+"""
 class Room(models.Model):
     RoomNumber = models.CharField(max_length=4,primary_key=True,choices=ROOM_CHOICES)
     maxOccupants = models.CharField(max_length=1)
-
+"""
 class Mid(models.Model):
     Alpha = models.CharField(max_length=6,primary_key=True)
     L_Name = models.CharField(max_length=30)
@@ -146,7 +146,7 @@ class Mid(models.Model):
     PerfGrade = models.CharField(max_length=1)
     ConductGrade = models.CharField(max_length=1)
     PRT = models.IntegerField(max_length=3)
-    
+
 class Billets(models.Model):
     mid = models.ForeignKey(Mid)
     Billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
@@ -154,7 +154,7 @@ class Billets(models.Model):
     endDate = models.DateField()
     Evaluation = models.TextField()
     Current = models.BooleanField()
-
+"""
 class Brovo_Inspection(models.Model):
     #List of possible hits for a Brovo room inspection
     Inspector = models.ForeignKey(Mid)
