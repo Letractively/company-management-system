@@ -1,10 +1,9 @@
 from django.db import models
-from projects.CMS.cms.MID import MID
 # Create your models here.
 
 class Brovo_Inspection(models.Model):
     #List of possible hits for a Brovo room inspection
-    Inspector = models.ForeignKey(Mid)
+    Inspector = models.ForeignKey(MID.Mid)
     Room = models.ForeignKey(Room)
     Deck = models.BooleanField()
     Laundry = models.BooleanField()
