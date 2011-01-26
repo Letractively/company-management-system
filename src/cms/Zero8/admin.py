@@ -1,4 +1,4 @@
 from django.contrib import admin
-from WatchBill.models import Mid
+from Zero8.models import Zero8
 
-admin.site.register(Mid)
+admin.site.register(Zero8)
