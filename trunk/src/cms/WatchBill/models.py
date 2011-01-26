@@ -253,7 +253,7 @@ class Methods_of_Travel(models.Model):
     Method_of_Travel = models.CharField(max_length=20)
     RAC = models.IntegerField()
     Risk_management_plan = models.TextField()
-"""
+
 class Form1(models.Model):
     FORM1_TYPE_CHOICES = (
                           ('P','Positive'),
@@ -283,7 +283,7 @@ class Form1(models.Model):
                           ('A','Fwd for Adjudication'),
                           )
     Resolution = models.CharField(max_length=1,choices=RESOLUTION_CHOICES)
-    
+
 class Report0800(models.Model):
     Offgoing_CDO = models.ForeignKey(Mid, related_name='+')
     Oncoming_CDO = models.ForeignKey(Mid, related_name='+')
@@ -336,7 +336,7 @@ class Attendance(models.Model):
     Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
     Comment = models.TextField()
     Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
-    
+"""
 class WatchBill(models.Model):
     Date = models.DateField()
     Type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
