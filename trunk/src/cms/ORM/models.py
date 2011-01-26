@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class ORM_Chit(models.Model):
-    mid = models.ForeignKey(Mid)
+    mid = models.ForeignKey("MID.Mid")
     L_Street1 = models.CharField(max_length=20)
     L_Street2 = models.CharField(max_length=20)
     L_City = models.CharField(max_length=30)
