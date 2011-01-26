@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     (r'^Company_Watch/', include('Company_Watch.urls')),
     (r'^MID/', include('MID.urls')),    # this app may or may not need a url path.  i'm thinking no, but here it is for now - mlaws
     (r'^ORM/', include('ORM.urls')),
-    (r'^Report_0800/', include('Report_0800.urls')),
+    (r'^Zero8/', include('Report_0800.urls')),
     (r'^SpecialRequestChit/', include('SpecialRequestChit.urls')),
     (r'^Uniform_Inspection/', include('Uniform_Inspection.urls')),
     (r'^Uniform_Inspection/', include('Uniform_Inspection.urls')),
