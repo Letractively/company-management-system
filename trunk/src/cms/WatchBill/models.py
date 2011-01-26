@@ -182,7 +182,7 @@ class Brovo_Inspection(models.Model):
     Bright_work = models.BooleanField()
     Material_deficiencies = models.BooleanField()
     Rifles = models.BooleanField()
-"""
+
 class Uniform_Inspection(models.Model):
     #List of possible hits for a uniform inspection
     Inspector = models.ForeignKey(Mid)
@@ -214,7 +214,7 @@ class Weekend(models.Model):
     Enddate = models.DateField()
     Location = models.CharField(max_length=40)
     ContactNumber = models.CharField(max_length=10)
-    
+
 class SpecialRequestChit(models.Model):
     mid = models.ForeignKey(Mid)
     Date = models.DateField()
@@ -224,7 +224,7 @@ class SpecialRequestChit(models.Model):
     RequestType = models.CharField(max_length=1, choices=REQUEST_TYPES)
     otherRequestType = models.CharField(max_length=30)
     Justification = models.TextField()
-    
+
 class ORM_Chit(models.Model):
     mid = models.ForeignKey(Mid)
     L_Street1 = models.CharField(max_length=20)
@@ -253,7 +253,7 @@ class Methods_of_Travel(models.Model):
     Method_of_Travel = models.CharField(max_length=20)
     RAC = models.IntegerField()
     Risk_management_plan = models.TextField()
-    
+"""
 class Form1(models.Model):
     FORM1_TYPE_CHOICES = (
                           ('P','Positive'),
