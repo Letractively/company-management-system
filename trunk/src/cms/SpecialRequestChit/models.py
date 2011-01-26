@@ -1,7 +1,20 @@
 from django.db import models
 
 # Create your models here.
-
+REQUEST_TYPES = (
+                 ('W','Weekend Liberty'),
+                 ('D','Dining Out'),
+                 ('L','Leave'),
+                 ('O','Other'),
+                 )
+CHIT_REQUEST_LEVEL = (
+                   ('SUPE','VADM M.H. Miller, USN'),
+                   ('DANT','CAPT R.E. Clark II, USN'),
+                   ('DDNT','CAPT B.P. O Donnell, USN'),
+                   ('BATO','CAPT A. Jerrett, USN'),
+                   ('CO','LT K. Igawa, USN'),
+                   ('CSEL','AECS Morring, USN'),
+                   )
 class SpecialRequestChit(models.Model):
     mid = models.ForeignKey("MID.Mid")
     Date = models.DateField()
