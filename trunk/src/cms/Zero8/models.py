@@ -33,7 +33,7 @@ class Absencs(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Name = models.ForeignKey("MID.Mid")
     Authorized = models.BooleanField()
-    Description = models.CharField(max_ength=20)
+    Description = models.CharField(max_length=20)
     Admin_Note = models.CharField(max_length=90)
     REASON_CHOICES = (
                      ('AA','Authorized Absence'),
@@ -144,5 +144,15 @@ COMPANIES=(
 class Inturmural_Results(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Sport = models.CharField(max_length=30)
+    Oponant = models.CharField(max_length=2,choices=COMPANIES)
+    WIN = models.BooleanField()
+    Score_US = models.IntegerField()
+    Score_THEM = models.IntegerField()
+    Admin_Note = models.CharField(max_length=90)
     
-    
+class Next_Day_Event(models.Model):
+    Event = models.CharField(max_length=50)
+    Location = models.CharField(max_length=50)
+    DateTime = models.DateTimeField()
+    POC = models.CharField(max_length=50)
+    Admin_Note = models.CharField(max_length=90)
