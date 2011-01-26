@@ -26,7 +26,30 @@ class SIG_EVENTS(models.Model):
                      )
     Section = models.CharField(max_length=1, choices=SECTION_CHOICES)
     Name = models.ForeignKey("MID.Mid")
-    Description = models.TextField()
-    Admin_Note = models.TextField()
+    Description = models.CharField(max_length=30)
+    Admin_Note = models.CharField(max_length=90)
     
-class
+class Absencs(models.Model):
+    Zero8 = models.ForeignKey(Zero8)
+    Name = models.ForeignKey("MID.Mid")
+    Authorized = models.BooleanField()
+    Description = models.CharField(max_ength=20)
+    Admin_Note = models.CharField(max_length=90)
+    REASON_CHOICES = (
+                     ('AA','Authorized Absence'),
+                     ('UA','Unauthorized Absence'),
+                     ('WE','Weekend'),
+                     ('MO','Movement Order'),
+                     )
+    Reason = models.CharField(max_length=2,choices=REASON_CHOICES)
+    
+class MO(models.Model):
+    Zero8 = models.ForeignKey(Zero8)
+    Organization = models.CharField(max_length=30)
+    MO_Code = models.ForeignKey("MID.Mid")
+    Depart = models.DateField()
+    Return = models.DateField()
+    Admin_Note = models.CharField(max_length=90)
+    
+
+    
