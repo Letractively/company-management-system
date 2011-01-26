@@ -154,7 +154,7 @@ class Billets(models.Model):
     endDate = models.DateField()
     Evaluation = models.TextField()
     Current = models.BooleanField()
-"""
+
 class Brovo_Inspection(models.Model):
     #List of possible hits for a Brovo room inspection
     Inspector = models.ForeignKey(Mid)
@@ -182,7 +182,7 @@ class Brovo_Inspection(models.Model):
     Bright_work = models.BooleanField()
     Material_deficiencies = models.BooleanField()
     Rifles = models.BooleanField()
-    
+"""
 class Uniform_Inspection(models.Model):
     #List of possible hits for a uniform inspection
     Inspector = models.ForeignKey(Mid)

@@ -3,8 +3,8 @@ from django.db import models
 
 class Brovo_Inspection(models.Model):
     #List of possible hits for a Brovo room inspection
-    Inspector = models.ForeignKey(MID.Mid)
-    Room = models.ForeignKey(Room)
+    Inspector = models.ForeignKey("MID.Mid")
+    Room = models.ForeignKey("MID.Room")
     Deck = models.BooleanField()
     Laundry = models.BooleanField()
     Mold = models.BooleanField()
