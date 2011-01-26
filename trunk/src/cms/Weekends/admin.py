@@ -1,4 +1,4 @@
 from django.contrib import admin
-from WatchBill.models import Mid
+from Weekends.models import Weekend
 
-admin.site.register(Mid)
+admin.site.register(Weekend)

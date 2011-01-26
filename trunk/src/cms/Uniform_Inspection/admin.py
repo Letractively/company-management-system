@@ -1,4 +1,4 @@
 from django.contrib import admin
-from WatchBill.models import Mid
+from Uniform_Inspection.models import Uniform_Inspection
 
-admin.site.register(Mid)
+admin.site.register(Uniform_Inspection)
