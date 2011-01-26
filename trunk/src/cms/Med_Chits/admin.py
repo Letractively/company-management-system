@@ -1,4 +1,4 @@
 from django.contrib import admin
-from WatchBill.models import Mid
+from Med_Chits.models import chit
 
-admin.site.register(Mid)
+admin.site.register(chit)
