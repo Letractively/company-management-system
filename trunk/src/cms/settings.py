@@ -95,7 +95,7 @@ INSTALLED_APPS = (
     'MID',
     'Accountability',
     'Bravo_Inspection',
-    'Company_Blog',
+    #'Company_Blog',
     'Company_Watch',
     'ORM',
     'Zero8',
