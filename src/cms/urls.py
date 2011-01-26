@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # put url's to all the apps in this folder.
     (r'^Accountability/', include('Accountability.urls')),
     (r'^Bravo_Inspection/', include('Bravo_Inspection.urls')),
-    (r'^Company_Blog/', include('Company_Blog.urls')),
+    #(r'^Company_Blog/', include('Company_Blog.urls')),
     (r'^Company_Watch/', include('Company_Watch.urls')),
     (r'^MID/', include('MID.urls')),    # this app may or may not need a url path.  i'm thinking no, but here it is for now - mlaws
     (r'^ORM/', include('ORM.urls')),
