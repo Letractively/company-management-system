@@ -37,7 +37,7 @@ class Event(models.Model):
     
 class Attendance(models.Model):
     Event = models.ForeignKey(Event) 
-    Mid = models.ForeignKey(Mid)
+    Mid = models.ForeignKey("MID.Mid")
     Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
     Comment = models.TextField()
     Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
