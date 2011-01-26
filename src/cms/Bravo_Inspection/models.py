@@ -1,7 +1,7 @@
 from django.db import models
 # Create your models here.
 
-class Brovo_Inspection(models.Model):
+class Bravo_Inspection(models.Model):
     #List of possible hits for a Brovo room inspection
     Inspector = models.ForeignKey("MID.Mid")
     Room = models.ForeignKey("MID.Room")
