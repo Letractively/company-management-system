@@ -98,7 +98,7 @@ INSTALLED_APPS = (
     'Company_Blog',
     'Company_Watch',
     'ORM',
-    'Report_0800',
+    'Zero8',
     'SpecialRequestChit',
     'Uniform_Inspection',
     'Weekends',
