@@ -18,18 +18,6 @@ ATTEND_STATUS_CHOICES = (
                          ('U','Unauthorized Absent'),
                          ('E','Excused'),
                          )
-
-WATCHBILL_TYPE_CHOICES = (
-                          ('W','Work day'),
-                          ('H','Holiday'),
-                          )
-
-WATCH_TYPE_CHOICES = (
-                      ('CMDO','Company Mate of the Deck'),
-                      ('ACDO','Asistant Company Duty Officer'),
-                      ('CDO','Company Duty Officer'),
-                      )
-
 class Event(models.Model):
    DateTime = models.DateTimeField() 
    Type = models.CharField(max_length=3, choices=EVENT_TYPE_CHOICES)
