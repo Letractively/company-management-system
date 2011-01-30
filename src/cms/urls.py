@@ -8,7 +8,8 @@ urlpatterns = patterns('',
 
     # put url's to all the apps in this folder.
     #Initial login page
-    #(r'^CMS/$', 'mid.views.login'),
+    (r'^$', 'MID.views.loginPage'),
+    (r'^login$', 'MID.views.log_in'),
 
     (r'^Accountability/', include('Accountability.urls')),
     (r'^Bravo_Inspection/', include('Bravo_Inspection.urls')),
