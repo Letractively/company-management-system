@@ -1,0 +1,16 @@
+<h1>Login to the Company Management Database</h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+{% if repeat %}
+    <h3>Incorrect credentials. Try again.</h3>
+{% endif %}
+
+<form action="login" method="post">
+{% csrf_token %}
+	<input type="text" name="username" /><br /><br />
+	<input type="password" name="password" /><br /><br />
+	<input type="submit" value="Login" />
+</form>

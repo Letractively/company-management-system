@@ -1,0 +1,15 @@
+    <h1>User logged in.</h1>
+    
+    {{ user }}
+    
+    <ul>
+    {% for group in user.get_all_groups %}
+        <li>{{ group }}</li>
+    {% endfor %}
+    </ul>
+    
+    <ul>
+    {% for perm in user.get_all_permissions %}
+        <li>{{ perm }}</li>
+    {% endfor %}
+    </ul>

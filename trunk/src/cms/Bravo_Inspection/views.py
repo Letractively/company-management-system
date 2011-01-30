@@ -1,7 +1,14 @@
-# Create your views here.
+from django.http import HttpResponse
+from django.http import Http404
+from Bravo_Inspection.models import Bravo_Inspection
 
-def enter(request, poll_id):
-    return HttpResponse("You're entering inspection  %s." % poll_id)
 
-def review(request, poll_id):
-    return HttpResponse("You're looking at the results of inspection %s." % poll_id)
+def index(request):
+    return HttpResponse();
+
+def enter(request, bInspection_id):
+    return HttpResponse("You're entering inspection  %s." % bInspection_id);
+
+def review(request, bInspection_id):
+    p = get_object_or_404(Bravo_Inspection, pk=bInspection_id)
+    return HttpResponse(p)
