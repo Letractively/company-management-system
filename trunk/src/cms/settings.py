@@ -5,6 +5,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
+    ('usnacwa', 'usnacwa@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -12,11 +13,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'm112802',                      # Or path to database file if using sqlite3.
+        'NAME': 'cms',                      # Or path to database file if using sqlite3.
 # i made cms/cms12#$ mysql user/pass on the linode.
-        'USER': 'm112802',                      # Not used with sqlite3.
-        'PASSWORD': 'm1128024321',                  # Not used with sqlite3.
-        'HOST': 'schooner.cs.usna.edu',                      # Set to empty string for localhost. Not used with sqlite3.
+        'USER': 'cms',                      # Not used with sqlite3.
+        'PASSWORD': 'cms12#$',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
