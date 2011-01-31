@@ -31,5 +31,5 @@ class Attendance(models.Model):
     Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
     Comment = models.TextField()
     Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Mid + " - " + self.Event 

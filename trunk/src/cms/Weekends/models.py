@@ -8,5 +8,5 @@ class Weekend(models.Model):
     Enddate = models.DateField()
     Location = models.CharField(max_length=40)
     ContactNumber = models.CharField(max_length=10)
-    def __unicode_(self):
+    def __unicode__(self):
         return self.mid + " - " + self.Startdate

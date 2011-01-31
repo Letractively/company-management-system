@@ -17,7 +17,7 @@ class ORM_Chit(models.Model):
     Days_Travel = models.IntegerField()
     Days_Leave = models.IntegerField()
     Travel_Ratio = models.IntegerField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.DateTime
     
 class Leisure_Activites(models.Model):
@@ -25,7 +25,7 @@ class Leisure_Activites(models.Model):
     Activity = models.CharField(max_length=20)
     Duration = models.TimeField()
     RAC = models.IntegerField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Activity
     
 class Methods_of_Travel(models.Model):
@@ -35,5 +35,5 @@ class Methods_of_Travel(models.Model):
     Method_of_Travel = models.CharField(max_length=20)
     RAC = models.IntegerField()
     Risk_management_plan = models.TextField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Method_of_Travel

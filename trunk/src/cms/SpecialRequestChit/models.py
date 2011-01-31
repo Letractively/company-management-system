@@ -24,5 +24,5 @@ class SpecialRequestChit(models.Model):
     RequestType = models.CharField(max_length=1, choices=REQUEST_TYPES)
     otherRequestType = models.CharField(max_length=30)
     Justification = models.TextField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.RequestType + " - " + self.Date
