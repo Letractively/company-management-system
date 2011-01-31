@@ -12,3 +12,5 @@ class chit(models.Model):
                            )
     Disposition = models.CharField(max_length=3, choices=DISPOSITION_CHOICES)
     Admin_Notes = models.TextField()
+    def __unicode_(self):
+        return Mid + " - " + Diagnosis

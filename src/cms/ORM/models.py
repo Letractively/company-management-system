@@ -3,7 +3,8 @@ from django.db import models
 # Create your models here.
 
 class ORM_Chit(models.Model):
-    mid = models.ForeignKey("MID.Mid")
+    Mid = models.ForeignKey("MID.Mid")
+    DateTime = models.DateTimeField()
     L_Street1 = models.CharField(max_length=20)
     L_Street2 = models.CharField(max_length=20)
     L_City = models.CharField(max_length=30)
@@ -16,12 +17,16 @@ class ORM_Chit(models.Model):
     Days_Travel = models.IntegerField()
     Days_Leave = models.IntegerField()
     Travel_Ratio = models.IntegerField()
+    def __unicode_(self):
+        return DateTime
     
 class Leisure_Activites(models.Model):
     ORM_CHIT = models.ForeignKey(ORM_Chit)
     Activity = models.CharField(max_length=20)
     Duration = models.TimeField()
     RAC = models.IntegerField()
+    def __unicode_(self):
+        return Activity
     
 class Methods_of_Travel(models.Model):
     ORM_CHIT = models.ForeignKey(ORM_Chit)
@@ -30,4 +35,5 @@ class Methods_of_Travel(models.Model):
     Method_of_Travel = models.CharField(max_length=20)
     RAC = models.IntegerField()
     Risk_management_plan = models.TextField()
- 
+    def __unicode_(self):
+        return Method_of_Travel
