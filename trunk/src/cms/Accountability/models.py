@@ -22,6 +22,8 @@ class Event(models.Model):
    DateTime = models.DateTimeField() 
    Type = models.CharField(max_length=3, choices=EVENT_TYPE_CHOICES)
    Location = models.CharField(max_length=30)
+   def __unicode_(self):
+        return Type + " - " + DateTime + " - "+ Location
     
 class Attendance(models.Model):
     Event = models.ForeignKey(Event) 
@@ -29,3 +31,5 @@ class Attendance(models.Model):
     Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
     Comment = models.TextField()
     Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
+    def __unicode_(self):
+        return Mid + " - " + Event 
