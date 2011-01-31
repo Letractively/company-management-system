@@ -2,9 +2,10 @@ from django.db import models
 # Create your models here.
 
 class Bravo_Inspection(models.Model):
-    #List of possible hits for a Brovo room inspection
+    #List of possible hits for a Bravo room inspection
     Inspector = models.ForeignKey("MID.Mid")
     Room = models.ForeignKey("MID.Room")
+    When = models.DateTimeField()
     Deck = models.BooleanField()
     Laundry = models.BooleanField()
     Mold = models.BooleanField()
@@ -29,4 +30,4 @@ class Bravo_Inspection(models.Model):
     Material_deficiencies = models.BooleanField()
     Rifles = models.BooleanField()
     def __unicode__(self):
-        return self.Room
+        return self.Room.__str__() + " - " + self.When
