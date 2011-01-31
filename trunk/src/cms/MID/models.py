@@ -135,7 +135,7 @@ class Mid(models.Model):
     ConductGrade = models.CharField(max_length=1)
     PRT = models.IntegerField(max_length=3)
     def __unicode__(self):
-        return self.L_Name + ", " + self.F_Name + " " + self.MI_Name + " - " + Alpha
+        return self.L_Name + ", " + self.F_Name + " " + self.MI_Name + " - " + self.Alpha
     
 class Billets(models.Model):
     mid = models.ForeignKey(Mid)
