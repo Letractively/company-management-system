@@ -13,7 +13,7 @@ WATCH_TYPE_CHOICES = (
                       )
 
 class WatchBill(models.Model):
-    Date = models.DateField()
+    Date = models.DateField('Watchbill Date')
     Type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
     def __unicode_(self):
         return Type + " - " + Date
@@ -26,4 +26,4 @@ class Watch(models.Model):
     EndTime = models.TimeField()
     Type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
     def __unicode_(self):
-        return Mid + " - " + WatchBill
+        return self.Mid + " - " + self.WatchBill

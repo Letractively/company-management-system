@@ -19,7 +19,7 @@ ATTEND_STATUS_CHOICES = (
                          ('E','Excused'),
                          )
 class Event(models.Model):
-   DateTime = models.DateTimeField() 
+   DateTime = models.DateTimeField('Event Date and Time') 
    Type = models.CharField(max_length=3, choices=EVENT_TYPE_CHOICES)
    Location = models.CharField(max_length=30)
    def __unicode_(self):
@@ -32,4 +32,4 @@ class Attendance(models.Model):
     Comment = models.TextField()
     Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
     def __unicode_(self):
-        return Mid + " - " + Event 
+        return self.Mid + " - " + self.Event 

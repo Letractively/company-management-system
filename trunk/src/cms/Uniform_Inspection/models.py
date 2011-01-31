@@ -93,4 +93,4 @@ class Uniform_Inspection(models.Model):
     ID_properly_displayed = models.BooleanField()
     Other = models.TextField()
     def __unicode_(self):
-        return Room + " - " + DateTime
+        return self.Room + " - " + self.DateTime
