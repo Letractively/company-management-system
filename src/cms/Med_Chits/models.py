@@ -4,8 +4,8 @@ from django.db import models
 class chit(models.Model):
     Mid = models.ForeignKey("MID.Mid")
     Diagnosis = models.TextField()
-    Date_Start = models.DateField()
-    Date_End = models.DateField()
+    Date_Start = models.DateField('Start Date')
+    Date_End = models.DateField('End Date')
     DISPOSITION_CHOICES = (
                            ("SIQ","SIQ"),
                            ("CLA","SIQ with Class Option"),
@@ -13,4 +13,4 @@ class chit(models.Model):
     Disposition = models.CharField(max_length=3, choices=DISPOSITION_CHOICES)
     Admin_Notes = models.TextField()
     def __unicode_(self):
-        return Mid + " - " + Diagnosis
+        return self.Mid + " - " + self.Diagnosis

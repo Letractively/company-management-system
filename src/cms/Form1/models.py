@@ -38,7 +38,7 @@ class Form1(models.Model):
                           ('N','Negative'),
                           )
     Form_Type = models.CharField(max_length=1, choices=FORM1_TYPE_CHOICES)
-    DateTime = models.DateTimeField()
+    DateTime = models.DateTimeField('Form 1 Date and Time')
     Counseled_by = models.ForeignKey("MID.Mid", related_name='+')
     Counseled_Billet = models.CharField(max_length=2, choices=BILLET_CHOICES)
     Counceling = models.ForeignKey("MID.Mid", related_name='+')
@@ -63,4 +63,4 @@ class Form1(models.Model):
                           )
     Resolution = models.CharField(max_length=1,choices=RESOLUTION_CHOICES)
     def __unicode_(self):
-        return Form_Type + " - " + DateTime
+        return self.Form_Type + " - " + self.DateTime

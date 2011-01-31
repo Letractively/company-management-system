@@ -5,7 +5,7 @@ class Bravo_Inspection(models.Model):
     #List of possible hits for a Brovo room inspection
     Inspector = models.ForeignKey("MID.Mid")
     Room = models.ForeignKey("MID.Room")
-    DateTime = models.DateTimeField()
+    DateTime = models.DateTimeField('Inspection Date and Time')
     Deck = models.BooleanField()
     Laundry = models.BooleanField()
     Mold = models.BooleanField()
@@ -30,4 +30,4 @@ class Bravo_Inspection(models.Model):
     Material_deficiencies = models.BooleanField()
     Rifles = models.BooleanField()
     def __unicode_(self):
-        return Room + " - " + DateTime
+        return self.Room + " - " + self.DateTime
