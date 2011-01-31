@@ -25,5 +25,5 @@ class Watch(models.Model):
     StartTime = models.TimeField()
     EndTime = models.TimeField()
     Type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Mid + " - " + self.WatchBill

@@ -92,5 +92,5 @@ class Uniform_Inspection(models.Model):
     Trousers_proper_length = models.BooleanField()
     ID_properly_displayed = models.BooleanField()
     Other = models.TextField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Room + " - " + self.DateTime

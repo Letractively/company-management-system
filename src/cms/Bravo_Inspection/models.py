@@ -29,5 +29,5 @@ class Bravo_Inspection(models.Model):
     Bright_work = models.BooleanField()
     Material_deficiencies = models.BooleanField()
     Rifles = models.BooleanField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Room + " - " + self.DateTime

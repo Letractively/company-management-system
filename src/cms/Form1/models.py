@@ -62,5 +62,5 @@ class Form1(models.Model):
                           ('A','Fwd for Adjudication'),
                           )
     Resolution = models.CharField(max_length=1,choices=RESOLUTION_CHOICES)
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Form_Type + " - " + self.DateTime

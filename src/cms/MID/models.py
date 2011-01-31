@@ -113,7 +113,7 @@ ROOM_CHOICES = (
 class Room(models.Model):
     RoomNumber = models.CharField(max_length=4,primary_key=True,choices=ROOM_CHOICES)
     maxOccupants = models.CharField(max_length=1)
-    def __unicode_(self):
+    def __unicode__(self):
         return self.RoomNumber
     
 class Mid(models.Model):
@@ -134,7 +134,7 @@ class Mid(models.Model):
     PerfGrade = models.CharField(max_length=1)
     ConductGrade = models.CharField(max_length=1)
     PRT = models.IntegerField(max_length=3)
-    def __unicode_(self):
+    def __unicode__(self):
         return self.L_Name + ", " + self.F_Name + " " + self.MI_Name + " - " + Alpha
     
 class Billets(models.Model):
@@ -144,5 +144,5 @@ class Billets(models.Model):
     endDate = models.DateField()
     Evaluation = models.TextField()
     Current = models.BooleanField()
-    def __unicode_(self):
+    def __unicode__(self):
         return self.Billet
