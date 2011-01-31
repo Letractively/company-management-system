@@ -71,6 +71,7 @@ class Uniform_Inspection(models.Model):
     #List of possible hits for a uniform inspection
     Inspector = models.ForeignKey("MID.Mid")
     Room = models.CharField(max_length=4, choices=ROOM_CHOICES)
+    DateTime = models.DateTimeField()
     Missing_items = models.BooleanField(False)
     Appearance = models.BooleanField()
     Grooming_Shave = models.BooleanField()
@@ -91,3 +92,5 @@ class Uniform_Inspection(models.Model):
     Trousers_proper_length = models.BooleanField()
     ID_properly_displayed = models.BooleanField()
     Other = models.TextField()
+    def __unicode_(self):
+        return Room + " - " + DateTime

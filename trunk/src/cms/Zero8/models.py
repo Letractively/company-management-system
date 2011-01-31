@@ -16,6 +16,8 @@ class Zero8(models.Model):
     Work_Order_Active = models.IntegerField()
     Work_Order_Closed = models.IntegerField()
     Work_Order_Overdue = models.IntegerField()
+    def __unicode_(self):
+        return Report_Date
     
 class SIG_EVENTS(models.Model):
     Zero8 = models.ForeignKey(Zero8)
