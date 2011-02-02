@@ -5,7 +5,7 @@ class Bravo_Inspection(models.Model):
     #List of possible hits for a Bravo room inspection
     Inspector = models.ForeignKey("MID.Mid")
     Room = models.ForeignKey("MID.Room")
-    When = models.DateTimeField()
+    When = models.DateTimeField('date inspected')
     Deck = models.BooleanField()
     Laundry = models.BooleanField()
     Mold = models.BooleanField()
