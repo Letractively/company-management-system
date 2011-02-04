@@ -1,0 +1,249 @@
+- model: MID.Room
+	fields:
+		RoomNumber: 6303
+		maxOccupants: 3
+
+- model: MID.Room
+	fields:
+		RoomNumber: 6304
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6305
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6306
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6307
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6308
+		maxOccupants: 4
+- model: MID.Room
+	fields:
+		RoomNumber: 6309
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6311
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6314
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6315
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6316
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6317
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6318
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6319
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6320
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6322
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6323
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6329
+		maxOccupants: 3		
+- model: MID.Room
+	fields:
+		RoomNumber: 6402
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6403
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6404
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6405
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6406
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6407
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6408
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6409
+		maxOccupants: 2		
+- model: MID.Room
+	fields:
+		RoomNumber: 6411
+		maxOccupants: 4
+- model: MID.Room
+	fields:
+		RoomNumber: 6413
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6414
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6415
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6416
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6417
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6418
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6419
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6420
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6421
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6425
+		maxOccupants: 4
+- model: MID.Room
+	fields:
+		RoomNumber: 6428
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6429
+		maxOccupants: 2		
+- model: MID.Room
+	fields:
+		RoomNumber: 6430
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6431
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6432
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6433
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6434
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6435
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6437
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6438
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6439
+		maxOccupants: 2		
+- model: MID.Room
+	fields:
+		RoomNumber: 6440
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6441
+		maxOccupants: 4
+- model: MID.Room
+	fields:
+		RoomNumber: 6443
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6444
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6445
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6446
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6455
+		maxOccupants: 4
+- model: MID.Room
+	fields:
+		RoomNumber: 6459
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6460
+		maxOccupants: 3
+- model: MID.Room
+	fields:
+		RoomNumber: 6461
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6462
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6463
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6464
+		maxOccupants: 2
+- model: MID.Room
+	fields:
+		RoomNumber: 6466
+		maxOccupants: 3
