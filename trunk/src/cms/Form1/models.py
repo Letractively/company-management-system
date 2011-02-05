@@ -10,7 +10,7 @@ BILLET_CHOICES = (
     ('PMO','Physical Mission Officer'),
     ('AC','Academics Officer'),
     ('SAF','Safety Officer'),
-    ('A/C','Aptitiude/Conduct Officer'),
+    ('A/C','Aptitude/Conduct Officer'),
     ('ADEO','ADEO'),
     ('ATFP','ATFP'),
     ('TRN','Training Officer'),
