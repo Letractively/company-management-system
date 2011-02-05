@@ -41,7 +41,7 @@ class Form1(models.Model):
     DateTime = models.DateTimeField('Form 1 Date and Time')
     Counseled_by = models.ForeignKey("MID.Mid", related_name='+')
     Counseled_Billet = models.CharField(max_length=2, choices=BILLET_CHOICES)
-    Counceling = models.ForeignKey("MID.Mid", related_name='+')
+    Counseling = models.ForeignKey("MID.Mid", related_name='+')
     REASON_CHOICES = (
                       ('A','APPEARANCE'),
                       ('B','BEARING'),
