@@ -38,12 +38,14 @@ PLT_CHOICES = (
     ('3','3rd Platoon'),
     ('4','4th Platoon'),
     ('O','Out of Company'),
+    ('S','Company Staff'),
     )
 SQD_CHOICES = (
     ('1','1st Squad'),
     ('2','2nd Squad'),
     ('3','3rd Squad'),
     ('O','Out of Company'),
+    ('S','Company Staff'),
     )
 class Room(models.Model):
     RoomNumber = models.CharField(max_length=4,primary_key=True)
