@@ -63,6 +63,7 @@ class Mid(models.Model):
     RoomNumber = models.ForeignKey(Room,null=True)
     PhoneNumber = models.CharField(max_length=10,null=True)
     Weekends = models.IntegerField(null=True)
+    Weekends_comment = models.CharField(max_length=50)
     AcSAT = models.BooleanField(null=True).default=True
     PRTSAT = models.BooleanField(null=True).default=True
     CQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
@@ -83,8 +84,8 @@ class Billets(models.Model):
     def __unicode__(self):
         return self.Billet
     
-class Absencs(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
+class Absences(models.Model):
+    Zero8 = models.ForeignKey("Zero8.Zero8")
     Name = models.ForeignKey(Mid)
     Authorized = models.BooleanField()
     Description = models.CharField(max_length=20)
@@ -109,7 +110,7 @@ class Disipline(models.Model):
     Checked = models.DateField()
     
 class Separations(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
+    Zero8 = models.ForeignKey("Zero8.Zero8")
     Mid = models.ForeignKey("MID.Mid")
     Pending = models.BooleanField()
     Admin_Note = models.CharField(max_length=90)
@@ -118,4 +119,4 @@ class Probation(models.Model):
     mid = models.ForeignKey(Mid)
     start_date = models.DateField()
     end_date = models.DateField()
-    description = models.CharField(maxlength=50)
+    description = models.CharField(max_length=50)
