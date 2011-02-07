@@ -28,8 +28,8 @@ class Event(models.Model):
 class Attendance(models.Model):
     Event = models.ForeignKey(Event) 
     Mid = models.ForeignKey("MID.Mid")
-    Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
-    Comment = models.TextField()
-    Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES)
+    Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
+    Comment = models.TextField(null=True)
+    Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
     def __unicode__(self):
         return self.Mid + " - " + self.Event 
