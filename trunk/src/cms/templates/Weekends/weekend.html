@@ -1,0 +1,16 @@
+<h1>Welcome to the weekends module, {{ mid.F_Name }} {{ mid.L_Name }}.</h1>
+
+<p>You have been awarded {{ mid.Weekends }}, and you have taken {{ WT }} weekends; you have {{ WL }} weekends left.</p>
+
+{% if WE %}
+
+    <p>Would you like to request a weekend?</p>
+    <form>
+        <input type = "submit" value = "Request a weekend" />
+    </form>
+
+{% else %}
+
+    <p>Sorry, you are NOT eligible for a weekend.</p>
+    
+{% endif %}

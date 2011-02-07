@@ -1,14 +1,13 @@
-    <h1>Logged in.</h1>
+    <h1>{{ mid.F_Name }} {{ mid.L_Name }} logged in successfully.</h1>
     
-    
-    {{ mid }}<br />
-    
-    {{ b }}<br />
-    
+    <h3>What would you like to do?</h3>
     
     <ul>
-    {% for m in b %}
-        <li>{{ b }}</li>
-    {% endfor %}
+        <li><a href = "Weekends/">Weekends</a></li >
+        <li><del><a href = "MID/">Personal Information</a></del></li >
+        <li><del><a href = "">Chits</a><</del>/li >
+        <li><del><a href = "Form1/">Form-1</a></del></li >
+        <li><del><a href = "Bravo_Inspection/">Room Inspections</a></del></li >
+        <li><del><a href = "Uniform_Inspection/">Uniform Inspections</a></del></li >
+        <li><a href = "logout">Log out</a></li >
     </ul>
-    
