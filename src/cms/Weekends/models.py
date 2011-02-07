@@ -13,5 +13,6 @@ class Weekend(models.Model):
     Status = models.CharField(maxlength=1,choices=STATUS_CHOICES)
     Location = models.CharField(max_length=40)
     ContactNumber = models.CharField(max_length=10)
+    
     def __unicode__(self):
         return self.mid + " - " + self.Startdate
