@@ -1,5 +1,0 @@
-- model: MID.room
-	pk: 6302
-	fields:
-		RoomNumber: 6302
-		maxOccupants: 2
