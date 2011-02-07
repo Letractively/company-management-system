@@ -60,7 +60,6 @@ class Mid(models.Model):
     F_Name = models.CharField(max_length=30)
     PLT = models.CharField(max_length=1, choices=PLT_CHOICES,null=True)
     SQD = models.CharField(max_length=1, choices=SQD_CHOICES,null=True)
-    #Billets = models.CharField(max_length=4, choices=BILLET_CHOICES) //this needs to be its own class because of inharitance
     RoomNumber = models.ForeignKey(Room,null=True)
     PhoneNumber = models.CharField(max_length=10,null=True)
     Weekends = models.IntegerField(null=True)
