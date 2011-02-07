@@ -1,4 +1,4 @@
-from cms.MID.models import MID
+from cms.MID.models import Mid
 from cms.MID.models import Billets
 from cms.MID.models import Discipline
 from cms.MID.models import Probation
