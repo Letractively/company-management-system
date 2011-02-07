@@ -58,28 +58,28 @@ class Mid(models.Model):
     L_Name = models.CharField(max_length=30)
     MI_Name = models.CharField(max_length=3)
     F_Name = models.CharField(max_length=30)
-    PLT = models.CharField(max_length=1, choices=PLT_CHOICES)
-    SQD = models.CharField(max_length=1, choices=SQD_CHOICES)
+    PLT = models.CharField(max_length=1, choices=PLT_CHOICES,null=True)
+    SQD = models.CharField(max_length=1, choices=SQD_CHOICES,null=True)
     #Billets = models.CharField(max_length=4, choices=BILLET_CHOICES) //this needs to be its own class because of inharitance
-    RoomNumber = models.ForeignKey(Room)
-    PhoneNumber = models.CharField(max_length=10)
-    Weekends = models.IntegerField()
-    AcSAT = models.BooleanField().default=True
-    PRTSAT = models.BooleanField().default=True
-    CQPR = models.DecimalField(max_digits=4, decimal_places=2)
-    SQPR = models.DecimalField(max_digits=4, decimal_places=2)
-    PerfGrade = models.CharField(max_length=1)
-    ConductGrade = models.CharField(max_length=1)
-    PRT = models.IntegerField(max_length=3)
+    RoomNumber = models.ForeignKey(Room,null=True)
+    PhoneNumber = models.CharField(max_length=10,null=True)
+    Weekends = models.IntegerField(null=True)
+    AcSAT = models.BooleanField(null=True).default=True
+    PRTSAT = models.BooleanField(null=True).default=True
+    CQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
+    SQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
+    PerfGrade = models.CharField(max_length=1,null=True)
+    ConductGrade = models.CharField(max_length=1,null=True)
+    PRT = models.IntegerField(max_length=3,null=True)
     def __unicode__(self):
         return self.L_Name + ", " + self.F_Name + " " + self.MI_Name + " - " + self.Alpha
     
 class Billets(models.Model):
     mid = models.ForeignKey(Mid)
     Billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
-    startDate = models.DateField()
-    endDate = models.DateField()
-    Evaluation = models.TextField()
-    Current = models.BooleanField()
+    startDate = models.DateField(null=True)
+    endDate = models.DateField(null=True)
+    Evaluation = models.TextField(null=True)
+    Current = models.NullBooleanField()
     def __unicode__(self):
         return self.Billet
