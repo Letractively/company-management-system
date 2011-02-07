@@ -8,6 +8,10 @@
     <h3>Incorrect credentials. Try again.</h3>
 {% endif %}
 
+{% if noUser %}
+    <h3>User exests, but is not in MIDS database. Contact your system administrator.</h3>
+{% endif %}
+
 <form action="login" method="post">
 {% csrf_token %}
 	<input type="text" name="username" /><br /><br />
