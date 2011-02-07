@@ -6,13 +6,14 @@ STATUS_CHOICES = (
                   ('A','Approved'),
                   ('D','Disapproved'),
                   )
+
 class Weekend(models.Model):
     mid = models.ForeignKey("MID.Mid")
-    Startdate = models.DateField()
-    Enddate = models.DateField()
-    Status = models.CharField(max_length=1,choices=STATUS_CHOICES)
-    Location = models.CharField(max_length=40)
-    ContactNumber = models.CharField(max_length=10)
+    startDate = models.DateField()
+    endDate = models.DateField()
+    status = models.CharField(max_length=1,choices=STATUS_CHOICES)
+    location = models.CharField(max_length=40)
+    contactNumber = models.CharField(max_length=10)
     
     def __unicode__(self):
         return self.mid + " - " + self.Startdate
