@@ -21,27 +21,32 @@ def log_in(request):
         if user.is_active:
             login(request, user)
             
-            if re.match("m", username) is not None : 
+            if user.username == 'co' :
+                 return render_to_response('MID/co.html', { })
             
-                alpha = username.split('m')
-                alpha = alpha[1]
-    
-                if Mid.objects.filter(Alpha=alpha) :
-                    
-                    cMid = Mid.objects.filter(Alpha=alpha)
-                    cMid = cMid[0]
-                                        
-                    return render_to_response('MID/switchboard.html', { 'mid' : cMid })
+            else :
+            
+                if re.match("m", username) is not None : 
                 
-                #Alpha does not exist in the database, redirect to login with 'noUser' flag TRUE.
+                    alpha = username.split('m')
+                    alpha = alpha[1]
+        
+                    if Mid.objects.filter(Alpha=alpha) :
+                        
+                        cMid = Mid.objects.filter(Alpha=alpha)
+                        cMid = cMid[0]
+                                            
+                        return render_to_response('MID/switchboard.html', { 'mid' : cMid })
+                    
+                    #Alpha does not exist in the database, redirect to login with 'noUser' flag TRUE.
+                    else :
+                        return render_to_response('MID/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
+                                                  context_instance=RequestContext(request))
+                
+                #Non 'mXXXXXX' login entered, redirect to login with with the 'noUser' flag TRUE.
                 else :
                     return render_to_response('MID/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
                                               context_instance=RequestContext(request))
-            
-            #Non 'mXXXXXX' login entered, redirect to login with with the 'noUser' flag TRUE.
-            else :
-                return render_to_response('MID/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
-                                          context_instance=RequestContext(request))
         
         #Disabled account: should not happen, but here just in case
         else:

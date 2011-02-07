@@ -1,11 +1,18 @@
 <h1>Welcome to the weekends module, {{ mid.F_Name }} {{ mid.L_Name }}.</h1>
 
-<p>You have been awarded {{ mid.Weekends }}, and you have taken {{ WT }} weekends; you have {{ WL }} weekends left.</p>
+<p>You have been awarded {{ mid.Weekends }} weekends.</p>
+<p>You have taken {{ WT }} weekends; you have {{ WL }} weekends left.</p>
+<p>Today is: {{ today }}</p>
+<p>Next weekend starts on {{ NWB }} and ends on {{ NWE }}</p>
+{% if late %}
 
-{% if WE %}
+    <p>You can only request a weekend before Thursday. Sorry, them are the rules. </p> 
+
+{% else if WE %}
 
     <p>Would you like to request a weekend?</p>
-    <form>
+    <form action="reqWeekend" method="post">
+    {% csrf_token %}
         <input type = "submit" value = "Request a weekend" />
     </form>
 
