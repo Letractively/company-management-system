@@ -34,7 +34,7 @@ class SIG_EVENTS(models.Model):
 class MO(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Organization = models.CharField(max_length=30)
-    MO_Code = models.ForeignKey(Mid)
+    MO_Code = models.ForeignKey("MID.Mid")
     Depart = models.DateField()
     Return = models.DateField()
     Admin_Note = models.CharField(max_length=90)

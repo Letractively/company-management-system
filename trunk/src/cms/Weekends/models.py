@@ -10,7 +10,7 @@ class Weekend(models.Model):
     mid = models.ForeignKey("MID.Mid")
     Startdate = models.DateField()
     Enddate = models.DateField()
-    Status = models.CharField(maxlength=1,choices=STATUS_CHOICES)
+    Status = models.CharField(max_length=1,choices=STATUS_CHOICES)
     Location = models.CharField(max_length=40)
     ContactNumber = models.CharField(max_length=10)
     
