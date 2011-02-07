@@ -82,3 +82,40 @@ class Billets(models.Model):
     Current = models.NullBooleanField()
     def __unicode__(self):
         return self.Billet
+    
+class Absencs(models.Model):
+    Zero8 = models.ForeignKey(Zero8)
+    Name = models.ForeignKey(Mid)
+    Authorized = models.BooleanField()
+    Description = models.CharField(max_length=20)
+    Admin_Note = models.CharField(max_length=90)
+    REASON_CHOICES = (
+                     ('AA','Authorized Absence'),
+                     ('UA','Unauthorized Absence'),
+                     ('WE','Weekend'),
+                     ('MO','Movement Order'),
+                     )
+    Reason = models.CharField(max_length=2,choices=REASON_CHOICES)    
+ 
+class Disipline(models.Model):
+    Mid = models.ForeignKey(Mid)
+    Conduct_Honor = models.BooleanField()
+    Date_Offence = models.DateField()
+    Restriction_Days_Awarded = models.IntegerField()
+    Restriction_Days_Remaining = models.IntegerField()
+    Tours_Awarded = models.IntegerField()
+    Tours_Remaining = models.IntegerField()
+    Admin_Notes = models.CharField(max_length=90)
+    Checked = models.DateField()
+    
+class Separations(models.Model):
+    Zero8 = models.ForeignKey(Zero8)
+    Mid = models.ForeignKey("MID.Mid")
+    Pending = models.BooleanField()
+    Admin_Note = models.CharField(max_length=90)
+    
+class Probation(models.Model):
+    mid = models.ForeignKey(Mid)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.CharField(maxlength=50)

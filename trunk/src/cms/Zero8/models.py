@@ -31,28 +31,14 @@ class SIG_EVENTS(models.Model):
     Description = models.CharField(max_length=30)
     Admin_Note = models.CharField(max_length=90)
     
-class Absencs(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
-    Name = models.ForeignKey("MID.Mid")
-    Authorized = models.BooleanField()
-    Description = models.CharField(max_length=20)
-    Admin_Note = models.CharField(max_length=90)
-    REASON_CHOICES = (
-                     ('AA','Authorized Absence'),
-                     ('UA','Unauthorized Absence'),
-                     ('WE','Weekend'),
-                     ('MO','Movement Order'),
-                     )
-    Reason = models.CharField(max_length=2,choices=REASON_CHOICES)
-    
 class MO(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Organization = models.CharField(max_length=30)
-    MO_Code = models.ForeignKey("MID.Mid")
+    MO_Code = models.ForeignKey(Mid)
     Depart = models.DateField()
     Return = models.DateField()
     Admin_Note = models.CharField(max_length=90)
-    
+  
 #FOR YOUR WEEKENDS LIST GO TO THE WEEKENDS APPLICATION
 
 #FOR YOUR CHITS GO TO YOUR MED_CHIT APPLICATION
@@ -61,23 +47,6 @@ class Candidates(models.Model):
     Name = models.CharField(max_length=30)
     Host = models.ForeignKey("MID.Mid")
     Source = models.CharField(max_length=40)
-    Admin_Note = models.CharField(max_length=90)
-    
-class Disipline(models.Model):
-    Mid = models.ForeignKey("MID.Mid")
-    Conduct_Honor = models.BooleanField()
-    Date_Offence = models.DateField()
-    Restriction_Days_Awarded = models.IntegerField()
-    Restriction_Days_Remaining = models.IntegerField()
-    Tours_Awarded = models.IntegerField()
-    Tours_Remaining = models.IntegerField()
-    Admin_Notes = models.CharField(max_length=90)
-    Checked = models.DateField()
-    
-class Separations(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
-    Mid = models.ForeignKey("MID.Mid")
-    Pending = models.BooleanField()
     Admin_Note = models.CharField(max_length=90)
     
 class Inspections(models.Model):

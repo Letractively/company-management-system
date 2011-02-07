@@ -1,155 +1,41 @@
-- model: MID.Room
-	fields:
-		RoomNumber: 6303
-		maxOccupants: 3
-
-- model: MID.Room
-	fields:
-		RoomNumber: 6304
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6305
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6306
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6307
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6308
-		maxOccupants: 4
-- model: MID.Room
-	fields:
-		RoomNumber: 6309
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6311
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6314
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6315
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6316
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6317
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6318
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6319
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6320
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6322
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6323
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6329
-		maxOccupants: 3		
-- model: MID.Room
-	fields:
-		RoomNumber: 6402
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6403
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6404
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6405
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6406
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6407
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6408
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6409
-		maxOccupants: 2		
-- model: MID.Room
-	fields:
-		RoomNumber: 6411
-		maxOccupants: 4
-- model: MID.Room
-	fields:
-		RoomNumber: 6413
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6414
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6415
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6416
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6417
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6418
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6419
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6420
-		maxOccupants: 2
-- model: MID.Room
-	fields:
-		RoomNumber: 6421
-		maxOccupants: 3
-- model: MID.Room
-	fields:
-		RoomNumber: 6425
-		maxOccupants: 4
-- model: MID.Room
-	fields:
-		RoomNumber: 6428
+6303 3
+6304 3
+6305 2
+6306 2
+6307 3
+6308 4
+6309 2
+6311 3
+6314 2
+6315 2
+6316 3
+6317 3
+6318 3
+6319 3
+6320 3
+6322 2
+6323 3
+6329 3		
+6402 3
+6403 2
+6404 2
+6405 2
+6406 2
+6407 2
+6408 3
+6409 2		
+6411 4
+6413 2
+6414 2
+6415 2
+6416 2
+6417 2
+6418 2
+6419 2
+6420 2
+6421 3
+6425 4
+6428
 		maxOccupants: 2
 - model: MID.Room
 	fields:
