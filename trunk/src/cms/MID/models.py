@@ -70,7 +70,7 @@ class Mid(models.Model):
     SQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
     PerfGrade = models.CharField(max_length=1,null=True)
     ConductGrade = models.CharField(max_length=1,null=True)
-    PRT = models.IntegerField(max_length=3,null=True)
+    PRT = models.DecimalField(max_digits=3, decimal_places=2,null=True)
     def __unicode__(self):
         return self.L_Name + ", " + self.F_Name + " " + self.MI_Name + " - " + self.Alpha
     
