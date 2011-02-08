@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Chit(models.Model):
-    mid = models.ForeignKey("MID.Mid")
+    mid = models.ForeignKey("mid.Mid")
     diagnosis = models.TextField()
     dateStart = models.DateField('Start Date')
     dateEnd = models.DateField('End Date')

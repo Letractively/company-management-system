@@ -3,7 +3,7 @@ from django.db import models
 
 class BravoInspection(models.Model):
     #List of possible hits for a Bravo room inspection
-    inspector = models.ForeignKey("MID.Mid")
+    inspector = models.ForeignKey("mid.Mid")
     room = models.ForeignKey("MID.Room")
     inspectionDate = models.DateTimeField('date inspected')
     deck = models.BooleanField('Deck mopped clean, swept')

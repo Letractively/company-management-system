@@ -85,7 +85,7 @@ class Billets(models.Model):
         return self.Billet
     
 class Absences(models.Model):
-    zero8 = models.ForeignKey("Zero8.Zero8")
+    zero8 = models.ForeignKey("zero8.Zero8")
     name = models.ForeignKey(Mid)
     authorized = models.BooleanField()
     description = models.CharField(max_length=20)
@@ -110,8 +110,8 @@ class Discipline(models.Model):
     checked = models.DateField()
     
 class Separations(models.Model):
-    zero8 = models.ForeignKey("Zero8.Zero8")
-    mid = models.ForeignKey("MID.Mid")
+    zero8 = models.ForeignKey("zero8.Zero8")
+    mid = models.ForeignKey("Mid")
     pending = models.BooleanField()
     adminNote = models.CharField(max_length=90)
     

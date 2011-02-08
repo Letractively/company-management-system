@@ -16,7 +16,7 @@ CHIT_REQUEST_LEVEL = (
                    ('CSEL','AECS Morring, USN'),
                    )
 class SpecialRequestChit(models.Model):
-    mid = models.ForeignKey("MID.Mid")
+    mid = models.ForeignKey("mid.Mid")
     date = models.DateField()
     toLine = models.CharField(max_length=4, choices=CHIT_REQUEST_LEVEL)
     fromLine = models.CharField(max_length=50)

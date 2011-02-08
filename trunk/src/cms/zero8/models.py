@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 
 class Zero8(models.Model):
-    offgoingCDO = models.ForeignKey("MID.Mid", related_name='+')
-    oncomingCDO = models.ForeignKey("MID.Mid", related_name='+')
+    offgoingCDO = models.ForeignKey("mid.mid", related_name='+')
+    oncomingCDO = models.ForeignKey("mid.mid", related_name='+')
     reportDate = models.DateField()
     FORCE_PROTECTION_CHOICES = (
                                 ('A','Alpha'),
@@ -27,14 +27,14 @@ class SignificantEvents(models.Model):
                      ('C','Bancroft Hall Thefts'),
                      )
     section = models.CharField(max_length=1, choices=SECTION_CHOICES)
-    name = models.ForeignKey("MID.Mid")
+    name = models.ForeignKey("mid.Mid")
     description = models.CharField(max_length=30)
     adminNote = models.CharField(max_length=90)
     
 class MovementOrder(models.Model):
     zero8 = models.ForeignKey(Zero8)
     organization = models.CharField(max_length=30)
-    movementOrderCode = models.ForeignKey("MID.Mid")
+    movementOrderCode = models.ForeignKey("mid.Mid")
     departDate = models.DateField()
     returnDate = models.DateField()
     adminNote = models.CharField(max_length=90)
@@ -45,7 +45,7 @@ class MovementOrder(models.Model):
 
 class Candidates(models.Model):
     name = models.CharField(max_length=30)
-    host = models.ForeignKey("MID.Mid")
+    host = models.ForeignKey("mid.Mid")
     source = models.CharField(max_length=40)
     adminNote = models.CharField(max_length=90)
     
@@ -60,8 +60,8 @@ class Inspections(models.Model):
                   ('A','BAC'),
                   )
     type = models.CharField(max_length=1,choices=TYPE_CHOICES)
-    inspector = models.ForeignKey("MID.Mid", related_name='+')
-    inspectee = models.ForeignKey("MID.Mid", related_name='+')
+    inspector = models.ForeignKey("mid.Mid", related_name='+')
+    inspectee = models.ForeignKey("mid.Mid", related_name='+')
     time = models.TimeField()
     scoreEarned = models.IntegerField()
     scorePossible = models.IntegerField()

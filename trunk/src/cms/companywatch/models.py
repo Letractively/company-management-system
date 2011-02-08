@@ -20,7 +20,7 @@ class WatchBill(models.Model):
     
 class Watch(models.Model):
     watchBill = models.ForeignKey(WatchBill)
-    mid = models.ForeignKey("MID.Mid")
+    mid = models.ForeignKey("mid.Mid")
     post = models.CharField(max_length=20)
     startTime = models.TimeField()
     endTime = models.TimeField()
