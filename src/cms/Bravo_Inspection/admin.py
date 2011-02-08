@@ -1,4 +1,4 @@
 from django.contrib import admin
-from Bravo_Inspection.models import Bravo_Inspection
+from Bravo_Inspection.models import BravoInspection
 
-admin.site.register(Bravo_Inspection)
+admin.site.register(BravoInspection)

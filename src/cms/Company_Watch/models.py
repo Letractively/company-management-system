@@ -13,17 +13,17 @@ WATCH_TYPE_CHOICES = (
                       )
 
 class WatchBill(models.Model):
-    Date = models.DateField('Watchbill Date')
-    Type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
+    date = models.DateField('Watchbill Date')
+    type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
     def __unicode_(self):
-        return Type + " - " + Date
+        return type + " - " + date
     
 class Watch(models.Model):
-    WatchBill = models.ForeignKey(WatchBill)
-    Mid = models.ForeignKey("MID.Mid")
-    Post = models.CharField(max_length=20)
-    StartTime = models.TimeField()
-    EndTime = models.TimeField()
-    Type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
+    watchBill = models.ForeignKey(WatchBill)
+    mid = models.ForeignKey("MID.Mid")
+    post = models.CharField(max_length=20)
+    startTime = models.TimeField()
+    endTime = models.TimeField()
+    type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
     def __unicode__(self):
         return self.Mid + " - " + self.WatchBill
