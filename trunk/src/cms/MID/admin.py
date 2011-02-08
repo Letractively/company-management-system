@@ -9,8 +9,8 @@ class ChoiceInline(admin.StackedInline):
 
 class MidAdmin(admin.ModelAdmin):
     fieldsets = [
-                 ('Alpha:', {'fields':['Alpha']}),
-                 ('Name:', {'fields': ['L_Name']}),
+                 ('alpha:', {'fields':['alpha']}),
+                 ('Name:', {'fields': ['LName']}),
                  ]
     inlines = [ChoiceInline]
 

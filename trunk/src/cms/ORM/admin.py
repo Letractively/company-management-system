@@ -1,4 +1,4 @@
 from django.contrib import admin
-from ORM.models import ORM_Chit
+from ORM.models import OrmChit
 
-admin.site.register(ORM_Chit)
+admin.site.register(OrmChit)
