@@ -1,4 +1,4 @@
 from django.contrib import admin
-from Med_Chits.models import chit
+from Med_Chits.models import Chit
 
-admin.site.register(chit)
+admin.site.register(Chit)
