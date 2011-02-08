@@ -37,11 +37,11 @@ class Form1(models.Model):
                           ('P','Positive'),
                           ('N','Negative'),
                           )
-    Form_Type = models.CharField(max_length=1, choices=FORM1_TYPE_CHOICES)
-    DateTime = models.DateTimeField('Form 1 Date and Time')
-    Counseled_by = models.ForeignKey("MID.Mid", related_name='+')
-    Counseled_Billet = models.CharField(max_length=2, choices=BILLET_CHOICES)
-    Counseling = models.ForeignKey("MID.Mid", related_name='+')
+    formType = models.CharField(max_length=1, choices=FORM1_TYPE_CHOICES)
+    dateTime = models.DateTimeField('Form 1 Date and Time')
+    counseledBy = models.ForeignKey("MID.Mid", related_name='+')
+    counseledBillet = models.CharField(max_length=2, choices=BILLET_CHOICES)
+    counseling = models.ForeignKey("MID.Mid", related_name='+')
     REASON_CHOICES = (
                       ('A','APPEARANCE'),
                       ('B','BEARING'),
@@ -53,14 +53,14 @@ class Form1(models.Model):
                       ('CM','COMMITMENT'),
                       ('MO','MORAL'),
                       )
-    Reason = models.CharField(max_length=3, choices=REASON_CHOICES)
-    Comment = models.TextField()
+    reason = models.CharField(max_length=3, choices=REASON_CHOICES)
+    comment = models.TextField()
     RESOLUTION_CHOICES = (
                           ('C','Counseled'),
                           ('E','EMI awarded'),
                           ('C','Fwd for Commendation'),
                           ('A','Fwd for Adjudication'),
                           )
-    Resolution = models.CharField(max_length=1,choices=RESOLUTION_CHOICES)
+    resolution = models.CharField(max_length=1,choices=RESOLUTION_CHOICES)
     def __unicode__(self):
         return self.Form_Type + " - " + self.DateTime

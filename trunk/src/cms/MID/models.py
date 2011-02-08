@@ -48,72 +48,72 @@ SQD_CHOICES = (
     ('S','Company Staff'),
     )
 class Room(models.Model):
-    RoomNumber = models.CharField(max_length=4,primary_key=True)
+    roomNumber = models.CharField(max_length=4,primary_key=True)
     maxOccupants = models.CharField(max_length=1)
     def __unicode__(self):
         return self.RoomNumber
     
 class Mid(models.Model):
-    Alpha = models.CharField(max_length=6,primary_key=True)
-    L_Name = models.CharField(max_length=30)
-    MI_Name = models.CharField(max_length=3)
-    F_Name = models.CharField(max_length=30)
-    PLT = models.CharField(max_length=1, choices=PLT_CHOICES,null=True)
-    SQD = models.CharField(max_length=1, choices=SQD_CHOICES,null=True)
-    RoomNumber = models.ForeignKey(Room,null=True)
-    PhoneNumber = models.CharField(max_length=10,null=True)
-    Weekends = models.IntegerField(null=True)
-    Weekends_comment = models.CharField(max_length=50)
-    AcSAT = models.BooleanField(null=True).default=True
-    PRTSAT = models.BooleanField(null=True).default=True
+    alpha = models.CharField(max_length=6,primary_key=True)
+    LName = models.CharField(max_length=30)
+    mName = models.CharField(max_length=3)
+    fName = models.CharField(max_length=30)
+    platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True)
+    squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True)
+    roomNumber = models.ForeignKey(Room,null=True)
+    phoneNumber = models.CharField(max_length=10,null=True)
+    weekends = models.IntegerField(null=True)
+    weekendsComment = models.CharField(max_length=50)
+    acSAT = models.BooleanField(null=True).default=True
+    PRTSat = models.BooleanField(null=True).default=True
     CQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
     SQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
-    PerfGrade = models.CharField(max_length=1,null=True)
-    ConductGrade = models.CharField(max_length=1,null=True)
+    performanceGrade = models.CharField(max_length=1,null=True)
+    conductGrade = models.CharField(max_length=1,null=True)
     PRT = models.DecimalField(max_digits=3, decimal_places=2,null=True)
     def __unicode__(self):
         return self.L_Name + ", " + self.F_Name + " " + self.MI_Name + " - " + self.Alpha
     
 class Billets(models.Model):
     mid = models.ForeignKey(Mid)
-    Billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
+    billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
     startDate = models.DateField(null=True)
     endDate = models.DateField(null=True)
-    Evaluation = models.TextField(null=True)
-    Current = models.NullBooleanField()
+    evaluation = models.TextField(null=True)
+    current = models.NullBooleanField()
     def __unicode__(self):
         return self.Billet
     
 class Absences(models.Model):
-    Zero8 = models.ForeignKey("Zero8.Zero8")
-    Name = models.ForeignKey(Mid)
-    Authorized = models.BooleanField()
-    Description = models.CharField(max_length=20)
-    Admin_Note = models.CharField(max_length=90)
+    zero8 = models.ForeignKey("Zero8.Zero8")
+    name = models.ForeignKey(Mid)
+    authorized = models.BooleanField()
+    description = models.CharField(max_length=20)
+    adminNote = models.CharField(max_length=90)
     REASON_CHOICES = (
                      ('AA','Authorized Absence'),
                      ('UA','Unauthorized Absence'),
                      ('WE','Weekend'),
                      ('MO','Movement Order'),
                      )
-    Reason = models.CharField(max_length=2,choices=REASON_CHOICES)    
+    reason = models.CharField(max_length=2,choices=REASON_CHOICES)    
  
 class Discipline(models.Model):
     mid = models.ForeignKey(Mid)
-    Conduct_Honor = models.BooleanField()
-    Date_Offence = models.DateField()
+    conductHonor = models.BooleanField()
+    dateOffence = models.DateField()
     startDate = models.DateField()
     daysAwarded = models.IntegerField()
-    Tours_Awarded = models.IntegerField()
-    Tours_Remaining = models.IntegerField()
-    Admin_Notes = models.CharField(max_length=90)
-    Checked = models.DateField()
+    toursAwarded = models.IntegerField()
+    toursRemaining = models.IntegerField()
+    adminNotes = models.CharField(max_length=90)
+    checked = models.DateField()
     
 class Separations(models.Model):
-    Zero8 = models.ForeignKey("Zero8.Zero8")
+    zero8 = models.ForeignKey("Zero8.Zero8")
     mid = models.ForeignKey("MID.Mid")
-    Pending = models.BooleanField()
-    Admin_Note = models.CharField(max_length=90)
+    pending = models.BooleanField()
+    adminNote = models.CharField(max_length=90)
     
 class Probation(models.Model):
     mid = models.ForeignKey(Mid)

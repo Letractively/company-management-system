@@ -3,54 +3,54 @@ from django.db import models
 # Create your models here.
 
 class Zero8(models.Model):
-    Offgoing_CDO = models.ForeignKey("MID.Mid", related_name='+')
-    Oncoming_CDO = models.ForeignKey("MID.Mid", related_name='+')
-    Report_Date = models.DateField()
+    offgoingCDO = models.ForeignKey("MID.Mid", related_name='+')
+    oncomingCDO = models.ForeignKey("MID.Mid", related_name='+')
+    reportDate = models.DateField()
     FORCE_PROTECTION_CHOICES = (
                                 ('A','Alpha'),
                                 ('B','Bravo'),
                                 ('C','Charlie'),
                                 ('D','Delta'),                                
                                 )
-    Force_Protection_Condition = models.CharField(max_length=1, choices=FORCE_PROTECTION_CHOICES)
-    Work_Order_Active = models.IntegerField()
-    Work_Order_Closed = models.IntegerField()
-    Work_Order_Overdue = models.IntegerField()
+    forceProtectionCondition = models.CharField(max_length=1, choices=FORCE_PROTECTION_CHOICES)
+    workOrderActive = models.IntegerField()
+    workOrderClosed = models.IntegerField()
+    workOrderOverdue = models.IntegerField()
     def __unicode__(self):
         return self.Report_Date
     
 class SignificantEvents(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
+    zero8 = models.ForeignKey(Zero8)
     SECTION_CHOICES=(
                      ('A','Family Crisis/Hospitalization/Death Notifications'),
                      ('B','Major Conduct Offenses that occured this date'),
                      ('C','Bancroft Hall Thefts'),
                      )
-    Section = models.CharField(max_length=1, choices=SECTION_CHOICES)
-    Name = models.ForeignKey("MID.Mid")
-    Description = models.CharField(max_length=30)
-    Admin_Note = models.CharField(max_length=90)
+    section = models.CharField(max_length=1, choices=SECTION_CHOICES)
+    name = models.ForeignKey("MID.Mid")
+    description = models.CharField(max_length=30)
+    adminNote = models.CharField(max_length=90)
     
 class MovementOrder(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
-    Organization = models.CharField(max_length=30)
-    MO_Code = models.ForeignKey("MID.Mid")
-    Depart = models.DateField()
-    Return = models.DateField()
-    Admin_Note = models.CharField(max_length=90)
+    zero8 = models.ForeignKey(Zero8)
+    organization = models.CharField(max_length=30)
+    movementOrderCode = models.ForeignKey("MID.Mid")
+    departDate = models.DateField()
+    returnDate = models.DateField()
+    adminNote = models.CharField(max_length=90)
   
 #FOR YOUR WEEKENDS LIST GO TO THE WEEKENDS APPLICATION
 
 #FOR YOUR CHITS GO TO YOUR MED_CHIT APPLICATION
 
 class Candidates(models.Model):
-    Name = models.CharField(max_length=30)
-    Host = models.ForeignKey("MID.Mid")
-    Source = models.CharField(max_length=40)
-    Admin_Note = models.CharField(max_length=90)
+    name = models.CharField(max_length=30)
+    host = models.ForeignKey("MID.Mid")
+    source = models.CharField(max_length=40)
+    adminNote = models.CharField(max_length=90)
     
 class Inspections(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
+    zero8 = models.ForeignKey(Zero8)
     TYPE_CHOICES=(
                   ('W','WATCH SECTION'),
                   ('R','ROOM'),
@@ -59,19 +59,19 @@ class Inspections(models.Model):
                   ('C','RESTRICTEE'),
                   ('A','BAC'),
                   )
-    Type = models.CharField(max_length=1,choices=TYPE_CHOICES)
-    Inspector = models.ForeignKey("MID.Mid", related_name='+')
-    Inspectee = models.ForeignKey("MID.Mid", related_name='+')
-    Time = models.TimeField()
-    Score_Earned = models.IntegerField()
-    Score_Possible = models.IntegerField()
+    type = models.CharField(max_length=1,choices=TYPE_CHOICES)
+    inspector = models.ForeignKey("MID.Mid", related_name='+')
+    inspectee = models.ForeignKey("MID.Mid", related_name='+')
+    time = models.TimeField()
+    scoreEarned = models.IntegerField()
+    scorePossible = models.IntegerField()
     SAT = models.BooleanField()
     
 class OtherMaterialDiscrepancies(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
-    Location = models.CharField(max_length=50)
-    Issue = models.TextField()
-    Admin_Note = models.CharField(max_length=90)
+    zero8 = models.ForeignKey(Zero8)
+    location = models.CharField(max_length=50)
+    issue = models.TextField()
+    adminNote = models.CharField(max_length=90)
     
 COMPANIES=(
                ('01','1st Company'),
@@ -113,17 +113,17 @@ COMPANIES=(
                )    
     
 class InturmuralResults(models.Model):
-    Zero8 = models.ForeignKey(Zero8)
-    Sport = models.CharField(max_length=30)
-    Oponant = models.CharField(max_length=2,choices=COMPANIES)
-    WIN = models.BooleanField()
-    Score_US = models.IntegerField()
-    Score_THEM = models.IntegerField()
-    Admin_Note = models.CharField(max_length=90)
+    zero8 = models.ForeignKey(Zero8)
+    sport = models.CharField(max_length=30)
+    oponant = models.CharField(max_length=2,choices=COMPANIES)
+    Win = models.BooleanField()
+    scoreUs = models.IntegerField()
+    scoreThem = models.IntegerField()
+    adminNote = models.CharField(max_length=90)
     
 class NextDayEvents(models.Model):
-    Event = models.CharField(max_length=50)
-    Location = models.CharField(max_length=50)
-    DateTime = models.DateTimeField()
+    event = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    dateTime = models.DateTimeField()
     POC = models.CharField(max_length=50)
-    Admin_Note = models.CharField(max_length=90)
+    adminNote = models.CharField(max_length=90)

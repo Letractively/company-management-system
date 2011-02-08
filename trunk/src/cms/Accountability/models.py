@@ -19,17 +19,17 @@ ATTEND_STATUS_CHOICES = (
                          ('E','Excused'),
                          )
 class Event(models.Model):
-   DateTime = models.DateTimeField('Event Date and Time') 
-   Type = models.CharField(max_length=3, choices=EVENT_TYPE_CHOICES)
-   Location = models.CharField(max_length=30)
+   dateTime = models.DateTimeField('Event Date and Time') 
+   type = models.CharField(max_length=3, choices=EVENT_TYPE_CHOICES)
+   location = models.CharField(max_length=30)
    def __unicode_(self):
         return Type + " - " + DateTime + " - "+ Location
     
 class Attendance(models.Model):
-    Event = models.ForeignKey(Event) 
-    Mid = models.ForeignKey("MID.Mid")
-    Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
-    Comment = models.TextField(null=True)
-    Temp_Status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
+    event = models.ForeignKey(Event) 
+    mid = models.ForeignKey("MID.Mid")
+    status = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
+    comment = models.TextField(null=True)
+    tempStatus = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
     def __unicode__(self):
         return self.Mid + " - " + self.Event 
