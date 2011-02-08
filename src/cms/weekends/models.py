@@ -8,7 +8,7 @@ STATUS_CHOICES = (
                   )
 
 class Weekend(models.Model):
-    mid = models.ForeignKey("MID.Mid")
+    mid = models.ForeignKey("mid.Mid")
     startDate = models.DateField()
     endDate = models.DateField()
     status = models.CharField(max_length=1,choices=STATUS_CHOICES)

@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class OrmChit(models.Model):
-    mid = models.ForeignKey("MID.Mid")
+    mid = models.ForeignKey("mid.Mid")
     dateTime = models.DateTimeField()
     LStreet1 = models.CharField(max_length=20)
     LStreet2 = models.CharField(max_length=20)

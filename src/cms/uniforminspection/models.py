@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class UniformInspection(models.Model):
     #List of possible hits for a uniform inspection
-    inspector = models.ForeignKey("MID.Mid")
-    room = models.ForeignKey("MID.Room")
+    inspector = models.ForeignKey("mid.Mid")
+    room = models.ForeignKey("mid.Room")
     dateTime = models.DateTimeField()
     missingItems = models.BooleanField('No missing uniform items')
     appearance = models.BooleanField('Uniform Appearance(stains/wrinkles)')
