@@ -1,7 +1,7 @@
 from django.contrib import admin
-from MID.models import Mid
-from MID.models import Room
-from MID.models import Billets
+from mid.models import Mid
+from mid.models import Room
+from mid.models import Billets
 
 class ChoiceInline(admin.StackedInline):
     model = Billets

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from Uniform_Inspection.models import UniformInspection
+from uniforminspection.models import UniformInspection
 
 admin.site.register(UniformInspection)
