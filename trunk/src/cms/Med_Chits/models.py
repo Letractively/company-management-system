@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class chit(models.Model):
+class Chit(models.Model):
     Mid = models.ForeignKey("MID.Mid")
     Diagnosis = models.TextField()
     Date_Start = models.DateField('Start Date')
