@@ -19,7 +19,7 @@ class Zero8(models.Model):
     def __unicode__(self):
         return self.Report_Date
     
-class SIG_EVENTS(models.Model):
+class SignificantEvents(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     SECTION_CHOICES=(
                      ('A','Family Crisis/Hospitalization/Death Notifications'),
@@ -31,7 +31,7 @@ class SIG_EVENTS(models.Model):
     Description = models.CharField(max_length=30)
     Admin_Note = models.CharField(max_length=90)
     
-class MO(models.Model):
+class MovementOrder(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Organization = models.CharField(max_length=30)
     MO_Code = models.ForeignKey("MID.Mid")
@@ -67,7 +67,7 @@ class Inspections(models.Model):
     Score_Possible = models.IntegerField()
     SAT = models.BooleanField()
     
-class Other_Material_Discrepancies(models.Model):
+class OtherMaterialDiscrepancies(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Location = models.CharField(max_length=50)
     Issue = models.TextField()
@@ -112,7 +112,7 @@ COMPANIES=(
                ('36','36th Company'),
                )    
     
-class Inturmural_Results(models.Model):
+class InturmuralResults(models.Model):
     Zero8 = models.ForeignKey(Zero8)
     Sport = models.CharField(max_length=30)
     Oponant = models.CharField(max_length=2,choices=COMPANIES)
@@ -121,7 +121,7 @@ class Inturmural_Results(models.Model):
     Score_THEM = models.IntegerField()
     Admin_Note = models.CharField(max_length=90)
     
-class Next_Day_Event(models.Model):
+class NextDayEvents(models.Model):
     Event = models.CharField(max_length=50)
     Location = models.CharField(max_length=50)
     DateTime = models.DateTimeField()

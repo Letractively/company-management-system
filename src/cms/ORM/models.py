@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class ORM_Chit(models.Model):
+class OrmChit(models.Model):
     Mid = models.ForeignKey("MID.Mid")
     DateTime = models.DateTimeField()
     L_Street1 = models.CharField(max_length=20)
@@ -20,16 +20,16 @@ class ORM_Chit(models.Model):
     def __unicode__(self):
         return self.DateTime
     
-class Leisure_Activites(models.Model):
-    ORM_CHIT = models.ForeignKey(ORM_Chit)
+class LeisureActivites(models.Model):
+    ORM_CHIT = models.ForeignKey(OrmChit)
     Activity = models.CharField(max_length=20)
     Duration = models.TimeField()
     RAC = models.IntegerField()
     def __unicode__(self):
         return self.Activity
     
-class Methods_of_Travel(models.Model):
-    ORM_CHIT = models.ForeignKey(ORM_Chit)
+class MethodsOfTravel(models.Model):
+    ORM_CHIT = models.ForeignKey(OrmChit)
     EstimatedDepartTime = models.DateTimeField()
     EstimatedArrivalTime = models.DateTimeField()
     Method_of_Travel = models.CharField(max_length=20)
