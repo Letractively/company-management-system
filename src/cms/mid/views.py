@@ -10,7 +10,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-import re
+#import render_to_response
 
 def loginPage(request):
     return render_to_response('mid/loginPage.html', { 'repeat' : False, 'noUser' : False }, 
