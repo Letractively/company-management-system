@@ -2,14 +2,18 @@
 
 = Introduction =
 
-http://www.python.org/dev/peps/pep-0008/
-
-Add your content here.
-
+This project will follow the style discussion we had right when MS2 was due.
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+For additional style details refer to:
+http://www.python.org/dev/peps/pep-0008/
+
+At the top of each file two or more comments are required:
+
+#applicationName fileName.foo
+# Author: Foo Bar
+# Editor: Bar Foo
+# whatever else you need
+
+You are highly encouraged to write a comment describing what is in the file and how the flow is controlled.
