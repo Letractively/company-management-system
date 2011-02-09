@@ -1,6 +1,10 @@
+#bravoinspection views.py
+# Author: Dimitri Hatley
+# Editor: Michael Laws
+
 from django.http import HttpResponse
 from django.http import Http404
-from Bravo_Inspection.models import Bravo_Inspection
+from bravoinspection.models import BravoInspection
 
 
 def index(request):
