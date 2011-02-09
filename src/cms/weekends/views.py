@@ -1,7 +1,11 @@
-from cms.MID.models import Mid
-from cms.MID.models import Billets
-from cms.MID.models import Discipline
-from cms.MID.models import Probation
+#weekends views.py
+# Author: Dimitri Hatley
+# Editor: Michael Laws
+
+from cms.mid.models import Mid
+from cms.mid.models import Billets
+from cms.mid.models import Discipline
+from cms.mid.models import Probation
 
 from cms.Weekends.models import Weekend
 
