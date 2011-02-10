@@ -61,7 +61,7 @@ def index(request):
     if cMid.Weekends > 0 and cMid.AcSAT and cMid.PRTSAT and not onRestriction and not onProbation:
         WE = True 
 
-    return render_to_response('Weekends/weekend.html', { 'mid' : cMid, 'cWeekend' : cWeekends, 
+    return render_to_response('weekends/weekend.html', { 'mid' : cMid, 'cWeekend' : cWeekends, 
                                                         'WT' : WT, 'WL' : WL, 'WE' : WE, 
                                                         'today' : cDate, 'late' : late,
                                                         'NWB' : cNextWeekendBeg, 'NWE' : cNextWeekendEnd }, 
@@ -69,4 +69,4 @@ def index(request):
 
 @login_required(redirect_field_name='')
 def reqWeekend(request):
-    return render_to_response('Weekends/reqWeekend.html', {})
+    return render_to_response('weekends/reqWeekend.html', {})
