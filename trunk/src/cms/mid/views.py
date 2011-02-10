@@ -27,7 +27,7 @@ def log_in(request):
             login(request, user)
             
             if user.username == 'co' :
-                 return render_to_response('MID/co.html', { })
+                 return render_to_response('mid/co.html', { })
             
             else :
             
