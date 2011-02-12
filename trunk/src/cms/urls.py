@@ -2,6 +2,9 @@ from django.conf.urls.defaults import *
 
 # admin enabled
 from django.contrib import admin
+from cms.mid.views import *
+
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
