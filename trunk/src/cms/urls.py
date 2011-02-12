@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 # admin enabled
 from django.contrib import admin
-import cms.views
+
 
 
 admin.autodiscover()
