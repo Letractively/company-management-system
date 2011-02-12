@@ -12,7 +12,7 @@
     <h3>User exists, but is not in MIDS database. Contact your system administrator.</h3>
 {% endif %}
 
-<form action="cms/login" method="post">
+<form action="login" method="post">
     {% csrf_token %}
 	<input type="text" name="username" /><br /><br />
 	<input type="password" name="password" /><br /><br />
