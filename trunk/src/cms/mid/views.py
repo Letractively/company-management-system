@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 #import render_to_response
 
 def loginPage(request):
-    return render_to_response('mid/templates/loginPage.html', { 'repeat' : False, 'noUser' : False }, 
+    return render_to_response('mid/loginPage.html', { 'repeat' : False, 'noUser' : False }, 
                               context_instance=RequestContext(request))
 
 def log_in(request):
@@ -27,7 +27,7 @@ def log_in(request):
             login(request, user)
             
             if user.username == 'co' :
-                 return render_to_response('mid/templates/co.html', { })
+                 return render_to_response('mid/co.html', { })
             
             else :
             
@@ -41,16 +41,16 @@ def log_in(request):
                         cMid = Mid.objects.filter(Alpha=alpha)
                         cMid = cMid[0]
                                             
-                        return render_to_response('mid/templates/switchboard.html', { 'mid' : cMid })
+                        return render_to_response('mid/switchboard.html', { 'mid' : cMid })
                     
                     #Alpha does not exist in the database, redirect to login with 'noUser' flag TRUE.
                     else :
-                        return render_to_response('mid/templates/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
+                        return render_to_response('mid/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
                                                   context_instance=RequestContext(request))
                 
                 #Non 'mXXXXXX' login entered, redirect to login with with the 'noUser' flag TRUE.
                 else :
-                    return render_to_response('mid/templates/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
+                    return render_to_response('mid/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
                                               context_instance=RequestContext(request))
         
         #Disabled account: should not happen, but here just in case
@@ -59,7 +59,7 @@ def log_in(request):
         
     #Wrong password, redirect redirect to login with the 'repeat' flag TRUE    
     else:
-        return render_to_response('mid/templates/loginPage.html', { 'repeat' : True, 'noUser' : False }, 
+        return render_to_response('mid/loginPage.html', { 'repeat' : True, 'noUser' : False }, 
                                   context_instance=RequestContext(request))
 
 
