@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 #import render_to_response
 
 def loginPage(request):
-    return render_to_response('loginPage.html', { 'repeat' : False, 'noUser' : False }, 
+    return render_to_response('mid/loginPage.html', { 'repeat' : False, 'noUser' : False }, 
                               context_instance=RequestContext(request))
 
 def log_in(request):
