@@ -10,8 +10,8 @@ urlpatterns = patterns('',
 
     # (r'^cms/', include('cms.foo.urls')),
 
-    (r'^$', 'weekends.views.index'),
-    (r'^reqWeekend', 'weekends.views.reqWeekend'),
+    (r'^$', 'index'),
+    (r'^reqWeekend', 'reqWeekend'),
     
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
