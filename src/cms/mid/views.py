@@ -3,7 +3,7 @@
 # Editor: Michael Laws
 
 
-from cms.mid.models import Mid
+from mid.models import Mid
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
