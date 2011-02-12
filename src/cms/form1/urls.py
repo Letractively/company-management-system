@@ -4,7 +4,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('from1.views',
+urlpatterns = patterns('form1.views',
 
     # put url's to all the apps in this folder.
 
