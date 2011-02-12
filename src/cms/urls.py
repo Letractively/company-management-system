@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     # put url's to all the apps in this folder.
     #Initial login page
-    (r'^', include('mid.urls')),
+    (r'^$', include('mid.urls')),
     (r'^accountability/', include('accountability.urls')),
     (r'^bravoinspection/', include('bravoinspection.urls')),
     #(r'^companyblog/', include('companyblog.urls')),
