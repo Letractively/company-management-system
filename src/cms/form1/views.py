@@ -15,7 +15,7 @@ from django.template import RequestContext
 
 def createNewForm1(request):
     
-    rForm1 = Form1.objects.REASON_CHOICES
+    rForm1 = Form1.objects.reason
     
     return render_to_response('createNewForm1.html', { 'reasons' : rForm1})
  
