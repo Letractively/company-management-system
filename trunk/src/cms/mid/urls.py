@@ -10,10 +10,7 @@ urlpatterns = patterns('',
 
     # (r'^cms/', include('cms.foo.urls')),
     
-    (r'^$',
-      ListView.as_view(
-        model=mid,
-        template_name='index.html')),
+    (r'^$','index.html')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
