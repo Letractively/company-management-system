@@ -1,6 +1,37 @@
 from django.db import models
 
-
+# Create your models here.
+BILLET_CHOICES = (
+    ('CC','Company Commander'),
+    ('XO','Executive Officer'),
+    ('HA','Honor Advisor'),
+    ('OPS','Operations Officer'),
+    ('ADJ','Adjutant'),
+    ('PMO','Physical Mission Officer'),
+    ('AC','Academics Officer'),
+    ('SAF','Safety Officer'),
+    ('A/C','Aptitude/Conduct Officer'),
+    ('ADEO','ADEO'),
+    ('ATFP','ATFP'),
+    ('TRN','Training Officer'),
+    ('1LT','1st LT'),
+    ('ADM','Administrative Officer'),
+    ('PRO','Protocol Officer'),
+    ('WRD','Wardroom'),
+    ('DRL','Drill Officer'),
+    ('SAVI','SAVI'),
+    ('CMEO','CMEO'),
+    ('FIN','Financial Officer'),
+    ('1SGT','1st Sergeant'),
+    ('TRNS','Training Sgt'),
+    ('DRLS','Drill Sgt'),
+    ('ADMC','Admin Chief'),
+    ('MISLO','MISLO'),
+    ('PC','Platoon CDR'),
+    ('SL','Squad Leader'),
+    ('PLTS','Platoon Sgt'),
+    ('OOC','Out of Company'),
+    )
 class Form1(models.Model):
     FORM1_TYPE_CHOICES = (
                           ('P','Positive'),
