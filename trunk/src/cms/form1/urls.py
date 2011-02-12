@@ -9,7 +9,7 @@ urlpatterns = patterns('from1.views',
     # put url's to all the apps in this folder.
 
     # (r'^cms/', include('cms.foo.urls')),
-    (r'^cms/from1/', 'createNewForm1'),
+    (r'^form1/', 'createNewForm1'),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
