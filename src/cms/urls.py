@@ -1,24 +1,25 @@
-from django.conf.urls.defaults import *
+#cms urls.py
+# Author: Laws, Rabe, Hatley, Harrison
+# Editor: see above
 
+from django.conf.urls.defaults import *
 # admin enabled
 from django.contrib import admin
-
-
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    
+    #Initial login page    
+    (r'^', 'mid.views.loginPage'),
+    (r'^login$', 'mid.views.log_in'),
 
-    # put url's to all the apps in this folder.
-    #Initial login page
-    (r'^$', include('mid.urls')),
+    # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
     (r'^bravoinspection/', include('bravoinspection.urls')),
     #(r'^companyblog/', include('companyblog.urls')),
     (r'^companywatch/', include('companywatch.urls')),
     (r'^form1/',include('form1.urls')),
-    (r'^mid/', include('mid.urls')),    
-        # this app may or may not need a url path.  i'm thinking no, but here it is for now - mlaws
+    (r'^mid/', include('mid.urls')),
     (r'^orm/', include('orm.urls')),
     (r'^zero8/', include('zero8.urls')),
     (r'^specialrequestchit/', include('specialrequestchit.urls')),
