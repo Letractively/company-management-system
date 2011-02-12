@@ -17,8 +17,8 @@ def createNewForm1(request):
     
     rForm1 = Form1.objects.REASON_CHOICES
     
-    return render_to_response('form1/createNewForm1.html', { 'reasons' : rForm1})
+    return render_to_response('createNewForm1.html', { 'reasons' : rForm1})
  
  
 def reviewForm1(request):
-    return render_to_response('form1/reviewForm1.html')
+    return render_to_response('reviewForm1.html')
