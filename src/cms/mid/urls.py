@@ -11,6 +11,7 @@ urlpatterns = patterns('mid.views',
     # (r'^cms/', include('cms.foo.urls')),
     
     (r'^$','loginPage'),
+    (r'^login$', 'log_in'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
