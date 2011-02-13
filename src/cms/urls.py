@@ -10,8 +10,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     
     #Initial login page    
-    (r'^', 'mid.views.loginPage'),
-    (r'^login$', 'mid.views.log_in'),
+    
+    # put all of this under cms/mid now.
+    #(r'^', 'mid.views.loginPage'),
+    #(r'^login$', 'mid.views.log_in'),
 
     # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
