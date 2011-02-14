@@ -26,7 +26,7 @@ class Event(models.Model):
    type = models.CharField(max_length=3, choices=EVENT_TYPE_CHOICES)
    location = models.CharField(max_length=30)
    def __unicode_(self):
-        return Type + " - " + DateTime + " - "+ Location
+        return type + " - " + dateTime + " - "+ location
     
 class Attendance(models.Model):
     event = models.ForeignKey(Event) 
@@ -35,4 +35,4 @@ class Attendance(models.Model):
     comment = models.TextField(null=True)
     tempStatus = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
     def __unicode__(self):
-        return self.Mid + " - " + self.Event 
+        return self.mid + " - " + self.event 
