@@ -56,7 +56,7 @@ class Room(models.Model):
     roomNumber = models.CharField(max_length=4,primary_key=True)
     maxOccupants = models.CharField(max_length=1)
     def __unicode__(self):
-        return self.RoomNumber
+        return self.roomNumber
     
 class Mid(models.Model):
     alpha = models.CharField(max_length=6,primary_key=True)
@@ -87,7 +87,7 @@ class Billets(models.Model):
     evaluation = models.TextField(null=True)
     current = models.NullBooleanField()
     def __unicode__(self):
-        return self.Billet
+        return self.billet
     
 class Absences(models.Model):
     zero8 = models.ForeignKey("zero8.Zero8")
