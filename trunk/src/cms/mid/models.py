@@ -77,7 +77,7 @@ class Mid(models.Model):
     conductGrade = models.CharField(max_length=1,null=True)
     PRT = models.DecimalField(max_digits=3, decimal_places=2,null=True)
     def __unicode__(self):
-        return self.LName + ", " + self.fName + " " + self.mIName + " - " + self.Alpha
+        return self.LName + ", " + self.fName + " " + self.mName + " - " + self.Alpha
     
 class Billets(models.Model):
     mid = models.ForeignKey(Mid)
