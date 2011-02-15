@@ -96,7 +96,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
      
-    "/home/djangoCode/cms/src/cms/templates"
+    #"/home/djangoCode/cms/src/cms/templates"
+    "/home/mlaws/workspace/CMS/cms/templates"
 )
 
 INSTALLED_APPS = (
