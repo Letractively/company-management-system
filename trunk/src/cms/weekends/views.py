@@ -7,7 +7,7 @@ from cms.mid.models import Billets
 from cms.mid.models import Discipline
 from cms.mid.models import Probation
 
-from cms.Weekends.models import Weekend
+from cms.weekends.models import Weekend
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -22,9 +22,9 @@ def index(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
 
-    cMid = Mid.objects.filter(Alpha=alpha)
+    cMid = Mid.objects.filter(alpha=alpha)
     cMid = cMid[0]
-    #cBillets = Billets.objects.filter(mid=cMid)
+    cBillets = Billets.objects.filter(mid=cMid)
     
     #cWeekends - list of currently taken weekends
     cWeekends = Weekend.objects.filter(mid=cMid).order_by('-startDate')
@@ -55,7 +55,7 @@ def index(request):
     WT = len(cWeekends)
     
     #WL - Weekends Left
-    WL = cMid.Weekends - WT
+    WL = cMid.weekends - WT
     
     #WE - Weekend Eligible
     if cMid.Weekends > 0 and cMid.AcSAT and cMid.PRTSAT and not onRestriction and not onProbation:
