@@ -3,9 +3,9 @@ from mid.models import Mid
 from mid.models import Room
 from mid.models import Billet
 
-'''
+
 class ChoiceInline(admin.StackedInline):
-    model = Billets
+    model = Billet
     extra = 0
 
 class MidAdmin(admin.ModelAdmin):
@@ -14,7 +14,7 @@ class MidAdmin(admin.ModelAdmin):
                  ('Name:', {'fields': ['LName']}),
                  ]
     inlines = [ChoiceInline]
-'''
+
 admin.site.register(Mid)
 admin.site.register(Room)
 admin.site.register(Billet)

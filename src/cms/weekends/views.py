@@ -3,7 +3,7 @@
 # Editor: Michael Laws
 
 from cms.mid.models import Mid
-from cms.mid.models import Billets
+from cms.mid.models import Billet
 from cms.mid.models import Discipline
 from cms.mid.models import Probation
 
@@ -24,7 +24,7 @@ def index(request):
 
     cMid = Mid.objects.filter(alpha=alpha)
     cMid = cMid[0]
-    cBillets = Billets.objects.filter(mid=cMid)
+    cBillets = Billet.objects.filter(mid=cMid)
     
     #cWeekends - list of currently taken weekends
     cWeekends = Weekend.objects.filter(mid=cMid).order_by('-startDate')
@@ -57,8 +57,8 @@ def index(request):
     #WL - Weekends Left
     WL = cMid.weekends - WT
     
-    #WE - Weekend Eligible
-    if cMid.Weekends > 0 and cMid.AcSAT and cMid.PRTSAT and not onRestriction and not onProbation:
+    #WE - Weekend Eligible  '''cMid.Weekends'''
+    if cMid.weekends > 0 and cMid.acSAT and cMid.PRTSat and not onRestriction and not onProbation:
         WE = True 
 
     return render_to_response('weekends/weekend.html', { 'mid' : cMid, 'cWeekend' : cWeekends, 
