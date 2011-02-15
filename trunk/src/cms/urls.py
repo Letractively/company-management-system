@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     # put all of this under cms/mid now.
     (r'^$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.log_in'),
+    (r'^logout$', 'mid.views.log_out'),
 
     # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
