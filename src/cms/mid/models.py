@@ -79,7 +79,7 @@ class Mid(models.Model):
     def __unicode__(self):
         return self.LName + ", " + self.fName + " " + self.mName + " - " + self.alpha
     
-class Billets(models.Model):
+class Billet(models.Model):
     mid = models.ForeignKey(Mid)
     billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
     startDate = models.DateField(null=True)
@@ -89,7 +89,7 @@ class Billets(models.Model):
     def __unicode__(self):
         return self.billet
     
-class Absences(models.Model):
+class Absence(models.Model):
     zero8 = models.ForeignKey("zero8.Zero8")
     name = models.ForeignKey(Mid)
     authorized = models.BooleanField()
@@ -114,7 +114,7 @@ class Discipline(models.Model):
     adminNotes = models.CharField(max_length=90)
     checked = models.DateField()
     
-class Separations(models.Model):
+class Separation(models.Model):
     zero8 = models.ForeignKey("zero8.Zero8")
     mid = models.ForeignKey("Mid")
     pending = models.BooleanField()
