@@ -1,4 +1,4 @@
-INSERT INTO MID_room (RoomNumber,maxOccupants) VALUES
+INSERT INTO mid.Room (RoomNumber,maxOccupants) VALUES
 ('6302','2'),
 ('6303', '3'),
 ('6304', '3'),
