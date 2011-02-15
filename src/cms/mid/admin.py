@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mid.models import Mid
 from mid.models import Room
-from mid.models import Billets
+from mid.models import Billet
 
 '''
 class ChoiceInline(admin.StackedInline):
@@ -17,4 +17,4 @@ class MidAdmin(admin.ModelAdmin):
 '''
 admin.site.register(Mid)
 admin.site.register(Room)
-admin.site.register(Billets)
+admin.site.register(Billet)
