@@ -4,14 +4,10 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-
-    # put url's to all the apps in this folder.
-
-    # (r'^cms/', include('cms.foo.urls')),
+urlpatterns = patterns('weekends.views',
 
     (r'^$', 'index'),
-    (r'^reqWeekend', 'reqWeekend'),
+    (r'^reqWeekend$', 'reqWeekend'),
     
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
