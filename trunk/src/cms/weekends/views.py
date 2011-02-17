@@ -32,10 +32,13 @@ def index(request):
     
     late = True
     
+    # figure out if they can still sign up for a weekend or are too late.
     if cDate.isoweekday() < 4 :
-        cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-        cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
         late = False
+    
+    # we still need to initialize these variables to be passed to the page
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
     onRestriction = False
     onProbation = False
@@ -54,7 +57,8 @@ def index(request):
     #WL - Weekends Left
     WL = cMid.weekends - WT
     
-    #WE - Weekend Eligible  '''cMid.Weekends'''
+    #WE - Weekend Eligible
+    WE = False
     if cMid.weekends > 0 and cMid.acSAT and cMid.PRTSat and not onRestriction and not onProbation:
         WE = True 
 
