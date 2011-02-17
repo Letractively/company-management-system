@@ -7,8 +7,7 @@
 {% if late %}
 
     <p>You can only request a weekend before Thursday. Sorry, them are the rules. </p> 
-
-#{% else if WE %}
+{% else %}{% if WE %}
 
     <p>Would you like to request a weekend?</p>
     <form action="reqWeekend" method="post">
@@ -16,8 +15,8 @@
         <input type = "submit" value = "Request a weekend" />
     </form>
 
-#{% else %}
+{% else %}
 
     <p>Sorry, you are NOT eligible for a weekend.</p>
     
-{% endif %}
+{% endif %}{% endif %}
