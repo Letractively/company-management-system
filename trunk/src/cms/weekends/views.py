@@ -6,14 +6,11 @@ from cms.mid.models import Mid
 from cms.mid.models import Billet
 from cms.mid.models import Discipline
 from cms.mid.models import Probation
-
 from cms.weekends.models import Weekend
-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
 from datetime import date
 from datetime import timedelta
 
