@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     (r'^$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
-    (r'^logout$', 'mid.views.log_out'),
+    (r'^logout$', 'mid.views.logOut'),
     (r'^accounts/login/$', 'mid.views.loginPage'),
 
     # All the other module's pages
