@@ -11,10 +11,10 @@ urlpatterns = patterns('',
     
     #Initial login page    
     
-    # put all of this under cms/mid now.
+    #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
     (r'^$', 'mid.views.loginPage'),
-    (r'^login$', 'mid.views.log_in'),
-    (r'^logout$', 'mid.views.log_out'),
+    (r'^login$', 'mid.views.logIn'),
+    (r'^logout$', 'mid.views.logOut'),
 
     # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     (r'^specialrequestchit/', include('specialrequestchit.urls')),
     (r'^uniforminspection/', include('uniforminspection.urls')),
     (r'^weekends/', include('weekends.urls')),
+    (r'^logout$', 'MID.views.log_out'),
+    (r'^accounts/login/$', 'MID.views.loginPage'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
