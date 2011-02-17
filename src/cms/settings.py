@@ -15,23 +15,16 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-#        'NAME': 'm112802', 
-#        'USER': 'm112802',
-#        'PASSWORD':'m1128024321',
-#        'HOST':'intranet.cs.usna.edu',
-#        'PORT': '',      
-        'NAME': 'm112802',
-        'USER': 'm112802',
-        'PASSWORD': 'm1128024321',
-        'HOST': 'schooner.cs.usna.edu',
-        'PORT':'',
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'cms',
-#        'USER': 'cms',
-#        'PASSWORD': 'cms12#$',
-#        'HOST': '',
-#        'PORT': '',
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': 'm112802',                      # Or path to database file if using sqlite3.
+#        'USER': 'm112802',                      # Not used with sqlite3.
+#        'PASSWORD': 'm1128024321',                  # Not used with sqlite3.
+#        'HOST': 'schooner.cs.usna.edu',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'cms',                      # Or path to database file if using sqlite3.
+        'USER': 'cms',                      # Not used with sqlite3.
+        'PASSWORD': 'cms12#$',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -95,9 +88,9 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    "/home/dmitri/workspace/CMS/cms/templates/"
+    #"/home/dmitri/workspace/CMS/cms/templates/"
      
-    #"/home/djangoCode/cms/src/cms/templates"
+    "/home/djangoCode/cms/src/cms/templates"
     #"/home/mlaws/workspace/CMS/cms/templates"
 )
 
