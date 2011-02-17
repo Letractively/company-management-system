@@ -4,6 +4,7 @@
 
 from mid.models import Mid
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
@@ -16,7 +17,7 @@ def loginPage(request):
     return render_to_response('mid/loginPage.html', { 'repeat' : False, 'noUser' : False }, 
                               context_instance=RequestContext(request))
 
-def log_in(request):
+def logIn(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
@@ -65,6 +66,6 @@ def log_in(request):
 
 
 @login_required(redirect_field_name='')
-def log_out(request):
+def logOut(request):
     logout(request)
     return HttpResponse("You have been successfully deauthenticated.")
