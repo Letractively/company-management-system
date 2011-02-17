@@ -12,9 +12,12 @@ urlpatterns = patterns('',
     #Initial login page    
     
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
+    #yes, but mid is lowercase :) - mikeL
     (r'^$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
+    (r'^logout$', 'mid.views.log_out'),
+    (r'^accounts/login/$', 'mid.views.loginPage'),
 
     # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
@@ -28,8 +31,7 @@ urlpatterns = patterns('',
     (r'^specialrequestchit/', include('specialrequestchit.urls')),
     (r'^uniforminspection/', include('uniforminspection.urls')),
     (r'^weekends/', include('weekends.urls')),
-    (r'^logout$', 'MID.views.log_out'),
-    (r'^accounts/login/$', 'MID.views.loginPage'),
+    
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
