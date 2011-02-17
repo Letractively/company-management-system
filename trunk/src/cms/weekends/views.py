@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import date
 from datetime import timedelta
 
-@login_required(redirect_field_name='')
+@login_required(redirect_field_name='/')
 def index(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
@@ -93,7 +93,7 @@ def index(request):
                                                         }, 
                                                         context_instance=RequestContext(request))
 
-@login_required(redirect_field_name='')
+@login_required(redirect_field_name='/')
 def reqWeekend(request):
     cLocation = request.POST['location']
     
