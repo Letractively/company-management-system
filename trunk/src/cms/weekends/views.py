@@ -86,9 +86,10 @@ def index(request):
     if WL > 0 and cMid.acSAT and cMid.PRTSat and not onRestriction and not onProbation:
         WE = True
 
+    #FOR TESTING PRPOSES, ('late' : False); switch back to ('late' : late) for production
     return render_to_response('weekends/weekend.html', { 'mid' : cMid, 'lWeekends' : lWeekends, 'cWeekend' : cWeekend,
                                                         'WT' : WT, 'WL' : WL, 'WE' : WE, 
-                                                        'today' : cDate, 'late' : late,
+                                                        'today' : cDate, 'late' : False,
                                                         'NWB' : cNextWeekendBeg, 'NWE' : cNextWeekendEnd,
                                                         }, 
                                                         context_instance=RequestContext(request))
