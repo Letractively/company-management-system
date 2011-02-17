@@ -65,7 +65,7 @@ def logIn(request):
 
 
 
-@login_required(redirect_field_name='')
+@login_required(redirect_field_name='/')
 def logOut(request):
     logout(request)
     return HttpResponse("You have been successfully deauthenticated.")
