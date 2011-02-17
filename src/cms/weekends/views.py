@@ -2,11 +2,11 @@
 # Author: Dimitri Hatley
 # Editor: Michael Laws
 
-from cms.mid.models import Mid
-from cms.mid.models import Billet
-from cms.mid.models import Discipline
-from cms.mid.models import Probation
-from cms.weekends.models import Weekend
+from mid.models import Mid
+from mid.models import Billet
+from mid.models import Discipline
+from mid.models import Probation
+from weekends.models import Weekend
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
