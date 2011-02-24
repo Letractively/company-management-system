@@ -2,30 +2,34 @@
 <html lang="en">
 	<head>
 		<title>{% block title %}{% endblock %}</title>
-		Header
+		<link rel="stylesheet" type="text/css" href="Media/Style/Style.css" />
 	</head>
 	<section id="wrapper">
 		<header>
 			<!--<img alt="header image" src="../media/images/header.jpg" />-->
 		</header>
 		
+		<section id="notification">
+		
+		</section>
+		
 		<!-- If the user is logged in show navigation options -->
 		<!-- I'm not sure what we have for the logged in control (Rabe) -->
 		{% if mid.loggedin %}
+		{% endif %}
+		
+		<body>
+		{% block content %}
+		
+		{% endblock %}
+		</body>
+		
 		<nav>
 			{% include "nav.html" %}
 		</nav>
-		{% endif %}
-		
-		{% block content %}
-		<body>
-		
-		</body>
-		{% endblock %}
 		
 		<footer>
 			<!--<img alt="footer image" src="../media/images/footer.jpg" />-->
-			Footer
 		</footer>
 	</section>
 </html>
