@@ -2,12 +2,12 @@ body {
 	position:absolute;
 	left: 10%;
 	top: 5%;
-	background-color: background-color: rgba(0, 0, 0, 1);
+	background-color: rgba(0, 0, 250, 1);
 	width: 800px;
 }
 
 header, section #notification, #main, nav, footer {
-   background-color: background-color: rgba(255, 255, 255, .8);
+   background-color: rgba(255, 255, 255, .8);
 	width: 100%;
 }
 
