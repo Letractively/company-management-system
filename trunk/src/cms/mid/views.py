@@ -69,9 +69,17 @@ def logIn(request):
         return render_to_response('mid/loginPage.html', { 'repeat' : True, 'noUser' : False }, 
                                   context_instance=RequestContext(request))
 
-
+def passwordRecovery(request):
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/cms/')
+    
+    username = request.POST['username']
+    #sendmail goes here. =)
+    
+    return HttpResponseRedirect('/cms/')
 
 @login_required(redirect_field_name='/')
 def logOut(request):
     logout(request)
-    return HttpResponse("You have been successfully deauthenticated.")
+    return HttpResponseRedirect('/cms/')
