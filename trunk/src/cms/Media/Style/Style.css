@@ -49,14 +49,14 @@ nav {
 footer {
   height: 5%;
 }
-
+ 
 div.icon {
   top: 5px;
   width: 40px;
-  border-bottom-left: 2px 2px;
-  border-bottom-right: 2px 2px;
-  border-top-left: 2px 2px;
-  border-top-right: 2px 2px;
+  border-bottom-left-radius: 2px 2px;
+  border-bottom-right-radius: 2px 2px;
+  border-top-left-radius: 2px 2px;
+  border-top-right-radius: 2px 2px;
 }
 
 th {
