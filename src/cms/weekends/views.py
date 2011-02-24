@@ -184,7 +184,7 @@ def denyWeekend(request):
     #Second check - make sure the user IS CO
     name = request.user.username    
     if name != 'co' :
-        return HttpResponseRedirect('/cms/')
+        return HttpResponseRedirect('')
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
