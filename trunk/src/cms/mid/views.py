@@ -3,6 +3,7 @@
 # Editor: Michael Laws
 
 from mid.models import Mid
+from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -18,6 +19,10 @@ def loginPage(request):
                               context_instance=RequestContext(request))
 
 def logIn(request):
+    
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
