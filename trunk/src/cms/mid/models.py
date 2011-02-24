@@ -61,21 +61,21 @@ class Room(models.Model):
 class Mid(models.Model):
     alpha = models.CharField(max_length=6,primary_key=True)
     LName = models.CharField(max_length=30)
-    mName = models.CharField(max_length=3)
+    mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30)
-    platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True)
-    squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True)
+    platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True, blank=True)
+    squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True, blank=True)
     roomNumber = models.ForeignKey(Room,null=True)
     phoneNumber = models.CharField(max_length=10,null=True)
     weekends = models.IntegerField(null=True)
     weekendsComment = models.CharField(max_length=50)
     acSAT = models.BooleanField(null=True).default=True
     PRTSat = models.BooleanField(null=True).default=True
-    CQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
-    SQPR = models.DecimalField(max_digits=4, decimal_places=2,null=True)
+    CQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True)
+    SQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True)
     performanceGrade = models.CharField(max_length=1,null=True)
     conductGrade = models.CharField(max_length=1,null=True)
-    PRT = models.DecimalField(max_digits=3, decimal_places=2,null=True)
+    PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True)
     def __unicode__(self):
         return self.LName + ", " + self.fName + " " + self.mName + " - " + self.alpha
     
@@ -92,7 +92,7 @@ class Billet(models.Model):
 class Absence(models.Model):
     zero8 = models.ForeignKey("zero8.Zero8")
     name = models.ForeignKey(Mid)
-    authorized = models.BooleanField()
+    authorized = models.NullBooleanField()
     description = models.CharField(max_length=20)
     adminNote = models.CharField(max_length=90)
     REASON_CHOICES = (
