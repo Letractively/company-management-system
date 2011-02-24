@@ -116,20 +116,21 @@ def reqWeekend(request):
     return HttpResponseRedirect('/cms/weekends/')
 
 @login_required(redirect_field_name='/')
-def coView(request):
+def coApproval(request):
     
     #Second check - make sure the user IS CO
     name = request.user.username    
     if name != 'co' :
         return HttpResponseRedirect('/cms/')
     
+    #date assignment block
     cDate = date.today()
-    
-    #Assign next weekend's beginning and end
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
     cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
-    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).order_by('-mid')
+    #list of current non-approved weekends
+    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(status='P').order_by('-mid')
+                                                                                                        
     
     
     
