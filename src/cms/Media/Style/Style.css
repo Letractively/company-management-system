@@ -6,7 +6,7 @@ body {
   margin-right:auto;
 }
 
-section #wrapper {
+#wrapper {
   position: relative;
   top: 50px;
   margin-left:auto;
