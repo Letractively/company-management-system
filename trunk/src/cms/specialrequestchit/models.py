@@ -29,5 +29,10 @@ class SpecialRequestChit(models.Model):
     requestType = models.CharField(max_length=1, choices=REQUEST_TYPES)
     otherRequestType = models.CharField(max_length=30)
     justification = models.TextField()
+    squadLeaderApproval = models.NullBooleanField()
+    platoonLeaderApproval = models.NullBooleanField()
+    companyCommanderApproval = models.NullBooleanField()
+    companySELApproval = models.NullBooleanField()
+    companyOfficer = models.NullBooleanField()
     def __unicode__(self):
         return self.RequestType + " - " + self.Date
