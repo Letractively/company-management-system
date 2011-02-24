@@ -13,6 +13,7 @@ body {
 }
 
 header, section #notification, #main, nav, footer {
+  padding: 2px;
   color: #ffffff;
    background-color: rgba(255, 255, 255, .2);
 	width: 100%;
@@ -24,6 +25,7 @@ header {
 
 section #notification {
 	height: 10px;
+   visibility:hidden;
 }
 
 section #main {
