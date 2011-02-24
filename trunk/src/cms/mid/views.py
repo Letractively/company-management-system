@@ -21,7 +21,7 @@ def loginPage(request):
 def logIn(request):
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
-        return HttpResponseRedirect('cms/')
+        return HttpResponseRedirect('/cms/')
     
     username = request.POST['username']
     password = request.POST['password']
