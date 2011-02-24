@@ -11,6 +11,7 @@ body {
   top: 50px;
   margin-left:auto;
   margin-right:auto;
+  padding: 5px;
   background-color: rgba(107, 144, 218, 1);
   width: 800px;
   border-bottom-left-radius: 5px 5px;
@@ -22,10 +23,10 @@ body {
   box-shadow: 10px 10px 5px #888888;
 }
 
-header, #notification, #main, #wrapper, nav, footer {
+header, #notification, #main, nav, footer {
   padding: 2px;
   color: #ffffff;
-  background-color: rgba(255, 255, 255, .2);
+  background-color: rgba(255, 255, 255, .3);
   width: 100%;
 }
 
