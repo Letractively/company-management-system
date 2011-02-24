@@ -19,10 +19,14 @@ CHIT_REQUEST_LEVEL = (
                    ('BATO','CAPT A. Jerrett, USN'),
                    ('CO','LT K. Igawa, USN'),
                    ('CSEL','AECS Morring, USN'),
+                   ('CC','Company Commander'),
+                   ('PL','Platoon Commander'),
+                   ('SL','Squad Leader')
                    )
 class SpecialRequestChit(models.Model):
     mid = models.ForeignKey("mid.Mid")
     date = models.DateField()
+    #This is the level to which the chit must be approved.  
     toLine = models.CharField(max_length=4, choices=CHIT_REQUEST_LEVEL)
     fromLine = models.CharField(max_length=50)
     viaLine = models.CharField(max_length=50)
@@ -34,5 +38,10 @@ class SpecialRequestChit(models.Model):
     companyCommanderApproval = models.NullBooleanField()
     companySELApproval = models.NullBooleanField()
     companyOfficer = models.NullBooleanField()
+    #the approvalLevel is an int which should be set at run time after checking
+    #the toLine for the level to which the chit needs to go.s
+    approvalLevel = models.IntegerField()
+    approvalStatus = models.IntegerField()
+    
     def __unicode__(self):
         return self.RequestType + " - " + self.Date
