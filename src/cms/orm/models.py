@@ -21,6 +21,8 @@ class OrmChit(models.Model):
     daysTravel = models.IntegerField()
     daysLeave = models.IntegerField()
     travelRatio = models.IntegerField()
+    safetyOfficerApproval = models.NullBooleanField()
+    companyOfficerApproval = models.NullBooleanField()
     def __unicode__(self):
         return self.DateTime
     
