@@ -1,0 +1,40 @@
+section #wrapper {
+	position:absolute;
+	left: 10%;
+	top: 5%;
+	background-color: #0000000;
+	width: 800px;
+}
+
+header, section #notification, body, nav, footer {
+	width: 100%;
+}
+
+header {
+	height: 50px;
+}
+
+section #notification {
+	height: 10px;
+}
+
+body {
+	height: 600px;
+}
+
+nav {
+	height: 50px;
+}
+
+footer {
+	height: 5%;
+}
+
+div.icon {
+	top: 5px;
+	width: 40px;
+	border-bottom-left: 2px 2px;
+	border-bottom-right: 2px 2px;
+	border-top-left: 2px 2px;
+	border-top-right: 2px 2px;
+}
