@@ -2,9 +2,10 @@
 <html lang="en">
 	<head>
 		<title>{% block title %}{% endblock %}</title>
-     <link rel="stylesheet" type="text/css" href="media/Style/Style.css" />
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="media/Style/Style.css" />
 	</head>
-	<section id="wrapper">
+	<body>
 		<header>
 			<!--<img alt="header image" src="../media/images/header.jpg" />-->
 		</header>
@@ -18,11 +19,11 @@
 		{% if mid.loggedin %}
 		{% endif %}
 		
-		<body>
+		<section id="main">
 		{% block content %}
 		
 		{% endblock %}
-		</body>
+		</section>
 		
 		<nav>
 			{% include "nav.html" %}
@@ -31,5 +32,5 @@
 		<footer>
 			<!--<img alt="footer image" src="../media/images/footer.jpg" />-->
 		</footer>
-	</section>
+	</body>
 </html>
