@@ -8,6 +8,7 @@ urlpatterns = patterns('weekends.views',
 
     (r'^$', 'index'),
     (r'^reqWeekend$', 'reqWeekend'),
+    (r'^co$', 'coView'),
     
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
