@@ -1,20 +1,27 @@
-<h1>Login to the Company Management Database</h1>
+{% extends "base.html" %}
 
-{% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
-{% endif %}
+{% block title %}Login{% endblock %}
 
-{% if repeat %}
-    <h3>Incorrect credentials. Try again.</h3>
-{% endif %}
 
-{% if noUser %}
-    <h3>User exists, but is not in MIDS database. Contact your system administrator.</h3>
-{% endif %}
-
-<form action="login" method="post">
-    {% csrf_token %}
-	<input type="text" name="username" /><br /><br />
-	<input type="password" name="password" /><br /><br />
-	<input type="submit" value="Login" />
-</form>
+{% block content %}
+  <h1>Login to the Company Management Database</h1>
+  
+  {% if error_message %}
+      <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+  
+  {% if repeat %}
+      <h3>Incorrect credentials. Try again.</h3>
+  {% endif %}
+  
+  {% if noUser %}
+      <h3>User exists, but is not in MIDS database. Contact your system administrator.</h3>
+  {% endif %}
+  
+  <form action="login" method="post">
+      {% csrf_token %}
+     <input type="text" name="username" /><br /><br />
+     <input type="password" name="password" /><br /><br />
+     <input type="submit" value="Login" />
+  </form>
+{% endblock %}
