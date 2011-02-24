@@ -49,8 +49,12 @@
 <table>
 {% for p in lWeekends %}
     {% if p.status != "P" %}
-        <tr><td>{{ p.startDate }} - {{ p.endDate }}</td><td>{{ p.contactNumber }}</td>
-        <td>{{ p.location }}</td><td>{{ p.status }}</td</tr>
+        <tr>
+            <td>{{ p.startDate }} - {{ p.endDate }}</td>
+            <td>{{ p.contactNumber }}</td>
+            <td>{{ p.location }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
     {% endif %}
 {% empty %}
     <tr><td>You have not taken any weekends.</td></tr>

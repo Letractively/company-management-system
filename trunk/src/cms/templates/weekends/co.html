@@ -1,0 +1,37 @@
+<html>
+<body>
+<h3>Current weekend requests pending approval: </h3>
+<table>
+{% for p in lWeekends %}
+    {% if p.status == "P" %}
+        <tr>
+            <td>{{ p.mid.LName }}</td>
+            <td>{{ p.mid.alpha }}</td>
+            <td>{{ p.startDate }} - {{ p.endDate }}</td>
+            <td>{{ p.contactNumber }}</td>
+            <td>{{ p.location }}</td>
+            <td>{{ p.status }}</td>
+            <td><form action="approveWeekend" method="post">
+                    <input type="hidden" name = "mid" value = " {{ p.mid.alpha }} " />
+                    <input type="submit" value="Approve" />
+                </form>
+            </form></td>
+            <td><form action="denyWeekend" method="post">
+                    <input type="hidden" name = "mid" value = " {{ p.mid.alpha }} " />
+                    <input type="submit" value="Deny" />
+                </form></td>
+        </tr>
+    {% endif %}
+{% empty %}
+    <tr><td>Weekend list is empty.</td></tr>
+{% endfor %}
+    <tr>
+        <td colspan="8">
+            <form action="approveAll" method="post">
+                <input type="submit" value="Approve All" />
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
