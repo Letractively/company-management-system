@@ -114,9 +114,27 @@ def reqWeekend(request):
     cWeekend.save()
 
     return HttpResponseRedirect('/cms/weekends/')
+    
+
+@login_required(redirect_field_name='/')
+def viewList(request):
+    #Called on /cms/weekends/view -> generates a current weekend list, no additional functionality
+    
+    #date assignment block
+    cDate = date.today()
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    
+    #list of current approved weekends
+    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(status='A').order_by('-mid')
+      
+    return render_to_response('weekends/list.html', { 'lWeekends' : lWeekends }, context_instance=RequestContext(request))
+
+#Following functions deal with CO's functionality - approval and disapproval of weekend requests
 
 @login_required(redirect_field_name='/')
 def coApproval(request):
+    #Called on /cms/weekends/co -> generates a list of weekends to be approved
     
     #Second check - make sure the user IS CO
     name = request.user.username    
@@ -131,19 +149,79 @@ def coApproval(request):
     #list of current non-approved weekends
     lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(status='P').order_by('-mid')
                                                                                                         
+    return render_to_response('weekends/co.html', { 'lWeekends' : lWeekends }, context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')    
+def approveWeekend(request):
+    #Approves a specific weekend, redirects back to CO's approval page
     
+    #Second check - make sure the user IS CO
+    name = request.user.username    
+    if name != 'co' :
+        return HttpResponseRedirect('/cms/')
     
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("http://www.michaellaws.info/cms/")
     
+    cMid = request.POST['mid']
     
+    #date assignment block
+    cDate = date.today()
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
+    cWeekend = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid=cMid)
+    cWeekend.status = "A"
+    cWeekend.save()
     
+    return HttpResponseRedirect('/cms/weekends/co')
     
+@login_required(redirect_field_name='/')
+def denyWeekend(request): 
+    #Denies a specific weekend, redirects back to CO's approval page
     
+    #Second check - make sure the user IS CO
+    name = request.user.username    
+    if name != 'co' :
+        return HttpResponseRedirect('/cms/')
     
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("http://www.michaellaws.info/cms/")
     
+    cMid = request.POST['mid']
     
+    #date assignment block
+    cDate = date.today()
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
+    cWeekend = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid=cMid)
+    cWeekend.status = "D"
+    cWeekend.save()
     
+    return HttpResponseRedirect('/cms/weekends/co')
+
+@login_required(redirect_field_name='/')
+def approveAll(request):
+    #Automatically approves all weekends in the CO's list
     
+    #Second check - make sure the user IS CO
+    name = request.user.username    
+    if name != 'co' :
+        return HttpResponseRedirect('/cms/')
     
+    #date assignment block
+    cDate = date.today()
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
+    #list of current non-approved weekends
+    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(status='P').order_by('-mid')
+    
+    for p in lWeekends :
+        p.status = "A"
+        p.save()
+                                                                                                        
+    return HttpResponseRedirect('/cms/weekends/co')

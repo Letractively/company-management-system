@@ -19,12 +19,13 @@ def loginPage(request):
                               context_instance=RequestContext(request))
 
 def logIn(request):
-    
+    #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect("http://www.michaellaws.info/cms/")
     
     username = request.POST['username']
     password = request.POST['password']
+    
     user = authenticate(username=username, password=password)
     
     if user is not None:

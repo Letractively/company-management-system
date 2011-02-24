@@ -1,0 +1,21 @@
+<html>
+<body>
+<h3>Current Weekend List: </h3>
+<table>
+{% for p in lWeekends %}
+    {% if p.status != "P" %}
+        <tr>
+            <td>{{ p.mid.LName }}</td>
+            <td>{{ p.mid.alpha }}</td>
+            <td>{{ p.startDate }} - {{ p.endDate }}</td>
+            <td>{{ p.contactNumber }}</td>
+            <td>{{ p.location }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
+    {% endif %}
+{% empty %}
+    <tr><td>Weekend list is empty.</td></tr>
+{% endfor %}
+</table>
+</body>
+</html>
