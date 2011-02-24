@@ -1,12 +1,12 @@
-section #wrapper {
+body {
 	position:absolute;
 	left: 10%;
 	top: 5%;
-	background-color: #0000000;
+	background-color: #0a00000;
 	width: 800px;
 }
 
-header, section #notification, body, nav, footer {
+header, section #notification, #main, nav, footer {
 	width: 100%;
 }
 
@@ -18,7 +18,7 @@ section #notification {
 	height: 10px;
 }
 
-body {
+section #main {
 	height: 600px;
 }
 
