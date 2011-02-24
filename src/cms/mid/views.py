@@ -21,7 +21,7 @@ def loginPage(request):
 def logIn(request):
     
     if request.method != "POST" :
-        return HttpResponseRedirect('/cms/')
+        return HttpResponseRedirect('cms/')
     
     username = request.POST['username']
     password = request.POST['password']
