@@ -204,7 +204,7 @@ def denyWeekend(request):
     return HttpResponseRedirect('/cms/weekends/co')
 
 @login_required(redirect_field_name='/')
-def approveAll(request):
+def approveAllWeekends(request):
     #Automatically approves all weekends in the CO's list
     
     #Second check - make sure the user IS CO
