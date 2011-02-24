@@ -12,12 +12,9 @@ body {
   margin-left:auto;
   margin-right:auto;
   padding: 5px;
-  background-color: rgba(107, 144, 218, 1);
+  background-color: rgba(107, 144, 200, 1);
   width: 800px;
-  border-bottom-left-radius: 5px 5px;
-  border-bottom-right-radius: 5px 5px;
-  border-top-left-radius: 5px 5px;
-  border-top-right-radius: 5px 5px;
+  border-radius: 2em;
   -moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
   -webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
   box-shadow: 10px 10px 5px #888888;
