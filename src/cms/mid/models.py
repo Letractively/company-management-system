@@ -68,7 +68,7 @@ class Mid(models.Model):
     roomNumber = models.ForeignKey(Room,null=True)
     phoneNumber = models.CharField(max_length=10,null=True)
     weekends = models.IntegerField(null=True)
-    weekendsComment = models.CharField(max_length=50)
+    weekendsComment = models.CharField(max_length=50, null=True,blank=True)
     acSAT = models.BooleanField(null=True).default=True
     PRTSat = models.BooleanField(null=True).default=True
     CQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True)
