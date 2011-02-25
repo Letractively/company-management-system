@@ -15,10 +15,12 @@
     {% else %}
     
         {% if WE %}
-            <p>Would you like to request a weekend from {{ NWB }} to {{ NWE }}?</p>
+            Would you like to request a weekend from {{ NWB }} to {{ NWE }}?
+            <br /><br />
             <form action="reqWeekend" method="post">
                 {% csrf_token %}
-                Where are you going? <input type = "input" name = "location" /><br />
+                Where are you going? <input type = "input" name = "location" />
+                <br /><br />
                 <input type = "submit" value = "Request a weekend" />
             </form>
         {% endif %}
@@ -31,8 +33,15 @@
 {% else %}
     
     {% if cWeekend.status == "P" %}
-        You have applied for the weekend from {{ NWB }} to {{ NWE }}. <br />
-        Pending approval by your Company Officer...
+        You have applied for the weekend from {{ NWB }} to {{ NWE }}. 
+        <br /><br />
+        Pending approval by your Company Officer... 
+        <br /><br />
+        
+        <form action="cancelReqWeekend" method="post"> 
+        {% csrf_token %}
+             <input type = "submit" value = "Cancel weekend request" />
+        </form>
     {% endif %}
     
     {% if cWeekend.status == "A" %}

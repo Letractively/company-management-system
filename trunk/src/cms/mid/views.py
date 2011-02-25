@@ -3,6 +3,7 @@
 # Editor: Michael Laws
 
 from mid.models import Mid
+from mid.models import Billet
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -17,7 +18,7 @@ from django.contrib.auth import logout
 import re
 
 def loginPage(request):
-    return render_to_response('mid/loginPage.html', { 'repeat' : False, 'noUser' : False }, 
+    return render_to_response('mid/loginPage.html', {}, 
                               context_instance=RequestContext(request))
 
 def logIn(request):
@@ -45,41 +46,40 @@ def logIn(request):
                     alpha = username.split('m')
                     alpha = alpha[1]
         
-                    if Mid.objects.filter(alpha=alpha) :
+                    if Mid.objects.filter(alpha = alpha) :
                         
-                        cMid = Mid.objects.filter(alpha=alpha)
+                        cMid = Mid.objects.filter(alpha = alpha)
                         cMid = cMid[0]
+                        
+                        lBillets = Billet.objects.filter(mid = cMid)
+                        
+                        #Here we assign permissions based on billets.
+                        flagAdmin = False;
+                        for p in lBillets :
+                            if p.billet == "ADM" and p.current :
+                                flagAdmin = True
                                             
-                        return render_to_response('mid/switchboard.html', { 'mid' : cMid })
+                        return render_to_response('mid/switchboard.html', { 'mid' : cMid,
+                                                                            'admin' : flagAdmin })
                     
                     #Alpha does not exist in the database, redirect to login with 'noUser' flag TRUE.
                     else :
-                        return render_to_response('mid/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
+                        return render_to_response('mid/loginPage.html', { 'noUser' : True }, 
                                                   context_instance=RequestContext(request))
                 
                 #Non 'mXXXXXX' login entered, redirect to login with with the 'noUser' flag TRUE.
                 else :
-                    return render_to_response('mid/loginPage.html', { 'repeat' : False,  'noUser' : True }, 
+                    return render_to_response('mid/loginPage.html', {'noUser' : True }, 
                                               context_instance=RequestContext(request))
         
         #Disabled account: should not happen, but here just in case
         else:
-            return HttpResponse("Disabled account.")
+            return HttpResponseRedirect('/')
         
     #Wrong password, redirect redirect to login with the 'repeat' flag TRUE    
     else:
-        return render_to_response('mid/loginPage.html', { 'repeat' : True, 'noUser' : False }, 
+        return render_to_response('mid/loginPage.html', { 'repeat' : True,}, 
                                   context_instance=RequestContext(request))
-
-def passwordRecovery(request):
-    #Safety feature, makes sure we POST data to this view
-    if request.method != "POST" :
-        return HttpResponseRedirect('/')
-    
-    username = request.POST['username']
-    #sendmail goes here. =)
-    
-    return HttpResponseRedirect('/')
 
 @login_required(redirect_field_name='/')
 def logOut(request):

@@ -8,7 +8,11 @@ urlpatterns = patterns('weekends.views',
 
     (r'^$', 'index'),
     (r'^reqWeekend$', 'reqWeekend'),
+    (r'^cancelReqWeekend$', 'cancelReqWeekend'),
     (r'^view$', 'viewList'),
+    
+    (r'^admin$', 'admin'),
+    (r'^saveWeekendCount$', 'saveWeekendCount'),
     
     (r'^co$', 'coApproval'),
     (r'^approveWeekend$', 'approveWeekend'),
