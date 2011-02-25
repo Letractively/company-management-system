@@ -10,27 +10,29 @@
             <td>{{ p.startDate }} - {{ p.endDate }}</td>
             <td>{{ p.contactNumber }}</td>
             <td>{{ p.location }}</td>
-            <td><form action="approveWeekend" method="post">
-                    <input type="hidden" name = "mid" value = " {{ p.mid.alpha }} " />
+            <td><form action="approveWeekend" method="post"> {% csrf_token %}
+                    <input type="hidden" name = "mid" value = "{{ p.mid.alpha }}" />
                     <input type="submit" value="Approve" />
                 </form>
             </form></td>
-            <td><form action="denyWeekend" method="post">
-                    <input type="hidden" name = "mid" value = " {{ p.mid.alpha }} " />
+            <td><form action="denyWeekend" method="post"> {% csrf_token %}
+                    <input type="hidden" name = "mid" value = "{{ p.mid.alpha }}" />
                     <input type="submit" value="Deny" />
                 </form></td>
         </tr>
     {% endif %}
 {% empty %}
-    <tr><td>Weekend list is empty.</td></tr>
+    <tr><td>No weekends pending approval.</td></tr>
 {% endfor %}
+{% if lWeekends %}    
     <tr>
         <td colspan="8">
-            <form action="approveAllWeekends" method="post">
+            <form action="approveAllWeekends" method="post"> {% csrf_token %}
                 <input type="submit" value="Approve All" />
             </form>
         </td>
     </tr>
+{% endif %}
 </table>
 </body>
 </html>

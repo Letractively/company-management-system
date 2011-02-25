@@ -11,7 +11,10 @@ from weekends.models import Weekend
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+
 from django.template import RequestContext
+from django.core.context_processors import csrf
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
@@ -164,7 +167,8 @@ def approveWeekend(request):
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    cMid = request.POST['mid']
+    alpha = request.POST['mid'] 
+    cMid = Mid.objects.filter(alpha=alpha)
     
     #date assignment block
     cDate = date.today()
@@ -172,8 +176,9 @@ def approveWeekend(request):
     cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
     cWeekend = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid=cMid)
-    cWeekend.status = "A"
-    cWeekend.save()
+    for p in cWeekend :
+        p.status = "A"
+        p.save()
     
     return HttpResponseRedirect('/weekends/co')
     
@@ -190,7 +195,8 @@ def denyWeekend(request):
     if request.method != "POST" :
         return HttpResponseRedirect("http://www.michaellaws.info/cms/")
     
-    cMid = request.POST['mid']
+    alpha = request.POST['mid'] 
+    cMid = Mid.objects.filter(alpha=alpha)
     
     #date assignment block
     cDate = date.today()
@@ -198,8 +204,9 @@ def denyWeekend(request):
     cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
     cWeekend = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid=cMid)
-    cWeekend.status = "D"
-    cWeekend.save()
+    for p in cWeekend :
+        p.status = "D"
+        p.save()
     
     return HttpResponseRedirect('/weekends/co')
 
