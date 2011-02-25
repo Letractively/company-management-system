@@ -8,9 +8,9 @@ urlpatterns = patterns('weekends.views',
 
     (r'^$', 'index'),
     (r'^reqWeekend$', 'reqWeekend'),
-    (r'^/view$', 'viewList'),
+    (r'^view$', 'viewList'),
     
-    (r'^/co$', 'coApproval'),
+    (r'^co$', 'coApproval'),
     (r'^approveWeekend$', 'approveWeekend'),
     (r'^denyWeekend$', 'denyWeekend'),
     (r'^approveAllWeekends$', 'approveAllWeekends'),
