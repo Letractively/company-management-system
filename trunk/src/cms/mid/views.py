@@ -19,9 +19,8 @@ def loginPage(request):
 
 def logIn(request):
     #Safety feature, makes sure we POST data to this view
-    #if request.method != "POST" :
-        #return HttpResponse("NO POST")
-        #return HttpResponseRedirect('/cms/')
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
     
     username = request.POST['username']
     password = request.POST['password']
@@ -33,7 +32,7 @@ def logIn(request):
         if user.is_active:
             login(request, user)
             
-            if user.username == 'co' :
+            if user.username == 'CO' :
                  return render_to_response('mid/co.html', { })
             
             else :
@@ -72,14 +71,14 @@ def logIn(request):
 def passwordRecovery(request):
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
-        return HttpResponseRedirect('/cms/')
+        return HttpResponseRedirect('/')
     
     username = request.POST['username']
     #sendmail goes here. =)
     
-    return HttpResponseRedirect('/cms/')
+    return HttpResponseRedirect('/')
 
 @login_required(redirect_field_name='/')
 def logOut(request):
     logout(request)
-    return HttpResponseRedirect('/cms/')
+    return HttpResponseRedirect('/')

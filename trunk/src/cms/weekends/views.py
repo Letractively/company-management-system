@@ -113,7 +113,7 @@ def reqWeekend(request):
     
     cWeekend.save()
 
-    return HttpResponseRedirect('/cms/weekends/')
+    return HttpResponseRedirect('/weekends/')
     
 
 @login_required(redirect_field_name='/')
@@ -138,8 +138,8 @@ def coApproval(request):
     
     #Second check - make sure the user IS CO
     name = request.user.username    
-    if name != 'co' :
-        return HttpResponseRedirect('/cms/')
+    if name != 'CO' :
+        return HttpResponseRedirect('/')
     
     #date assignment block
     cDate = date.today()
@@ -157,12 +157,12 @@ def approveWeekend(request):
     
     #Second check - make sure the user IS CO
     name = request.user.username    
-    if name != 'co' :
+    if name != 'CO' :
         return HttpResponseRedirect('/cms/')
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
-        return HttpResponseRedirect("http://www.michaellaws.info/cms/")
+        return HttpResponseRedirect("/")
     
     cMid = request.POST['mid']
     
@@ -175,7 +175,7 @@ def approveWeekend(request):
     cWeekend.status = "A"
     cWeekend.save()
     
-    return HttpResponseRedirect('/cms/weekends/co')
+    return HttpResponseRedirect('/weekends/co')
     
 @login_required(redirect_field_name='/')
 def denyWeekend(request): 
@@ -183,8 +183,8 @@ def denyWeekend(request):
     
     #Second check - make sure the user IS CO
     name = request.user.username    
-    if name != 'co' :
-        return HttpResponseRedirect('/cms/')
+    if name != 'CO' :
+        return HttpResponseRedirect('/')
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -201,7 +201,7 @@ def denyWeekend(request):
     cWeekend.status = "D"
     cWeekend.save()
     
-    return HttpResponseRedirect('/cms/weekends/co')
+    return HttpResponseRedirect('/weekends/co')
 
 @login_required(redirect_field_name='/')
 def approveAllWeekends(request):
@@ -209,8 +209,8 @@ def approveAllWeekends(request):
     
     #Second check - make sure the user IS CO
     name = request.user.username    
-    if name != 'co' :
-        return HttpResponseRedirect('/cms/')
+    if name != 'CO' :
+        return HttpResponseRedirect('/')
     
     #date assignment block
     cDate = date.today()
@@ -224,4 +224,4 @@ def approveAllWeekends(request):
         p.status = "A"
         p.save()
                                                                                                         
-    return HttpResponseRedirect('/cms/weekends/co')
+    return HttpResponseRedirect('/weekends/co')
