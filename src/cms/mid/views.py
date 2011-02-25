@@ -3,14 +3,17 @@
 # Editor: Michael Laws
 
 from mid.models import Mid
-from django.http import HttpResponseRedirect
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+
 from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+
 from django.template import RequestContext
+from django.core.context_processors import csrf
+
 from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 import re
 
 def loginPage(request):
