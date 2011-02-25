@@ -10,7 +10,6 @@
             <td>{{ p.startDate }} - {{ p.endDate }}</td>
             <td>{{ p.contactNumber }}</td>
             <td>{{ p.location }}</td>
-            <td>{{ p.status }}</td>
             <td><form action="approveWeekend" method="post">
                     <input type="hidden" name = "mid" value = " {{ p.mid.alpha }} " />
                     <input type="submit" value="Approve" />
