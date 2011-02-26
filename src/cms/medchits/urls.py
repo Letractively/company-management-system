@@ -6,7 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('medchits.views',
 
-    (r'$', 'index'),
+    (r'^$', 'index'),
+    (r'^/$', 'index'),
     (r'submit$', 'submit'),
     
     # Uncomment the admin/doc line below to enable admin documentation:    
