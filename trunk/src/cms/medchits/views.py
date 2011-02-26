@@ -40,8 +40,31 @@ def index(request):
                 cChit = p
                 endDate = p.endDate
     
-    return render_to_response('weekends/weekend.html', {'cMid' : cMid, 
+    return render_to_response('medchits/medchit.html', {'cMid' : cMid, 
                                                         'cChit' : cChit, 
                                                         'lChits' : lChits,
                                                         }, 
                                                         context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def submit(request):
+    #Medchit submission
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.filter(alpha=alpha)
+    cMid = cMid[0]
+    
+     #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cChit = Chit(mid = cMid,
+                 diagnosis = request.POST['diagnosis'],
+                 startDate = request.POST['startDate'],
+                 endDate = request.POST['endDate'],
+                 disposition = request.POST['disposition'],
+                 adminNotes = request.POST['adminNotes'])
+    
+    cChit.save()
+    
+    return HttpResponseRedirect('/medchits/')

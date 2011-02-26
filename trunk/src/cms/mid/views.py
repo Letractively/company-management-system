@@ -209,17 +209,9 @@ def saveUser(request) :
         return HttpResponseRedirect('/')
     
     newUser = request.POST['newUser']
-    alpha = request.POST['alpha']
-    fName = request.POST['fName']
-    mName = request.POST['mName']
-    lName = request.POST['lName']
     roomNumber = request.POST['roomNumber']
-    
     roomNumber = Room.objects.filter(roomNumber = roomNumber)
     roomNumber = roomNumber[0]
-    
-    phoneNumber = request.POST['phoneNumber']
-    weekends = request.POST['weekends']
     
     #Making sure user with this alpha does not exist
     lMids = Mid.objects.all()
@@ -233,22 +225,22 @@ def saveUser(request) :
         cMid = Mid.objects.filter(alpha = alpha)
         cMid = cMid[0]
         
-        cMid.LName=lName 
-        cMid.mName=mName
-        cMid.fName = fName
+        cMid.LName=request.POST['lName'] 
+        cMid.mName=request.POST['mName']
+        cMid.fName = request.POST['fName']
         cMid.roomNumber = roomNumber
-        cMid.phoneNumber = phoneNumber
-        cMid.weekends = weekends
+        cMid.phoneNumber = request.POST['phoneNumber']
+        cMid.weekends = request.POST['weekends']
         cMid.save()
                
     if newUser == "true" and not alphaExists:
-        cMid = Mid(alpha=alpha,
-                   LName=lName,
-                   mName=mName,
-                   fName = fName,
+        cMid = Mid(alpha=request.POST['alpha'],
+                   LName=request.POST['lName'],
+                   mName=request.POST['mName'],
+                   fName = request.POST['fName'],
                    roomNumber = roomNumber,
-                   phoneNumber = phoneNumber,
-                   weekends = weekends, 
+                   phoneNumber = request.POST['phoneNumber'],
+                   weekends = request.POST['weekends'], 
                    #acSAT = True,
                    #PRTSat = True,
                    CQPR = "0.00",
