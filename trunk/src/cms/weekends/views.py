@@ -28,7 +28,6 @@ def index(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
     cMid = Mid.objects.filter(alpha=alpha)
     cMid = cMid[0]
     

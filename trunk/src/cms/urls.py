@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     (r'^/$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
+    (r'^switchboard$', 'mid.views.renderSwitchboard'),
 
     # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
