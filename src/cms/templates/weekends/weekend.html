@@ -1,9 +1,6 @@
-<html>
-<head>
-<title>Weekends Module</title>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}Weekends Module{% endblock %}
+{% block content %}
 <h1>Welcome to the weekends module, {{ mid.fName }} {{ mid.LName }}.</h1>
 
 <p>You have been awarded {{ mid.weekends }} weekends. {{ mid.weekendsComment }}</p>
@@ -68,6 +65,4 @@
 {% empty %}
     <tr><td>You have not taken any weekends.</td></tr>
 {% endfor %}
-</table>
-</body>
-</html>
+{% endblock %}

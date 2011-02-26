@@ -1,6 +1,9 @@
-<html>
-<body>
-<h3>Current weekends counts: </h3>
+{% extends "base.html" %}
+
+
+{% block title %}Current weekends counts: {% endblock %}
+
+{% block content %}
 <table>
 <form action="saveWeekendCount" method="post"> 
 {% csrf_token %}
@@ -23,7 +26,4 @@
         </td>
     </tr>
 {% endif %}
-</form>
-</table>
-</body>
-</html>
+{% endblock %}
