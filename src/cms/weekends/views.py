@@ -123,7 +123,7 @@ def reqWeekend(request):
     
     cWeekend.save()
 
-    return HttpResponseRedirect('/weekends/')
+    return HttpResponseRedirect('weekends/')
     
 @login_required(redirect_field_name='/')
 def cancelReqWeekend(request):
@@ -146,7 +146,7 @@ def cancelReqWeekend(request):
     cWeekend = Weekend.objects.filter(mid = cMid).filter(startDate = cNextWeekendBeg)
     cWeekend.delete()
 
-    return HttpResponseRedirect('/weekends/')
+    return HttpResponseRedirect('weekends/')
 
 @login_required(redirect_field_name='/')
 def viewList(request):
@@ -226,7 +226,7 @@ def saveWeekendCount(request):
         p.weekendsComment = request.POST[p.alpha+'Comm']
         p.save()
         
-    return HttpResponseRedirect('/weekends/admin')
+    return HttpResponseRedirect('weekends/admin')
 
 #Following functions deal with CO's functionality - approval and disapproval of weekend requests
 @login_required(redirect_field_name='/')
@@ -277,7 +277,7 @@ def approveWeekend(request):
         p.status = "A"
         p.save()
     
-    return HttpResponseRedirect('/weekends/co')
+    return HttpResponseRedirect('weekends/co')
     
 @login_required(redirect_field_name='/')
 def denyWeekend(request): 
@@ -306,7 +306,7 @@ def denyWeekend(request):
         p.status = "D"
         p.save()
     
-    return HttpResponseRedirect('/weekends/co')
+    return HttpResponseRedirect('weekends/co')
 
 @login_required(redirect_field_name='/')
 def approveAllWeekends(request):
@@ -330,4 +330,4 @@ def approveAllWeekends(request):
         p.status = "A"
         p.save()
                                                                                                         
-    return HttpResponseRedirect('/weekends/co')
+    return HttpResponseRedirect('weekends/co')
