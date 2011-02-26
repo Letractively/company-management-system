@@ -1,16 +1,19 @@
 from django.db import models
 
+DISPOSITION_CHOICES = (
+                           ("SIQ","SIQ"),
+                           ("CLA","SIQ with Class Option"),
+                           ("LLD","Light/Limited Duty"),
+                           )
+
 # Create your models here.
 class Chit(models.Model):
     mid = models.ForeignKey("mid.Mid")
     diagnosis = models.TextField()
-    dateStart = models.DateField('Start Date')
-    dateEnd = models.DateField('End Date')
-    DISPOSITION_CHOICES = (
-                           ("SIQ","SIQ"),
-                           ("CLA","SIQ with Class Option"),
-                           )
+    startDate = models.DateField('Start Date')
+    endDate = models.DateField('End Date')
     disposition = models.CharField(max_length=3, choices=DISPOSITION_CHOICES)
     adminNotes = models.TextField()
+    
     def __unicode__(self):
-        return self.Mid + " - " + self.Diagnosis
+        return self.Mid + " - " + self.Diagnosis + "(" + self.startDate + " - " + self.endDate + ")"

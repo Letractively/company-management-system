@@ -87,7 +87,8 @@ def renderSwitchboard(request) :
             flagAdmin = True
     
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
-                                                        'admin' : flagAdmin })
+                                                        'admin' : flagAdmin },
+                                                        context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def logOut(request):
