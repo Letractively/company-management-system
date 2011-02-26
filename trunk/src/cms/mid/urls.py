@@ -6,13 +6,13 @@ admin.autodiscover()
 
 urlpatterns = patterns('mid.views',
 
-    (r'^selectUser$', 'selectUser'),
-    (r'^modifyUser$', 'modifyUser'),
-    (r'^saveUser$', 'saveUser'),
-    (r'^selectPassReset$', 'selectPassReset'),
-    (r'^passReset$', 'passReset'),
-    (r'^selectPassChange$', 'selectPassChange'),
-    (r'^passChange$', 'passChange'),
+    (r'selectUser$', 'selectUser'),
+    (r'modifyUser$', 'modifyUser'),
+    (r'saveUser$', 'saveUser'),
+    (r'selectPassReset$', 'selectPassReset'),
+    (r'passReset$', 'passReset'),
+    (r'selectPassChange$', 'selectPassChange'),
+    (r'passChange$', 'passChange'),
     
     # put url's to all the apps in this folder.
 

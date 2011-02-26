@@ -4,6 +4,7 @@
 
 from django.conf.urls.defaults import *
 # admin enabled
+
 from django.contrib import admin
 from django.views.static import *
 from django.conf import settings
@@ -14,15 +15,20 @@ urlpatterns = patterns('',
     #Initial login page    
     
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
+
     (r'^$', 'mid.views.loginPage'),
+    (r'^/$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
     (r'^switchboard$', 'mid.views.renderSwitchboard'),
+
     
-    (r'^mid/$', include('mid.urls')),
+    (r'^mid/', include('mid.urls')),
     
     #Chits/Paperwork
-    (r'^medchits/$', include('medchits.urls')),
+
+    (r'^medchits/', include('medchits.urls')),
+
     # All the other module's pages
     #(r'^accountability/', include('accountability.urls')),
     #(r'^bravoinspection/', include('bravoinspection.urls')),

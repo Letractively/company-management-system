@@ -7,9 +7,9 @@
 
 <h1>Welcome to the medical Chits module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
-{% if cChit is not None %}
+{% if cChit %}
     You are currently on {{ cChit.disposition }}, due to {{cChit.diagnosis}}.<br />
-    Your chit will expire on {{ cChit. endDate }}. 
+    Your chit will expire on {{ cChit.endDate }}. 
 {% endif %}
 
 <h3>Enter a medical chit:</h3>
@@ -21,7 +21,7 @@
     <tr><td>End date:</td><td><input type = "text" name = "endDate" size=8 /></td></tr>
     <tr><td>Diagnosis:</td><td><input type = "text" name = "diagnosis" size = 20 /></td></tr>
     <tr>
-        <td>Room number:</td>
+        <td>Disposition:</td>
         <td>
                 <select name = "disposition" />
                     <option value="SIQ">SIQ</option>
