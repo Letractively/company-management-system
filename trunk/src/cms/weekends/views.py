@@ -160,7 +160,7 @@ def viewList(request):
     #list of current approved weekends
     lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(status = 'A').order_by('-mid')
       
-    return render_to_response('/weekends/list.html', { 'lWeekends' : lWeekends }, 
+    return render_to_response('weekends/list.html', { 'lWeekends' : lWeekends }, 
                               context_instance=RequestContext(request))
 
 #Following functions deal with the Admin Officer functionality
@@ -190,7 +190,7 @@ def admin(request):
     
     #ALERT! In the corresponding view second input text size is 50 due to the database limit. 
     #Change required to allow for at least 120 symbols. 
-    return render_to_response('/weekends/admin.html', { 'lMids' : lMids },
+    return render_to_response('weekends/admin.html', { 'lMids' : lMids },
                               context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
