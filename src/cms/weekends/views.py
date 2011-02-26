@@ -115,12 +115,16 @@ def reqWeekend(request):
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
     cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
         
-    cWeekend = Weekend(mid=cMid, startDate=cNextWeekendBeg, endDate=cNextWeekendEnd,
-                       status = 'P', location = cLocation, contactNumber = cMid.phoneNumber)
+    cWeekend = Weekend(mid=cMid, 
+                       startDate=cNextWeekendBeg, 
+                       endDate=cNextWeekendEnd,
+                       status = 'P', 
+                       location = cLocation, 
+                       contactNumber = cMid.phoneNumber)
     
     cWeekend.save()
 
-    return HttpResponseRedirect('/weekends/')
+    return HttpResponseRedirect('weekends/')
     
 @login_required(redirect_field_name='/')
 def cancelReqWeekend(request):
@@ -143,7 +147,7 @@ def cancelReqWeekend(request):
     cWeekend = Weekend.objects.filter(mid = cMid).filter(startDate = cNextWeekendBeg)
     cWeekend.delete()
 
-    return HttpResponseRedirect('/weekends/')
+    return HttpResponseRedirect('weekends/')
 
 @login_required(redirect_field_name='/')
 def viewList(request):
@@ -160,7 +164,7 @@ def viewList(request):
     return render_to_response('weekends/list.html', { 'lWeekends' : lWeekends }, 
                               context_instance=RequestContext(request))
 
-#Following function deal with the Admin Officer functionality
+#Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
 def admin(request):
     #Called on /weekends/admin -> generates an editable list of weekend counts and comments for the company
@@ -223,7 +227,7 @@ def saveWeekendCount(request):
         p.weekendsComment = request.POST[p.alpha+'Comm']
         p.save()
         
-    return HttpResponseRedirect('/weekends/admin')
+    return HttpResponseRedirect('weekends/admin')
 
 #Following functions deal with CO's functionality - approval and disapproval of weekend requests
 @login_required(redirect_field_name='/')
@@ -274,7 +278,7 @@ def approveWeekend(request):
         p.status = "A"
         p.save()
     
-    return HttpResponseRedirect('/weekends/co')
+    return HttpResponseRedirect('weekends/co')
     
 @login_required(redirect_field_name='/')
 def denyWeekend(request): 
@@ -303,7 +307,7 @@ def denyWeekend(request):
         p.status = "D"
         p.save()
     
-    return HttpResponseRedirect('/weekends/co')
+    return HttpResponseRedirect('weekends/co')
 
 @login_required(redirect_field_name='/')
 def approveAllWeekends(request):
@@ -327,4 +331,4 @@ def approveAllWeekends(request):
         p.status = "A"
         p.save()
                                                                                                         
-    return HttpResponseRedirect('/weekends/co')
+    return HttpResponseRedirect('weekends/co')
