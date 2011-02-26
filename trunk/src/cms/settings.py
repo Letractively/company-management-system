@@ -6,9 +6,6 @@ import os.path
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-# url fixes
-APPEND_SLASH = True
-
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
     ('usnacwa', 'usnacwa@gmail.com'),

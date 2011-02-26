@@ -15,9 +15,9 @@ urlpatterns = patterns('',
     
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
     #yes, but mid is lowercase :) - mikeL
-    (r'^$/', 'mid.views.loginPage'),
-    (r'^login$/', 'mid.views.logIn'),
-    (r'^logout$/', 'mid.views.logOut'),
+    (r'^$', 'mid.views.loginPage'),
+    (r'^login$', 'mid.views.logIn'),
+    (r'^logout$', 'mid.views.logOut'),
 
     # All the other module's pages
     (r'^accountability/', include('accountability.urls')),
@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     (r'^zero8/', include('zero8.urls')),
     (r'^specialrequestchit/', include('specialrequestchit.urls')),
     (r'^uniforminspection/', include('uniforminspection.urls')),
-    (r'^weekends', include('weekends.urls')),
+    (r'^weekends/', include('weekends.urls')),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
