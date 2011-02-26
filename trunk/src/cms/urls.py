@@ -19,7 +19,9 @@ urlpatterns = patterns('',
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
     (r'^switchboard$', 'mid.views.renderSwitchboard'),
-
+    
+    (r'^mid/', include('mid.urls')),
+    
     #Chits/Paperwork
     (r'^medchits/', include('medchits.urls')),
     # All the other module's pages
@@ -28,7 +30,6 @@ urlpatterns = patterns('',
     #(r'^companyblog/', include('companyblog.urls')),
     #(r'^companywatch/', include('companywatch.urls')),
     #(r'^form1/',include('form1.urls')),
-    #(r'^mid/', include('mid.urls')),
     #(r'^orm/', include('orm.urls')),
     #(r'^zero8/', include('zero8.urls')),
     #(r'^specialrequestchit/', include('specialrequestchit.urls')),
