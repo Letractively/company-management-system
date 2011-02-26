@@ -21,4 +21,4 @@ class Weekend(models.Model):
     #companyOfficerApproval = models.NullBooleanField()
     
     def __unicode__(self):
-        return self.mid + " - " + self.Startdate
+        return self.mid.LName + " - " + self.status
