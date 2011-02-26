@@ -6,8 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('weekends.views',
 
-
-    (r'$', 'index'),
+    (r'^$', 'index'),
     (r'reqWeekend$', 'reqWeekend'),
     (r'cancelReqWeekend$', 'cancelReqWeekend'),
     (r'view$', 'viewList'),
