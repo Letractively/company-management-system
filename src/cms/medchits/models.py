@@ -1,3 +1,8 @@
+#medchits models.py
+# Author: Michael Harrison
+# Editor: Michael Laws
+# Editor: Dimitri Hatley
+
 from django.db import models
 
 DISPOSITION_CHOICES = (
