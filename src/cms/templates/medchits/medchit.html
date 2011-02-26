@@ -1,9 +1,6 @@
-<html>
-<head>
-<title>Medical Chits</title>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}Medical Chits{% endblock %}
+{% block content %}
 
 <h1>Welcome to the medical Chits module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
@@ -48,3 +45,5 @@
     <tr><td>You have not been issued any medical chits.</td></tr>
 {% endfor %}
 </table>
+
+{% endblock %}
