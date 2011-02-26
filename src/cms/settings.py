@@ -6,6 +6,9 @@ import os.path
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# url fixes
+APPEND_SLASH = True
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
     ('usnacwa', 'usnacwa@gmail.com'),
@@ -90,8 +93,8 @@ ROOT_URLCONF = 'urls'
 TEMPLATE_DIRS = (
     #"/home/dmitri/workspace/CMS/cms/templates/"
      
-    "/home/djangoCode/cms/src/cms/templates"
-    #"/home/mlaws/workspace/CMS/cms/templates"
+    #"/home/djangoCode/cms/src/cms/templates"
+    "/home/mlaws/workspace/CMS/cms/templates"
 )
 
 INSTALLED_APPS = (
