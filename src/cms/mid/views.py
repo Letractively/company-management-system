@@ -50,20 +50,8 @@ def logIn(request):
         
                     if Mid.objects.filter(alpha = alpha) :
                         
-                        cMid = Mid.objects.filter(alpha = alpha)
-                        cMid = cMid[0]
-                        
-                        lBillets = Billet.objects.filter(mid = cMid)
-                        
-                        #Here we assign permissions based on billets.
-                        flagAdmin = False;
-                        for p in lBillets :
-                            if p.billet == "ADM" and p.current :
-                                flagAdmin = True
+                        return HttpResponseRedirect('switchboard')
                                             
-                        return render_to_response('mid/switchboard.html', { 'mid' : cMid,
-                                                                            'admin' : flagAdmin })
-                    
                     #Alpha does not exist in the database, redirect to login with 'noUser' flag TRUE.
                     else :
                         return render_to_response('mid/loginPage.html', { 'noUser' : True }, 
@@ -82,6 +70,24 @@ def logIn(request):
     else:
         return render_to_response('mid/loginPage.html', { 'repeat' : True,}, 
                                   context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def renderSwitchboard(request) :
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.filter(alpha = alpha)
+    cMid = cMid[0]
+                        
+    lBillets = Billet.objects.filter(mid = cMid)
+                        
+    #Here we assign permissions based on billets.
+    flagAdmin = False;
+    for p in lBillets :
+        if p.billet == "ADM" and p.current :
+            flagAdmin = True
+    
+    return render_to_response('mid/switchboard.html', { 'mid' : cMid,
+                                                        'admin' : flagAdmin })
 
 @login_required(redirect_field_name='/')
 def logOut(request):
