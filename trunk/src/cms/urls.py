@@ -34,7 +34,7 @@ urlpatterns = patterns('',
     #(r'^specialrequestchit/', include('specialrequestchit.urls')),
     #(r'^uniforminspection/', include('uniforminspection.urls')),
     
-    (r'^weekends/$', include('weekends.urls')),
+    (r'^weekends/', include('weekends.urls')),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
