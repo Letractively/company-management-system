@@ -14,7 +14,7 @@
 
 <h3>Enter a medical chit:</h3>
 
-<form action="enterMedchit" method="post">
+<form action="submit" method="post">
 {% csrf_token %}
 <table>
     <tr><td>Start date:</td><td><input type = "text" name = "startDate" size=8 /></td></tr>
@@ -30,8 +30,7 @@
                 </select>
             </td>
     </tr>
-    <tr><td>Admin notes:</td><td><input type = "text" name = "adminNotes" size=20 />
-            <input type = "hidden" name = "alpha" value = "{{ cMid.alpha }}" /></td></tr>
+    <tr><td>Admin notes:</td><td><input type = "text" name = "adminNotes" size=20 /></td></tr>
     <tr><td colspan = 2><input type="submit" value="Save" /></td></tr>
 </table>
 </form>
