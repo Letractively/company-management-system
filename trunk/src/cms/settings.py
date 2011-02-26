@@ -58,8 +58,6 @@ LOGIN_REDIRECT_URL = '/cms/'
 LOGIN_URL = '/cms/'
 LOGOUT_URL = '/cms/'
 
-APPEND_SLASH = True
-
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/var/www/media/'
