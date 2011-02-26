@@ -97,8 +97,8 @@ ROOT_URLCONF = 'urls'
 TEMPLATE_DIRS = (
     #"/home/dmitri/workspace/CMS/cms/templates/"
      
-    #"/home/djangoCode/cms/src/cms/templates"
-    "/home/mlaws/workspace/CMS/cms/templates"
+    "/home/djangoCode/cms/src/cms/templates"
+    #"/home/mlaws/workspace/CMS/cms/templates"
 )
 
 INSTALLED_APPS = (
@@ -107,17 +107,19 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'mid',
     'accountability',
     'bravoinspection',
     #'Company_Blog',
     'companywatch',
+    'form1',
+    'medchits',
+    'mid',
     'orm',
     'zero8',
     'specialrequestchit',
     'uniforminspection',
     'weekends',
-    'form1',
+    
     
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
