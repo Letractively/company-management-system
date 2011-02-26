@@ -19,10 +19,10 @@ urlpatterns = patterns('',
     (r'^logout$', 'mid.views.logOut'),
     (r'^switchboard$', 'mid.views.renderSwitchboard'),
     
-    (r'^mid$', include('mid.urls')),
+    (r'^mid/$', include('mid.urls')),
     
     #Chits/Paperwork
-    (r'^medchits$', include('medchits.urls')),
+    (r'^medchits/$', include('medchits.urls')),
     # All the other module's pages
     #(r'^accountability/', include('accountability.urls')),
     #(r'^bravoinspection/', include('bravoinspection.urls')),
@@ -34,7 +34,7 @@ urlpatterns = patterns('',
     #(r'^specialrequestchit/', include('specialrequestchit.urls')),
     #(r'^uniforminspection/', include('uniforminspection.urls')),
     
-    (r'^weekends$', include('weekends.urls')),
+    (r'^weekends/$', include('weekends.urls')),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
