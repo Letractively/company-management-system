@@ -51,6 +51,13 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+##################################
+#urls config
+
+LOGIN_REDIRECT_URL = '/cms/'
+LOGIN_URL = '/cms/'
+LOGOUT_URL = '/cms/'
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/var/www/media/cms/'
