@@ -54,6 +54,7 @@ USE_L10N = True
 ##################################
 #urls config
 
+
 LOGIN_REDIRECT_URL = '/cms/'
 LOGIN_URL = '/cms/'
 LOGOUT_URL = '/cms/'

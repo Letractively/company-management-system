@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
     #yes, but mid is lowercase :) - mikeL
     (r'^$', 'mid.views.loginPage'),
+    (r'^/$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
 
