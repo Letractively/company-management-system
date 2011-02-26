@@ -123,7 +123,7 @@ def reqWeekend(request):
     
     cWeekend.save()
 
-    return HttpResponseRedirect('weekends/')
+    return HttpResponseRedirect('/weekends/')
     
 @login_required(redirect_field_name='/')
 def cancelReqWeekend(request):
@@ -146,7 +146,7 @@ def cancelReqWeekend(request):
     cWeekend = Weekend.objects.filter(mid = cMid).filter(startDate = cNextWeekendBeg)
     cWeekend.delete()
 
-    return HttpResponseRedirect('weekends/')
+    return HttpResponseRedirect('/weekends/')
 
 @login_required(redirect_field_name='/')
 def viewList(request):
