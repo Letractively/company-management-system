@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     #Initial login page    
     
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
-    (r'^/$', 'mid.views.loginPage'),
+    (r'^$', 'mid.views.loginPage'),
     (r'^login/$', 'mid.views.logIn'),
     (r'^logout/$', 'mid.views.logOut'),
     (r'^switchboard/$', 'mid.views.renderSwitchboard'),
