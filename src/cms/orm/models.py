@@ -23,6 +23,8 @@ class OrmChit(models.Model):
     travelRatio = models.IntegerField()
     safetyOfficerApproval = models.NullBooleanField()
     companyOfficerApproval = models.NullBooleanField()
+    platoonCommander = models.NullBooleanField()
+    squadLeader = models.NullBooleanField()
     def __unicode__(self):
         return unicode(self.reportDate) + " - " + self.mid.LName
     
