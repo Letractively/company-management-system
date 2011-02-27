@@ -44,4 +44,4 @@ class BravoInspection(models.Model):
     
     
     def __unicode__(self):
-        return self.Room.__str__() + " - " + self.When.__str__()
+        return self.room.__str__() + " - " + self.inspector
