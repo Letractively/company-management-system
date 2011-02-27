@@ -29,15 +29,17 @@ urlpatterns = patterns('',
     (r'^formOne/',include('form1.urls')),
     (r'^medchits/', include('medchits.urls')),
 
+    #Inspections
+    (r'^bIns/', include('bravoinspection.urls')),
+    (r'^uIns/', include('uniforminspection.urls')),
+    
     # All the other module's pages
     #(r'^accountability/', include('accountability.urls')),
-    #(r'^bravoinspection/', include('bravoinspection.urls')),
     #(r'^companyblog/', include('companyblog.urls')),
     #(r'^companywatch/', include('companywatch.urls')),
     #(r'^orm/', include('orm.urls')),
     #(r'^zero8/', include('zero8.urls')),
     #(r'^specialrequestchit/', include('specialrequestchit.urls')),
-    #(r'^uniforminspection/', include('uniforminspection.urls')),
     
     (r'^weekends/', include('weekends.urls')),
     

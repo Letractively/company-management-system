@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class UniformInspection(models.Model):
     #List of possible hits for a uniform inspection
-    inspector = models.ForeignKey("mid.Mid")
-    room = models.ForeignKey("mid.Room")
+    inspector = models.CharField(max_length=6)
+    mid = models.ForeignKey("mid.Mid")
     dateTime = models.DateTimeField()
     missingItems = models.BooleanField('No missing uniform items')
     appearance = models.BooleanField('Uniform Appearance(stains/wrinkles)')
@@ -26,5 +26,6 @@ class UniformInspection(models.Model):
     trousersProperLength = models.BooleanField('Trousers: proper length')
     IDProperlyDisplayed = models.BooleanField('ID displayed (if inside)')
     other = models.TextField('General appearance')
+    
     def __unicode__(self):
-        return self.Room + " - " + self.DateTime
+        return self.mid + " - " + self.DateTime
