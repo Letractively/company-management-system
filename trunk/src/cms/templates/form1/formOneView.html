@@ -5,7 +5,7 @@
 <h1>Form-1 for {{ cMid.fName }} {{ cMid.LName }}, submitted on {{ cForm.formDate }}.</h1>
 
 <table>
-    <tr><td>Form type: </td><td>{{ cForm.formType }}</td></tr>
+    <tr><td>Form type: </td><td>{{ cForm.get_formType_display }}</td></tr>
     <tr><td>Given by: </td><td>{{ cForm.counseledBy }}, {{ cForm.get_CounseledBillet_display }}</td></tr>
     <tr><td>Reason: </td><td>{{ cForm.get_reason_display }}</td></tr>
     <tr><td>Comment: </td><td>{{ cForm.comment }}</td></tr>
