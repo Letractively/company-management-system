@@ -27,7 +27,7 @@ def formOne(request):
     lForms = Form1.objects.filter(mid=cMid).order_by('-formDate')
     
     return render_to_response('form1/formOne.html', {'cMid' : cMid,  
-                                                     'lForms' : lForms,
+                                                     'lFormOnes' : lForms,
                                                     }, 
                                                     context_instance=RequestContext(request))
 
