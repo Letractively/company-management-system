@@ -12,6 +12,7 @@ from weekends.models import Weekend
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from django.template import RequestContext
 from django.core.context_processors import csrf
@@ -123,7 +124,8 @@ def reqWeekend(request):
     
     cWeekend.save()
 
-    return HttpResponseRedirect('/cms/weekends/')
+    return HttpResponseRedirect(reverse('weekendIndex'))
+    #return HttpResponseRedirect('/weekends/')
     
 @login_required(redirect_field_name='/')
 def cancelReqWeekend(request):
@@ -146,7 +148,8 @@ def cancelReqWeekend(request):
     cWeekend = Weekend.objects.filter(mid = cMid).filter(startDate = cNextWeekendBeg)
     cWeekend.delete()
 
-    return HttpResponseRedirect('/cms/weekends/')
+    return HttpResponseRedirect(reverse('weekendIndex'))
+    #return HttpResponseRedirect('/weekends/')
 
 @login_required(redirect_field_name='/')
 def viewList(request):
