@@ -63,4 +63,4 @@ class Form1(models.Model):
     comment = models.TextField()
     resolution = models.CharField(max_length=1,choices=RESOLUTION_CHOICES)
     def __unicode__(self):
-        return self.Form_Type + " - " + self.DateTime
+        return self.formType + " - " + self.formDate
