@@ -2,9 +2,8 @@ from django.db import models
 
 # Create your models here.
 class UniformInspection(models.Model):
-    #List of possible hits for a uniform inspection
-    inspectorAlpha = models.CharField(max_length=6)
     mid = models.ForeignKey("mid.Mid")
+    inspector = models.ForeignKey("mid.Mid", related_name='+')
     inspectionDate = models.DateField()
 
     # int field for the score
@@ -13,25 +12,33 @@ class UniformInspection(models.Model):
     # i think "pass" is a reserved term in python, so this is the fail block, passing by default.
     fail = models.BooleanField(null=True).default=False
     
-    missingItems = models.BooleanField('No missing uniform items')
-    appearance = models.BooleanField('Uniform Appearance(stains/wrinkles)')
-    groomingShave = models.BooleanField('Hair/Grooming: Shave/Sideburns')
-    groomingLength = models.BooleanField('Hair/Grooming: Proper Length')
-    groomingAppearance = models.BooleanField('Hair/Grooming: Neat Appearance')
-    creasesPresent = models.BooleanField('Creases present')
-    shinedShoes = models.BooleanField('Shined Shoes')
-    ribbons = models.BooleanField('Ribbons/ Nametag appearance/ placement')
-    IPs = models.BooleanField('No IP')
-    dust = models.BooleanField('No Dust')
-    coverDirtRing = models.BooleanField('Cover: dirt ring/dirty/marks')
-    coverCleanBill = models.BooleanField('Cover: clean bill')
-    shirtUndershirt = models.BooleanField('Shirt: undershirt not showing')
-    shirtProperTie = models.BooleanField('Shirt: proper tie knot/neck tab button buttoned')
-    shirtInsigniaPlacement = models.BooleanField('Shirt: insignia placement')
-    beltBuckleTip = models.BooleanField('Belt: buckle/tip scratches/dirty')
-    gigLine = models.BooleanField('Gig-line straight')
-    trousersProperLength = models.BooleanField('Trousers: proper length')
-    IDProperlyDisplayed = models.BooleanField('ID displayed (if inside)')
+    #List of possible hits for a uniform inspection
+    groomingShave = models.BooleanField('Grooming: Unshaved')
+    groomingLength = models.BooleanField('Grooming: Hair out of regs')
+    groomingAppearance = models.BooleanField('Grooming: appearance is not neat')
+    
+    missingItems = models.BooleanField('Uniform: Missing articles')
+    appearance = models.BooleanField('Uniform: Poor appearance')
+    IPs = models.BooleanField('Uniform: IP-s present')
+    dust = models.BooleanField('Uniform: Dusty')
+       
+    coverDirtRing = models.BooleanField('Cover: Dirty')
+    coverCleanBill = models.BooleanField('Cover: Scratched bill')
+    
+    ribbons = models.BooleanField('Shirt: ribbons/nametag poorly placed/tarnished') 
+    shirtInsigniaPlacement = models.BooleanField('Shirt: Collar devices poorly placed/tarnished')
+    shirtProperTie = models.BooleanField('Shirt: Improper tie knot/neck tab')
+    IDProperlyDisplayed = models.BooleanField('Shirt: Improper ID placement')
+    shirtUndershirt = models.BooleanField('Shirt: Showing undershirt')
+    creasesPresent = models.BooleanField('Shirt: No creases')
+    
+    beltBuckleTip = models.BooleanField('Belt: Buckle scratched')
+    gigLine = models.BooleanField('Belt: Poor gig-line')
+    
+    trousersProperLength = models.BooleanField('Trousers: Poor length/fit')
+    
+    shinedShoes = models.BooleanField('Shoes: No shine')
+      
     other = models.TextField('General appearance')
     
     def __unicode__(self):
