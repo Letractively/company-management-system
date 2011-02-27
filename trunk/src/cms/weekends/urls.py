@@ -15,6 +15,7 @@ urlpatterns = patterns('weekends.views',
     (r'admin$', 'admin'),
     (r'saveWeekendCount$', 'saveWeekendCount'),
 
+    url(r'^$', 'co', name = "coIndex"),
     (r'co$', 'coApproval'),
     (r'approveWeekend$', 'approveWeekend'),
     (r'denyWeekend$', 'denyWeekend'),
