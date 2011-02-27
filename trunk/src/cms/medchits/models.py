@@ -21,4 +21,4 @@ class Chit(models.Model):
     adminNotes = models.TextField()
     
     def __unicode__(self):
-        return self.Mid + " - " + self.Diagnosis + "(" + self.startDate + " - " + self.endDate + ")"
+        return self.mid.LName + " - " + self.Diagnosis + "(" + unicode(self.startDate) + " - " + unicode(self.endDate) + ")"

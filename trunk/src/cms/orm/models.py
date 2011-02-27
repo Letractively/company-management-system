@@ -24,7 +24,8 @@ class OrmChit(models.Model):
     safetyOfficerApproval = models.NullBooleanField()
     companyOfficerApproval = models.NullBooleanField()
     def __unicode__(self):
-        return self.mid.LName
+        return unicode(self.reportDate) + " - " + self.mid.LName
+    
     
 class LeisureActivites(models.Model):
     OrmChit = models.ForeignKey(OrmChit)
