@@ -16,11 +16,11 @@ urlpatterns = patterns('',
     
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
 
-    (r'^$', 'mid.views.loginPage'),
+    url(r'^$', 'mid.views.loginPage', name = "base"),
     (r'^/$', 'mid.views.loginPage'),
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
-    (r'^switchboard$', 'mid.views.renderSwitchboard'),
+    url(r'^switchboard$', 'mid.views.renderSwitchboard', name = "switchboard"),
 
     
     (r'^mid/', include('mid.urls')),
