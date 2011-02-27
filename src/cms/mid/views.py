@@ -39,7 +39,8 @@ def logIn(request):
             login(request, user)
             
             if user.username == 'CO' :
-                 return render_to_response('mid/co.html', { })
+                 return render_to_response('mid/co.html', { },
+                                           context_instance=RequestContext(request))
             
             else :
             
