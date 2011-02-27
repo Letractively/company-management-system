@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Bravo Room Inspections Selector{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Bravo Room Inspections module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Enter Bravo Room Inspection for Room: </h3>
+
+<form action="bInsSubmit" method="post">
+{% csrf_token %}
+    <select name = 'room'>    
+        {% for p in lRooms %}
+            <option value="{{ p.roomNumber }}">{{ p.roomNumber }}</option>
+        {% endfor %}
+    </select><br /><br />
+    <input type="submit" value="Enter Inspection" />
+</form>
+
+</table>
+
+{% endblock %}

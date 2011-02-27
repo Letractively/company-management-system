@@ -10,6 +10,8 @@ urlpatterns = patterns('uniforminspection.views',
     (r'^/$', 'uIns'),
     (r'uInsView', 'uInsView'),
     (r'uInsSubmit$', 'uInsSubmit'),
+    url(r'uInsSelect$', 'uInsSelect', name = "uInsSelect"),
+    (r'uInsSave$', 'uInsSave'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),

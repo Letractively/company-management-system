@@ -53,6 +53,42 @@ def formOneView(request):
                                                         context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def formOneSubmit(request):
+def formOneSelect(request):
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.filter(alpha=alpha)
+    cMid = cMid[0]
+    
+    lMids = Mid.objects.order_by('alpha')
+    
+    return render_to_response('form1/formOneSelect.html', {'cMid' : cMid,  
+                                                                  'lMids' : lMids,
+                                                                  }, 
+                                                                  context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
+def formOneSubmit(request):
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.filter(alpha=alpha)
+    cMid = cMid[0]
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cInspectee = request.POST['mid']
+    cInspectee = Mid.objects.filter(alpha=cInspectee)
+    cInspectee = cInspectee[0]
+    
+    return render_to_response('form1/formOneSubmit.html', {'cMid' : cMid,  
+                                                            'cInspectee' : cInspectee,
+                                                           }, 
+                                                           context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')    
+def formOneSave(request) :
+    
     return HttpResponseRedirect(reverse('formOne'))

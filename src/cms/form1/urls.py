@@ -10,6 +10,8 @@ urlpatterns = patterns('form1.views',
     (r'^/$', 'formOne'),
     (r'formOneView', 'formOneView'),
     (r'formOneSubmit$', 'formOneSubmit'),
+    (r'formOneSelect$', 'formOneSelect'),
+    (r'formOneSave$', 'formOneSave'),
     
     # Uncomment the admin/doc line below to enable admin documentation:    
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

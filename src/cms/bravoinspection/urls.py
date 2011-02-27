@@ -10,6 +10,8 @@ urlpatterns = patterns('bravoinspection.views',
     (r'^/$', 'bIns'),
     (r'bInsView', 'bInsView'),
     (r'bInsSubmit$', 'bInsSubmit'),
+    url(r'bInsSelect$', 'bInsSelect', name = "bInsSelect"),
+    (r'bInsSave$', 'bInsSave'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),

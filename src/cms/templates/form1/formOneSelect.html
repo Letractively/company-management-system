@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Form-1 Selector{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Form-1 module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Enter Form-1 for: </h3>
+
+<form action="formOneSubmit" method="post">
+{% csrf_token %}
+    <select name = 'mid'>    
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
+        {% endfor %}
+    </select><br /><br />
+    <input type="submit" value="Enter Form-1" />
+</form>
+
+</table>
+
+{% endblock %}
