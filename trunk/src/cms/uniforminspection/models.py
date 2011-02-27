@@ -3,9 +3,9 @@ from django.db import models
 # Create your models here.
 class UniformInspection(models.Model):
     #List of possible hits for a uniform inspection
-    inspector = models.CharField(max_length=6)
+    inspectorAlpha = models.CharField(max_length=6)
     mid = models.ForeignKey("mid.Mid")
-    dateTime = models.DateTimeField()
+    inspectionDate = models.DateField()
     missingItems = models.BooleanField('No missing uniform items')
     appearance = models.BooleanField('Uniform Appearance(stains/wrinkles)')
     groomingShave = models.BooleanField('Hair/Grooming: Shave/Sideburns')
