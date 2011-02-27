@@ -8,7 +8,7 @@ from mid.models import Room
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 
 from django.template import RequestContext
 from django.core.context_processors import csrf
