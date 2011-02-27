@@ -6,23 +6,23 @@
 
 <table>
     <tr>
-        <td><input type="checkbox" disabled = "true" {% if cuIns.deck %} checked {% endif %}/></td>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.deck %} checked {% endif %}/></td>
         <td> Deck mopped clean, swept </td>
     </tr>
     <tr>
-        <td><input type="checkbox" disabled = "true" {% if cuIns.laundry %} checked {% endif %}/></td>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.laundry %} checked {% endif %}/></td>
         <td> No excessive dirty laundry in locker/ No odor emanating </td>
     </tr>
     <tr>
-        <td><input type="checkbox" disabled = "true" {% if cuIns.mold %} checked {% endif %}/></td>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.mold %} checked {% endif %}/></td>
         <td> No mold in shower and/or shower curtain </td>
     </tr>   
     <tr>
-        <td><input type="checkbox" disabled = "true" {% if cuIns.door %} checked {% endif %}/></td>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.door %} checked {% endif %}/></td>
         <td> Door is open at a 90 degree angle when the room is unoccupied </td>
     </tr>
     <tr>
-        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.electronics %} checked {% endif %}/></td>
+        <td><br /><input type="checkbox" disabled = "true" {% if cbIns.electronics %} checked {% endif %}/></td>
         <td><br /> All lights and electrical equipment is shut off </td>
     </tr>   
     <tr>
@@ -33,14 +33,9 @@
         <td><input type="checkbox" disabled = "true" {% if cbIns.bulkheads %} checked {% endif %}/></td>
         <td> Nothing hung from bulkhead, overheads, closets, racks, or doors </td>
     </tr>
-
     <tr>
         <td><input type="checkbox" disabled = "true" {% if cbIns.racks %} checked {% endif %}/></td>
         <td> Racks neatly made with clean linen/pillow in place/no blankets on rack </td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" disabled = "true" {% if cbIns.furniture %} checked {% endif %}/></td>
-        <td> Cover: No scratches on bill </td>
     </tr>
     <tr>
         <td><input type="checkbox" disabled = "true" {% if cbIns.furniture %} checked {% endif %}/></td>
@@ -112,7 +107,7 @@
     </tr>
     
     <tr>
-        <td colspan = 2><br />Result: {% if cbIns.fail %}FAIL{% else %}PASS{% endif %}, {{ cbIns.score }}/19 </td>
+        <td colspan = 2><br />Result: {% if cbIns.fail %}FAIL{% else %}PASS{% endif %}, {{ cbIns.score }}/23 </td>
     </tr>
     
 </form>

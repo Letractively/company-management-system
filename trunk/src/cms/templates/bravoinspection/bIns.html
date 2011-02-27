@@ -5,22 +5,22 @@
 <h1>Welcome to the Bravo Room Inspections module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
 <h3>Your Bravo Room Inspections: </h3>
-<form action="bInsView" method = "post">
-{% csrf_token %}
 <table>
 {% for p in lbIns %}
     <tr>
-        <td>{% if pIns.fail %}FAIL{% else %}PASS{% endif %}</td>
-        <td>{{ p.score }}/19</td>
+        <form action="bInsView" method = "post">
+        {% csrf_token %}
+        <td>{% if p.fail %}FAIL{% else %}PASS{% endif %}</td>
+        <td>{{ p.score }}/23</td>
         <td>{{ p.inspectionDate }}</td>
         <td>{{ p.inspector.LName }} ({{ p.inspector.alpha }})</td>
         <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
             <input type = "submit" value = "View Bravo Inspection" /></td>
+        </form>
     </tr>
 {% empty %}
     <tr><td>Your room have not had any Bravo Inspections.</td></tr>
 {% endfor %}
-</form>
 </table>
 
 {% endblock %}

@@ -14,7 +14,7 @@ class BravoInspection(models.Model):
     score = models.IntegerField(null=True)
     
     # i think "pass" is a reserved term in python, so this is the fail block, passing by default.
-    fail = models.BooleanField(null=True).default=False
+    fail = models.BooleanField('Inspection failed')
     
     inspectionDate = models.DateField('date inspected')
     deck = models.BooleanField('Deck mopped clean, swept')
@@ -40,6 +40,8 @@ class BravoInspection(models.Model):
     brightWork = models.BooleanField('Brightwork work and mirros clean')
     materialDeficiencies = models.BooleanField('Material deficiencies documented on the room check-in sheet or updated on ZIDL')
     rifles = models.BooleanField('All rifles and swords locked')
+    
+    comment = models.TextField(null=True)
     
     
     def __unicode__(self):

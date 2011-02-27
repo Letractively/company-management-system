@@ -35,14 +35,19 @@
         <li><a href = "logout">Log out</a></li>
     </ul>
     
-    {% if admin%}
+    <h3>Midn 1/C options: (visible to all now, for testing purposes)</h3>
+    <ul>
+        <li><a href = "formOne/formOneSelect">Enter Form-1</a></li>
+        <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
+        <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
+    </ul>
     
+    {% if admin%}
     <h3>Admin Officer options: </h3>
     <ul>
         <li><a href = "weekends/admin">View/Edit number of weekends</a></li>
         <li><a href = "mid/selectUser">Edit/Add user</a></li>
         <li><a href = "mid/selectPassReset">Restore user's password</a></li>
     </ul>
-    
     {% endif %}
 {% endblock %}

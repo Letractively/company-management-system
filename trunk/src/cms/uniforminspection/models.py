@@ -2,7 +2,6 @@
 # Author: Michael Harrison
 # Editor: Michael Laws
 
-
 from django.db import models
 
 # Create your models here.
@@ -15,7 +14,7 @@ class UniformInspection(models.Model):
     score = models.IntegerField(null=True)
     
     # i think "pass" is a reserved term in python, so this is the fail block, passing by default.
-    fail = models.BooleanField(null=True).default=False
+    fail = models.BooleanField('Inspection failed')
     
     #List of possible hits for a uniform inspection
     groomingShave = models.BooleanField('Grooming: Unshaved')
@@ -44,7 +43,7 @@ class UniformInspection(models.Model):
     
     shinedShoes = models.BooleanField('Shoes: No shine')
       
-    other = models.TextField('General appearance')
+    comment = models.TextField(null=True)
     
     def __unicode__(self):
         return self.mid.alpha + " - " + self.inspectionDate.__str__()
