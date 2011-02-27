@@ -105,7 +105,9 @@ TEMPLATE_DIRS = (
     #"/home/mlaws/workspace/CMS/cms/templates"
 )
 
-SESSION_COOKIE_AGE = 10
+
+# time until the session cookie times out on the browser.  in seconds
+SESSION_COOKIE_AGE = 500
 
 INSTALLED_APPS = (
     'django.contrib.auth',

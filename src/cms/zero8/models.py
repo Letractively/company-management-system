@@ -22,7 +22,7 @@ class Zero8(models.Model):
     workOrderClosed = models.IntegerField()
     workOrderOverdue = models.IntegerField()
     def __unicode__(self):
-        return unicode(self.reportDate)
+        return unicode(self.reportDate) + " - " + self.offgoingCDO.LName
     
 class SignificantEvents(models.Model):
     zero8 = models.ForeignKey(Zero8)
