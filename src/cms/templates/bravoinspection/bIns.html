@@ -10,10 +10,10 @@
 <table>
 {% for p in lbIns %}
     <tr>
-        <td>{{ p.fail }}</td>
+        <td>{% if pIns.fail %}FAIL{% else %}PASS{% endif %}</td>
         <td>{{ p.score }}/19</td>
         <td>{{ p.inspectionDate }}</td>
-        <td>{{ p.inspector.alpha }} - {{ p.inspector.LName }}</td>
+        <td>{{ p.inspector.LName }} ({{ p.inspector.alpha }})</td>
         <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
             <input type = "submit" value = "View Bravo Inspection" /></td>
     </tr>
