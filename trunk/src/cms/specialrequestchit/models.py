@@ -44,4 +44,4 @@ class SpecialRequestChit(models.Model):
     approvalStatus = models.IntegerField()
     
     def __unicode__(self):
-        return self.RequestType + " - " + self.Date
+        return self.requestType + " - " + unicode(self.date)
