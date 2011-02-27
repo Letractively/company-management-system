@@ -105,6 +105,8 @@ TEMPLATE_DIRS = (
     #"/home/mlaws/workspace/CMS/cms/templates"
 )
 
+SESSION_COOKIE_AGE = 10
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
