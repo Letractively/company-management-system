@@ -8,6 +8,7 @@ from mid.models import Room
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 
 from django.template import RequestContext
 from django.core.context_processors import csrf
@@ -114,7 +115,7 @@ def passChange(request) :
     cUser.set_password(password)
     cUser.save()
     
-    return HttpResponseRedirect('selectPassChange')
+    return HttpResponseRedirect('renderSwitchboard')
 
 #Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
@@ -180,7 +181,8 @@ def modifyUser(request):
         
     lRooms = Room.objects.order_by('roomNumber')
     
-    return render_to_response('mid/modifyUser.html', { 'cMid' : cMid, 'lRooms' : lRooms, },
+    return render_to_response('mid/modifyUser.html', { 'cMid' : cMid, 
+                                                       'lRooms' : lRooms, },
                               context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')    
@@ -210,6 +212,7 @@ def saveUser(request) :
         return HttpResponseRedirect('/')
     
     newUser = request.POST['newUser']
+    alpha = request.POST['alpha']
     roomNumber = request.POST['roomNumber']
     roomNumber = Room.objects.filter(roomNumber = roomNumber)
     roomNumber = roomNumber[0]
@@ -235,7 +238,7 @@ def saveUser(request) :
         cMid.save()
                
     if newUser == "true" and not alphaExists:
-        cMid = Mid(alpha=request.POST['alpha'],
+        cMid = Mid(alpha=alpha,
                    LName=request.POST['lName'],
                    mName=request.POST['mName'],
                    fName = request.POST['fName'],
@@ -252,11 +255,11 @@ def saveUser(request) :
         cMid.save()
         
         cUser = User.objects.create_user('m'+alpha, 'm'+alpha+'@usna.edu', alpha)
-        cUser.first_name = fName
-        cUser.last_name = lName
+        cUser.first_name = request.POST['fName']
+        cUser.last_name = request.POST['lName']
         cUser.is_staff = False
         cUser.save()
-        
+      
     return HttpResponseRedirect('selectUser')
 
 @login_required(redirect_field_name='/')
