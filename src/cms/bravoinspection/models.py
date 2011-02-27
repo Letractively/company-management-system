@@ -9,8 +9,7 @@ class BravoInspection(models.Model):
     #List of possible hits for a Bravo room inspection
     inspector = models.ForeignKey("mid.Mid")
     room = models.ForeignKey("mid.Room")
-    
-    
+      
     # int field for the score
     score = models.IntegerField(null=True)
     

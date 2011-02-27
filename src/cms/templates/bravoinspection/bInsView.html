@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Bravo Inspection{% endblock %}
+{% block content %}
+
+<h1>Bravo Inspection for {{ cMid.fName }} {{ cMid.LName }}, submitted on {{ cbIns.inspectionDate }}.</h1>
+
+<table>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.deck %} checked {% endif %}/></td>
+        <td> Deck mopped clean, swept </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.laundry %} checked {% endif %}/></td>
+        <td> No excessive dirty laundry in locker/ No odor emanating </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.mold %} checked {% endif %}/></td>
+        <td> No mold in shower and/or shower curtain </td>
+    </tr>   
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.door %} checked {% endif %}/></td>
+        <td> Door is open at a 90 degree angle when the room is unoccupied </td>
+    </tr>
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.electronics %} checked {% endif %}/></td>
+        <td><br /> All lights and electrical equipment is shut off </td>
+    </tr>   
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.dust %} checked {% endif %}/></td>
+        <td> All surfaces clean and dusted </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.bulkheads %} checked {% endif %}/></td>
+        <td> Nothing hung from bulkhead, overheads, closets, racks, or doors </td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.racks %} checked {% endif %}/></td>
+        <td> Racks neatly made with clean linen/pillow in place/no blankets on rack </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.furniture %} checked {% endif %}/></td>
+        <td> Cover: No scratches on bill </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.furniture %} checked {% endif %}/></td>
+        <td> No unauthorized furniture or appliances present (up to one non issued desk chair allowed per desk) </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.felt %} checked {% endif %}/></td>
+        <td> Protective felt pads on sled style chairs </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.gear %} checked {% endif %}/></td>
+        <td> No gear adrift </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.conLockers %} checked {% endif %}/></td>
+        <td> Confidential lockers locked </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.blinds %} checked {% endif %}/></td>
+        <td> Blinds at half mast and open</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.boxes %} checked {% endif %}/></td>
+        <td> All boxes and plastic containers are in closet or on shelves </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.corkBoard %} checked {% endif %}/></td>
+        <td> Cork board/blotter/desk material appropriate and neatly arranged </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.computer %} checked {% endif %}/></td>
+        <td> Computer screensavers are appropriate and in good taste </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.rugs %} checked {% endif %}/></td>
+        <td> No rugs in room except shower mat, which must be clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.midRegs %} checked {% endif %}/></td>
+        <td> Mid Regs/ Uniform Regs and Honor Instruction binders in bracket </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.shower %} checked {% endif %}/></td>
+        <td> Shower walls, curtain, and deck clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.medicineCabinets %} checked {% endif %}/></td>
+        <td> Medicine cabinet clean and neatly arranged </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.brightWork %} checked {% endif %}/></td>
+        <td> Brightwork work and mirros clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.materialDeficiencies %} checked {% endif %}/></td>
+        <td> Material deficiencies documented on the room check-in sheet or updated on ZIDL </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cbIns.rifles %} checked {% endif %}/></td>
+        <td> All rifles and swords locked </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br /><br />Comment: {{ cbIns.other }} </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Inspector: {{ cbIns.inspector.LName }} ({{ cbIns.inspector.alpha }}) </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Result: {% if cbIns.fail %}FAIL{% else %}PASS{% endif %}, {{ cbIns.score }}/19 </td>
+    </tr>
+    
+</form>
+</table>
+
+{% endblock %}
