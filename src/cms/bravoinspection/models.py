@@ -1,3 +1,7 @@
+#bravoinspection models.py
+# Author: Michael Harrison
+# Editor: Michael Laws
+
 from django.db import models
 # Create your models here.
 
@@ -5,6 +9,14 @@ class BravoInspection(models.Model):
     #List of possible hits for a Bravo room inspection
     inspector = models.ForeignKey("mid.Mid")
     room = models.ForeignKey("mid.Room")
+    
+    
+    # int field for the score
+    score = models.IntegerField(null=True)
+    
+    # i think "pass" is a reserved term in python, so this is the fail block, passing by default.
+    fail = models.BooleanField(null=True).default=False
+    
     inspectionDate = models.DateField('date inspected')
     deck = models.BooleanField('Deck mopped clean, swept')
     laundry = models.BooleanField('Excessive dirty laundry in locker/ No odor emanating')
