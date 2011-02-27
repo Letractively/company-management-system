@@ -7,6 +7,7 @@ from medchits.models import Chit
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from django.template import RequestContext
 from django.core.context_processors import csrf
@@ -17,7 +18,7 @@ from datetime import date
 from datetime import timedelta
 
 @login_required(redirect_field_name='/')
-def index(request):
+def medchits(request):
     #Basic user view for medical chits
     
     alpha = request.user.username.split('m')
@@ -33,7 +34,7 @@ def index(request):
     
     #Check if the user is currently on chit
     cChit = None
-    endDate = cDate
+    endDate = cDate+timedelta(days=365);
     for p in lChits :
         if p.endDate > cDate :
             if p.endDate < endDate :
@@ -54,17 +55,25 @@ def submit(request):
     cMid = Mid.objects.filter(alpha=alpha)
     cMid = cMid[0]
     
-     #Safety feature, makes sure we POST data to this view
+    #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cChit = Chit(mid = cMid,
-                 diagnosis = request.POST['diagnosis'],
-                 startDate = request.POST['startDate'],
-                 endDate = request.POST['endDate'],
-                 disposition = request.POST['disposition'],
-                 adminNotes = request.POST['adminNotes'])
+    lChits = Chit.objects.filter(mid=cMid).order_by('-endDate')
     
-    cChit.save()
+    #Check for repeated start date; avoid multiple submissions
+    repeat = False
+    for p in lChits :
+        if p.startDate == request.POST['startDate'] :
+            repeat = True
     
-    return HttpResponseRedirect('/medchits/')
+    if not repeat :
+        cChit = Chit(mid = cMid,
+                     diagnosis = request.POST['diagnosis'],
+                     startDate = request.POST['startDate'],
+                     endDate = request.POST['endDate'],
+                     disposition = request.POST['disposition'],
+                     adminNotes = request.POST['adminNotes'])
+        cChit.save()
+    
+    return HttpResponseRedirect(reverse('medchits'))
