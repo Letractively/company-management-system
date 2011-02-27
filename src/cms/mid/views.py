@@ -95,7 +95,7 @@ def renderSwitchboard(request) :
 @login_required(redirect_field_name='/')
 def logOut(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(reverse('base'))
 
 @login_required(redirect_field_name='/')
 def selectPassChange(request):
@@ -115,7 +115,7 @@ def passChange(request) :
     cUser.set_password(password)
     cUser.save()
     
-    return HttpResponseRedirect('renderSwitchboard')
+    return HttpResponseRedirect(reverse('switchboard'))
 
 #Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
