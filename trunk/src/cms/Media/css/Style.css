@@ -12,7 +12,7 @@ body {
 
 #wrapper {
   position: relative;
-  top: 50px;
+  top: 10px;
   margin-left:auto;
   margin-right:auto;
   padding: 10px;
@@ -41,25 +41,41 @@ section #notification {
 }
 
 section #main {
-  height: 600px;
+  height: 550px;
 }
 
 nav {
   height: 50px;
+  background-color: rgba(100, 125, 200, 1);
+  -webkit-box-reflect:below 5px 
+  -webkit-gradient(linear, left 
+  top, left bottom, from(transparent), 
+  color-stop(0.5, transparent), to(white));
 }
 
 footer {
-  height: 50px;
-  background-color: rgba(100, 125, 200, 1);
+  height: 5%;
 }
  
-div.icon {
+img.icon {
+  float: left;
   top: 5px;
   width: 40px;
+  height: 40px;
+  padding-left: 5px;
   border-bottom-left-radius: 2px 2px;
   border-bottom-right-radius: 2px 2px;
   border-top-left-radius: 2px 2px;
   border-top-right-radius: 2px 2px;
+  filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+}
+
+img.icon: hover {
+  filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+  -moz-opacity: 1;
+  opacity: 1;
 }
 
 th {
