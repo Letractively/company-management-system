@@ -1,6 +1,6 @@
 from mid.models import Mid
 
-from form1.models import Form1
+from bravoinspection.models import BravoInspection
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -22,12 +22,12 @@ def bIns(request):
     cRoom = cMid.roomNumber
     
     #lWeekends - list of user's medical chits
-    lbIns = BravoInspection.objects.filter(room=cRoom).order_by('-dateTime')
+    lbIns = BravoInspection.objects.filter(room=cRoom).order_by('-inspectionDate')
     
-    return render_to_response('form1/formOne.html', {'cMid' : cMid,  
-                                                     'lbIns' : lbIns,
-                                                    }, 
-                                                    context_instance=RequestContext(request))
+    return render_to_response('bravoinspection/bIns.html', {'cMid' : cMid,  
+                                                            'lbIns' : lbIns,
+                                                            }, 
+                                                            context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def bInsView(request):
@@ -45,10 +45,10 @@ def bInsView(request):
     cbIns = BravoInspection.objects.filter(id=request.POST['id'])
     cbIns = cbIns[0]
     
-    return render_to_response('form1/bInsView.html', {'cMid' : cMid,  
-                                                      'cbIns' : cbIns,
-                                                     }, 
-                                                     context_instance=RequestContext(request))
+    return render_to_response('bravoinspection/bInsView.html', {'cMid' : cMid,  
+                                                                'cbIns' : cbIns,
+                                                                }, 
+                                                                context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def bInsSubmit(request):

@@ -8,7 +8,7 @@ urlpatterns = patterns('form1.views',
 
     url(r'^$', 'formOne', name = "formOne"),
     (r'^/$', 'formOne'),
-    (r'FormOneView', 'FormOneView'),
+    (r'formOneView', 'formOneView'),
     (r'formOneSubmit$', 'formOneSubmit'),
     
     # Uncomment the admin/doc line below to enable admin documentation:    

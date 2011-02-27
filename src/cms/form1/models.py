@@ -56,7 +56,7 @@ RESOLUTION_CHOICES = (('P', 'Pending'),
 class Form1(models.Model):
     mid = models.ForeignKey("mid.Mid")
     formType = models.CharField(max_length=1, choices=FORM1_TYPE_CHOICES)
-    dateTime = models.DateTimeField('Form 1 Date and Time')
+    formDate = models.DateField('Form 1 Date and Time')
     counseledBy = models.ForeignKey("mid.Mid", related_name='+')
     counseledBillet = models.CharField(max_length=5, choices=BILLET_CHOICES)
     reason = models.CharField(max_length=3, choices=REASON_CHOICES)

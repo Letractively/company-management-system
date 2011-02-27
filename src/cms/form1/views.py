@@ -24,7 +24,7 @@ def formOne(request):
     cMid = cMid[0]
     
     #lWeekends - list of user's medical chits
-    lForms = Form1.objects.filter(mid=cMid).order_by('-dateTime')
+    lForms = Form1.objects.filter(mid=cMid).order_by('-formDate')
     
     return render_to_response('form1/formOne.html', {'cMid' : cMid,  
                                                      'lForms' : lForms,
@@ -32,7 +32,7 @@ def formOne(request):
                                                     context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def FormOneView(request):
+def formOneView(request):
     #Basic view for review of a Form-1
     
     alpha = request.user.username.split('m')

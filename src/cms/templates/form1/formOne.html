@@ -5,7 +5,7 @@
 <h1>Welcome to the Form-1 module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
 <h3>Your Form-1s: </h3>
-<form action="viewFormOne" method = "post">
+<form action="formOneView" method = "post">
 {% csrf_token %}
 <table>
 {% for p in lFormOnes %}

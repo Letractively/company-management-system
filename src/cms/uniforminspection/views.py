@@ -1,6 +1,6 @@
 from mid.models import Mid
 
-from form1.models import Form1
+from uniforminspection.models import UniformInspection
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -21,12 +21,12 @@ def uIns(request):
     cMid = cMid[0]
     
     #lWeekends - list of user's medical chits
-    uIns = UniformInspection.objects.filter(mid=cMid).order_by('-dateTime')
+    luIns = UniformInspection.objects.filter(mid=cMid).order_by('-inspectionDate')
     
-    return render_to_response('form1/uIns.html', {'cMid' : cMid,  
-                                                  'luIns' : luIns,
-                                                 }, 
-                                                 context_instance=RequestContext(request))
+    return render_to_response('uniforminspection/uIns.html', {'cMid' : cMid,  
+                                                              'luIns' : luIns,
+                                                              }, 
+                                                              context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def uInsView(request):
@@ -44,10 +44,10 @@ def uInsView(request):
     cuIns = UniformInspection.objects.filter(id=request.POST['id'])
     cuIns = cuIns[0]
     
-    return render_to_response('form1/uInsView.html', {'cMid' : cMid,  
-                                                      'cuIns' : cuIns,
-                                                     }, 
-                                                     context_instance=RequestContext(request))
+    return render_to_response('uniforminspection/uInsView.html', {'cMid' : cMid,  
+                                                                  'cuIns' : cuIns,
+                                                                  }, 
+                                                                  context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
 def uInsSubmit(request):
