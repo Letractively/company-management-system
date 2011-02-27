@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Uniform Inspection{% endblock %}
+{% block content %}
+
+<h1>Uniform Inspection for {{ cMid.fName }} {{ cMid.LName }}, submitted on {{ cuIns.inspectionDate }}.</h1>
+
+<table>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.groomingShave %} checked {% endif %}/></td>
+        <td> Grooming: Unshaved </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.groomingLength %} checked {% endif %}/></td>
+        <td> Grooming: Hair out of regs </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.groomingAppearance %} checked {% endif %}/></td>
+        <td> Grooming: Appearance is not neat </td>
+    </tr>
+    
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.missingItems %} checked {% endif %}/></td>
+        <td><br /> Uniform: Missing articles </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.appearance %} checked {% endif %}/></td>
+        <td> Uniform: Poor appearance </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.IPs %} checked {% endif %}/></td>
+        <td> Uniform: IP-s present </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.dust %} checked {% endif %}/></td>
+        <td> Uniform: Dusty </td>
+    </tr>
+
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.coverDirtRing %} checked {% endif %}/></td>
+        <td><br /> Cover: Dirty </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.coverCleanBill %} checked {% endif %}/></td>
+        <td> Cover: Scratched bill </td>
+    </tr>
+    
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.ribbons %} checked {% endif %}/></td>
+        <td><br /> Shirt: Ribbons/nametag poorly placed/tarnished </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.shirtInsigniaPlacement %} checked {% endif %}/></td>
+        <td> Shirt: Collar devices poorly placed/tarnished </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.shirtProperTie %} checked {% endif %}/></td>
+        <td> Shirt: Improper tie knot/neck tab </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.IDProperlyDisplayed %} checked {% endif %}/></td>
+        <td> Shirt: Improper ID placement </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.shirtUndershirt %} checked {% endif %}/></td>
+        <td> Shirt: Showing undershirt </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.creasesPresent %} checked {% endif %}/></td>
+        <td> Shirt: No creases </td>
+    </tr>
+    
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.beltBuckleTip %} checked {% endif %}/></td>
+        <td><br /> Belt: Buckle scratched </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.gigLine %} checked {% endif %}/></td>
+        <td> Belt: Poor gig-line </td>
+    </tr>
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.trousersProperLength %} checked {% endif %}/></td>
+        <td><br /> Trousers: Poor length/fit </td>
+    </tr>
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.shinedShoes %} checked {% endif %}/></td>
+        <td><br /> Shoes: No shine </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br /><br />Comment: {{ cuIns.other }} </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Inspector: {{ cuIns.inspector.LName }} ({{ cuIns.inspector.alpha }}) </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Result: {% if cuIns.fail %}FAIL{% else %}PASS{% endif %}, {{ cuIns.score }}/19 </td>
+    </tr>
+    
+</form>
+</table>
+
+{% endblock %}

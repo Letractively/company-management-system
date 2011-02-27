@@ -47,4 +47,4 @@ class UniformInspection(models.Model):
     other = models.TextField('General appearance')
     
     def __unicode__(self):
-        return self.mid + " - " + self.inspectionDate.__str__()
+        return self.mid.alpha + " - " + self.inspectionDate.__str__()
