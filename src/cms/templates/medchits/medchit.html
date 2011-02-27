@@ -5,7 +5,7 @@
 <h1>Welcome to the medical Chits module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
 {% if cChit %}
-    You are currently on {{ cChit.disposition }}, due to {{cChit.diagnosis}}.<br />
+    You are currently on {{ cChit.disposition }} due to {{cChit.diagnosis}}.<br />
     Your chit will expire on {{ cChit.endDate }}. 
 {% endif %}
 
@@ -14,8 +14,8 @@
 <form action="submit" method="post">
 {% csrf_token %}
 <table>
-    <tr><td>Start date:</td><td><input type = "text" name = "startDate" size=8 /></td></tr>
-    <tr><td>End date:</td><td><input type = "text" name = "endDate" size=8 /></td></tr>
+    <tr><td>Start date:</td><td><input type = "text" name = "startDate" size=10 /></td></tr>
+    <tr><td>End date:</td><td><input type = "text" name = "endDate" size=10 /></td></tr>
     <tr><td>Diagnosis:</td><td><input type = "text" name = "diagnosis" size = 20 /></td></tr>
     <tr>
         <td>Disposition:</td>
@@ -37,7 +37,7 @@
 {% for p in lChits %}
     <tr>
         <td>{{ p.startDate }} - {{ p.endDate }}</td>
-        <td>{{ p.disposition }}</td>
+        <td>{{ p.get_disposition_display }}</td>
         <td>{{ p.diagnosis }}</td>
         <td>{{ p.adminNotes }}</td>
     </tr>

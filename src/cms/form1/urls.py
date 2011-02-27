@@ -6,15 +6,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('form1.views',
 
-    # put url's to all the apps in this folder.
-
-    # (r'^cms/', include('cms.foo.urls')),
-    (r'^', 'createNewForm1'),
+    url(r'^$', 'formOne', name = "formOne"),
+    (r'^/$', 'formOne'),
+    (r'submit$', 'submit'),
     
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    # Uncomment the admin/doc line below to enable admin documentation:    
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # enabled the admin
-     (r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
 )

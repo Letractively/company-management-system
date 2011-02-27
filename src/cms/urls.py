@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     (r'^mid/', include('mid.urls')),
     
     #Chits/Paperwork
-
+    (r'^formOne/',include('form1.urls')),
     (r'^medchits/', include('medchits.urls')),
 
     # All the other module's pages
@@ -34,7 +34,6 @@ urlpatterns = patterns('',
     #(r'^bravoinspection/', include('bravoinspection.urls')),
     #(r'^companyblog/', include('companyblog.urls')),
     #(r'^companywatch/', include('companywatch.urls')),
-    #(r'^form1/',include('form1.urls')),
     #(r'^orm/', include('orm.urls')),
     #(r'^zero8/', include('zero8.urls')),
     #(r'^specialrequestchit/', include('specialrequestchit.urls')),
