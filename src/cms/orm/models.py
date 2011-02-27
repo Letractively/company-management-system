@@ -24,7 +24,7 @@ class OrmChit(models.Model):
     safetyOfficerApproval = models.NullBooleanField()
     companyOfficerApproval = models.NullBooleanField()
     def __unicode__(self):
-        return self.DateTime
+        return self.dateTime
     
 class LeisureActivites(models.Model):
     OrmChit = models.ForeignKey(OrmChit)
@@ -32,7 +32,7 @@ class LeisureActivites(models.Model):
     duration = models.TimeField()
     RAC = models.IntegerField()
     def __unicode__(self):
-        return self.Activity
+        return self.activity
     
 class MethodsOfTravel(models.Model):
     OrmChit = models.ForeignKey(OrmChit)
@@ -42,4 +42,4 @@ class MethodsOfTravel(models.Model):
     RAC = models.IntegerField()
     RiskManagementPlan = models.TextField()
     def __unicode__(self):
-        return self.Method_of_Travel
+        return self.methodOfTravel
