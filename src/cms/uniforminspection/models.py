@@ -6,6 +6,13 @@ class UniformInspection(models.Model):
     inspectorAlpha = models.CharField(max_length=6)
     mid = models.ForeignKey("mid.Mid")
     inspectionDate = models.DateField()
+
+    # int field for the score
+    score = models.IntegerField(null=True)
+    
+    # i think "pass" is a reserved term in python, so this is the fail block, passing by default.
+    fail = models.BooleanField(null=True).default=False
+    
     missingItems = models.BooleanField('No missing uniform items')
     appearance = models.BooleanField('Uniform Appearance(stains/wrinkles)')
     groomingShave = models.BooleanField('Hair/Grooming: Shave/Sideburns')
