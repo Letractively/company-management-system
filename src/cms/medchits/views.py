@@ -8,6 +8,7 @@ from medchits.models import Chit
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 
 from django.template import RequestContext
 from django.core.context_processors import csrf
@@ -62,9 +63,11 @@ def submit(request):
     lChits = Chit.objects.filter(mid=cMid).order_by('-endDate')
     
     #Check for repeated start date; avoid multiple submissions
+    startDate = request.POST['startDate']
+    
     repeat = False
     for p in lChits :
-        if p.startDate == request.POST['startDate'] :
+        if p.startDate == startDate :
             repeat = True
     
     if not repeat :
