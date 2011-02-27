@@ -29,5 +29,7 @@ class BravoInspection(models.Model):
     brightWork = models.BooleanField('Brightwork work and mirros clean')
     materialDeficiencies = models.BooleanField('Material deficiencies documented on the room check-in sheet or updated on ZIDL')
     rifles = models.BooleanField('All rifles and swords locked')
+    
+    
     def __unicode__(self):
         return self.Room.__str__() + " - " + self.When.__str__()

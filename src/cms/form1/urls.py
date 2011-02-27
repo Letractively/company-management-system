@@ -8,7 +8,8 @@ urlpatterns = patterns('form1.views',
 
     url(r'^$', 'formOne', name = "formOne"),
     (r'^/$', 'formOne'),
-    (r'submit$', 'submit'),
+    (r'FormOneView', 'FormOneView'),
+    (r'formOneSubmit$', 'formOneSubmit'),
     
     # Uncomment the admin/doc line below to enable admin documentation:    
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -281,7 +281,7 @@ def approveWeekend(request):
         p.status = "A"
         p.save()
     
-    return HttpResponseRedirect(reverse('coIndex'))
+    return HttpResponseRedirect(reverse('coApproval'))
     #return HttpResponseRedirect('/weekends/co')
     
 @login_required(redirect_field_name='/')
@@ -312,7 +312,7 @@ def denyWeekend(request):
         p.save()
     
     #return HttpResponseRedirect('/weekends/co')
-    return HttpResponseRedirect(reverse('coIndex'))
+    return HttpResponseRedirect(reverse('coApproval'))
 
 @login_required(redirect_field_name='/')
 def approveAllWeekends(request):
@@ -336,5 +336,5 @@ def approveAllWeekends(request):
         p.status = "A"
         p.save()
         
-    return HttpResponseRedirect(reverse('coIndex'))                                                                                                   
+    return HttpResponseRedirect(reverse('coApproval'))                                                                                                   
     #return HttpResponseRedirect('/weekends/co')
