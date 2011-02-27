@@ -229,7 +229,7 @@ def saveWeekendCount(request):
         p.weekendsComment = request.POST[p.alpha+'Comm']
         p.save()
 
-    return HttpResponseRedirect(reverse('weekendIndex')) 
+    return HttpResponseRedirect(reverse('weekendAdmin')) 
     #return HttpResponseRedirect('/weekends/admin')
 
 #Following functions deal with CO's functionality - approval and disapproval of weekend requests

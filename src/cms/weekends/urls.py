@@ -12,9 +12,8 @@ urlpatterns = patterns('weekends.views',
     (r'cancelReqWeekend$', 'cancelReqWeekend'),
     (r'view$', 'viewList'),
 
-    (r'admin$', 'admin'),
+    url(r'admin$', 'admin', name = "weekendAdmin"),
     (r'saveWeekendCount$', 'saveWeekendCount'),
-
 
     url(r'co$', 'coApproval', name="coApproval"),
     (r'approveWeekend$', 'approveWeekend'),
