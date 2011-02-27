@@ -1,3 +1,8 @@
+#uniforminspection models.py
+# Author: Michael Harrison
+# Editor: Michael Laws
+
+
 from django.db import models
 
 # Create your models here.
@@ -42,4 +47,4 @@ class UniformInspection(models.Model):
     other = models.TextField('General appearance')
     
     def __unicode__(self):
-        return self.mid + " - " + self.DateTime
+        return self.mid + " - " + self.inspectionDate.__str__()
