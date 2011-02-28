@@ -30,7 +30,7 @@ function iconDraw(id) {
         ctx.font="6pt sans-serif";
         ctx.textAlign="center";
         
-        var words = getLines(ctx, icon.title, 35, ctx.font);
+        var words = getLines(ctx, icon.title, 40, ctx.font);
         var spacing = new Array(4);
         spacing[0]=[20];
         spacing[1]=[15,25];
