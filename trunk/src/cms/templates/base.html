@@ -18,7 +18,7 @@
         {% endblock %}
       </section>
       <nav>
-        {% include "nav.html" %}
+        {% if is_logged_in %}{% include "nav.html" %}{% endif %}
       </nav>
       <footer>
       </footer>
