@@ -28,7 +28,17 @@ function iconDraw(id) {
         
         ctx.fillStyle="#FFFFFF";
         ctx.textAlign="center";
-        ctx.fillText(icon.title,20,20);
+        var spacing = new Array(4);
+        spacing[0]=[20];
+        spacing[1]=[15,25];
+        spacing[2]=[10,20,30];
+        spacing[3]=[5,15,25,35];
+
+        for( var i = 0; i<words.length; i++ ){
+            var y = spacing[words.length][i];
+            ctx.fillText(words[i],20,y);
+        }
+
     }
 }
 
@@ -65,7 +75,7 @@ function iconHighlight(id) {
 
         for( var i = 0; i<words.length; i++ ){
             var y = spacing[words.length][i];
-            ctx.fillText(icon.title,20,y);
+            ctx.fillText(words[i],20,y);
         }
     }
 }
