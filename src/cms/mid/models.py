@@ -36,6 +36,7 @@ BILLET_CHOICES = (
     ('SL','Squad Leader'),
     ('PLTS','Platoon Sgt'),
     ('OOC','Out of Company'),
+    ('MIR','Midshipman in Ranks'),
     )
 PLT_CHOICES = (
     ('1','1st Platoon'),
@@ -68,7 +69,7 @@ class Mid(models.Model):
     roomNumber = models.ForeignKey(Room,null=True)
     phoneNumber = models.CharField(max_length=10,null=True)
     weekends = models.IntegerField(null=True)
-    weekendsComment = models.CharField(max_length=50, null=True,blank=True)
+    weekendsComment = models.CharField(max_length=300, null=True,blank=True)
     acSAT = models.BooleanField(null=True).default=True
     PRTSat = models.BooleanField(null=True).default=True
     CQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True)
@@ -79,12 +80,27 @@ class Mid(models.Model):
     def __unicode__(self):
         return self.LName + ", " + self.fName + " " + self.mName + " - " + self.alpha
     
+class Grade(models.Model):
+    mid = models.ForeignKey(Mid)
+    className = models.CharField(max_length=50)
+    classHours = models.IntegerField(max_length=1)
+    classGrade6 = models.CharField(max_length=1,null=True,blank=True)
+    classGrade12 = models.CharField(max_length=1,null=True,blank=True)
+    classGrade16 = models.CharField(max_length=1,null=True,blank=True)
+    classGradeFinal = models.CharField(max_length=1,null=True,blank=True)
+    SEMESTER_CHOICES = (
+                        ('S','Spring'),
+                        ('F','Fall')
+                        )
+    classSemester = models.CharField(max_length=1,choices=SEMESTER_CHOICES)
+    classYear = models.IntegerField(max_length=4)
+    
 class Billet(models.Model):
     mid = models.ForeignKey(Mid)
     billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
     startDate = models.DateField(null=True)
     endDate = models.DateField(null=True)
-    evaluation = models.TextField(null=True)
+    evaluation = models.TextField(null=True,blank=True)
     current = models.NullBooleanField()
     def __unicode__(self):
         return self.billet
