@@ -6,48 +6,107 @@ window.onload=function() {
     iconDraw("personalInformation");
 }
 
+/**
+ * iconDraw(id)
+ * draws icon white background, black text
+ * @param id
+*/
 function iconDraw(id) {
     var icon=document.getElementById(id);
     if(icon.getContext) {
-        var i=icon.getContext("2d");
-        i.fillStyle="#000000";
-        i.beginPath();
-        i.arc(20,20,20,0,Math.PI*2,true);
-        i.closePath();
-        i.fill();
+        var ctx=icon.getContext("2d");
+        ctx.fillStyle="#000000";
+        ctx.beginPath();
+        ctx.arc(20,20,20,0,Math.PI*2,true);
+        ctx.closePath();
+        ctx.fill();
         
-        i.shadowOffsetX=2;
-        i.shadowOffsetY=2;
-        i.shadowBlur=5;
-        i.shadowColor="#666";
+        ctx.shadowOffsetX=2;
+        ctx.shadowOffsetY=2;
+        ctx.shadowBlur=5;
+        ctx.shadowColor="#666";
         
-        i.fillStyle="#FFFFFF";
-        i.textAlign="center";
-        i.fillText(icon.title,20,20);
+        ctx.fillStyle="#FFFFFF";
+        ctx.textAlign="center";
+        ctx.fillText(icon.title,20,20);
     }
 }
 
+/**
+ * iconHighlight(id)
+ * draws icon white background, black text
+ * @param id
+*/
 function iconHighlight(id) {
     var icon=document.getElementById(id);
     if(icon.getContext) {
-        var i=icon.getContext("2d");
-        i.fillStyle="#FFFFFF";
-        i.beginPath();
-        i.arc(20,20,20,0,Math.PI*2,true);
-        i.closePath();
-        i.fill();
+        var ctx=icon.getContext("2d");
+        ctx.fillStyle="#FFFFFF";
+        ctx.beginPath();
+        ctx.arc(20,20,20,0,Math.PI*2,true);
+        ctx.closePath();
+        ctx.fill();
         
-        i.shadowOffsetX=2;
-        i.shadowOffsetY=2;
-        i.shadowBlur=5;
-        i.shadowColor="#666";
+        ctx.shadowOffsetX=2;
+        ctx.shadowOffsetY=2;
+        ctx.shadowBlur=5;
+        ctx.shadowColor="#666";
         
-        i.fillStyle="#000000";
-        i.textAlign="center";
-        i.fillText(icon.title,20,20);
+        ctx.fillStyle="#000000";
+        ctx.textAlign="center";
+        
+        //Parse to fit text
+        var words = getLines(ctx, icon.title, 35, ctx.font);
+        var spacing new Array(4);
+        spacing[0]=[20];
+        spacing[1]=[15,25];
+        spacing[2]=[10,20,30];
+        spacing[3]=[5,15,25,35];
+
+        for( var i = 0; i<words.length; i++ ){
+            var y = spacing[words.length][i];
+            ctx.fillText(icon.title,20,y);
+        }
     }
 }
 
+/**
+ * Divide an entire phrase in an array of phrases, all with the max pixel length given.
+ * @param phrase
+ * @param length
+ * @return
+*/
+function getLines(ctx,phrase,maxPxLength,textStyle) {
+    var words=phrase.split(" "),
+        phraseArray=[],
+        lastPhrase="",
+        l=maxPxLength,
+        measure=0;
+        ctx.font = textStyle;
+
+    for (var i=0;i<words.length;i++) {
+        var word=words[i];
+        measure=ctx.measureText(lastPhrase+word).width;
+        if (measure<l) {
+            lastPhrase+=(" "+word);
+        }else {
+            phraseArray.push(lastPhrase);
+            lastPhrase=word;
+        }
+        if (i==words.length-1) {
+            phraseArray.push(lastPhrase);
+            break;
+        }
+    }
+    return phraseArray;
+}
+
+/**
+ * iconSlider(id, buttonid)
+ * toggles elements of id
+ * @param id
+ * @param buttonid
+*/
 function iconSlider(id, buttonid){
         var icon = document.getElementById(buttonid);
         var icon_menu = document.getElementById(id);
