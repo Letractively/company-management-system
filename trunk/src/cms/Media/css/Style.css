@@ -52,7 +52,6 @@ nav {
   -webkit-gradient(linear, left 
   top, left bottom, from(transparent), 
   color-stop(0.25, transparent), to(black));
-  overflow: auto;
 }
 
 footer {
@@ -74,7 +73,7 @@ div.icon {
   opacity: 0.5;
 }
 
-div.icon: hover {
+div.icon hover {
   filter:alpha(opacity=100);
   -moz-opacity: 1.0;
   opacity: 1.0;
