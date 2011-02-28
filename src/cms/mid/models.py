@@ -83,11 +83,13 @@ class Mid(models.Model):
 class Grade(models.Model):
     mid = models.ForeignKey(Mid)
     className = models.CharField(max_length=50)
-    classHours = models.IntegerField(max_length=1)
-    classGrade6 = models.CharField(max_length=1,null=True,blank=True)
-    classGrade12 = models.CharField(max_length=1,null=True,blank=True)
-    classGrade16 = models.CharField(max_length=1,null=True,blank=True)
-    classGradeFinal = models.CharField(max_length=1,null=True,blank=True)
+    courseCode = models.CharField(max_length=5,null=True,blank=True)
+    courseSection = models.CharField(max_length=4,null=True,blank=True)
+    courseHours = models.IntegerField(max_length=1)
+    grade6 = models.CharField(max_length=1,null=True,blank=True)
+    grade12 = models.CharField(max_length=1,null=True,blank=True)
+    grade16 = models.CharField(max_length=1,null=True,blank=True)
+    gradeFinal = models.CharField(max_length=1,null=True,blank=True)
     SEMESTER_CHOICES = (
                         ('S','Spring'),
                         ('F','Fall')
