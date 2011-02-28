@@ -57,41 +57,8 @@ nav {
 footer {
   height: 10px;
 }
- 
-div.icon {
-  float: left;
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  border: 1px solid black;
-  border-bottom-left-radius: 2px 2px;
-  border-bottom-right-radius: 2px 2px;
-  border-top-left-radius: 2px 2px;
-  border-top-right-radius: 2px 2px;
-}
 
-div.icon: hover {
-  background-color: #ffffff;
-  border: 1px solid yellow;
-  filter:alpha(opacity=100);
-  -moz-opacity: 1.0;
-  opacity: 1.0;
-}
-
-div.icon img{
-  width: 40px;
-  height: 40px;
-}
-
-div.icon img:hover{
-  background-color: #ffffff;
-  border: 1px solid yellow;
-  filter:alpha(opacity=100);
-  -moz-opacity: 1.0;
-  opacity: 1.0;
-}
-
-canvas#icon {
+canvas.icon {
   float: left;
   width: 40px;
   height: 40px;
