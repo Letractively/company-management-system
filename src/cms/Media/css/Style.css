@@ -48,14 +48,14 @@ section #main {
 nav {
   height: 50px;
   background-color: rgba(100, 125, 200, 1);
-  -webkit-box-reflect:below 5px 
+  -webkit-box-reflect:below 1px 
   -webkit-gradient(linear, left 
   top, left bottom, from(transparent), 
-  color-stop(0.5, transparent), to(black));
+  color-stop(0.25, transparent), to(black));
 }
 
 footer {
-  height: 5%;
+  height: 10px;
 }
  
 div.icon {
