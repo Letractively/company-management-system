@@ -49,6 +49,12 @@ function iconHighlight(id) {
 }
 
 function iconSlider(id, buttonid){
+        var elements = document.getElementByTagName("ul");
+        for( var i=0; i<elements.length ; i++ ) {
+            if( elements[i].class=="icon" ) {
+                elements[i].style.display="none";
+            }
+        }
         var icon = document.getElementById(buttonid);
         var icon_menu = document.getElementById(id);
         if(icon_menu.style.display=="none") {
