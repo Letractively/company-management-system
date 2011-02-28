@@ -30,4 +30,28 @@
 <ul class="menu" id="form_menu">
 	<li><a href="formOne/">Review Form-1s</a></li>
 	<li><a href="medchits/">Medical Chits</a></li>
+	<li><a href = "specReq/">Special Request Chits</a></li>
+    <li><del><a href = "ORM/">ORM Chits</a></del></li>
+</ul>
+<canvas class="icon" id="inspections" title="Inspections"
+	height="40" width="40" 
+	onmouseover="iconHighlight(this.id)" 
+	onmouseout="iconDraw(this.id)"
+	onclick="iconSlider('inspection_menu',this.id)">
+	Bummer!
+</canvas>
+<ul class="menu" id="inspection_menu">
+	<li><a href = "bIns/">Review Room Inspections</a></li>
+    <li><a href = "uIns/">Review Uniform Inspections</a></li>
+</ul>
+<canvas class="icon" id="personalInformation" title="Personal Information"
+	height="40" width="40" 
+	onmouseover="iconHighlight(this.id)" 
+	onmouseout="iconDraw(this.id)"
+	onclick="iconSlider('personal_information_menu',this.id)">
+	Bummer!
+</canvas>
+<ul class="menu" id="personal_information_menu">
+	<li><a href = "mid/selectPassChange">Change Password</a></li>
+    <li><a href = "logout">Log out</a></li>
 </ul>
