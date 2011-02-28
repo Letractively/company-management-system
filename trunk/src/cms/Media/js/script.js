@@ -41,4 +41,5 @@ function iconHighlight(id) {
         i.fillStyle="#000000";
         i.textAlign="center";
         i.fillText(text,20,20);
+    }
 }
