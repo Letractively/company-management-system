@@ -53,10 +53,10 @@ function iconSlider(){
         //var h = $("canvas.icon").height();
         //$(".menu").style.top="-100px";
         //$(".menu").fadeToggle();
-        if(menu.style.display=="hidden"){
+        if(menu.style.display=="none"){
             menu.style.display="block";
         } else {
-            menu.style.display="hidden";
+            menu.style.display="none";
         }
         
         
