@@ -14,6 +14,8 @@ from django.core.context_processors import csrf
 
 from django.contrib.auth.decorators import login_required
 
+from datetime import date
+
 @login_required(redirect_field_name='/')
 def formOne(request):
     #Basic user view for Form-1s
@@ -84,11 +86,34 @@ def formOneSubmit(request):
     cInspectee = cInspectee[0]
     
     return render_to_response('form1/formOneSubmit.html', {'cMid' : cMid,  
-                                                            'cInspectee' : cInspectee,
+                                                           'cInspectee' : cInspectee,
                                                            }, 
                                                            context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')    
 def formOneSave(request) :
     
-    return HttpResponseRedirect(reverse('formOne'))
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.filter(alpha=alpha)
+    cMid = cMid[0]
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cInspectee = Mid.objects.filter(alpha=request.POST['alpha'])
+    cInspectee = cInspectee[0]
+    
+    cForm = Form1(mid = cInspectee,
+                  formType = request.POST['type'],
+                  formDate = date.today(),
+                  counseledBy = cMid,
+                  reason = request.POST['reason'],
+                  comment = request.POST['comment'],
+                  resolution = "P"
+                  )
+    
+    cForm.save()
+    
+    return HttpResponseRedirect(reverse('formOneSelect'))
