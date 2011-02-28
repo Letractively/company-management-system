@@ -15,14 +15,15 @@
     <td>Via: </td><td>{{ cChit.viaLine }}</td>
 </tr>
 <tr>
-    <td>Purpose: {{cChit.requestType}}</td>
+    <td>Purpose: </td>
     <td>{%if cChit.requestType == 'O' %}
             {{ cChit.otherRequestType }}
         {% else %}
             {{ cChit.get_requestType_display }}
-        {%endif%}
+        {% endif %}
     </td>
 </tr>
+
 <tr>
     <td>Justification: </td><td>{{ cChit.justification }}</td>
 </tr>
@@ -32,17 +33,15 @@
 
 <tr>
     <td>Squad Leader: </td><td>{%if not cChit.squadLeaderApproval %}
-                                PENDING
+                                    PENDING
                                {% else %}
-                               {%if cChit.squadLeaderApproval == True%}
-                               APPROVED{%endif%}
-                               {%if cChit.squadLeaderApproval == False%}
-                               DENIED{%endif%}
-                               {%endif}
+                                    {%if cChit.squadLeaderApproval == True%} APPROVED {% endif %}
+                                    {%if cChit.squadLeaderApproval == False%} DENIED {% endif %}
+                               {%endif%}
     </td>
 </tr>
 
-{%if cChit.approvalLevel > 1%}
+{%if cChit.approvalLevel > 1 and cChit.approvalStatus > 1%}
 <tr>
     <td>Platoon Commander: </td><td>{%if not cChit.platoonLeaderApproval %}
                                 PENDING
@@ -51,12 +50,12 @@
                                APPROVED{%endif%}
                                {%if cChit.platoonLeaderApproval == False%}
                                DENIED{%endif%}
-                               {%endif}
+                               {%endif%}
     </td>
 </tr>
 {%endif%}
 
-{%if cChit.approvalLevel > 2%}
+{%if cChit.approvalLevel > 2 and cChit.approvalStatus > 2%}
 <tr>
     <td>Company Commander: </td><td>{%if not cChit.companyCommanderApproval %}
                                 PENDING
@@ -65,12 +64,12 @@
                                APPROVED{%endif%}
                                {%if cChit.companyCommanderApproval == False%}
                                DENIED{%endif%}
-                               {%endif}
+                               {%endif%}
     </td>
 </tr>
 {%endif%}
 
-{%if cChit.approvalLevel > 3%}
+{%if cChit.approvalLevel > 3 and cChit.approvalStatus > 3%}
 <tr>
     <td>SEL: </td><td>{%if not cChit.companySELApproval %}
                                 PENDING
@@ -79,12 +78,12 @@
                                APPROVED{%endif%}
                                {%if cChit.companySELApproval == False%}
                                DENIED{%endif%}
-                               {%endif}
+                               {%endif%}
     </td>
 </tr>
 {%endif%}
 
-{%if cChit.approvalLevel > 4%}
+{%if cChit.approvalLevel > 4 and cChit.approvalStatus > 4%}
 <tr>
     <td>Company Officer: </td><td>{%if not cChit.companyOfficer %}
                                 PENDING
@@ -93,7 +92,7 @@
                                APPROVED{%endif%}
                                {%if cChit.companyOfficer == False%}
                                DENIED{%endif%}
-                               {%endif}
+                               {%endif%}
     </td>
 </tr>
 {%endif%}
