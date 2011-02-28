@@ -1,8 +1,8 @@
 window.onload=function() { 
-    iconDraw("icon","Home");
+    iconDraw("icon");
 }
 
-function iconDraw(id,text) {
+function iconDraw(id) {
     var icon=document.getElementById(id);
     if(icon.getContext) {
         var i=icon.getContext("2d");
@@ -19,7 +19,7 @@ function iconDraw(id,text) {
         
         i.fillStyle="#FFFFFF";
         i.textAlign="center";
-        i.fillText(text,20,20);
+        i.fillText(icon.value,20,20);
     }
 }
 
@@ -40,6 +40,6 @@ function iconHighlight(id) {
         
         i.fillStyle="#000000";
         i.textAlign="center";
-        i.fillText(text,20,20);
+        i.fillText(icon.value,20,20);
     }
 }
