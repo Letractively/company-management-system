@@ -45,6 +45,7 @@ section #main {
   overflow: auto;
 }
 
+/** Begin: Navigation **/
 nav {
   height: 50px;
   background-color: rgba(100, 125, 200, 1);
@@ -53,10 +54,6 @@ nav {
   top, left bottom, from(transparent), 
   color-stop(0.25, transparent), to(black));
   overflow:hidden;
-}
-
-footer {
-  height: 10px;
 }
 
 canvas.icon {
@@ -100,9 +97,20 @@ ul, li {
     color: black;
     background-color: rgba(255, 255, 255, .7);
 }
+/** End: Navigation **/
 
+footer {
+  height: 10px;
+}
+
+/** Begin: Table **/
 th {
+  color: rgba(0, 0, 0, 1);
   background-color: rgba(0, 0, 240, .8);
+}
+
+td {
+    color: rgba(255, 255, 255, 1);
 }
 
 td #row1 {
