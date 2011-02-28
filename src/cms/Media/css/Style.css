@@ -110,24 +110,26 @@ ul, li {
 }
 
 .menu {
+    position: relative;
     display: none;
     width: 200px;
     border: 1px solid #000000;
 }
 
 .menu li {
-    background-color: rgba(0, 0, 255, .7);
+    background-color: rgba(0, 0, 0, .7);
 }
 
 .menu li a {
-    color: black;
+    color: white;
     text-decoration: none;
     padding: 10px;
     display: block;
 }
 
 .menu li a:hover {
-    color: white;
+    color: black;
+    background-color: rgba(255, 255, 255, .7);
 }
 
 th {
