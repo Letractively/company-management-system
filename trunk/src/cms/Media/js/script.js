@@ -19,7 +19,7 @@ function iconDraw(id) {
         
         i.fillStyle="#FFFFFF";
         i.textAlign="center";
-        i.fillText(icon.value,20,20);
+        i.fillText(icon.title,20,20);
     }
 }
 
@@ -40,6 +40,6 @@ function iconHighlight(id) {
         
         i.fillStyle="#000000";
         i.textAlign="center";
-        i.fillText(icon.value,20,20);
+        i.fillText(icon.title,20,20);
     }
 }
