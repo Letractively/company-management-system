@@ -2,6 +2,8 @@ window.onload=function() {
     iconDraw("icon");
     iconDraw("weekends");
     iconDraw("forms");
+    iconDraw("inspections");
+    iconDraw("personalInformation");
 }
 
 function iconDraw(id) {
