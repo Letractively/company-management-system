@@ -49,9 +49,6 @@ function iconHighlight(id) {
 }
 
 function iconSlider(id, buttonid){
-        $(".menu").each(function(){
-            this.style.display="none";
-        })
         var icon = document.getElementById(buttonid);
         var icon_menu = document.getElementById(id);
         if(icon_menu.style.display=="none") {
@@ -59,4 +56,7 @@ function iconSlider(id, buttonid){
         } else {
             icon_menu.style.display="none";
         }
+        $(".menu").each(function(){
+            if(this!=icon_menu) this.style.display="none";
+        })
 }
