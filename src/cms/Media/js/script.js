@@ -49,7 +49,7 @@ function iconHighlight(id) {
 }
 
 function iconSlider(id, buttonid){
-        $(".icon").each(function(){
+        $(".menu").each(function(){
             this.style.display="none";
         })
         var icon = document.getElementById(buttonid);
