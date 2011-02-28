@@ -91,6 +91,11 @@ div.icon img:hover{
   opacity: 1.0;
 }
 
+canvas#icon {
+    height: 40px;
+    width: 40px;
+}
+
 th {
   background-color: rgba(0, 0, 240, .8);
 }
