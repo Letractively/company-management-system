@@ -48,7 +48,9 @@ function iconHighlight(id) {
 function iconSlider(){
     $("canvas.icon").click(
     function() {
-        $("ul.menu").slideToggle("medium");
-        $("ul.menu").style.top = "-20px";
+        event.preventDefault();
+        $("canvas.icon").fadeToggle();
+        var h = $("canvas.icon").height();
+        
     });
 }
