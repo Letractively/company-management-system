@@ -1,6 +1,5 @@
 window.onload=function() { 
     iconDraw("icon");
-    iconSlider();
 }
 
 function iconDraw(id) {
