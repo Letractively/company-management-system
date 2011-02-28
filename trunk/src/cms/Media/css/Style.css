@@ -52,6 +52,7 @@ nav {
   -webkit-gradient(linear, left 
   top, left bottom, from(transparent), 
   color-stop(0.25, transparent), to(black));
+  overflow:hidden;
 }
 
 footer {
