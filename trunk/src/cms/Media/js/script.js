@@ -1,5 +1,6 @@
 window.onload=function() { 
     iconDraw("icon");
+    iconSlider();
 }
 
 function iconDraw(id) {
@@ -42,4 +43,11 @@ function iconHighlight(id) {
         i.textAlign="center";
         i.fillText(icon.title,20,20);
     }
+}
+
+function iconSlider(){
+    $("canvas.icon").click(
+    function() {
+        $("ul.menu").slideToggle("medium");
+    });
 }
