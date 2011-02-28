@@ -110,12 +110,16 @@ ul, li {
 }
 
 .menu {
+    position: fixed;
+    top: -40px;
+    z-index: 100;
     display: none;
     width: 100px;
     border: 1px solid #000000;
 }
 
 .menu li {
+    float:left;
     background-color: rgba(0, 0, 0, .7);
 }
 
