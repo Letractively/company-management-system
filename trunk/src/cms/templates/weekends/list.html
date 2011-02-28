@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Current Weekend List: {% endblock %}
 {% block content %}
-<table>
-{% for p in lWeekends %}
-    {% if p.status != "P" %}
-        <tr>
-            <td>{{ p.mid.LName }}</td>
-            <td>{{ p.mid.alpha }}</td>
-            <td>{{ p.startDate }} - {{ p.endDate }}</td>
-            <td>{{ p.contactNumber }}</td>
-            <td>{{ p.location }}</td>
-        </tr>
-    {% endif %}
-#{% empty %}
-    <tr><td>Weekend list is empty.</td></tr>
-{% endfor %}
+	<table>
+	{% for p in lWeekends %}
+	    {% if p.status != "P" %}
+	        <tr>
+	            <td>{{ p.mid.LName }}</td>
+	            <td>{{ p.mid.alpha }}</td>
+	            <td>{{ p.startDate }} - {{ p.endDate }}</td>
+	            <td>{{ p.contactNumber }}</td>
+	            <td>{{ p.location }}</td>
+	        </tr>
+	    {% endif %}
+	{% empty %}
+	    <tr><td>Weekend list is empty.</td></tr>
+	{% endfor %}
+	</table>
 {% endblock %}
