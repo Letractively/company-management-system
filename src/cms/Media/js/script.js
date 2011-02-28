@@ -49,8 +49,16 @@ function iconSlider(){
     $("canvas.icon").click(
     function() {
         event.preventDefault();
-        $(".menu").fadeToggle();
-        var h = $("canvas.icon").height();
+        var menu = $(".menu");
+        //var h = $("canvas.icon").height();
+        //$(".menu").style.top="-100px";
+        //$(".menu").fadeToggle();
+        if(menu.style.display=="hidden"){
+            menu.style.display="block";
+        } else {
+            menu.style.display="hidden";
+        }
+        
         
     });
 }
