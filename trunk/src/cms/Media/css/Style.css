@@ -91,8 +91,11 @@ div.icon img:hover{
   opacity: 1.0;
 }
 
-canvas#icon {
+div.iconClass {
   float: left;
+}
+
+canvas#icon {
   width: 40px;
   height: 40px;
   margin: 5px;
@@ -110,9 +113,8 @@ ul, li {
 }
 
 .menu {
-    position: relative;
     display: none;
-    width: 200px;
+    width: 100px;
     border: 1px solid #000000;
 }
 
