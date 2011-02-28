@@ -27,7 +27,7 @@ function iconDraw(id) {
         ctx.shadowColor="#666";
         
         ctx.fillStyle="#FFFFFF";
-        ctx.font="regular 8px sans-serif";
+        ctx.font="regular 6px sans-serif";
         ctx.textAlign="center";
         
         var words = getLines(ctx, icon.title, 35, ctx.font);
@@ -66,7 +66,7 @@ function iconHighlight(id) {
         ctx.shadowColor="#666";
         
         ctx.fillStyle="#000000";
-        ctx.font="regular 8px sans-serif";
+        ctx.font="regular 6px sans-serif";
         ctx.textAlign="center";
         
         //Parse to fit text
@@ -78,7 +78,7 @@ function iconHighlight(id) {
         spacing[3]=[5,15,25,35];
 
         for( var i = 0; i<words.length; i++ ){
-            var y = spacing[words.length][i];
+            var y = spacing[words.length-1][i];
             ctx.fillText(words[i],20,y);
         }
     }
