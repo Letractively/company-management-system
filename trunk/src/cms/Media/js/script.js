@@ -1,5 +1,7 @@
 window.onload=function() { 
     iconDraw("icon");
+    iconDraw("weekends");
+    iconDraw("forms");
 }
 
 function iconDraw(id) {
