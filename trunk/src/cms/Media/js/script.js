@@ -45,20 +45,11 @@ function iconHighlight(id) {
     }
 }
 
-function iconSlider(){
-    $("canvas.icon").click(
-    function() {
-        event.preventDefault();
-        var menu = $(".menu");
-        //var h = $("canvas.icon").height();
-        //$(".menu").style.top="-100px";
-        //$(".menu").fadeToggle();
-        if(menu.style.display=="none"){
-            menu.style.display="block";
+function iconSlider(id){
+        var icon_menu = document.getElementById(id);
+        if(icon_menu.style.display=="none") {
+            icon_menu.style.display="block";
         } else {
-            menu.style.display="none";
+            icon_menu.style.display="none";
         }
-        
-        
-    });
 }

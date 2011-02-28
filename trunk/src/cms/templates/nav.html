@@ -1,14 +1,15 @@
 <div onclick="" class="icon"><img src="{{MEDIA_URL}}img/login.gif" alt="login" /></div>
 <div onclick="" class="icon"><img src="{{MEDIA_URL}}img/users.gif" alt="users" /></div>
 <div class="iconClass">
-	<ul class="menu">
+	<ul class="menu" id="home_menu">
 		<li><a href="#">Link</a></li>
 		<li><a href="#">Link</a></li>
 	</ul>
-	<canvas class="icon" id="icon" title="Home" 
+	<canvas class="icon" id="icon" title="Home">
 		height="40" width="40" 
 		onmouseover="iconHighlight(this.id)" 
-		onmouseout="iconDraw(this.id)">
+		onmouseout="iconDraw(this.id)"
+		onclick="iconSlider('home_menu')">
 		Bummer!
 	</canvas>
 </div>
