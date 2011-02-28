@@ -110,10 +110,8 @@ ul, li {
 }
 
 .menu {
-    position: fixed;
-    z-index: 100;
     display: none;
-    width: 200px;
+    width: 100px;
     border: 1px solid #000000;
 }
 

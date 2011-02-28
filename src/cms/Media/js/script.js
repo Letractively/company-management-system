@@ -49,5 +49,6 @@ function iconSlider(){
     $("canvas.icon").click(
     function() {
         $("ul.menu").slideToggle("medium");
+        $("ul.menu").style.top = "-20px";
     });
 }
