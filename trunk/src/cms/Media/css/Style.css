@@ -110,8 +110,10 @@ ul, li {
 }
 
 .menu {
-    position: absolute;
+    margin: 5px;
+    float:left;
     display: none;
+    height: 40px;
 }
 
 .menu li {
