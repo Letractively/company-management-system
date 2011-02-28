@@ -1,3 +1,7 @@
+window.onload=function(){ 
+    iconDraw("Home");
+}
+
 function iconDraw(text){
     var icon=document.getElementById("icon");
     if(icon.getContext) {
