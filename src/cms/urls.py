@@ -30,14 +30,14 @@ urlpatterns = patterns('',
     (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),
     
     #Chits/Paperwork
-    (r'^formOne/',include('form1.urls')),
-    (r'^medchits/', include('medchits.urls')),
-    (r'^specReq/', include('specialrequestchit.urls')),
-    (r'^ORM/', include('orm.urls')),
+    (r'^formOne/',include('form1.urls', namespace="formOne", app_name="formOne")),
+    (r'^medchits/', include('medchits.urls', namespace="medchits", app_name="medchits")),
+    (r'^specReq/', include('specialrequestchit.urls', namespace="specReq", app_name="specReq")),
+    (r'^ORM/', include('orm.urls', namespace="ORM", app_name="ORM")),
 
     #Inspections
-    (r'^bIns/', include('bravoinspection.urls')),
-    (r'^uIns/', include('uniforminspection.urls')),
+    (r'^bIns/', include('bravoinspection.urls', namespace="bIns", app_name="bIns")),
+    (r'^uIns/', include('uniforminspection.urls', namespace="uIns", app_name="uIns")),
     
     # All the other module's pages
     #(r'^accountability/', include('accountability.urls')),
@@ -45,7 +45,7 @@ urlpatterns = patterns('',
     #(r'^companywatch/', include('companywatch.urls')),
     #(r'^zero8/', include('zero8.urls')),
     
-    (r'^weekends/', include('weekends.urls')),
+    (r'^weekends/', include('weekends.urls', namespace="weekends", app_name="weekends")),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
