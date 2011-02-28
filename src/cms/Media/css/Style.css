@@ -92,8 +92,15 @@ div.icon img:hover{
 }
 
 canvas#icon {
-    height: 40px;
-    width: 40px;
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: 1px solid black;
+  border-bottom-left-radius: 2px 2px;
+  border-bottom-right-radius: 2px 2px;
+  border-top-left-radius: 2px 2px;
+  border-top-right-radius: 2px 2px;
 }
 
 th {
