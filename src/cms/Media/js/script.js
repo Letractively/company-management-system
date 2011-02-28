@@ -12,11 +12,11 @@ function iconDraw(text){
         i.closePath();
         i.fill();
         
-        i.shadowOffsetX=2;
+        /*i.shadowOffsetX=2;
         i.shadowOffsetY=2;
         i.shadowBlur=5;
         i.shadowColor="#666";
-        
+        */
         i.fillStyle="#FFFFFF";
         i.fillText(text,20,20);
     }
