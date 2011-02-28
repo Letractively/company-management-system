@@ -27,7 +27,10 @@ function iconDraw(id) {
         ctx.shadowColor="#666";
         
         ctx.fillStyle="#FFFFFF";
+        ctx.font="regular 8px sans-serif";
         ctx.textAlign="center";
+        
+        var words = getLines(ctx, icon.title, 35, ctx.font);
         var spacing = new Array(4);
         spacing[0]=[20];
         spacing[1]=[15,25];
@@ -63,6 +66,7 @@ function iconHighlight(id) {
         ctx.shadowColor="#666";
         
         ctx.fillStyle="#000000";
+        ctx.font="regular 8px sans-serif";
         ctx.textAlign="center";
         
         //Parse to fit text
