@@ -49,11 +49,8 @@ function iconHighlight(id) {
 }
 
 function iconSlider(id, buttonid){
-        var elements = document.getElementsByTagName("ul");
-        for( var i=0; i<elements.length ; i++ ) {
-            if( elements[i].class=="icon" ) {
-                elements[i].style.display="none";
-            }
+        $(".icon").each{
+            $(this).style.display="none";
         }
         var icon = document.getElementById(buttonid);
         var icon_menu = document.getElementById(id);
