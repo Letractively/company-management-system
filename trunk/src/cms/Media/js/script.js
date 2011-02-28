@@ -48,8 +48,8 @@ function iconSlider(id, buttonid){
         var icon = document.getElementById(buttonid);
         var icon_menu = document.getElementById(id);
         if(icon_menu.style.display=="none") {
-            icon_menu.style.top=icon.style.top-20;
-            icon_menu.style.left=icon.style.left;
+            icon_menu.style.top=icon.style.top-50;
+            icon_menu.style.left=icon.offsetLeft;
             icon_menu.style.display="block";
         } else {
             icon_menu.style.display="none";
