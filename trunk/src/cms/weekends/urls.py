@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
+namespace="weekends"
+
 urlpatterns = patterns('weekends.views',
 
     url(r'^$', 'index', name = "weekendIndex"),
