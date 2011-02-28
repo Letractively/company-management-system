@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     #Chits/Paperwork
     (r'^formOne/',include('form1.urls')),
     (r'^medchits/', include('medchits.urls')),
+    (r'^specReq/', include('specialrequestchit.urls')),
+    (r'^ORM/', include('orm.urls')),
 
     #Inspections
     (r'^bIns/', include('bravoinspection.urls')),
@@ -37,9 +39,7 @@ urlpatterns = patterns('',
     #(r'^accountability/', include('accountability.urls')),
     #(r'^companyblog/', include('companyblog.urls')),
     #(r'^companywatch/', include('companywatch.urls')),
-    #(r'^orm/', include('orm.urls')),
     #(r'^zero8/', include('zero8.urls')),
-    #(r'^specialrequestchit/', include('specialrequestchit.urls')),
     
     (r'^weekends/', include('weekends.urls')),
     
