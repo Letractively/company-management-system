@@ -49,7 +49,7 @@ function iconSlider(){
     $("canvas.icon").click(
     function() {
         event.preventDefault();
-        $("canvas.icon").fadeToggle();
+        $(".menu").fadeToggle();
         var h = $("canvas.icon").height();
         
     });
