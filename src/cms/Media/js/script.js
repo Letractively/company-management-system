@@ -50,3 +50,4 @@ function iconSlider(){
     function() {
         $("ul.menu").slideToggle("medium");
     });
+}
