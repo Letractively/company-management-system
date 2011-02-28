@@ -10,6 +10,8 @@ from django.views.static import *
 from django.conf import settings
 admin.autodiscover()
 
+namespace="cms"
+
 urlpatterns = patterns('',
     
     #Initial login page    
