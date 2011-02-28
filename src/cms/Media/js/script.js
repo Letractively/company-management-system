@@ -57,7 +57,7 @@ function iconHighlight(id) {
         
         //Parse to fit text
         var words = getLines(ctx, icon.title, 35, ctx.font);
-        var spacing new Array(4);
+        var spacing = new Array(4);
         spacing[0]=[20];
         spacing[1]=[15,25];
         spacing[2]=[10,20,30];
