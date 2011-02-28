@@ -47,7 +47,7 @@ section #main {
 
 /** Begin: Navigation **/
 nav {
-  height: 50px;
+  height: 70px;
   background-color: rgba(100, 125, 200, 1);
   -webkit-box-reflect:below 1px 
   -webkit-gradient(linear, left 
@@ -58,8 +58,8 @@ nav {
 
 canvas.icon {
   float: left;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   margin: 5px;
   border: 1px solid black;
   border-bottom-left-radius: 2px 2px;

@@ -17,7 +17,7 @@ function iconDraw(id) {
         var ctx=icon.getContext("2d");
         ctx.fillStyle="#000000";
         ctx.beginPath();
-        ctx.arc(20,20,20,0,Math.PI*2,true);
+        ctx.arc(30,30,30,0,Math.PI*2,true);
         ctx.closePath();
         ctx.fill();
         
@@ -27,19 +27,19 @@ function iconDraw(id) {
         ctx.shadowColor="#666";
         
         ctx.fillStyle="#FFFFFF";
-        ctx.font="6pt sans-serif";
+        ctx.font="8pt sans-serif";
         ctx.textAlign="center";
         
-        var words = getLines(ctx, icon.title, 40, ctx.font);
+        var words = getLines(ctx, icon.title, 60, ctx.font);
         var spacing = new Array(4);
-        spacing[0]=[20];
-        spacing[1]=[15,25];
-        spacing[2]=[10,20,30];
-        spacing[3]=[5,15,25,35];
+        spacing[0]=[30];
+        spacing[1]=[25,35];
+        spacing[2]=[20,30,40];
+        spacing[3]=[15,25,35,45];
 
         for( var i = 0; i<words.length; i++ ){
             var y = spacing[words.length-1][i];
-            ctx.fillText(words[i],20,y);
+            ctx.fillText(words[i],30,y);
         }
 
     }
@@ -56,7 +56,7 @@ function iconHighlight(id) {
         var ctx=icon.getContext("2d");
         ctx.fillStyle="#FFFFFF";
         ctx.beginPath();
-        ctx.arc(20,20,20,0,Math.PI*2,true);
+        ctx.arc(30,30,30,0,Math.PI*2,true);
         ctx.closePath();
         ctx.fill();
         
@@ -70,16 +70,16 @@ function iconHighlight(id) {
         ctx.textAlign="center";
         
         //Parse to fit text
-        var words = getLines(ctx, icon.title, 35, ctx.font);
+        var words = getLines(ctx, icon.title, 60, ctx.font);
         var spacing = new Array(4);
-        spacing[0]=[20];
-        spacing[1]=[15,25];
-        spacing[2]=[10,20,30];
-        spacing[3]=[5,15,25,35];
+        spacing[0]=[30];
+        spacing[1]=[25,35];
+        spacing[2]=[20,30,40];
+        spacing[3]=[15,25,35,45];
 
         for( var i = 0; i<words.length; i++ ){
             var y = spacing[words.length-1][i];
-            ctx.fillText(words[i],20,y);
+            ctx.fillText(words[i],30,y);
         }
     }
 }

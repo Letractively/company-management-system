@@ -1,54 +1,54 @@
-<a href="#">
+<a href="{% mid:index %}">
 	<canvas class="icon" id="icon" title="Home"
-		height="40" width="40" 
+		height="60" width="60" 
 		onmouseover="iconHighlight(this.id)" 
 		onmouseout="iconDraw(this.id)">
 		Bummer!
 	</canvas>
 </a>
 <canvas class="icon" id="weekends" title="Weekends"
-	height="40" width="40" 
+	height="60" width="60" 
 	onmouseover="iconHighlight(this.id)" 
 	onmouseout="iconDraw(this.id)"
 	onclick="iconSlider('weekend_menu',this.id)">
 	Bummer!
 </canvas>
 <ul class="menu" id="weekend_menu">
-	<li><a href="weekends/">Request Weekends</a></li>
-	<li><a href="{% url weekends:weekendIndex %}">View Weekend List</a></li>
+	<li><a href="{% url weekends:weekendIndex %}">Request Weekends</a></li>
+	<li><a href="{% url weekends:viewList %}">View Weekend List</a></li>
 </ul>
 <canvas class="icon" id="forms" title="Forms"
-	height="40" width="40" 
+	height="60" width="60" 
 	onmouseover="iconHighlight(this.id)" 
 	onmouseout="iconDraw(this.id)"
 	onclick="iconSlider('form_menu',this.id)">
 	Bummer!
 </canvas>
 <ul class="menu" id="form_menu">
-	<li><a href="formOne/">Review Form-1s</a></li>
-	<li><a href="medchits/">Medical Chits</a></li>
-	<li><a href = "specReq/">Special Request Chits</a></li>
-    <li><del><a href = "ORM/">ORM Chits</a></del></li>
+	<li><a href="{% url formOne:index %}">Review Form-1s</a></li>
+	<li><a href="{% url medchits:index %}">Medical Chits</a></li>
+	<li><a href = "{% url specReq:index %}">Special Request Chits</a></li>
+    <li><del><a href = "{% url ORM:index %}">ORM Chits</a></del></li>
 </ul>
 <canvas class="icon" id="inspections" title="Inspections"
-	height="40" width="40" 
+	height="60" width="60" 
 	onmouseover="iconHighlight(this.id)" 
 	onmouseout="iconDraw(this.id)"
 	onclick="iconSlider('inspection_menu',this.id)">
 	Bummer!
 </canvas>
 <ul class="menu" id="inspection_menu">
-	<li><a href = "bIns/">Review Room Inspections</a></li>
-    <li><a href = "uIns/">Review Uniform Inspections</a></li>
+	<li><a href = "{% url bIns:index %}">Review Room Inspections</a></li>
+    <li><a href = "{% url uIns:index %}">Review Uniform Inspections</a></li>
 </ul>
 <canvas class="icon" id="personalInformation" title="Personal Information"
-	height="40" width="40" 
+	height="60" width="60" 
 	onmouseover="iconHighlight(this.id)" 
 	onmouseout="iconDraw(this.id)"
 	onclick="iconSlider('personal_information_menu',this.id)">
 	Bummer!
 </canvas>
 <ul class="menu" id="personal_information_menu">
-	<li><a href = "mid/selectPassChange">Change Password</a></li>
-    <li><a href = "logout">Log out</a></li>
+	<li><a href = "{% url mid:selectPassChange %}">Change Password</a></li>
+    <li><a href = "{% url mid.views.logOut %}">Log out</a></li>
 </ul>
