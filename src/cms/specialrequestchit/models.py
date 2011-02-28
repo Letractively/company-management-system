@@ -33,11 +33,13 @@ class SpecialRequestChit(models.Model):
     requestType = models.CharField(max_length=1, choices=REQUEST_TYPES)
     otherRequestType = models.CharField(max_length=30)
     justification = models.TextField()
+    
     squadLeaderApproval = models.NullBooleanField()
     platoonLeaderApproval = models.NullBooleanField()
     companyCommanderApproval = models.NullBooleanField()
     companySELApproval = models.NullBooleanField()
     companyOfficer = models.NullBooleanField()
+    
     #the approvalLevel is an int which should be set at run time after checking
     #the toLine for the level to which the chit needs to go.s
     approvalLevel = models.IntegerField()

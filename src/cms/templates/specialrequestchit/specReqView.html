@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Special Request Chit{% endblock %}
+{% block content %}
+
+<h1>Reviewing Special Request Chit {{ cChit.id }}.</h1>
+
+<table>
+<tr>
+    <td>To: </td><td>{{ cChit.get_toLine_display }}</td>
+</tr>
+<tr>
+    <td>From: </td><td>{{ cChit.fromLine }}</td>
+</tr>
+<tr>
+    <td>Via: </td><td>{{ cChit.viaLine }}</td>
+</tr>
+<tr>
+    <td>Purpose: {{cChit.requestType}}</td>
+    <td>{%if cChit.requestType == 'O' %}
+            {{ cChit.otherRequestType }}
+        {% else %}
+            {{ cChit.get_requestType_display }}
+        {%endif%}
+    </td>
+</tr>
+<tr>
+    <td>Justification: </td><td>{{ cChit.justification }}</td>
+</tr>
+<tr>
+    <td colspan = 2>Approval: </td>
+</tr>
+
+<tr>
+    <td>Squad Leader: </td><td>{%if not cChit.squadLeaderApproval %}
+                                PENDING
+                               {% else %}
+                               {%if cChit.squadLeaderApproval == True%}
+                               APPROVED{%endif%}
+                               {%if cChit.squadLeaderApproval == False%}
+                               DENIED{%endif%}
+                               {%endif}
+    </td>
+</tr>
+
+{%if cChit.approvalLevel > 1%}
+<tr>
+    <td>Platoon Commander: </td><td>{%if not cChit.platoonLeaderApproval %}
+                                PENDING
+                               {% else %}
+                               {%if cChit.platoonLeaderApproval == True%}
+                               APPROVED{%endif%}
+                               {%if cChit.platoonLeaderApproval == False%}
+                               DENIED{%endif%}
+                               {%endif}
+    </td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 2%}
+<tr>
+    <td>Company Commander: </td><td>{%if not cChit.companyCommanderApproval %}
+                                PENDING
+                               {% else %}
+                               {%if cChit.companyCommanderApproval == True%}
+                               APPROVED{%endif%}
+                               {%if cChit.companyCommanderApproval == False%}
+                               DENIED{%endif%}
+                               {%endif}
+    </td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 3%}
+<tr>
+    <td>SEL: </td><td>{%if not cChit.companySELApproval %}
+                                PENDING
+                               {% else %}
+                               {%if cChit.companySELApproval == True%}
+                               APPROVED{%endif%}
+                               {%if cChit.companySELApproval == False%}
+                               DENIED{%endif%}
+                               {%endif}
+    </td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 4%}
+<tr>
+    <td>Company Officer: </td><td>{%if not cChit.companyOfficer %}
+                                PENDING
+                               {% else %}
+                               {%if cChit.companyOfficer == True%}
+                               APPROVED{%endif%}
+                               {%if cChit.companyOfficer == False%}
+                               DENIED{%endif%}
+                               {%endif}
+    </td>
+</tr>
+{%endif%}
+
+</table>
+
+{% endblock %}

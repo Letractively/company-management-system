@@ -49,7 +49,7 @@ def medchits(request):
                                                         context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def submit(request):
+def medChitSubmit(request):
     #Medchit submission
     alpha = request.user.username.split('m')
     alpha = alpha[1]

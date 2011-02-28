@@ -4,11 +4,12 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('specialrequestchit.views',
 
-    # put url's to all the apps in this folder.
-
-    # (r'^cms/', include('cms.foo.urls')),
+    url(r'^$', 'specReq', name = "specReq"),
+    (r'^/$', 'specReq'),
+    (r'specReqSubmit$', 'specReqSubmit'),
+    (r'specReqView$', 'specReqView'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
