@@ -49,7 +49,7 @@ function iconHighlight(id) {
 }
 
 function iconSlider(id, buttonid){
-        var elements = document.getElementByTagName("ul");
+        var elements = document.getElementsByTagName("ul");
         for( var i=0; i<elements.length ; i++ ) {
             if( elements[i].class=="icon" ) {
                 elements[i].style.display="none";
