@@ -10,7 +10,7 @@ urlpatterns = patterns('form1.views',
     (r'^/$', 'formOne'),
     (r'formOneView', 'formOneView'),
     (r'formOneSubmit$', 'formOneSubmit'),
-    (r'formOneSelect$', 'formOneSelect'),
+    url(r'formOneSelect$', 'formOneSelect', name = "formOneSelect"),
     (r'formOneSave$', 'formOneSave'),
     
     # Uncomment the admin/doc line below to enable admin documentation:    

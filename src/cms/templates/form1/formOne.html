@@ -11,7 +11,7 @@
 {% for p in lFormOnes %}
     <tr>
         <td>{{ p.get_formType_display }}</td>
-        <td>{{ p.dateTime }}</td>
+        <td>{{ p.formDate }}</td>
         <td>{{ p.get_reason_display }}</td>
         <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
             <input type = "submit" value = "View Form-1" /></td>
