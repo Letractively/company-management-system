@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^switchboard$', 'mid.views.renderSwitchboard', name = "switchboard"),
 
     
-    (r'^mid/', include('mid.urls')),
+    (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),
     
     #Chits/Paperwork
     (r'^formOne/',include('form1.urls')),
