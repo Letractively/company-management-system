@@ -12,7 +12,7 @@ urlpatterns = patterns('weekends.views',
     (r'^/$', 'index'),
     (r'reqWeekend$', 'reqWeekend'),
     (r'cancelReqWeekend$', 'cancelReqWeekend'),
-    url(r'viewList$', 'viewList', name = "viewList"),
+    url(r'view$', 'viewList', name = "viewList"),
     (r'view$', 'viewList'),
 
     url(r'admin$', 'admin', name = "weekendAdmin"),
