@@ -38,8 +38,8 @@ urlpatterns = patterns('',
     (r'^ORM/', include('orm.urls', namespace="ORM", app_name="ORM")),
 
     #Inspections
-    (r'^bIns/', include('bravoinspection.urls', namespace="bIns", app_name="bIns")),
-    (r'^uIns/', include('uniforminspection.urls', namespace="uIns", app_name="uIns")),
+    (r'^bIns/', include('bravoinspection.urls', namespace="bIns", app_name="bravoinspection")),
+    (r'^uIns/', include('uniforminspection.urls', namespace="uIns", app_name="uniforminspection")),
     
     # All the other module's pages
     #(r'^accountability/', include('accountability.urls')),
