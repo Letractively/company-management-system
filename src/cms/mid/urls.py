@@ -6,9 +6,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('mid.views',
 
+    url(r'selectUser$', 'selectUser', name = "selectUser"),
     (r'selectUser$', 'selectUser'),
     (r'modifyUser$', 'modifyUser'),
     (r'saveUser$', 'saveUser'),
+    url(r'selectPassReset$', 'selectPassReset', name = "passReset"),
     (r'selectPassReset$', 'selectPassReset'),
     (r'passReset$', 'passReset'),
     (r'selectPassChange$', 'selectPassChange'),

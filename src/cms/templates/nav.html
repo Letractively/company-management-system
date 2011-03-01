@@ -25,10 +25,10 @@
 	Bummer!
 </canvas>
 <ul class="menu" id="form_menu">
-	<li><a href="{% url formOne:index %}">Review Form-1s</a></li>
-	<li><a href="{% url medchits:index %}">Medical Chits</a></li>
-	<li><a href = "{% url specReq:index %}">Special Request Chits</a></li>
-    <li><del><a href = "{% url ORM:index %}">ORM Chits</a></del></li>
+	<li><a href="{% url formOne:formOne %}">Review Form-1s</a></li>
+	<li><a href="#">Medical Chits</a></li>
+	<li><a href = "{% url specReq:specReq %}">Special Request Chits</a></li>
+    <li><del><a href = "#">ORM Chits</a></del></li>
 </ul>
 <canvas class="icon" id="inspections" title="Inspections"
 	height="60" width="60" 
@@ -38,8 +38,8 @@
 	Bummer!
 </canvas>
 <ul class="menu" id="inspection_menu">
-	<li><a href = "{% url bIns:index %}">Review Room Inspections</a></li>
-    <li><a href = "{% url uIns:index %}">Review Uniform Inspections</a></li>
+	<li><a href = "#">Review Room Inspections</a></li>
+    <li><a href = "#">Review Uniform Inspections</a></li>
 </ul>
 <canvas class="icon" id="personalInformation" title="Personal Information"
 	height="60" width="60" 
@@ -50,5 +50,4 @@
 </canvas>
 <ul class="menu" id="personal_information_menu">
 	<li><a href = "{% url mid:selectPassChange %}">Change Password</a></li>
-    <li><a href = "{% url mid.views.logOut %}">Log out</a></li>
 </ul>
