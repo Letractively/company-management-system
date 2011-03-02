@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('bravoinspection.views',
 
-    url(r'^$', 'bIns', name = "bIns"),
+    url(r'^$', 'bIns', name = "bravoinspection"),
     (r'^/$', 'bIns'),
     (r'bInsView', 'bInsView'),
     (r'bInsSubmit$', 'bInsSubmit'),
