@@ -38,6 +38,38 @@ BILLET_CHOICES = (
     ('OOC','Out of Company'),
     ('MIR','Midshipman in Ranks'),
     )
+CO_CHOICES = (
+              ('1','1st Company'),
+              ('2','2nd Company'),
+              ('3','3rd Company'),
+              ('4','4th Company'),
+              ('5','5th Company'),
+              ('6','6th Company'),
+              ('7','7th Company'),
+              ('8','8th Company'),
+              ('9','9th Company'),
+              ('10','10th Company'),
+              ('11','11th Company'),
+              ('12','12th Company'),
+              ('13','13th Company'),
+              ('14','14th Company'),
+              ('15','15th Company'),
+              ('16','16th Company'),
+              ('17','17th Company'),
+              ('18','18th Company'),
+              ('19','19th Company'),
+              ('20','20th Company'),
+              ('21','21st Company'),
+              ('22','22nd Company'),
+              ('23','23rd Company'),
+              ('24','24th Company'),
+              ('25','25th Company'),
+              ('26','26th Company'),
+              ('27','27th Company'),
+              ('28','28th Company'),
+              ('29','29th Company'),
+              ('30','30th Company'),              
+              )
 PLT_CHOICES = (
     ('1','1st Platoon'),
     ('2','2nd Platoon'),
@@ -53,6 +85,17 @@ SQD_CHOICES = (
     ('O','Out of Company'),
     ('S','Company Staff'),
     )
+DS_CHOICES = (
+    ('1','Duty Section 1'),
+    ('2','Duty Seciton 2'),
+    ('3','Duty Section 3'),
+    ('4','Duty Section 4'),
+    ('5','Duty Section 5'),
+    ('6','Duty Section 6'),
+    ('7','Duty Section 7'),
+    ('8','Duty Section 8'),              
+              
+              )
 class Room(models.Model):
     roomNumber = models.CharField(max_length=4,primary_key=True)
     maxOccupants = models.CharField(max_length=1)
@@ -64,8 +107,10 @@ class Mid(models.Model):
     LName = models.CharField(max_length=30)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30)
+    company = models.CharField(max_length=1, choices=CO_CHOICES, null=True,blank=True)
     platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True, blank=True)
     squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True, blank=True)
+    dutySection = models.CharField(max_length=1, choices=DS_CHOICES, null=True, blank=True)
     roomNumber = models.ForeignKey(Room,null=True)
     phoneNumber = models.CharField(max_length=10,null=True)
     weekends = models.IntegerField(null=True)
