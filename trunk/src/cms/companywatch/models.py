@@ -4,11 +4,12 @@ from django.db import models
 WATCHBILL_TYPE_CHOICES = (
                           ('W','Work day'),
                           ('H','Holiday'),
+                          ('L','Leave')
                           )
 
 WATCH_TYPE_CHOICES = (
                       ('CMDO','Company Mate of the Deck'),
-                      ('ACDO','Asistant Company Duty Officer'),
+                      ('ACDO','Asi.edstant Company Duty Officer'),
                       ('CDO','Company Duty Officer'),
                       )
 
