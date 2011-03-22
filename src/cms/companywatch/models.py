@@ -12,6 +12,66 @@ WATCH_TYPE_CHOICES = (
                       ('ACDO','Asi.edstant Company Duty Officer'),
                       ('CDO','Company Duty Officer'),
                       )
+Ac_WEEK_CHOICES = (
+                   ('B','Blue Week'),
+                   ('G','Gold Week'),
+                   )
+Ac_WEEK_START = (
+                 ('E','Even'),
+                 ('O','Odd'),            
+                 )
+SEMESTER_CHOICES = (
+                    ('F','Fall'),
+                    ('S','Spring'),
+                    )
+DAY_CHOICES = (
+               ('0','Sunday'),
+               ('1','Monday'),
+               ('2','Tuesday'),
+               ('3','Wednesday'),
+               ('4','Thursday'),
+               ('5','Friday'),
+               ('6','Saturday'),
+               )
+
+class AcYear(models.Model):
+    fallStart = models.DateField()
+    fallGoldWeekStart = models.CharField(max_length=1, choices=Ac_WEEK_START)
+    fall6Weeks = models.DateField()
+    fall12Weeks = models.DateField()
+    thanksgivingStart = models.DateField()
+    thanksgivingEnd = models.DateField()
+    fallXWeekStart = models.DateField()
+    fallXWeekEnd = models.DateField()
+    christmasStart = models.DateField()
+    christmasEnd = models.DateField()
+    christmasIntersessionalStart = models.DateField()
+    christmasINtersessionalEnd = models.DateField()    
+    laborDay = models.DateField()
+    columbusDay = models.DateField()
+    veteransDay = models.DateField()    
+    fallEnd = models.DateField()    
+    startSpring = models.DateField()
+    spring6Weeks = models.DateField()
+    spring12Weeks = models.DateField()
+    springXWeekStart = models.DateField()
+    springXWeekEnd = models.DateField()
+    springBreakStart = models.DateField()
+    springBreakEnd = models.DateField()
+    mlkDay = models.DateField()
+    washingtonBirthday = models.DateField()   
+    endSpring = models.DateField()
+    springIntersessionalStart = models.DateField()
+    springINtersessionalEnd = models.DateField()
+    startSummer = models.DateField()
+    
+class AcWatch(models.Model):
+    semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
+    week = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
+    dayOfWeek = models.IntegerField(max_length=1, choices=DAY_CHOICES)
+    startTime = models.TimeField()
+    mid = models.ForeignKey("mid.Mid")
+    
 
 class WatchBill(models.Model):
     date = models.DateField('Watchbill Date')
