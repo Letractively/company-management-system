@@ -88,3 +88,11 @@ class Watch(models.Model):
     type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
     def __unicode__(self):
         return self.mid.LName + " - " + self.watchBill + " - " + unicode(self.startTime)
+    
+class LogBook(models.Model):
+    watchBill = models.ForeignKey(WatchBill)
+    
+class LogEntry(models.Model):
+    watch = models.ForeignKey(Watch)
+    entry = models.TextField()
+    

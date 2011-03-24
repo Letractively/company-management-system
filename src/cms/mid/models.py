@@ -93,7 +93,8 @@ DS_CHOICES = (
     ('5','Duty Section 5'),
     ('6','Duty Section 6'),
     ('7','Duty Section 7'),
-    ('8','Duty Section 8'),              
+    ('8','Duty Section 8'),
+    ('O','Out of Company'),              
               
               )
 class Room(models.Model):
