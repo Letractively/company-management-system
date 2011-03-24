@@ -125,6 +125,7 @@ def selectUser(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -137,7 +138,7 @@ def selectUser(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lMids = Mid.objects.order_by('alpha')
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
     return render_to_response('mid/selectUser.html', { 'lMids' : lMids },
                               context_instance=RequestContext(request))
@@ -187,6 +188,7 @@ def saveUser(request) :
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -235,6 +237,7 @@ def saveUser(request) :
                    roomNumber = roomNumber,
                    phoneNumber = request.POST['phoneNumber'],
                    weekends = request.POST['weekends'], 
+                   company = cCompany,
                    #acSAT = True,
                    #PRTSat = True,
                    CQPR = "0.00",
@@ -260,6 +263,7 @@ def selectPassReset(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -272,7 +276,7 @@ def selectPassReset(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lMids = Mid.objects.order_by('alpha')
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
     return render_to_response('mid/selectPassReset.html', { 'lMids' : lMids },
                               context_instance=RequestContext(request))
