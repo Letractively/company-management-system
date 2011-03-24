@@ -29,8 +29,7 @@ def index(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #lWeekends - list of currently requested weekends
     lWeekends = Weekend.objects.filter(mid=cMid).order_by('-startDate')
@@ -107,9 +106,7 @@ def reqWeekend(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     cDate = date.today()
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
@@ -137,9 +134,7 @@ def cancelReqWeekend(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     cDate = date.today()
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
@@ -174,9 +169,7 @@ def admin(request):
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -203,9 +196,8 @@ def saveWeekendCount(request):
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
 
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -337,4 +329,3 @@ def approveAllWeekends(request):
         p.save()
         
     return HttpResponseRedirect(reverse('coApproval'))                                                                                                   
-    #return HttpResponseRedirect('/weekends/co')

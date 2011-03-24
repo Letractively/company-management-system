@@ -24,8 +24,7 @@ def medchits(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #lWeekends - list of user's medical chits
     lChits = Chit.objects.filter(mid=cMid).order_by('-endDate')
@@ -53,8 +52,7 @@ def medChitSubmit(request):
     #Medchit submission
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :

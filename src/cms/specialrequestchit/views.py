@@ -21,8 +21,7 @@ from datetime import date
 def specReq(request):    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     lChits = SpecialRequestChit.objects.filter(mid=cMid).order_by('-date')
     
@@ -35,9 +34,8 @@ def specReq(request):
 def specReqSubmit(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
-    
+    cMid = Mid.objects.get(alpha=alpha)
+
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
@@ -77,11 +75,9 @@ def specReqSubmit(request):
 def specReqView(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
-    cChit = SpecialRequestChit.objects.filter(id=request.POST['id'])
-    cChit = cChit[0]
+    cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
     
     return render_to_response('specialrequestchit/specReqView.html', {'cMid' : cMid, 
                                                                       'cChit' : cChit,
