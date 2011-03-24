@@ -112,17 +112,17 @@ class Mid(models.Model):
     platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True, blank=True)
     squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True, blank=True)
     dutySection = models.CharField(max_length=1, choices=DS_CHOICES, null=True, blank=True)
-    roomNumber = models.ForeignKey(Room,null=True)
-    phoneNumber = models.CharField(max_length=10,null=True)
-    weekends = models.IntegerField(null=True)
+    roomNumber = models.ForeignKey(Room,null=True,blank=True)
+    phoneNumber = models.CharField(max_length=10,null=True,blank=True)
+    weekends = models.IntegerField(null=True,blank=True)
     weekendsComment = models.CharField(max_length=300, null=True,blank=True)
-    acSAT = models.BooleanField(null=True).default=True
-    PRTSat = models.BooleanField(null=True).default=True
-    CQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True)
-    SQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True)
-    performanceGrade = models.CharField(max_length=1,null=True)
-    conductGrade = models.CharField(max_length=1,null=True)
-    PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True)
+    acSAT = models.BooleanField(null=True,blank=True).default=True
+    PRTSat = models.BooleanField(null=True,blank=True).default=True
+    CQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
+    SQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
+    performanceGrade = models.CharField(max_length=1,null=True,blank=True)
+    conductGrade = models.CharField(max_length=1,null=True,blank=True)
+    PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     def __unicode__(self):
         return self.LName + ", " + self.fName + " " + self.mName + " - " + self.alpha
     
