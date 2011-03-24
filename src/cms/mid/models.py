@@ -107,7 +107,7 @@ class Mid(models.Model):
     LName = models.CharField(max_length=30)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30)
-    company = models.CharField(max_length=1, choices=CO_CHOICES, null=True,blank=True)
+    company = models.CharField(max_length=2, choices=CO_CHOICES, null=True,blank=True)
     platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True, blank=True)
     squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True, blank=True)
     dutySection = models.CharField(max_length=1, choices=DS_CHOICES, null=True, blank=True)
