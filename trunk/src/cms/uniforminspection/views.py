@@ -19,8 +19,7 @@ def uIns(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #lWeekends - list of user's medical chits
     luIns = UniformInspection.objects.filter(mid=cMid).order_by('-inspectionDate')
@@ -36,15 +35,13 @@ def uInsView(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cuIns = UniformInspection.objects.filter(id=request.POST['id'])
-    cuIns = cuIns[0]
+    cuIns = UniformInspection.objects.get(id=request.POST['id'])
     
     return render_to_response('uniforminspection/uInsView.html', {'cMid' : cMid,  
                                                                   'cuIns' : cuIns,
@@ -56,8 +53,7 @@ def uInsSelect(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     lMids = Mid.objects.order_by('alpha')
     
@@ -71,16 +67,14 @@ def uInsSubmit(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
     cInspectee = request.POST['mid']
-    cInspectee = Mid.objects.filter(alpha=cInspectee)
-    cInspectee = cInspectee[0]
+    cInspectee = Mid.objects.get(alpha=cInspectee)
     
     return render_to_response('uniforminspection/uInsSubmit.html', {'cMid' : cMid,  
                                                                     'cInspectee' : cInspectee,
@@ -92,15 +86,13 @@ def uInsSave(request) :
      
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cInspectee = Mid.objects.filter(alpha=request.POST['alpha'])
-    cInspectee = cInspectee[0]
+    cInspectee = Mid.objects.get(alpha=request.POST['alpha'])
       
     cScore = 0
     

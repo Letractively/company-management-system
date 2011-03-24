@@ -21,8 +21,7 @@ def bIns(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]    
+    cMid = Mid.objects.get(alpha=alpha)
     cRoom = cMid.roomNumber
     
     #lWeekends - list of user's medical chits
@@ -39,15 +38,13 @@ def bInsView(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cbIns = BravoInspection.objects.filter(id=request.POST['id'])
-    cbIns = cbIns[0]
+    cbIns = BravoInspection.objects.get(id=request.POST['id'])
     
     return render_to_response('bravoinspection/bInsView.html', {'cMid' : cMid,  
                                                                 'cbIns' : cbIns,
@@ -59,8 +56,7 @@ def bInsSelect(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     lRooms = Room.objects.order_by('roomNumber')
     
@@ -74,16 +70,13 @@ def bInsSubmit(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cRoom = request.POST['room']
-    cRoom = Room.objects.filter(roomNumber=cRoom)
-    cRoom = cRoom[0]
+    cRoom = Room.objects.get(roomNumber=request.POST['room'])
     
     return render_to_response('bravoinspection/bInsSubmit.html', {'cMid' : cMid,  
                                                                   'cRoom' : cRoom,
@@ -95,15 +88,13 @@ def bInsSave(request) :
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cRoom = Room.objects.filter(roomNumber=request.POST['roomNumber'])
-    cRoom = cRoom[0]
+    cRoom = Room.objects.get(roomNumber=request.POST['roomNumber'])
       
     cScore = 0
     

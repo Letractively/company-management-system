@@ -77,8 +77,7 @@ def logIn(request):
 def renderSwitchboard(request) :
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-    cMid = Mid.objects.filter(alpha = alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha = alpha)
                         
     lBillets = Billet.objects.filter(mid = cMid)
                         
@@ -125,9 +124,7 @@ def selectUser(request):
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -152,9 +149,7 @@ def modifyUser(request):
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -176,8 +171,7 @@ def modifyUser(request):
     if alpha == '000000' :
         cMid = None
     else :
-        cMid = Mid.objects.filter(alpha = alpha)
-        cMid = cMid[0]
+        cMid = Mid.objects.get(alpha = alpha)
         
     lRooms = Room.objects.order_by('roomNumber')
     
@@ -192,9 +186,7 @@ def saveUser(request) :
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -214,8 +206,7 @@ def saveUser(request) :
     newUser = request.POST['newUser']
     alpha = request.POST['alpha']
     roomNumber = request.POST['roomNumber']
-    roomNumber = Room.objects.filter(roomNumber = roomNumber)
-    roomNumber = roomNumber[0]
+    roomNumber = Room.objects.get(roomNumber = roomNumber)
     
     #Making sure user with this alpha does not exist
     lMids = Mid.objects.all()
@@ -226,8 +217,7 @@ def saveUser(request) :
             alphaExists = True
     
     if newUser == "false" :
-        cMid = Mid.objects.filter(alpha = alpha)
-        cMid = cMid[0]
+        cMid = Mid.objects.get(alpha = alpha)
         
         cMid.LName=request.POST['lName'] 
         cMid.mName=request.POST['mName']
@@ -269,9 +259,7 @@ def selectPassReset(request):
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -296,9 +284,7 @@ def passReset(request) :
     #Second check - make sure the user is Admin officer
     alpha = request.user.username.split('m')
     alpha = alpha[1]
-
-    cMid = Mid.objects.filter(alpha=alpha)
-    cMid = cMid[0]
+    cMid = Mid.objects.get(alpha=alpha)
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -317,8 +303,7 @@ def passReset(request) :
     
     alpha = request.POST['alpha']
     
-    cUser = User.objects.filter(username='m'+alpha)
-    cUser = cUser[0]
+    cUser = User.objects.get(username='m'+alpha)
     cUser.set_password(alpha)
     cUser.save()
     
