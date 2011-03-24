@@ -100,6 +100,7 @@ DS_CHOICES = (
 class Room(models.Model):
     roomNumber = models.CharField(max_length=4,primary_key=True)
     maxOccupants = models.CharField(max_length=1)
+    company = models.CharField(max_length=2, choices=CO_CHOICES)
     def __unicode__(self):
         return self.roomNumber
     
