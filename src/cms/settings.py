@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'specialrequestchit',
     'uniforminspection',
     'weekends',
+    'movementorder',
     
     
     # Uncomment the next line to enable the admin:
