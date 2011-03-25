@@ -12,4 +12,4 @@ class MovementOrder(models.Model):
     
 class MOParticipant(models.Model):
     MO = models.ForeignKey(MovementOrder)
-    mid = models.ForeignKey("mid.Mid")
+    participant = models.ForeignKey("mid.Mid",related_name='+')

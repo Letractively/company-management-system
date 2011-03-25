@@ -36,18 +36,6 @@ class SignificantEvents(models.Model):
     description = models.CharField(max_length=30)
     adminNote = models.CharField(max_length=90)
     
-class MovementOrder(models.Model):
-    zero8 = models.ForeignKey(Zero8)
-    organization = models.CharField(max_length=30)
-    movementOrderCode = models.CharField(max_length=7)
-    departDate = models.DateField()
-    returnDate = models.DateField()
-    adminNote = models.CharField(max_length=90)
-    
-class MOParticipant(models.Model):
-    MO = models.ForeignKey(MovementOrder)
-    mid = models.ForeignKey("mid.Mid")
-  
 #FOR YOUR WEEKENDS LIST GO TO THE WEEKENDS APPLICATION
 
 #FOR YOUR CHITS GO TO YOUR MED_CHIT APPLICATION
