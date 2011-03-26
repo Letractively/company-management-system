@@ -8,7 +8,7 @@ from django.db import models
 
 class OrmChit(models.Model):
     mid = models.ForeignKey("mid.Mid")
-    dateTime = models.DateTimeField()
+    date = models.DateField()
     LStreet1 = models.CharField(max_length=20)
     LStreet2 = models.CharField(max_length=20)
     LCity = models.CharField(max_length=30)
