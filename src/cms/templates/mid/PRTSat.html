@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Current Physical Status for {{ cCompany|numberToText }} Company: {% endblock %}
+
+{% block content %}
+<table>
+<form action="savePRTSat" method="post"> 
+{% csrf_token %}
+
+{% for p in lMids %}
+    <tr>
+        <td>{{ p.alpha }}</td>
+        <td>{{ p.fName }}</td>
+        <td>{{ p.LName }}</td>
+        <td>
+            <select name = "{{ p.alpha }}P">
+                <option value="True">SAT</option>
+                <option value="False" {% if not p.PRTSat %} selected {% endif %} >UNSAT</option>
+            </select>
+        </td>
+        <td>{{ p.PRT }}</td>
+    </tr>
+{% empty %}
+    <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
+{% endfor %}
+{% if lMids %}    
+    <tr>
+        <td colspan="8">
+            <input type="submit" value="Save" />
+        </td>
+    </tr>
+{% endif %}
+{% endblock %}

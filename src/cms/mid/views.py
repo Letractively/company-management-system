@@ -1,3 +1,5 @@
+#ACHTUNG: Line 258
+
 #mid views.py
 # Author: Dimitri Hatley
 # Editor: Michael Laws
@@ -5,6 +7,8 @@
 from mid.models import Mid
 from mid.models import Billet
 from mid.models import Room
+from mid.models import Discipline
+from mid.models import Probation
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -91,19 +95,24 @@ def renderSwitchboard(request) :
                         
     lBillets = Billet.objects.filter(mid = cMid)
     
-    if cMid.rank is 1 :
+    flagFirstie = False
+    if cMid.rank == "1" :
         flagFirstie = True
-    else :
-        flagFirstie = False
     
     #Here we assign permissions based on billets.
     flagAdmin = False;
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+            
+    flagPMO = False;
+    for p in lBillets :
+        if p.billet == "PMO" and p.current :
+            flagPMO = True
     
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
                                                         'firstie' : flagFirstie,
+                                                        'PMO' : flagPMO,
                                                         'admin' : flagAdmin },
                                                         context_instance=RequestContext(request))
 
@@ -167,6 +176,7 @@ def modifyUser(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -190,7 +200,7 @@ def modifyUser(request):
     else :
         cMid = Mid.objects.get(alpha = alpha)
         
-    lRooms = Room.objects.order_by('roomNumber')
+    lRooms = Room.objects.filter(company = cCompany).order_by('roomNumber')
     
     return render_to_response('mid/modifyUser.html', { 'cMid' : cMid, 
                                                        'lRooms' : lRooms, },
@@ -246,6 +256,17 @@ def saveUser(request) :
         cMid.save()
                
     if newUser == "true" and not alphaExists:
+    
+    #ACHTUNG: Add dynamic checking based on the current year. 
+        if re.match("11", alpha):
+            cRank = 1
+        elif re.match("12", alpha):
+            cRank = 2
+        elif re.match("13", alpha):
+            cRank = 3
+        else:
+            cRank = 4
+        
         cMid = Mid(alpha=alpha,
                    LName=request.POST['lName'],
                    mName=request.POST['mName'],
@@ -254,6 +275,7 @@ def saveUser(request) :
                    phoneNumber = request.POST['phoneNumber'],
                    weekends = request.POST['weekends'], 
                    company = cCompany,
+                   rank = cRank,
                    #acSAT = True,
                    #PRTSat = True,
                    CQPR = "0.00",
@@ -328,3 +350,234 @@ def passReset(request) :
     cUser.save()
     
     return HttpResponseRedirect('selectPassReset')
+
+@login_required(redirect_field_name='/')    
+def PRTSat(request) :
+    #Aggregate list of people's physical status
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagPMO = False
+    for p in lBillets :
+        if p.billet == "PMO" and p.current :
+            flagPMO = True
+
+    if not flagPMO :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+    
+    return render_to_response('mid/PRTSat.html', { 'cCompany' : cCompany, 
+                                                   'lMids' : lMids },
+                              context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def savePRTSat(request):
+    #Save updated [hysical status
+
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagPMO = False
+    for p in lBillets :
+        if p.billet == "PMO" and p.current :
+            flagPMO = True
+
+    if not flagPMO :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+    
+    for p in lMids :
+        p.PRTSat = request.POST[p.alpha+'P']
+        p.save()
+
+    return HttpResponseRedirect(reverse('PRTSat')) 
+
+@login_required(redirect_field_name='/')
+def enterDiscipline(request):
+    #Enter Restriction/Tours
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagApt = False
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+
+    if not flagApt :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+    
+    return render_to_response('mid/enterDiscipline.html', { 'cCompany' : cCompany, 
+                                                            'lMids' : lMids },
+                                                            context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def saveDiscipline(request):
+    #Save entered Restriction/Tours
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagApt = False
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+
+    if not flagApt :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    alpha = request.POST['alpha']
+    honor = request.POST['honor']
+    dateOffense = request.POST['dateOffence']
+    startDate = request.POST['startDate']
+    daysAwarded = request.POST['daysAwarded']
+    toursAwarded = request.POST['toursAwarded']
+    adminNotes = request.POST['adminNotes']
+
+    cDisc = Discipline(mid = Mid.objects.get(alpha = alpha),
+                       conductHonor = honor,
+                       dateOffence = dateOffence,
+                       startDate = startDate,
+                       daysAwarded = daysAwarded,
+                       daysRemaining = daysAwarded,
+                       toursAwarded = toursAwarded,
+                       toursRemaining = toursAwarded,
+                       adminNotes = adminNotes,
+                       checked = date.today - timedelta(days=1),
+                       )
+    
+    cDisc.save()
+    
+    return HttpResponseRedirect(reverse('enterDiscipline')) 
+
+@login_required(redirect_field_name='/')
+def enterProbation(request):
+    #Enter Restriction/Tours
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagApt = False
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+
+    if not flagApt :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+    
+    return render_to_response('mid/enterProbation.html', { 'cCompany' : cCompany, 
+                                                            'lMids' : lMids },
+                                                            context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def saveProbation(request):
+    #Save entered Restriction/Tours
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagApt = False
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+
+    if not flagApt :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    alpha = request.POST['alpha']
+    startDate = request.POST['startDate']
+    daysAwarded = request.POST['daysAwarded']
+    adminNotes = request.POST['adminNotes']
+
+    cDisc = Probation(mid = Mid.objects.get(alpha = alpha),
+                       startDate = startDate,
+                       daysAwarded = daysAwarded,
+                       description = adminNotes,
+                       )
+    
+    cDisc.save()
+    
+    return HttpResponseRedirect(reverse('enterProbation')) 
+
+@login_required(redirect_field_name='/')
+def assessDiscipline(request):
+    #Save entered Restriction/Tours
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagApt = False
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+
+    if not flagApt :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lDisc = Discipline.objects.filter(daysRemaining > 0 or toursRemaining > 0
+                                      ).filter(Mid__company = cCompany).order_by('-alpha')
+    
+    return render_to_response('mid/assessDiscipline.html', { 'cCompany' : cCompany, 
+                                                            'lMids' : lMids },
+                                                            context_instance=RequestContext(request))

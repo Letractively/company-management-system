@@ -57,8 +57,9 @@ def bInsSelect(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
-    lRooms = Room.objects.order_by('roomNumber')
+    lRooms = Room.objects.filter(company = cCompany).order_by('roomNumber')
     
     return render_to_response('bravoinspection/bInsSelect.html', {'cMid' : cMid,  
                                                                   'lRooms' : lRooms,

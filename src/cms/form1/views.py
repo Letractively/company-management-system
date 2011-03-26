@@ -57,8 +57,9 @@ def formOneSelect(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
-    lMids = Mid.objects.order_by('alpha')
+    lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     
     return render_to_response('form1/formOneSelect.html', {'cMid' : cMid,  
                                                                   'lMids' : lMids,

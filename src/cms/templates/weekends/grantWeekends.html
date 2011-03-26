@@ -11,7 +11,7 @@
 {% csrf_token %}
     <select name = 'alpha'>    
         {% for p in lMids %}
-            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
         {% empty %}
             <option value = "null">N/A</option>
         {% endfor %}

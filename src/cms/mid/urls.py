@@ -6,15 +6,28 @@ admin.autodiscover()
 
 urlpatterns = patterns('mid.views',
 
+    #Admin options:
     url(r'selectUser$', 'selectUser', name = "selectUser"),
-    (r'selectUser$', 'selectUser'),
     (r'modifyUser$', 'modifyUser'),
     (r'saveUser$', 'saveUser'),
+    
+    url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
+    (r'passChange$', 'passChange'),
     (r'selectPassReset$', 'selectPassReset'),
     (r'passReset$', 'passReset'),
-    url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
-    (r'selectPassChange$', 'selectPassChange'),
-    (r'passChange$', 'passChange'),
+    
+    #PMO options:
+    url(r'PRTSat$', 'PRTSat', name = "PRTSat"),
+    (r'savePRTSat$', 'savePRTSat'),
+    
+    #A/C Options
+    url(r'enterDiscipline$', 'enterDiscipline', name = "enterDiscipline"),
+    (r'saveDiscipline$', 'saveDiscipline'),
+    url(r'assessDiscipline$', 'assessDiscipline', name = "assessDiscipline"),
+    (r'updateDiscipline$', 'updateDiscipline'),
+    url(r'enterProbation$', 'enterProbation', name = "enterProbation"),
+    (r'updateProbation$', 'updateProbation'),
+    
     
     # put url's to all the apps in this folder.
 

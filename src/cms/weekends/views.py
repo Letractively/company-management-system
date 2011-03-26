@@ -57,7 +57,7 @@ def index(request):
     #Check if the user is currently on restriction
     onRestriction = False
     for p in lDiscipline :
-       if p.startDate < cDate and p.startDate + timedelta(days=p.daysAwarded) < cDate :
+       if p.startDate < cDate and p.daysRemaining > 0 :
             onRestriction = True
     
     #Check if user is currently on probation
@@ -193,6 +193,7 @@ def admin(request):
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
     
+    flagAdmin = False
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
@@ -220,6 +221,7 @@ def saveWeekendCount(request):
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
     
+    flagAdmin = False
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True

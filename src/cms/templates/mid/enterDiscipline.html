@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Enter Restriction/Tours: {% endblock %}
+
+{% block content %}
+<table>
+<form action="saveDiscipline" method="post"> 
+{% csrf_token %}
+    <table>
+    <tr><td colspan = 2>
+    <select name = 'alpha'>    
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+        {% empty %}
+            <option value = "null">N/A</option>
+        {% endfor %}
+    </select><br /><br />
+    </td></tr>
+    <tr><td colspan = 2>
+    <select name = 'honor'>
+        <option value = "False">CONDUCT</option>
+        <option value = "True">HONOR</option>
+    </td></tr>
+    
+    <tr><td>Date of Offense:</td><td><input type = "input" name = "dateOffence" /></td></tr>
+    <tr><td>Date of Adjudication:</td><td><input type = "input" name = "startDate" /></td></tr>
+    <tr><td>Days of Restriction Awarded:</td><td><input type = "input" name = "daysAwarded" /></td></tr>
+    <tr><td>Tours Awarded:</td><td><input type = "input" name = "toursAwarded" /></td></tr>
+    <tr><td>Admin Notes:</td><td><input type = "input" name = "adminNotes" size = 90/></td></tr>
+    
+    <input type="submit" value="Enter" />
+    </table>
+</form>
+
+{% endblock %}
