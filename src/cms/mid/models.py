@@ -188,6 +188,7 @@ class Discipline(models.Model):
     dateOffence = models.DateField()
     startDate = models.DateField()
     daysAwarded = models.IntegerField()
+    daysRemaining = models.IntegerField()
     toursAwarded = models.IntegerField()
     toursRemaining = models.IntegerField()
     adminNotes = models.CharField(max_length=90)
