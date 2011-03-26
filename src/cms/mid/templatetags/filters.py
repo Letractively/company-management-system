@@ -11,6 +11,6 @@ def numberToText(value):
                36:"Thirty Sixth"}
     for k, v in numbers.iteritems(): 
         if(k==value): return v
-    return value
+    return NaN
 
 register.filter("numberToText",numberToText)
