@@ -14,7 +14,6 @@ class OrmChit(models.Model):
     LCity = models.CharField(max_length=30)
     LState = models.CharField(max_length=2)
     lZip = models.CharField(max_length=5)
-    primaryPhone = models.CharField(max_length=10)
     altPhone = models.CharField(max_length=10)
     dateDepart = models.DateField()
     dateReturn = models.DateField()
