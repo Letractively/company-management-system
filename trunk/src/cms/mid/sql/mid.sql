@@ -1,4 +1,4 @@
-INSERT INTO mid_mid (alpha,LName,mName,fName,rank,company,platoon,squad,dutySection,roomNumber_id,phoneNumber,weekends,weekendsComment,CQPR,SQPR,performanceGrade,conductGrade,PRT) VALUES
+INSERT INTO mid_mid (alpha,LName,mName,fName,rank,company,platoon,squad,dutySection,roomNumber_id,phoneNumber,weekends,weekendsComment,CQPR,SQPR,performanceGrade,conductGrade) VALUES
 ('110018','ABID','','ANASTASIA','1','26','1','2','5','','1111111259','16','','3','3','B','B'),
 ('110024','ABNEY','','DANIEL','1','28','4','1','8','','1111111558','16','','3','3','A','A'),
 ('110030','ACKERMANN','','NORA','1','27','4','3','4','','1111111410','16','','3','3','C','C'),
