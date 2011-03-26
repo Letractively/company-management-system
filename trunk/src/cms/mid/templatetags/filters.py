@@ -9,9 +9,7 @@ def numberToText(value):
                26:"Twenty Sixth", 27:"Twenty Seventh", 28:"Twenty Eighth", 29:"Twenty Ninth", 30:"Thirtieth",
                31:"Thirty First", 32:"Thirty Second", 33:"Thirty Third", 34:"Thirty Fourth", 35:"Thirty Fifth",
                36:"Thirty Sixth"}
-    formatted_value = value;
-    for k in numbers:
-        if(k==value): formatted_value = numbers[k]
-    return formatted_value
+    if( value > 0 and value <=36 ): return numbers[value]
+    else: return value
 
 register.filter("numberToText",numberToText)
