@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Update Restriction/Tours: {% endblock %}
+
+{% block content %}
+    <table>
+    <form action="updateDiscipline" method="post"> 
+    {% csrf_token %}
+        {% for p in lDisc %}
+            <tr>
+                <td>{{ p.mid.alpha }}</td>
+                <td>{{ p.mid.LName }}</td>
+                <td>{{ p.mid.alpha }}</td>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.daysAwarded }}</td>
+                <td>{{ p.daysRemaining }}</td>
+                <td>{{ p.toursAwarded }}</td>
+                <td>{{ p.toursRemaining }}</td>
+                <td><select name = "mod">
+                    <value name = "0">Keep</value>
+                    <value name = "1">-1</value></select>
+                </td>
+            </tr>
+        {% empty %}
+            No Restrictions/Tours to update. 
+        {% endfor %}
+    <tr><td colspan = 10><input type="submit" value="Enter" /></td></tr>
+    </form>
+    </table>
+
+{% endblock %}
