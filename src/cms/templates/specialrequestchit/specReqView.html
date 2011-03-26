@@ -6,13 +6,47 @@
 
 <table>
 <tr>
-    <td>To: </td><td>{{ cChit.get_toLine_display }}</td>
+	<td> Special Request
+<tr class="SR_lable">
+    <td>To: </td>
+    <td>From: </td>
+    <td>Alpha Number
+</tr>
+<tr class="SR_field">
+	<td>{{ cChit.get_toLine_display }}</td>
+	<td>{{ cChit.fromLine }}</td>
+	<td>{{ cChit.mid.aplha }}</td>
 </tr>
 <tr>
-    <td>From: </td><td>{{ cChit.fromLine }}</td>
+    <td>Via: </td>
+    <td>Class Year</td>
+    <td>Company</td>
+    <td>Room Number</td>
+    <td>Rank</td>
 </tr>
 <tr>
-    <td>Via: </td><td>{{ cChit.viaLine }}</td>
+	<td>{{ cChit.viaLine }}</td>
+	<td>{{ cChit.mid.alpha[0:1] }}</td>
+	<td>{{ cChit.mid.company }}</td>
+	<td>{{ cChit.mid.roomNumber }}</td>
+	<!--todo-->
+	<td>MIDN _/C</td>
+</tr>
+<tr>
+	<td>REF<td>
+	<td>SQPR</td>
+	<td>SQPR</td>
+	<td>Perf. Grade</td>
+	<Conduct Grade</td>
+</tr>
+<tr>
+	<td>COMDTMIDNINST 5400.6M (17 Aug 10)</td>
+	<td>{{ cChit.mid.SQPR }}</td>
+	<td>{{ cChit.mid.CQPR }}</td>
+	<td>{{ cChit.mid.performanceGrade }}</td>
+	<td>{{ cChit.mid.conductGrade }}</td>
+<tr>
+	<td>I Respectfully Request (Type):
 </tr>
 <tr>
     <td>Purpose: </td>
@@ -25,7 +59,10 @@
 </tr>
 
 <tr>
-    <td>Justification: </td><td>{{ cChit.justification }}</td>
+    <td>Remarks or Reasons: </td>
+</tr>
+<tr>
+    <td>{{ cChit.justification }}</td>
 </tr>
 <tr>
     <td colspan = 2>Approval: </td>
