@@ -9,29 +9,18 @@
 <form action="addLeisure" method="post">
 {% csrf_token %}
 <table>
-    <tr><td>Alternative phone number: </td>
-        <td><input type = "text" name = "altPhone" size = "10" /></td></tr>
-        
-    <tr><td>Date of Departure: </td>
-        <td><input type = "text" name = "dateDepart" size = "10" /></td></tr>
-        
-    <tr><td>Date of Return: </td>
-        <td><input type = "text" name = "dateReturn" size = "10" /></td></tr>
-        
-    <tr><td>Days of Travel: </td>
-        <td><input type = "text" name = "daysTravel" size = "10" /></td></tr>
-    
-    <tr><td>Leave address: </td>
-        <td>
-            <table>
-                <tr><td>Street: </td><td><input type = "text" name = "street1" /></td></tr>
-                <tr><td></td><td><input type = "text" name = "street2" /></td></tr>
-                <tr><td>City:</td><td><input type = "text" name = "city" /></td></tr>
-                <tr><td>State:</td><td><input type = "text" name = "state" /></td></tr>
-                <tr><td>Zip: </td><td><input type = "text" name = "zip" /></td></tr>
-            </table>
-        </td>
-    </tr>
+    <tr><td>Alternative phone number: </td><td><input type = "text" name = "altPhone"/></td></tr>    
+    <tr><td>Date of Departure: </td><td><input type = "text" name = "dateDepart"/></td></tr> 
+    <tr><td>Date of Return: </td><td><input type = "text" name = "dateReturn"/></td></tr>  
+    <tr><td>Days of Travel: </td><td><input type = "text" name = "daysTravel"/></td></tr>
+    <tr><td colspan = 2>Leave address: </td>
+    <tr><td>Street: </td><td><input type = "text" name = "street1" /></td></tr>
+    <tr><td></td><td><input type = "text" name = "street2" /></td></tr>
+    <tr><td>City:</td><td><input type = "text" name = "city" /></td></tr>
+    <tr><td>State:</td><td><input type = "text" name = "state" /></td></tr>
+    <tr><td>Zip: </td><td><input type = "text" name = "zip" /></td></tr>
+    <tr><td>Risk Mitigation Plan: </td>
+    <td><textarea cols = 80 rows = 6 name = "justification"></textarea></td>
     <tr><td colspan = 2><input type="submit" value="Add Leisure Activities" /></td></tr>
 </table>
 </form>

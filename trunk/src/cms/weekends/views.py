@@ -164,7 +164,8 @@ def viewList(request):
     else :
         alpha = username.split('m')
         alpha = alpha[1]
-        cCompany = mid.objects.get(alpha=alpha).company
+        cCompany = Mid.objects.get(alpha=alpha)
+        cCompany = cCompany.company
     
     #date assignment block
     cDate = date.today()

@@ -21,6 +21,7 @@ class OrmChit(models.Model):
     daysLeave = models.IntegerField()
     travelRatio = models.IntegerField()
     riskMitigationPlan = models.TextField()
+    
     #the approvalLevel is an int which should be set at run time after checking
     #the toLine for the level to which the chit needs to go.s
     approvalLevel = models.IntegerField()
