@@ -20,20 +20,30 @@ from django.contrib.auth.decorators import login_required
 from datetime import date
 
 @login_required(redirect_field_name='/')
-def specReq(request):    
+def orm(request):    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
     lChits = OrmChit.objects.filter(mid=cMid).order_by('-date')
     
-    return render_to_response('orm/orm.html', {'cMid' : cMid, 
+    cChit = OrmChit(mid = cMid
+                    )
+    cChit.save()
+    
+    lLeisure = LeisureActivities.objects.filter(OrmChit = cChit)
+    lTravel = MethodsOfTravel.objects.filter(OrmChit = cChit)
+    
+    return render_to_response('orm/orm.html', {'cChit' : cChit,
+                                               'lLeisure' : lLeisure,
+                                               'lTravel' : lTravel,
+                                               'cMid' : cMid, 
                                                'lChits' : lChits,
                                               }, 
-                                            context_instance=RequestContext(request))
+                                              context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def ormSubmit(request):
+def addLeisure(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
