@@ -46,7 +46,7 @@ class AcYear(models.Model):
     christmasStart = models.DateField()
     christmasEnd = models.DateField()
     christmasIntersessionalStart = models.DateField()
-    christmasINtersessionalEnd = models.DateField()    
+    christmasIntersessionalEnd = models.DateField()    
     laborDay = models.DateField()
     columbusDay = models.DateField()
     veteransDay = models.DateField()    
@@ -62,7 +62,7 @@ class AcYear(models.Model):
     washingtonBirthday = models.DateField()   
     endSpring = models.DateField()
     springIntersessionalStart = models.DateField()
-    springINtersessionalEnd = models.DateField()
+    springIntersessionalEnd = models.DateField()
     startSummer = models.DateField()
     
 class AcWatch(models.Model):
