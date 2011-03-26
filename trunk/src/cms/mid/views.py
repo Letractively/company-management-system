@@ -581,3 +581,40 @@ def assessDiscipline(request):
     return render_to_response('mid/assessDiscipline.html', { 'cCompany' : cCompany, 
                                                             'lMids' : lMids },
                                                             context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def updateDiscipline(request):
+    #Save entered Restriction/Tours
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagApt = False
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+
+    if not flagApt :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    lDisc = Discipline.objects.filter(daysRemaining > 0 or toursRemaining > 0
+                                      ).filter(Mid__company = cCompany).order_by('-alpha')
+                                      
+    for p in lDisc :
+        if daysRemaining > 0 and request.POST['mod'] == "1":
+            daysRemaining = daysRemaining - 1
+            
+        if toursRemaining > 0 and request.POST['mod'] == "1":
+            toursRemaining = toursRemaining - 1
+    
+    return HttpResponseRedirect(reverse('assessDiscipline')) 
