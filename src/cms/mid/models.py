@@ -5,7 +5,12 @@
 
 from django.db import models
 
-# Create your models here.
+RANK_CHOICES = (
+                ('1','1/C'),
+                ('2','2/C'),
+                ('3','3/C'),
+                ('4','4/C'),
+                )
 BILLET_CHOICES = (
     ('CC','Company Commander'),
     ('XO','Executive Officer'),
@@ -109,6 +114,7 @@ class Mid(models.Model):
     LName = models.CharField(max_length=30)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30)
+    rank = models.CharField(max_length=1,choices=RANK_CHOICES,null=True, blank=True)
     company = models.CharField(max_length=2, choices=CO_CHOICES)
     platoon = models.CharField(max_length=1, choices=PLT_CHOICES,null=True, blank=True)
     squad = models.CharField(max_length=1, choices=SQD_CHOICES,null=True, blank=True)
