@@ -12,3 +12,5 @@ def numberToText(value):
     for k, v in numbers.iteritems(): 
         if(k==value): return v
     return value
+
+register.filter("numberToText",numberToText)
