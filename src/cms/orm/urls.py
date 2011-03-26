@@ -4,12 +4,14 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('orm.views',
 
     url(r'^$', 'orm', name = "orm"),
     (r'^/$', 'orm'),
-    url(r'addLeisure$', name = 'addLeisure'),
-    url(r'addTravel$', name = 'addTravel'),
+    
+    url(r'addLeisure$', 'addLeisure', name = "addLeisure"),
+    url(r'addTravel$', 'addTravel', name = "addTravel"),
+    
     (r'ormSubmit$', 'ormSubmit'),
     (r'ormView$', 'ormView'),
 

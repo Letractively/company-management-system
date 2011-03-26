@@ -18,6 +18,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
 from datetime import date
+from datetime import timedelta
 
 @login_required(redirect_field_name='/')
 def orm(request):    
@@ -27,17 +28,7 @@ def orm(request):
     
     lChits = OrmChit.objects.filter(mid=cMid).order_by('-date')
     
-    cChit = OrmChit(mid = cMid
-                    )
-    cChit.save()
-    
-    lLeisure = LeisureActivities.objects.filter(OrmChit = cChit)
-    lTravel = MethodsOfTravel.objects.filter(OrmChit = cChit)
-    
-    return render_to_response('orm/orm.html', {'cChit' : cChit,
-                                               'lLeisure' : lLeisure,
-                                               'lTravel' : lTravel,
-                                               'cMid' : cMid, 
+    return render_to_response('orm/orm.html', {'cMid' : cMid, 
                                                'lChits' : lChits,
                                               }, 
                                               context_instance=RequestContext(request))
@@ -52,36 +43,59 @@ def addLeisure(request):
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    approvalLevel = 0
-    
-    if request.POST['to'] == "SL" :
-        approvalLevel = 1
-    
-    if request.POST['to'] == "PL" :
-        approvalLevel = 2
-    
-    if request.POST['to'] == "CC" :
-        approvalLevel = 3
-    
-    if request.POST['to'] == "CSEL" :
-        approvalLevel = 4
-    
-    if request.POST['to'] == "CO" :
-        approvalLevel = 5    
+    dateDepart = request.POST['dateDepart']
+    dateReturn = request.POST['dateReturn']
+    daysLeave = timedelta(dateReturn - dateDepart);
+    daysTravel = request.POST['daysTravel']
+    travelRatio = daysTravel / daysLeave
+
+    #ORM Chit not complete
+    approvalStatus = -2   
     
     cChit = SpecialRequestChit(mid = cMid,
-                               date = date.today(),
-                               toLine = request.POST['to'],
-                               fromLine = cMid.fName + " " + cMid.mName + " " + cMid.LName,
-                               viaLine = "Chain of Command",
-                               requestType = request.POST['type'],
-                               otherRequestType = request.POST['otherType'],
-                               justification = request.POST['justification'],
-                               approvalLevel = approvalLevel,
-                               approvalStatus = 1)
+                               date = date.today(),            
+                               street1 = request.POST['street1'],
+                               street2 = request.POST['street2'],
+                               city = request.POST['city'],
+                               state = request.POST['state'],
+                               zip = request.POST['zip'],
+                               altPhone = request.POST['altPhone'],
+                               dateDepart = dateDepart,
+                               dateReturn = dateReturn,
+                               daysTravel = daysTravel,
+                               daysLeave = daysLeave,
+                               travelRatio = travelRatio,
+                               riskMitigationPlan = request.POST['street1'],
+                               approvalLevel = 4,
+                               approvalStatus = approvalStatus
+                               )
     cChit.save()
     
-    return HttpResponseRedirect(reverse('orm'))
+    lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
+    
+    return render_to_response('orm/ormLeisure.html', {'cMid' : cMid, 
+                                               'lChits' : lChits,
+                                               'lLeisure' : lLeisure,
+                                              }, 
+                                              context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveLeisure(request) :
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    
+    lChits = OrmChit.objects.filter(mid=cMid).order_by('-date')
+    cChit = lChits[0]
+    
+    lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
+    
+    return render_to_response('orm/ormLeisure.html', {'cMid' : cMid, 
+                                               'cChit' : cChit,
+                                               'lChits' : lChits,
+                                               'lLeisure' : lLeisure,
+                                              }, 
+                                              context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def ormView(request):
@@ -93,5 +107,7 @@ def ormView(request):
     
     return render_to_response('orm/ormView.html', {'cMid' : cMid, 
                                                    'cChit' : cChit,
+                                                   'lLeisure' : lLeisure,
+                                                   'lTravel' : lTravel,
                                                    }, 
                                                   context_instance=RequestContext(request))

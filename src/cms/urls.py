@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     (r'^formOne/',include('form1.urls', namespace="formOne", app_name="formOne")),
     (r'^medchits/', include('medchits.urls', namespace="medchits", app_name="medchits")),
     (r'^specReq/', include('specialrequestchit.urls', namespace="specReq", app_name="specReq")),
-    (r'^ORM/', include('orm.urls', namespace="ORM", app_name="ORM")),
+    (r'^ORM/', include('orm.urls', namespace="ORM", app_name="orm")),
 
     #Inspections
     (r'^bIns/', include('bravoinspection.urls', namespace="bIns", app_name="bravoinspection")),
