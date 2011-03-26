@@ -6,9 +6,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    # put url's to all the apps in this folder.
-
-    # (r'^cms/', include('cms.foo.urls')),
+    url(r'^$', 'orm', name = "orm"),
+    (r'^/$', 'orm'),
+    (r'ormSubmit$', 'ormSubmit'),
+    (r'ormView$', 'ormView'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),

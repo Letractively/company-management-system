@@ -12,8 +12,9 @@
     <select name = 'alpha'>    
         {% for p in lMids %}
             <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
-        {% endfor %}
+        {% empty %}
             <option value = "null">N/A</option>
+        {% endfor %}
     </select><br /><br />
     
     Weekend location? <input type = "input" name = "location" /><br /><br />
