@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}ORM Chits{% endblock %}
+{% block content %}
+
+<h1>Welcome to the ORM module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Enter an ORM Chit:</h3>
+
+<form action="ormSubmit" method="post">
+{% csrf_token %}
+<table>
+    <tr><td>Alternative phone number: </td>
+        <td><input type = "text" name = "altPhone" size = "10" /></td></tr>
+        
+    <tr><td>Date of Departure: </td>
+        <td><input type = "text" name = "dateDepart" size = "10" /></td></tr>
+        
+    <tr><td>Date of Return: </td>
+        <td><input type = "text" name = "dateReturn" size = "10" /></td></tr>
+        
+    <tr><td>Days of Travel: </td>
+        <td><input type = "text" name = "daysTravel" size = "10" /></td></tr>
+        
+        
+    <td>
+        <select name = "to">
+            <option value="SUPE">VADM M.H. Miller, USN</option>
+            <option value="DANT">CAPT R.E. Clark II, USN</option>
+            <option value="DDNT">CAPT B.P. O Donnell, USN</option>
+            <option value="BATO">CAPT A. Jerrett, USN</option>
+            <option value="CO">LT K. Igawa, USN</option>
+            <option value="CSEL">AECS Morring, USN</option>
+            <option value="CC">Company Commander</option>
+            <option value="PL">Platoon Commander</option>
+            <option value="SL" selected>Squad Leader</option>
+        </select>
+    </td>
+    </tr>
+    <tr><td>Type: </td>
+    <td>
+        <select name="type">
+            <option value="W">Special Liberty</option>
+            <option value="D" selected>Dining Out</option>
+            <option value="L">Special Leave</option>
+            <option value="O">Other</option>
+        </select>
+    </td>
+    </tr>
+    <tr>
+    <td>Other: </td><td><input type = "text" name = "otherType" /></td>
+    </tr>
+    <tr><td>Justification: </td>
+    <td><textarea cols = 80 rows = 6 name = "justification"></textarea></td>
+    </tr>
+    <tr><td colspan = 2><input type="submit" value="Send" /></td></tr>
+</table>
+</form>
+
+<h3>Past Special Request Chits: </h3>
+<table>
+{% for p in lChits %}
+    <tr>
+        <form action="specReqView" method = "post">
+        {% csrf_token %}
+        <td>{{ p.date }}</td>
+        <td>{%if p.requestType == 'O' %}
+                {{ p.otherRequestType }}
+            {% else %}
+                {{ p.get_requestType_display }}
+            {%endif%}
+        </td>
+        <td>{% if p.approvalStatus == 0 %}APPROVED
+            {%else%}
+                {% if p.approvalStatus == -1 %}DENIED{%endif%}
+                {% if p.approvalStatus > 0 %}PENDING{%endif%}
+            {%endif%}
+        </td>
+            <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+                <input type = "submit" value = "View Chit" /></td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>You have not been issued any Special Request Chits.</td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}
