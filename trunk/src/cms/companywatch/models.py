@@ -33,6 +33,17 @@ DAY_CHOICES = (
                ('5','Friday'),
                ('6','Saturday'),
                )
+DS_CHOICES = (
+    ('1','Duty Section 1'),
+    ('2','Duty Seciton 2'),
+    ('3','Duty Section 3'),
+    ('4','Duty Section 4'),
+    ('5','Duty Section 5'),
+    ('6','Duty Section 6'),
+    ('7','Duty Section 7'),
+    ('8','Duty Section 8'),
+    ('O','Out of Company'),              
+              )
 
 class AcYear(models.Model):
     fallStart = models.DateField()
@@ -76,6 +87,9 @@ class AcWatch(models.Model):
 class WatchBill(models.Model):
     date = models.DateField('Watchbill Date')
     type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
+    dutySection = models.CharField(max_length=1, choices=DS_CHOICES, null=True, blank=True)
+    CDO = models.ForeignKey("mid.Mid", related_name='+')
+    ACDO = models.ForeignKey("mid.Mid", related_name='+')
     def __unicode_(self):
         return self.type + " - " + unicode(self.date)
     
