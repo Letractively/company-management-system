@@ -8,6 +8,8 @@ urlpatterns = patterns('',
 
     url(r'^$', 'orm', name = "orm"),
     (r'^/$', 'orm'),
+    url(r'addLeisure$', name = 'addLeisure'),
+    url(r'addTravel$', name = 'addTravel'),
     (r'ormSubmit$', 'ormSubmit'),
     (r'ormView$', 'ormView'),
 
