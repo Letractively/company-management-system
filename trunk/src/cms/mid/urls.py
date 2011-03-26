@@ -23,11 +23,10 @@ urlpatterns = patterns('mid.views',
     #A/C Options
     url(r'enterDiscipline$', 'enterDiscipline', name = "enterDiscipline"),
     (r'saveDiscipline$', 'saveDiscipline'),
+    url(r'enterProbation$', 'enterProbation', name = "enterProbation"),
+    (r'saveProbation$', 'saveProbation'),
     url(r'assessDiscipline$', 'assessDiscipline', name = "assessDiscipline"),
     (r'updateDiscipline$', 'updateDiscipline'),
-    url(r'enterProbation$', 'enterProbation', name = "enterProbation"),
-    (r'updateProbation$', 'updateProbation'),
-    
     
     # put url's to all the apps in this folder.
 
