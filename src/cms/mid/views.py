@@ -42,11 +42,16 @@ def logIn(request):
             if re.match("CO", username) is not None :
                 username = username.split('_')
                 cCompany = username[1]
-                username = username[0]
+
+                return render_to_response('mid/co.html', { 'cCompany' : cCompany },
+                                            context_instance=RequestContext(request))
+            
+            if re.match("SEL", username) is not None :
+                username = username.split('_')
+                cCompany = username[1]
                 
-                if username == 'CO' :
-                    return render_to_response('mid/co.html', { 'cCompany' : cCompany },
-                                              context_instance=RequestContext(request))
+                return render_to_response('mid/sel.html', { 'cCompany' : cCompany },
+                                            context_instance=RequestContext(request))
             
             else :
             

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Password Reset{% endblock %}
+
+{% block content %}
+
+<h3>Select a user to manually add to the weekend list.</h3>
+<p>User will be granted an approved weekend from {{ NWB }} to {{ NWE }}.</p>
+
+<form action="commitWeekendGrant" method="post">
+{% csrf_token %}
+    <select name = 'alpha'>    
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
+        {% endfor %}
+            <option value = "null">N/A</option>
+    </select><br /><br />
+    
+    Weekend location? <input type = "input" name = "location" /><br /><br />
+    
+    <input type="submit" value="Grant Weekend" />
+</form>
+
+{% endblock %}
