@@ -129,7 +129,6 @@ class Mid(models.Model):
     SQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     performanceGrade = models.CharField(max_length=1,null=True,blank=True)
     conductGrade = models.CharField(max_length=1,null=True,blank=True)
-    PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     def __unicode__(self):
         return self.LName + ", " + self.fName + " " + self.mName + " - " + self.alpha
     
@@ -159,7 +158,16 @@ class Billet(models.Model):
     current = models.NullBooleanField()
     def __unicode__(self):
         return self.billet
+
+class PRT(models.Model):
+    mid = models.ForeignKey(Mid)
+    date = models.DateField()
+    pushUps = models.IntegerField(null=True,blank=True)
+    sitUps = models.IntegerField(null=True,blank=True)
+    runTime = models.TimeField(null=True,blank=True)
+    score = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     
+
 class Absence(models.Model):
     zero8 = models.ForeignKey("zero8.Zero8")
     name = models.ForeignKey(Mid)
