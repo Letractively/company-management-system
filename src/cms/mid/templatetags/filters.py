@@ -9,8 +9,8 @@ def numberToText(value):
                26:"Twenty Sixth", 27:"Twenty Seventh", 28:"Twenty Eighth", 29:"Twenty Ninth", 30:"Thirtieth",
                31:"Thirty First", 32:"Thirty Second", 33:"Thirty Third", 34:"Thirty Fourth", 35:"Thirty Fifth",
                36:"Thirty Sixth"}
-    for k, v in numbers.iteritems(): 
-        if(k==value): return v
-    return numbers[23]
+    for k in numbers.iteritems(): 
+        if(k==value): return numbers[k]
+    return value
 
 register.filter("numberToText",numberToText)
