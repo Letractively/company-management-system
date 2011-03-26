@@ -1,0 +1,12 @@
+#labels Featured,Phase-Support
+#All of the glorious feature creep that we would do if we had time.
+
+= The Wish List =
+
+Add all the features that you want but we don't have time to implement here.
+
+
+= List: =
+
+# PMO -> Company Remedial Attendance
+# Intramurals (for the PMO and in general)
