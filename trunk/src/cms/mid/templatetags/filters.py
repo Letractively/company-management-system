@@ -10,8 +10,8 @@ def numberToText(value):
                31:"Thirty First", 32:"Thirty Second", 33:"Thirty Third", 34:"Thirty Fourth", 35:"Thirty Fifth",
                36:"Thirty Sixth"}
     formatted_value = value;
-    for k, v in numbers.iteritems():
-        if(k==value): formatted_value = v
+    for k in numbers:
+        if(k==value): formatted_value = numbers[k]
     return formatted_value
 
 register.filter("numberToText",numberToText)
