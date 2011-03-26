@@ -20,6 +20,7 @@ class OrmChit(models.Model):
     daysTravel = models.IntegerField()
     daysLeave = models.IntegerField()
     travelRatio = models.IntegerField()
+    riskMitigationPlan = models.TextField()
     safetyOfficerApproval = models.NullBooleanField()
     companyOfficerApproval = models.NullBooleanField()
     platoonCommander = models.NullBooleanField()
