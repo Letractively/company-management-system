@@ -210,7 +210,7 @@ def uInsSave(request) :
     else :
         shinedShoes = False
    
-    if cScore < 15 :
+    if cScore > 3 :
         cFail = True
     else :
         cFail = False
