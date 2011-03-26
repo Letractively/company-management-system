@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Current Weekend List for {{ cCompany }}: {% endblock %}
+{% block title %}Current Weekend List for {{ cCompany|numberToText }}: {% endblock %}
 {% block content %}
 	<table>
 	{% for p in lWeekends %}
