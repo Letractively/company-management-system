@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 
-{% block title %}Current weekends counts: {% endblock %}
+{% block title %}Current weekends counts for {{ cCompany }} Company: {% endblock %}
 
 {% block content %}
 <table>
@@ -14,7 +14,7 @@
         <td>{{ p.fName }}</td>
         <td>{{ p.LName }}</td>
         <td><input type="text" size=2 value="{{ p.weekends }}" name="{{ p.alpha }}C"</td>
-        <td><input type="text" size=50 value="{{ p.weekendsComment }}" name="{{ p.alpha }}Comm"</td>
+        <td><input type="text" size=300 value="{{ p.weekendsComment }}" name="{{ p.alpha }}Comm"</td>
     </tr>
 {% empty %}
     <tr><td>No midshipmen found. Contact your system administrator. </td></tr>

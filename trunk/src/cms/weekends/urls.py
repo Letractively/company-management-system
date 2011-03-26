@@ -22,6 +22,8 @@ urlpatterns = patterns('weekends.views',
     (r'approveWeekend$', 'approveWeekend'),
     (r'denyWeekend$', 'denyWeekend'),
     (r'approveAllWeekends$', 'approveAllWeekends'),
+    url(r'grantWeekends', 'grantWeekends', name='grantWeekends'),
+    (r'commitWeekendGrant', 'commitWeekendGrant'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
