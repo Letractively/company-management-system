@@ -90,7 +90,12 @@ def renderSwitchboard(request) :
     cMid = Mid.objects.get(alpha = alpha)
                         
     lBillets = Billet.objects.filter(mid = cMid)
-                        
+    
+    if cMid.rank is 1 :
+        flagFirstie = True
+    else :
+        flagFirstie = False
+    
     #Here we assign permissions based on billets.
     flagAdmin = False;
     for p in lBillets :
@@ -98,6 +103,7 @@ def renderSwitchboard(request) :
             flagAdmin = True
     
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
+                                                        'firstie' : flagFirstie,
                                                         'admin' : flagAdmin },
                                                         context_instance=RequestContext(request))
 

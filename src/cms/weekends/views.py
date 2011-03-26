@@ -157,7 +157,7 @@ def viewList(request):
         username = username.split('_')
         cCompany = username[1]
         
-    if re.match("SEL", username) is not None :
+    elif re.match("SEL", username) is not None :
         username = username.split('_')
         cCompany = username[1]
     
