@@ -10,12 +10,6 @@ def numberToText(value):
                31:"Thirty First", 32:"Thirty Second", 33:"Thirty Third", 34:"Thirty Fourth", 35:"Thirty Fifth",
                36:"Thirty Sixth"}
     
-    try:
-        value = int(value)
-    except exceptions.ValueError:
-        return value
-    
-    if( value > 0 and value <=36 ): return numbers[value]
-    else: return value
+    return numbers[value]
 
 register.filter("numberToText",numberToText)
