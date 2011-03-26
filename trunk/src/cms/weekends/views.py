@@ -170,6 +170,7 @@ def admin(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
@@ -182,7 +183,7 @@ def admin(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lMids = Mid.objects.order_by('alpha')
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
     #ALERT! In the corresponding view second input text size is 50 due to the database limit. 
     #Change required to allow for at least 120 symbols. 
@@ -197,8 +198,8 @@ def saveWeekendCount(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
 
-    
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
     
@@ -214,7 +215,7 @@ def saveWeekendCount(request):
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    lMids = Mid.objects.order_by('alpha')
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
     for p in lMids :
         p.weekends = request.POST[p.alpha+'C']
@@ -230,7 +231,9 @@ def coApproval(request):
     #Called on /weekends/co -> generates a list of weekends to be approved
     
     #Second check - make sure the user is CO
-    name = request.user.username    
+    name = request.user.username.split('_')
+    cCompany = name[1]  
+    name = name[0]
     if name != 'CO' :
         return HttpResponseRedirect('/')
     #End of second check
@@ -241,7 +244,7 @@ def coApproval(request):
     cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
     #list of current non-approved weekends
-    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(status='P').order_by('-mid')
+    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
                                                                                                         
     return render_to_response('weekends/co.html', { 'lWeekends' : lWeekends }, 
                               context_instance=RequestContext(request))
@@ -251,7 +254,9 @@ def approveWeekend(request):
     #Approves a specific weekend, redirects back to CO's approval page
     
     #Second check - make sure the user is CO
-    name = request.user.username    
+    name = request.user.username.split('_')
+    company = name[1]  
+    name = name[0]
     if name != 'CO' :
         return HttpResponseRedirect('/')
     #End of second check
@@ -281,7 +286,9 @@ def denyWeekend(request):
     #Denies a specific weekend, redirects back to CO's approval page
     
     #Second check - make sure the user is CO
-    name = request.user.username    
+    name = request.user.username.split('_')
+    company = name[1]  
+    name = name[0]    
     if name != 'CO' :
         return HttpResponseRedirect('/')
     #End of second check
@@ -311,7 +318,58 @@ def approveAllWeekends(request):
     #Automatically approves all weekends in the CO's list
     
     #Second check - make sure the user is CO
-    name = request.user.username    
+    name = request.user.username.split('_')
+    cCompany = name[1]  
+    name = name[0]    
+    if name != 'CO' :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #date assignment block
+    cDate = date.today()
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    
+    #list of current non-approved weekends
+    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
+    
+    for p in lWeekends :
+        p.status = "A"
+        p.save()
+        
+    return HttpResponseRedirect(reverse('coApproval'))
+
+@login_required(redirect_field_name='/')
+def grantWeekends(request):
+    #Shows the menu for forcing a weekend
+    
+    #Second check - make sure the user is CO
+    name = request.user.username.split('_')
+    cCompany = name[1]  
+    name = name[0]    
+    if name != 'CO' :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    cDate = date.today()
+    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    
+    lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
+    
+    #list of current non-approved weekends
+                                                                                                        
+    return render_to_response('weekends/coGrant.html', { 'lMids' : lMids }, 
+                              context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def forceGrantWeekends(request):
+    #Allows the CO to grant a weekend to a person who would not be eligible for one
+    
+    #Second check - make sure the user is CO
+    name = request.user.username.split('_')
+    company = name[1]  
+    name = name[0]    
     if name != 'CO' :
         return HttpResponseRedirect('/')
     #End of second check
@@ -328,4 +386,4 @@ def approveAllWeekends(request):
         p.status = "A"
         p.save()
         
-    return HttpResponseRedirect(reverse('coApproval'))                                                                                                   
+    return HttpResponseRedirect(reverse('coApproval'))

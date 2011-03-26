@@ -39,9 +39,14 @@ def logIn(request):
         if user.is_active:
             login(request, user)
             
-            if user.username == 'CO' :
-                 return render_to_response('mid/co.html', { },
-                                           context_instance=RequestContext(request))
+            if re.match("CO", username) is not None :
+                username = username.split('_')
+                cCompany = username[1]
+                username = username[0]
+                
+                if username == 'CO' :
+                    return render_to_response('mid/co.html', { 'cCompany' : cCompany },
+                                              context_instance=RequestContext(request))
             
             else :
             
