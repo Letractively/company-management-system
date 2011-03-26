@@ -8,5 +8,5 @@ Add all the features that you want but we don't have time to implement here.
 
 = List: =
 
-# PMO -> Company Remedial Attendance
-# Intramurals (for the PMO and in general)
+  # PMO -> Company Remedial Attendance
+  # Intramurals (for the PMO and in general)
