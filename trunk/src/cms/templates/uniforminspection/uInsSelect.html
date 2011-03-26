@@ -10,7 +10,7 @@
 {% csrf_token %}
     <select name = 'mid'>    
         {% for p in lMids %}
-            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }}</option>
         {% endfor %}
     </select><br /><br />
     <input type="submit" value="Enter Uniform Inspection" />
