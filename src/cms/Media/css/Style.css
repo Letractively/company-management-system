@@ -104,9 +104,8 @@ ul, li {
 nav {
     float:left;
     padding: 0px 0px 0px 0px;
-    width: 200px;
 }
-
+/**
 ul#menu, ul#menu ul {
     list-style-type:none;
     margin: 0;
@@ -150,7 +149,7 @@ ul#menu li ul li span.link:hover {
 .link {
     cursor:pointer;
 }
-
+**/
 /** End: Menu Section **/
 
 footer {
