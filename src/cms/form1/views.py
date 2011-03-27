@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import date
 
 @login_required(redirect_field_name='/')
-def formOne(request):
+def form1(request):
     #Basic user view for Form-1s
     
     alpha = request.user.username.split('m')
@@ -33,7 +33,7 @@ def formOne(request):
                                                     context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def formOneView(request):
+def form1View(request):
     #Basic view for review of a Form-1
     
     alpha = request.user.username.split('m')
@@ -52,7 +52,7 @@ def formOneView(request):
                                                         context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def formOneSelect(request):
+def form1Select(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
@@ -67,7 +67,7 @@ def formOneSelect(request):
                                                                   context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
-def formOneSubmit(request):
+def form1Submit(request):
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
@@ -85,7 +85,7 @@ def formOneSubmit(request):
                                                            context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')    
-def formOneSave(request) :
+def form1Save(request) :
     
     alpha = request.user.username.split('m')
     alpha = alpha[1]
@@ -108,4 +108,4 @@ def formOneSave(request) :
     
     cForm.save()
     
-    return HttpResponseRedirect(reverse('formOneSelect'))
+    return HttpResponseRedirect(reverse('form1:form1Select'))
