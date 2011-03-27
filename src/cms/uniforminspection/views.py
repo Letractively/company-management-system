@@ -218,6 +218,7 @@ def uInsSave(request) :
     
     cuIns = UniformInspection(inspector = cMid,
                               mid = cInspectee,
+                              fail = cFail,
                               inspectionDate = date.today(),
                               score = cScore,
                               groomingShave = groomingShave,
