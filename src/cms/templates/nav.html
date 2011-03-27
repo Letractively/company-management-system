@@ -1,38 +1,36 @@
 <ul class="menu">
-    <li><a href='{% url switchboard %}'>Home</a></li>
-	<li><a class="parent" href='#'>Weekends</a>
+    <li><a href='{% url switchboard %}'><span>Home</span></a></li>
+	<li><a class="parent" href='#'><span>Weekends</span></a>
 		<div>
 			<ul>
-				<li><a href='{% url weekends:weekendIndex %}'>Request Weekends</a></li>
-				<li><a href='#'>View Weekend List</a></li>
+				<li><a href='{% url weekends:weekendIndex %}'><span>Request Weekends</span></a></li>
+				<li><a href='#'><span>View Weekend List</span></a></li>
 			</ul>
 		</div>
 	</li>
-	<li><a class="parent" href='#'>Forms</a>
+	<li><a class="parent" href='#'><span>Forms</span></a>
 		<div>
 			<ul>
-				<li><a href='{% url form1:form1 %}'>Review Form-1s</a></li>
-				<li><a href='#'>Medical Chits</a></li>
-				<li><a href='{% url specReq:specReq %}'>Special Request Chits</a></li>
-			    <li><del><a href='#'>ORM Chits</a></del></li>
+				<li><a href='{% url form1:form1 %}'><span>Review Form-1s</span></a></li>
+				<li><a href='#'><span>Medical Chits</span></a></li>
+				<li><a href='{% url specReq:specReq %}'><span>Special Request Chits</span></a></li>
+			    <li><del><span><a href='#'><span>ORM Chits</span></a></del></li>
 			</ul>
 		</div>
 	</li>
 	<li>
-		<a href='#' class='parent'>
-			Inspections
-		</a>
+		<a href='#' class='parent'><span>Inspections</span></a>
 		<div>
 			<ul class="menu" id="inspection_menu">
-				<li><a href='#'>Review Room Inspections</a></li>
-			    <li><a href='#'>Review Uniform Inspections</a></li>
+				<li><a href='#'><span>Review Room Inspections</span></a></li>
+			    <li><a href='#'><span>Review Uniform Inspections</span></a></li>
 			</ul>
 		</div>
 	</li>
-	<li><a href='#' class='parent'>Personal Information</a>
+	<li><a href='#' class='parent'><span>Personal Information</span></a>
 		<div>
 			<ul class="menu" id="personal_information_menu">
-				<li><a href='{% url mid:passChange %}'>Change Password</a></li>
+				<li><a href='{% url mid:passChange %}'><span>Change Password</span></a></li>
 			</ul>
 		</div>
 	</li>
