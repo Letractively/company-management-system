@@ -128,6 +128,7 @@ class Mid(models.Model):
     SQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     performanceGrade = models.CharField(max_length=1,null=True,blank=True)
     conductGrade = models.CharField(max_length=1,null=True,blank=True)
+    PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     def __unicode__(self):
         return self.LName + ", " + self.fName + " " + self.mName + " - " + self.alpha
     
