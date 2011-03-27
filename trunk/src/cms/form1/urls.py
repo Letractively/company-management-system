@@ -6,8 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('form1.views',
 
-    url(r'^$', 'formOne', name = "formOne"),
-    (r'^/$', 'formOne'),
+    url(r'^$', 'form1', name = "form1"),
+    (r'^/$', 'form1'),
     (r'formOneView', 'formOneView'),
     (r'formOneSubmit$', 'formOneSubmit'),
     url(r'formOneSelect$', 'formOneSelect', name = "formOneSelect"),
