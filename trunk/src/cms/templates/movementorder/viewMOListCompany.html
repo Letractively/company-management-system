@@ -8,13 +8,13 @@
 <table>
 {% for p in lMO %}
     <tr>
-        <td>{{ p.departDate }} - {{ p.returnDate }}</td>
+        <td>{{ p.departDate }} - {{ p.returnDateProjected }}</td>
         <td>{{ p.movementOrderCode }}</td>
         <td>{{ p.organization }}</td>
         <td>{{ p.adminNote }}</td>
     </tr>
 {% empty %}
-    <tr><td>You have not been on any MO-s.</td></tr>
+    <tr><td>Nobody from this company is currently on an MO.</td></tr>
 {% endfor %}
 </table>
 

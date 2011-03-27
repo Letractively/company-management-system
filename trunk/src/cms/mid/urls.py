@@ -13,6 +13,12 @@ urlpatterns = patterns('mid.views',
     url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
     (r'passChange$', 'passChange'),
 
+    #CC Options
+    url(r'assignCOC$', 'assignCOC', name = "assignCOC"),
+    (r'saveAssignCOC$', 'saveAssignCOC'),
+    url(r'assignBillets$', 'assignBillets', name = "assignBillets"),
+    (r'saveAssignBillets$', 'saveAssignBillets'),
+
     #Admin options:
     url(r'selectUser$', 'selectUser', name = "selectUser"),
     (r'modifyUser$', 'modifyUser'),
@@ -22,7 +28,7 @@ urlpatterns = patterns('mid.views',
     
     #PMO options:
     url(r'PRTSat$', 'PRTSat', name = "PRTSat"),
-    (r'savePRTSat$', 'savePRTSat'),
+    (r'savePRT$', 'savePRT'),
     
     #A/C Options
     url(r'enterDiscipline$', 'enterDiscipline', name = "enterDiscipline"),
@@ -31,6 +37,12 @@ urlpatterns = patterns('mid.views',
     (r'saveProbation$', 'saveProbation'),
     url(r'assessDiscipline$', 'assessDiscipline', name = "assessDiscipline"),
     (r'updateDiscipline$', 'updateDiscipline'),
+    
+    #CO options
+    url(r'appointCC$', 'appointCC', name = "appointCC"),
+    (r'saveAppointCC$', 'saveAppointCC'),
+    url(r'changeCompany$', 'changeCompany', name = "changeCompany"),
+    (r'saveChangeCompany$', 'saveChangeCompany'),
     
     # put url's to all the apps in this folder.
 

@@ -122,8 +122,8 @@ class Mid(models.Model):
     phoneNumber = models.CharField(max_length=10,null=True,blank=True)
     weekends = models.IntegerField(null=True,blank=True)
     weekendsComment = models.CharField(max_length=300, null=True,blank=True)
-    acSAT = models.BooleanField(null=True,blank=True).default=True
-    PRTSat = models.BooleanField(null=True,blank=True).default=True
+    acSAT = models.NullBooleanField(null=True,blank=True)
+    PRTSat = models.NullBooleanField(null=True,blank=True)
     CQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     SQPR = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     performanceGrade = models.CharField(max_length=1,null=True,blank=True)
@@ -153,7 +153,7 @@ class Billet(models.Model):
     mid = models.ForeignKey(Mid)
     billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
     startDate = models.DateField(null=True)
-    endDate = models.DateField(null=True)
+    endDate = models.DateField(null=True,blank=True)
     evaluation = models.TextField(null=True,blank=True)
     current = models.NullBooleanField()
     def __unicode__(self):

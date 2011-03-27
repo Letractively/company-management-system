@@ -5,11 +5,11 @@ from django.db import models
 class MovementOrder(models.Model):
     organization = models.CharField(max_length=30)
     movementOrderCode = models.CharField(max_length=7)
-    departDate = models.DateTimeField()
-    returnDateProjected = models.DateTimeField()
-    returnDate = models.DateTimeField(null=True,blank=True)
+    departDate = models.DateField()
+    returnDateProjected = models.DateField()
+    returnDate = models.DateField(null=True,blank=True)
     adminNote = models.CharField(max_length=90)
     
 class MOParticipant(models.Model):
     MO = models.ForeignKey(MovementOrder)
-    participant = models.ForeignKey("mid.Mid",related_name='+')
+    participant = models.ForeignKey("mid.Mid")

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Change company{% endblock %}
+
+{% block content %}
+
+<h3>Move a midshipman to another company.</h3>
+
+<form action="saveChangeCompany" method="post">
+{% csrf_token %}
+    <select name = 'alpha'>    
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+        {% empty %}
+            <option value = "null">N/A</option>
+        {% endfor %}
+    </select><br /><br />
+    
+    New company: <input type = "input" name = "company" size = 2/><br /><br />
+    
+    <input type="submit" value="Move companies" />
+</form>
+
+{% endblock %}
