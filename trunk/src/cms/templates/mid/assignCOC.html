@@ -1,0 +1,473 @@
+{% extends "base.html" %}
+
+{% block title %}Appoint Company Chain of Command members{% endblock %}
+
+{% block content %}
+
+<h3>Select midshipmen to serve in the Company Chain of Command.</h3>
+    
+<table>
+<form action="saveAssignBillets" method="post">
+{% csrf_token %}
+    <tr>
+        <td>Billet: </td>
+        <td>Current billet holder:</td>
+        <td>Start of tenure:</td>
+        <td>Change to: </td>
+    </tr>
+    
+    <tr>
+    {% if not XO %}
+        <td colspan = 3>Currently there is no Executive Officer</td>
+    {% else %}
+        <td>Executive Officer: </td><td>{{ XO.mid }}</td><td>{{ XO.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'XO'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not HA %}
+        <td colspan = 3>Currently there is no Honor Advisor</td>
+    {% else %}
+        <td>Honor Advisor: </td><td>{{ HA.mid }}</td><td>{{ HA.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'HA'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not OPS %}
+        <td colspan = 3>Currently there is no Operations Officer</td>
+    {% else %}
+        <td>Operations Officer: </td><td>{{ OPS.mid }}</td><td>{{ OPS.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'OPS'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not XO %}
+        <td colspan = 3>Currently there is no Adjutant</td>
+    {% else %}
+        <td>Adjutant: </td><td>{{ ADJ.mid }}</td><td>{{ ADJ.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'ADJ'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not PMO %}
+        <td colspan = 3>Currently there is no Physical Mission Officer</td>
+    {% else %}
+        <td>Physical Mission Officer: </td><td>{{ PMO.mid }}</td><td>{{ PMO.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'PMO'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not AC %}
+        <td colspan = 3>Currently there is no Academics Officer</td>
+    {% else %}
+        <td>Academics Officer: </td><td>{{ AC.mid }}</td><td>{{ AC.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'AC'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SAF %}
+        <td colspan = 3>Currently there is no Safety Officer</td>
+    {% else %}
+        <td>Safety Officer: </td><td>{{ SAF.mid }}</td><td>{{ SAF.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'SAF'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not AC %}
+        <td colspan = 3>Currently there is no Aptitude/Conduct Officer</td>
+    {% else %}
+        <td>Aptitude/Conduct Officer: </td><td>{{ AC.mid }}</td><td>{{ AC.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'AC'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not ADEO %}
+        <td colspan = 3>Currently there is no ADEO</td>
+    {% else %}
+        <td>ADEO: </td><td>{{ ADEO.mid }}</td><td>{{ ADEO.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'ADEO'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not ATFP %}
+        <td colspan = 3>Currently there is no ATFP Officer</td>
+    {% else %}
+        <td>ATFP Officer: </td><td>{{ ATFP.mid }}</td><td>{{ ATFP.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'ATFP'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not TRN %}
+        <td colspan = 3>Currently there is no Training Officer</td>
+    {% else %}
+        <td>Training Officer: </td><td>{{ TRN.mid }}</td><td>{{ TRN.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'TRN'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not 1LT %}
+        <td colspan = 3>Currently there is no First Lieutenant</td>
+    {% else %}
+        <td>First Lieutenant: </td><td>{{ 1LT.mid }}</td><td>{{ 1LT.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = '1LT'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not ADM %}
+        <td colspan = 3>Currently there is no Admin Officer</td>
+    {% else %}
+        <td>Admin Officer: </td><td>{{ ADM.mid }}</td><td>{{ ADM.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'ADM'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not PRO %}
+        <td colspan = 3>Currently there is no Protocol Officer</td>
+    {% else %}
+        <td>Protocol Officer: </td><td>{{ PRO.mid }}</td><td>{{ PRO.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'PRO'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not WRD %}
+        <td colspan = 3>Currently there is no Wardroom Officer</td>
+    {% else %}
+        <td>Wardroom Officer: </td><td>{{ WRD.mid }}</td><td>{{ WRD.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'WRD'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not DRL %}
+        <td colspan = 3>Currently there is no Drill Officer</td>
+    {% else %}
+        <td>Drill Officer: </td><td>{{ DRL.mid }}</td><td>{{ DRL.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'DRL'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SAVI %}
+        <td colspan = 3>Currently there is no SAVI Guide</td>
+    {% else %}
+        <td>SAVI Guide: </td><td>{{ SAVI.mid }}</td><td>{{ SAVI.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SAVI'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not CMEO %}
+        <td colspan = 3>Currently there is no CMEO Officer</td>
+    {% else %}
+        <td>CMEO Officer: </td><td>{{ CMEO.mid }}</td><td>{{ CMEO.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'CMEO'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not FIN %}
+        <td colspan = 3>Currently there is no Financial Officer</td>
+    {% else %}
+        <td>Financial Officer: </td><td>{{ FIN.mid }}</td><td>{{ FIN.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'FIN'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not 1SGT %}
+        <td colspan = 3>Currently there is no First Sargeant</td>
+    {% else %}
+        <td>First Sargeant: </td><td>{{ 1SGT.mid }}</td><td>{{ 1SGT.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = '1SGT'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsTwo %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not TRS1 %}
+        <td colspan = 3>Currently there is no Training Sargeant (One)</td>
+    {% else %}
+        <td>Training Sargeant (One): </td><td>{{ TRS1.mid }}</td><td>{{ TRS1.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'TRS1'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsTwo %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not TRS2 %}
+        <td colspan = 3>Currently there is no Training Sargeant (Two)</td>
+    {% else %}
+        <td>Training Sargeant (Two): </td><td>{{ TRS2.mid }}</td><td>{{ TRS2.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'TRS2'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsTwo %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not DRLS %}
+        <td colspan = 3>Currently there is no Drill Sargeant</td>
+    {% else %}
+        <td>Drill Sargeant: </td><td>{{ DRLS.mid }}</td><td>{{ DRLS.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'DRLS'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsTwo %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not ADMC %}
+        <td colspan = 3>Currently there is no Admin Chief</td>
+    {% else %}
+        <td>Admin Chief: </td><td>{{ ADMC.mid }}</td><td>{{ ADMC.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'ADMC'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsTwo %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not MISL %}
+        <td colspan = 3>Currently there is no MISLO</td>
+    {% else %}
+        <td>MISLO: </td><td>{{ MISL.mid }}</td><td>{{ MISL.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'MISL'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsTwo %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr><td colspan = 4><input type="submit" value="Appoint, starting immediately" /></td></tr>
+</form>
+</table>
+
+{% endblock %}
