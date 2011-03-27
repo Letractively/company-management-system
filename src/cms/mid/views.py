@@ -7,6 +7,7 @@
 from mid.models import Mid
 from mid.models import Billet
 from mid.models import Room
+from mid.models import PRT
 from mid.models import Discipline
 from mid.models import Probation
 
@@ -21,6 +22,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+
+from datetime import date
+from datetime import timedelta
 
 import re
 
@@ -379,7 +383,7 @@ def PRTSat(request) :
         return HttpResponseRedirect('/')
     #End of second check
     
-    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+    lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     
     return render_to_response('mid/PRTSat.html', { 'cCompany' : cCompany, 
                                                    'lMids' : lMids },
@@ -472,27 +476,30 @@ def saveDiscipline(request):
     
     alpha = request.POST['alpha']
     honor = request.POST['honor']
-    dateOffense = request.POST['dateOffence']
+    dateOffense = request.POST['dateOffense']
     startDate = request.POST['startDate']
     daysAwarded = request.POST['daysAwarded']
     toursAwarded = request.POST['toursAwarded']
     adminNotes = request.POST['adminNotes']
+    
+    if toursAwarded < daysAwarded :
+            toursAwarded = daysAwarded
 
     cDisc = Discipline(mid = Mid.objects.get(alpha = alpha),
                        conductHonor = honor,
-                       dateOffence = dateOffence,
+                       dateOffence = dateOffense,
                        startDate = startDate,
                        daysAwarded = daysAwarded,
                        daysRemaining = daysAwarded,
                        toursAwarded = toursAwarded,
                        toursRemaining = toursAwarded,
                        adminNotes = adminNotes,
-                       checked = date.today - timedelta(days=1),
+                       checked = date.today(),
                        )
     
     cDisc.save()
     
-    return HttpResponseRedirect(reverse('enterDiscipline')) 
+    return HttpResponseRedirect(reverse('mid:enterDiscipline')) 
 
 @login_required(redirect_field_name='/')
 def enterProbation(request):
@@ -559,7 +566,7 @@ def saveProbation(request):
     
     cDisc.save()
     
-    return HttpResponseRedirect(reverse('enterProbation')) 
+    return HttpResponseRedirect(reverse('mid:enterProbation')) 
 
 @login_required(redirect_field_name='/')
 def assessDiscipline(request):
@@ -582,10 +589,11 @@ def assessDiscipline(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lDisc = Discipline.objects.filter(daysRemaining > 0 or toursRemaining > 0).filter(Mid__company = cCompany).order_by('-alpha')
+    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0)
     
     return render_to_response('mid/assessDiscipline.html', { 'cCompany' : cCompany, 
-                                                            'lMids' : lMids },
+                                                             'lDisc' : lDisc,
+                                                             },
                                                             context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
@@ -613,14 +621,18 @@ def updateDiscipline(request):
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    lDisc = Discipline.objects.filter(daysRemaining > 0 or toursRemaining > 0
-                                      ).filter(Mid__company = cCompany).order_by('-alpha')
+    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0)
                                       
     for p in lDisc :
-        if daysRemaining > 0 and request.POST['mod'] == "1":
-            daysRemaining = daysRemaining - 1
-            
-        if toursRemaining > 0 and request.POST['mod'] == "1":
-            toursRemaining = toursRemaining - 1
+        if p.daysRemaining > 0 and request.POST[str(p.id)] == "true":
+            p.daysRemaining = p.daysRemaining -1
+        
+        if p.toursRemaining > 0 and request.POST[str(p.id)] == "true":
+            p.toursRemaining = p.toursRemaining -1
+        
+        if p.toursRemaining < p.daysRemaining :
+            p.toursRemaining = p.daysRemaining
+        
+        p.save()
     
-    return HttpResponseRedirect(reverse('assessDiscipline')) 
+    return HttpResponseRedirect(reverse('mid:assessDiscipline')) 
