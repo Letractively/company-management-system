@@ -51,15 +51,13 @@ def logIn(request):
                 username = username.split('_')
                 cCompany = username[1]
 
-                return render_to_response('mid/co.html', { 'cCompany' : cCompany },
-                                            context_instance=RequestContext(request))
+                return HttpResponseRedirect('switchboard')
             
             if re.match("SEL", username) is not None :
                 username = username.split('_')
                 cCompany = username[1]
                 
-                return render_to_response('mid/sel.html', { 'cCompany' : cCompany },
-                                            context_instance=RequestContext(request))
+                return HttpResponseRedirect('switchboard')
             
             else :
             
@@ -93,11 +91,19 @@ def logIn(request):
 
 @login_required(redirect_field_name='/')
 def renderSwitchboard(request) :
+    if re.match("CO", request.user.username) is not None :
+        return render_to_response('mid/switchboard.html', { 'CO' : True
+                                                           },
+                                                           context_instance=RequestContext(request))
+    
+    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha = alpha)
                         
     lBillets = Billet.objects.filter(mid = cMid)
+    
+    
     
     flagFirstie = False
     if cMid.rank == "1" :
@@ -666,102 +672,102 @@ def assignCOC(request):
     
     cPC1 = None
     for p in lBillet:
-        if p.billet == "PC" and p.current and p.evaluation == "1" :
+        if p.billet == "PC" and p.current and p.mid.platoon == "1" :
             cPC1 = p
             
     cPC2 = None
     for p in lBillet:
-        if p.billet == "PC" and p.current and p.evaluation == "2" :
+        if p.billet == "PC" and p.current and p.mid.platoon == "2" :
             cPC2 = p
             
     cPC3 = None
     for p in lBillet:
-        if p.billet == "PC" and p.current and p.evaluation == "3" :
+        if p.billet == "PC" and p.current and p.mid.platoon == "3" :
             cPC3 = p
             
     cPC4 = None
     for p in lBillet:
-        if p.billet == "PC" and p.current and p.evaluation == "4" :
+        if p.billet == "PC" and p.current and p.mid.platoon == "4" :
             cPC4 = p
     
     cPLS1 = None
     for p in lBillet:
-        if p.billet == "PLTS" and p.current and p.evaluation == "1" :
+        if p.billet == "PLTS" and p.current and p.mid.platoon == "1" :
             cPLS1 = p
     
     cPLS2 = None
     for p in lBillet:
-        if p.billet == "PLTS" and p.current and p.evaluation == "2" :
+        if p.billet == "PLTS" and p.current and p.mid.platoon == "2" :
             cPLS2 = p
     
     cPLS3 = None
     for p in lBillet:
-        if p.billet == "PLTS" and p.current and p.evaluation == "3" :
+        if p.billet == "PLTS" and p.current and p.mid.platoon == "3" :
             cPLS3 = p
     
     cPLS4 = None
     for p in lBillet:
-        if p.billet == "PLTS" and p.current and p.evaluation == "4" :
+        if p.billet == "PLTS" and p.current and p.mid.platoon == "4" :
             cPLS4 = p 
     
     cSL1 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "1" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "1" :
             cSL1 = p
     
     cSL2 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "2" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "2" :
             cSL2 = p
     
     cSL3 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "3" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "3" :
             cSL3 = p
     
     cSL4 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "4" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "1" :
             cSL4 = p
     
     cSL5 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "5" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "2" :
             cSL5 = p
     
     cSL6 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "6" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "3" :
             cSL6 = p
     
     cSL7 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "7" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "1" :
             cSL7 = p
     
     cSL8 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "8" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "2" :
             cSL8 = p
     
     cSL9 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "9" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "3" :
             cSL9 = p
     
     cSL10 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "10" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "1" :
             cSL10 = p
     
     cSL11 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "11" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "2" :
             cSL11 = p
     
     cSL12 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.evaluation == "12" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "3" :
             cSL12 = p
 
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
