@@ -237,7 +237,7 @@ def bInsSave(request) :
     else :
         rifles = False
    
-    if deck or laundry or mold or door or cScore > 3 :
+    if deck or laundry or mold or door or cScore < 3 :
         cFail = True
     else :
         cFail = False
