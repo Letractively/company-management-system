@@ -200,10 +200,28 @@ def viewDiscipline(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
 
+    #lDisc - list of user's errors in judgement
     lDisc = Discipline.objects.filter(mid = cMid)
+    lProb = Probation.objects.filter(mid = cMid)
+    #Current date 
+    cDate = date.today()
+    
+    #Check if the user is currently on chit
+    cDisc = None
+    for p in lDisc :
+        if p.daysRemaining > 0 :
+            cDisc = p
+    
+    cProb = None
+    for p in lProb :
+        if p.startDate + timedelta(days = p.daysAwarded) > cDate :
+            cProb = p
     
     return render_to_response('mid/viewDiscipline.html', {'cMid' : cMid, 
-                                                          'lDisc' : lDisc
+                                                          'cDisc' : cDisc,
+                                                          'lDisc' : lDisc,
+                                                          'cProb' : cProb,
+                                                          'lProb' : lProb
                                                           },
                                                           context_instance=RequestContext(request))
 

@@ -26,7 +26,7 @@ def medchits(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
-    #lWeekends - list of user's medical chits
+    #lChits - list of user's medical chits
     lChits = Chit.objects.filter(mid=cMid).order_by('-endDate')
     
     #Current date 
