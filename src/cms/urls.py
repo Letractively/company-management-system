@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),
     
     #Chits/Paperwork
-    (r'^formOne/',include('form1.urls', namespace="formOne", app_name="formOne")),
+    (r'^form1/',include('form1.urls', namespace="form1", app_name="form1")),
     (r'^medchits/', include('medchits.urls', namespace="medchits", app_name="medchits")),
     (r'^specReq/', include('specialrequestchit.urls', namespace="specReq", app_name="specReq")),
     (r'^ORM/', include('orm.urls', namespace="ORM", app_name="orm")),
@@ -42,7 +42,7 @@ urlpatterns = patterns('',
     # All the other module's pages
     #(r'^accountability/', include('accountability.urls')),
     #(r'^companyblog/', include('companyblog.urls')),
-    #(r'^companywatch/', include('companywatch.urls')),
+    (r'^companywatch/', include('companywatch.urls', namespace="companywatch", app_name="companywatch")),
     #(r'^zero8/', include('zero8.urls')),
     
     (r'^weekends/', include('weekends.urls', namespace="weekends", app_name="weekends")),
