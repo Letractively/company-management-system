@@ -1,11 +1,10 @@
-<a href="{% url switchboard %}">
-	<canvas class="icon" id="icon" title="Home"
-		height="60" width="60" 
-		onmouseover="iconHighlight(this.id)" 
-		onmouseout="iconDraw(this.id)">
-		Bummer!
-	</canvas>
-</a>
+<ul id="menu">
+     <li>
+          <span class="link" onclick="location.href='{% url swithcboard %}';">
+               Home
+          </span>
+     </li>
+</ul>
 <canvas class="icon" id="weekends" title="Weekends"
 	height="60" width="60" 
 	onmouseover="iconHighlight(this.id)" 
