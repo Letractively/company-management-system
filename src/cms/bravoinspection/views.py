@@ -237,7 +237,7 @@ def bInsSave(request) :
     else :
         rifles = False
    
-    if not deck or not laundry or not mold or not door or cScore < 3 :
+    if not deck or not laundry or not mold or not door or cScore < 20 :
         cFail = True
     else :
         cFail = False
