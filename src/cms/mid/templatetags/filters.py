@@ -19,7 +19,7 @@ register.filter("numberToText",numberToText)
 
 def alphaToClassYear(value):
     try:
-        return "20"+value[0:1]
+        return "20"+value[0:2]
     except:
         return value
 
