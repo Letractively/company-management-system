@@ -69,7 +69,7 @@ def specReqSubmit(request):
                                approvalStatus = 1)
     cChit.save()
     
-    return HttpResponseRedirect(reverse('specReq'))
+    return HttpResponseRedirect(reverse('specialrequestchit:specReq'))
 
 @login_required(redirect_field_name='/')
 def specReqView(request):

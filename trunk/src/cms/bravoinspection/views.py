@@ -274,4 +274,4 @@ def bInsSave(request) :
     
     cbIns.save()
 
-    return HttpResponseRedirect(reverse('bInsSelect'))
+    return HttpResponseRedirect(reverse('bravoinspection:bInsSelect'))
