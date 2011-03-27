@@ -3,7 +3,7 @@
 {% block title %}CMS - Homepage{% endblock %}
 
 {% block content %}
-    <h1>{{ mid.fName|capfirst }} {{ mid.LName|capfirst }} logged in successfully.</h1>
+    <h1>{{ mid.fName|lower|capfirst }} {{ mid.LName|lower|capfirst }} logged in successfully.</h1>
     
     <h3>What would you like to do?</h3>
     
@@ -25,6 +25,9 @@
         <li>Chits/Paperwork:
             <ul>
                 <li><a href = "form1/">Review Form-1s</a></li>
+                {% if firstie %}
+                <li><a href = "formOne/formOneSelect">Enter Form-1</a></li>
+                {% endif %}
                 <li><a href = "medchits/">Medical Chits</a></li>
                 <li><a href = "specReq/">Special Request Chits</a></li>
                 <li><a href = "ORM/">ORM Chits</a></li>
@@ -34,7 +37,13 @@
         <li>Inspections:
             <ul>
                 <li><a href = "bIns/">Review Room Inspections</a></li>
+                {% if firstie %}
+                <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
+                {% endif %}
                 <li><a href = "uIns/">Review Uniform Inspections</a></li>
+                {% if firstie %}
+                <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
+                {% endif %}
             </ul>
         </li><br />
         
@@ -44,15 +53,6 @@
         <li><a href = "mid/selectPassChange">Change Password</a></li>
         <li><a href = "logout">Log out</a></li>
     </ul>
-    
-    {% if firstie %}
-    <h3>Midn 1/C options: (visible to all now, for testing purposes)</h3>
-    <ul>
-        <li><a href = "formOne/formOneSelect">Enter Form-1</a></li>
-        <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
-        <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
-    </ul>
-    {% endif%}
     
     {% if Aptitude %}
     <h3>Aptitude/Conduct Officer options: </h3>
