@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),
     
     #Chits/Paperwork
-    (r'^form1/',include('form1.urls', namespace="form1", app_name="form1")),
+    (r'^form1/',include('form1.urls', namespace="formOne", app_name="form1")),
     (r'^medchits/', include('medchits.urls', namespace="medchits", app_name="medchits")),
     (r'^specReq/', include('specialrequestchit.urls', namespace="specReq", app_name="specReq")),
     (r'^ORM/', include('orm.urls', namespace="ORM", app_name="orm")),
