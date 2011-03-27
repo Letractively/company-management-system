@@ -45,6 +45,8 @@ class Candidates(models.Model):
     host = models.ForeignKey("mid.Mid")
     source = models.CharField(max_length=40)
     adminNote = models.CharField(max_length=90)
+    arriveDate = models.DateField()
+    departDate = models.DateField()
     
 class Inspections(models.Model):
     zero8 = models.ForeignKey(Zero8)
