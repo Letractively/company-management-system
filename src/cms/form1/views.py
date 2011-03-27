@@ -108,4 +108,4 @@ def formOneSave(request) :
     
     cForm.save()
     
-    return HttpResponseRedirect(reverse('form1:formOneSelect'))
+    return HttpResponseRedirect(reverse('formOneSelect'))
