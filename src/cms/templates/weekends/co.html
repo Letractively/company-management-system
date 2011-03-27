@@ -2,6 +2,8 @@
 {% block title %}Current weekend requests pending approval:{% endblock %}
 {% block content %}
 
+<h1>Current weekend requests pending approval:</h1>
+
 <table>
 {% for p in lWeekends %}
     {% if p.status == "P" %}

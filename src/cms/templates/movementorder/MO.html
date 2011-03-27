@@ -6,7 +6,7 @@
 
 <h3>Select MO from the list, or add a new MO</h3>
 
-{%if cMO is None%}
+{% if not cMO %}
 <form action="checkOutMO" method="post">
 {% csrf_token %}
     <select name = 'code'>
@@ -17,7 +17,7 @@
     </select>
     
     <p></p>If entering a new MO, please fill out those fields; if departing on an already
-    entered MO, skip the fields and just click "Check-out on MO"</p>
+    entered MO, skip the fields and just click "Check-out on MO."</p><br /><br />
     
     <table>
         <tr><td>Movement Order Code:</td><td><input type = "text" name = "movementOrderCode" size = 7 /></td></tr>
@@ -34,8 +34,8 @@
 {% csrf_token %}
     You are currently on the MO number {{ cMO.movementOrderCode }} with {{ cMO.organization }}.<br />
     Your projected return date is {{ cMO.returnDateProjected }}.<br />
-    Would you like to check back from the MO and close it?
-    <input type="hidden" value = "{{cMO.movementOrderCode}}" name = "code">
+    Would you like to check back from the MO and close it?<br /><br />
+    <input type="hidden" value = "{{ cMO.movementOrderCode }}" name = "code">
     <input type="submit" value="Check-in from MO and close it." />
 </form>
 {%endif%}
@@ -44,9 +44,9 @@
 <table>
 {% for p in lMO %}
     <tr>
-        <td>{{ p.departDate }} - {{ p.returnDate }}</td>
         <td>{{ p.movementOrderCode }}</td>
         <td>{{ p.organization }}</td>
+        <td>{{ p.departDate }} - {{ p.returnDate }}</td>
         <td>{{ p.adminNote }}</td>
     </tr>
 {% empty %}

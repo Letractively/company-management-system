@@ -30,22 +30,23 @@ def MO(request):
     cMid = Mid.objects.get(alpha=alpha)
     
     #lChits - list of user's MO-s
-    lMO = MovementOrder.objects.filter(MOParticipant__participant = cMid).order_by('-departDate')
-    lAllMO = MovementOrder.objects.filter(returnDate is None).order_by('-departDate')
+    lMO = MovementOrder.objects.filter(moparticipant__participant = cMid).exclude(returnDate = "3000-01-01").order_by('-departDate')
+    lAllMO = MovementOrder.objects.filter(returnDate = "3000-01-01").order_by('-departDate')
+    
+    temp = MovementOrder.objects.filter(moparticipant__participant = cMid).filter(returnDate = "3000-01-01")
     
     #Current date 
     cDate = date.today()
     
     #Check if the user is currently on MO
     cMO = None
-    for p in lMO :
-        if p.departDate < cDate and p.returnDate is None :
-            cMO = p
+    for p in temp :
+        cMO = p
     
     return render_to_response('movementorder/MO.html', {'cMid' : cMid, 
                                                         'cMO' : cMO, 
                                                         'lMO' : lMO,
-                                                        'lAllMO' : lAllMO
+                                                        'lAllMO' : lAllMO,
                                                         }, 
                                                         context_instance=RequestContext(request))
 
@@ -68,7 +69,7 @@ def checkOutMO(request):
                             movementOrderCode = request.POST['movementOrderCode'],
                             departDate = date.today(),
                             returnDateProjected = request.POST['returnDateProjected'],
-                            returnDate = None,
+                            returnDate = "3000-01-01",
                             adminNote = request.POST['adminNotes'],
                             )
         cMO.save()
@@ -96,7 +97,7 @@ def checkInMO(request):
     code = request.POST['code']
     cMO = MovementOrder.objects.get(movementOrderCode = code)
     cMO.returnDate = date.today()
-    cMO.save
+    cMO.save()
     
     return HttpResponseRedirect(reverse('movementorder:MO'))
 
@@ -107,10 +108,10 @@ def viewMOListCompany(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
-    lMO = MovementOrder.objects.filter(MOParticipant__participant__company = cCompany).order_by('-departDate')
-    lPart = MOParticipant.objects.filter(participant__company = cCompany).filter(MovementOrder__returnDate is None).order_by(participant__alpha)
+    lMO = MovementOrder.objects.filter(moparticipant__participant__company = cCompany).filter(returnDate = "3000-01-01").order_by('-departDate')
+    lMids = Mid.objects.filter(company = cCompany).filter(moparticipant__MO__returnDate = "3000-01-01").order_by('alpha')
     
     return render_to_response('movementorder/viewMOListCompany.html', {'lMO' : lMO,
-                                                                       'lPart' : lPart
+                                                                       'lPart' : lMids
                                                                        }, 
                                                                        context_instance=RequestContext(request))

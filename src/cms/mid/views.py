@@ -120,12 +120,24 @@ def renderSwitchboard(request) :
     for p in lBillets :
         if p.billet == "A/C" and p.current :
             flagApt = True
+            
+    flagAdj = False;
+    for p in lBillets :
+        if p.billet == "ADJ" and p.current :
+            flagAdj = True
+            
+    flagCC = False;
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            flagCC = True
     
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
                                                         'firstie' : flagFirstie,
                                                         'PMO' : flagPMO,
                                                         'admin' : flagAdmin,
-                                                        'Aptitude' : flagApt
+                                                        'Aptitude' : flagApt,
+                                                        'CC' : flagCC,
+                                                        'ADJ' : flagAdj
                                                         },
                                                         context_instance=RequestContext(request))
 
@@ -366,8 +378,8 @@ def saveUser(request) :
                    weekends = request.POST['weekends'], 
                    company = cCompany,
                    rank = cRank,
-                   #acSAT = True,
-                   #PRTSat = True,
+                   acSAT = True,
+                   PRTSat = True,
                    CQPR = "0.00",
                    SQPR = "0.00",
                    performanceGrade = "N",
@@ -445,6 +457,391 @@ def passReset(request) :
     
     return HttpResponseRedirect('mid:selectPassReset')
 
+#Following functions deal with CC's functionality
+@login_required(redirect_field_name='/')
+def assignBillets(request):
+    #Allows CC to appoint company staff
+    
+    #Saves billet assignment    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagCC = False
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            flagCC = True
+
+    if not flagCC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lBillet = Billet.objects.filter(mid__company = cCompany)
+    
+    cXO = None
+    for p in lBillet:
+        if p.billet == "XO" and p.current:
+            cXO = p
+    
+    cHA = None
+    for p in lBillet:
+        if p.billet == "HA" and p.current:
+            cHA = p
+    
+    cOPS = None
+    for p in lBillet:
+        if p.billet == "OPS" and p.current:
+            cOPS = p
+    
+    cADJ = None
+    for p in lBillet:
+        if p.billet == "ADJ" and p.current:
+            cADJ = p
+    
+    cPMO = None
+    for p in lBillet:
+        if p.billet == "PMO" and p.current:
+            cPMO = p
+    
+    cAC = None
+    for p in lBillet:
+        if p.billet == "AC" and p.current:
+            cAC = p
+    
+    cSAF = None
+    for p in lBillet:
+        if p.billet == "SAF" and p.current:
+            cSAF = p
+    
+    cAC = None
+    for p in lBillet:
+        if p.billet == "A/C" and p.current:
+            cAC = p
+    
+    cADEO = None
+    for p in lBillet:
+        if p.billet == "ADEO" and p.current:
+            cADEO = p
+    
+    cATFP = None
+    for p in lBillet:
+        if p.billet == "ATFP" and p.current:
+            cATFP = p
+    
+    cTRN = None
+    for p in lBillet:
+        if p.billet == "TRN" and p.current:
+            cTRN = p
+    
+    c1LT = None
+    for p in lBillet:
+        if p.billet == "1LT" and p.current:
+            c1LT = p
+    
+    cADM = None
+    for p in lBillet:
+        if p.billet == "ADM" and p.current:
+            cADM = p
+    
+    cPRO = None
+    for p in lBillet:
+        if p.billet == "PRO" and p.current:
+            cPRO = p
+    
+    cWRD = None
+    for p in lBillet:
+        if p.billet == "WRD" and p.current:
+            cWRD = p
+    
+    cDRL = None
+    for p in lBillet:
+        if p.billet == "DRL" and p.current:
+            cDRL = p
+    
+    cSAVI = None
+    for p in lBillet:
+        if p.billet == "SAVI" and p.current:
+            cSAVI = p
+    
+    cCMEO = None
+    for p in lBillet:
+        if p.billet == "CMEO" and p.current:
+            cCMEO = p
+    
+    cFIN = None
+    for p in lBillet:
+        if p.billet == "FIN" and p.current:
+            cFIN = p
+    
+    c1SGT = None
+    for p in lBillet:
+        if p.billet == "1SGT" and p.current:
+            c1SGT = p
+    
+    cTRS1 = None
+    for p in lBillet:
+        if p.billet == "TRNS" and p.current:
+            cTRS1 = p
+    
+    cTRS2 = None
+    for p in lBillet:
+        if p.billet == "TRNS" and p.current and p.evaluation == "2" :
+            cTRS2 = p
+    
+    cDRLS = None
+    for p in lBillet:
+        if p.billet == "DRLS" and p.current:
+            cDRLS = p
+    
+    cADMC = None
+    for p in lBillet:
+        if p.billet == "ADMC" and p.current:
+            cADMC = p
+    
+    cMISL = None
+    for p in lBillet:
+        if p.billet == "MISLO" and p.current:
+            cMISL = p
+
+    lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
+    lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
+                                                                                                        
+    return render_to_response('mid/assignBillets.html', {'lMidsOne' : lMidsOne, 
+                                                     'lMidsTwo' : lMidsTwo,
+                                                     'XO'  : cXO,
+                                                     'HA'  : cHA,
+                                                     'OPS' : cOPS,
+                                                     'ADJ' : cADJ,
+                                                     'PMO' : cPMO,
+                                                     'AC'  : cAC,
+                                                     'SAF' : cSAF,
+                                                     'AC'  : cAC,
+                                                     'ADEO': cADEO,
+                                                     'ATFP': cATFP,
+                                                     'TRN' : cTRN,
+                                                     '1LT' : c1LT,
+                                                     'ADM' : cADM,
+                                                     'PRO' : cPRO,
+                                                     'WRD' : cWRD,
+                                                     'DRL' : cDRL,
+                                                     'SAVI': cSAVI,
+                                                     'CMEO': cCMEO,
+                                                     'FIN' : cFIN,
+                                                     '1SGT': c1SGT,
+                                                     'TRS1': cTRS1,
+                                                     'TRS2': cTRS1,
+                                                     'DRLS': cDRLS,
+                                                     'ADMC': cADMC,
+                                                     'MISL': cMISL,
+                                                     }, 
+                                                     context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def assignCOC(request):
+    #Allows CC to appoint company staff
+    
+    #Saves billet assignment    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagCC = False
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            flagCC = True
+
+    if not flagCC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lBillet = Billet.objects.filter(mid__company = cCompany)
+    
+    cPC1 = None
+    for p in lBillet:
+        if p.billet == "PC" and p.current and p.evaluation == "1" :
+            cPC1 = p
+            
+    cPC2 = None
+    for p in lBillet:
+        if p.billet == "PC" and p.current and p.evaluation == "2" :
+            cPC2 = p
+            
+    cPC3 = None
+    for p in lBillet:
+        if p.billet == "PC" and p.current and p.evaluation == "3" :
+            cPC3 = p
+            
+    cPC4 = None
+    for p in lBillet:
+        if p.billet == "PC" and p.current and p.evaluation == "4" :
+            cPC4 = p
+    
+    cPLS1 = None
+    for p in lBillet:
+        if p.billet == "PLTS" and p.current and p.evaluation == "1" :
+            cPLS1 = p
+    
+    cPLS2 = None
+    for p in lBillet:
+        if p.billet == "PLTS" and p.current and p.evaluation == "2" :
+            cPLS2 = p
+    
+    cPLS3 = None
+    for p in lBillet:
+        if p.billet == "PLTS" and p.current and p.evaluation == "3" :
+            cPLS3 = p
+    
+    cPLS4 = None
+    for p in lBillet:
+        if p.billet == "PLTS" and p.current and p.evaluation == "4" :
+            cPLS4 = p 
+    
+    cSL1 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "1" :
+            cSL1 = p
+    
+    cSL2 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "2" :
+            cSL2 = p
+    
+    cSL3 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "3" :
+            cSL3 = p
+    
+    cSL4 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "4" :
+            cSL4 = p
+    
+    cSL5 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "5" :
+            cSL5 = p
+    
+    cSL6 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "6" :
+            cSL6 = p
+    
+    cSL7 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "7" :
+            cSL7 = p
+    
+    cSL8 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "8" :
+            cSL8 = p
+    
+    cSL9 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "9" :
+            cSL9 = p
+    
+    cSL10 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "10" :
+            cSL10 = p
+    
+    cSL11 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "11" :
+            cSL11 = p
+    
+    cSL12 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.evaluation == "12" :
+            cSL12 = p
+
+    lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
+    lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
+                                                                                                        
+    return render_to_response('mid/assignCOC.html', {'lMidsOne' : lMidsOne, 
+                                                     'lMidsTwo' : lMidsTwo,
+                                                     'PC1' : cPC1,
+                                                     'PC2' : cPC2,
+                                                     'PC3' : cPC3,
+                                                     'PC4' : cPC4,
+                                                     'PLS1': cPLS1,
+                                                     'PLS2': cLS2,
+                                                     'PLS3': cPLS3,
+                                                     'PLS4': cPLS4,
+                                                     'SL1' : cSL1,
+                                                     'SL2' : cSL2,
+                                                     'SL3' : cSL3,
+                                                     'SL4' : cSL4,
+                                                     'SL5' : cSL5,
+                                                     'SL6' : cSL6,
+                                                     'SL7' : cSL7,
+                                                     'SL8' : cSL8,
+                                                     'SL9' : cSL9,
+                                                     'SL10': cSL10,
+                                                     'SL11': cSL11,
+                                                     'SL12': cSL12,
+                                                     }, 
+                                                     context_instance=RequestContext(request))
+    
+
+    
+@login_required(redirect_field_name='/')
+def saveAssignBillet(request):
+    #Saves billet assignment    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagCC = False
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            flagCC = True
+
+    if not flagCC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    cDate = date.today()
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    alpha = request.POST['alpha']
+    
+    cMid = Mid.objects.get(alpha = alpha)
+    
+    lBillet = Billet.objects.filter(mid__company = cCompany)
+    
+    for p in lBillet:
+        if p.billet == "CC" :
+            p.endDate = cDate
+            p.current = False
+            p.save()
+    
+    cBillet = Billet(mid = cMid,
+                     billet = "CC",
+                     startDate = cDate,
+                     endDate = request.POST['endDate'],
+                     current = True
+                     )
+    cBillet.save()
+                                                                                                        
+    return HttpResponseRedirect(reverse('mid:appointCC')) 
+
 @login_required(redirect_field_name='/')    
 def PRTSat(request) :
     #Aggregate list of people's physical status
@@ -470,11 +867,11 @@ def PRTSat(request) :
     
     return render_to_response('mid/PRTSat.html', { 'cCompany' : cCompany, 
                                                    'lMids' : lMids },
-                              context_instance=RequestContext(request))
+                                                   context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
-def savePRTSat(request):
-    #Save updated [hysical status
+def savePRT(request):
+    #Save updated physical status
 
     alpha = request.user.username.split('m')
     alpha = alpha[1]
@@ -495,14 +892,18 @@ def savePRTSat(request):
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
-        return HttpResponseRedirect("/")
+       return HttpResponseRedirect("/")
     
     lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
-    
-    for p in lMids :
-        p.PRTSat = request.POST[p.alpha+'P']
-        p.save()
 
+    for p in lMids :
+        if request.POST[p.alpha+'P'] == "True" :
+            p.PRTSat = True
+        else :
+            p.PRTSat = False
+            
+        p.save()
+ 
     return HttpResponseRedirect(reverse('mid:PRTSat')) 
 
 @login_required(redirect_field_name='/')
@@ -719,3 +1120,113 @@ def updateDiscipline(request):
         p.save()
     
     return HttpResponseRedirect(reverse('mid:assessDiscipline')) 
+
+#Following functions deal with CO's functionality
+@login_required(redirect_field_name='/')
+def appointCC(request):
+    #Allows CO to appoint CC
+    
+    #Second check - make sure the user is CO
+    if re.match("CO", request.user.username) is not None :
+        name = request.user.username.split('_')
+        cCompany = name[1]  
+    else:
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lBillet = Billet.objects.filter(mid__company = cCompany)
+    
+    cBillet = None
+    for p in lBillet:
+        if p.billet == "CC" and p.current:
+            cBillet = p
+    
+    lMids = Mid.objects.filter(company = cCompany).filter(rank = "1")
+                                                                                                        
+    return render_to_response('mid/appointCC.html', {'cBillet' : cBillet, 
+                                                     'lMids' : lMids 
+                                                     }, 
+                                                     context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveAppointCC(request):
+    #Allows CO to appoint CC
+    
+    #Second check - make sure the user is CO
+    if re.match("CO", request.user.username) is not None :
+        name = request.user.username.split('_')
+        cCompany = name[1]  
+    else:
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    cDate = date.today()
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    alpha = request.POST['alpha']
+    
+    cMid = Mid.objects.get(alpha = alpha)
+    
+    lBillet = Billet.objects.filter(mid__company = cCompany)
+    
+    for p in lBillet:
+        if p.billet == "CC" :
+            p.endDate = cDate
+            p.current = False
+            p.save()
+    
+    cBillet = Billet(mid = cMid,
+                     billet = "CC",
+                     startDate = cDate,
+                     endDate = request.POST['endDate'],
+                     current = True
+                     )
+    cBillet.save()
+                                                                                                        
+    return HttpResponseRedirect(reverse('mid:appointCC')) 
+
+@login_required(redirect_field_name='/')
+def changeCompany(request):
+    #Allows CO to move MIDN to another company
+    
+    #Second check - make sure the user is CO
+    if re.match("CO", request.user.username) is not None :
+        name = request.user.username.split('_')
+        cCompany = name[1]  
+    else:
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lMids = Mid.objects.filter(company = cCompany)
+                                                                                                        
+    return render_to_response('mid/changeCompany.html', {'lMids' : lMids 
+                                                         }, 
+                                                         context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveChangeCompany(request):
+    #Allows CO to appoint CC
+    
+    #Second check - make sure the user is CO
+    if re.match("CO", request.user.username) is not None :
+        name = request.user.username.split('_')
+        cCompany = name[1]  
+    else:
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    alpha = request.POST['alpha']
+    
+    cMid = Mid.objects.get(alpha = alpha)
+    
+    cMid.company = request.POST['company']
+    cMid.save()
+                                                                                                        
+    return HttpResponseRedirect(reverse('mid:changeCompany')) 

@@ -51,6 +51,21 @@
         <li><a href = "logout">Log out</a></li>
     </ul>
     
+    {% if CC %}
+    <h3>Company Commander options:</h3>
+    <ul>
+        <li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
+        <li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
+    </ul>
+    {%endif%}
+    
+    {% if ADJ %}
+    <h3>Company Adjutant options:</h3>
+    <ul>
+        <li><a href = "companywatch/AcYear">Create Duty Calendar</a></li>
+    </ul>
+    {%endif%}
+    
     {% if Aptitude %}
     <h3>Aptitude/Conduct Officer options: </h3>
     <ul>
@@ -75,10 +90,4 @@
         <li><a href = "mid/selectPassReset">Restore user's password</a></li>
     </ul>
     {% endif %}
-    {% if ADJ %}
-    <h3>Company Adjutant</h3>
-    <ul>
-        <li><a href = "companywatch/AcYear">Create Duty Calendar</a></li>
-    </ul>
-    {%endif%}
 {% endblock %}
