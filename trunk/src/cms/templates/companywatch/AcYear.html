@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Current Duty Calendar for {{ cCompany|numberToText }} Company: {% endblock %}
+
+{% block content %}
+
+<form action="saveAcYear" method="post"> 
+{% csrf_token %}
+<table border=1>
+<caption>Fall Semester</caption>
+    <tr>
+        <td>Start Date: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>6 weeks: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>12 weeks</td><td>date</td>
+    </tr>
+    <tr>
+        <td>Ac Watch</td><td>select box</td>
+    </tr>
+    <tr>
+        <td>End Date: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Exam Week Start: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Exam Week End: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Fall Intersessional Leave Start: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Fall Intersessional Leave End:</td><td>date</td>
+    </tr>
+</table>
+<table>
+<caption>Spring Semester</caption>
+    <tr>
+        <td>Start Date: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>6 weeks: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>12 weeks: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Ac Watch: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>End Date: </td><td></td>
+    </tr>
+    <tr>
+        <td>Exam Week Start: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Examp Week End: </td><td></td>
+    </tr>
+    <tr>
+        <td>Spring Intersessional Leave Start: </td><td></td>
+    </tr>
+    <tr>
+        <td>Spring Intersessional Leave End: </td><td></td>
+    </tr>
+</table>
+<table>
+<caption>Leave Dates</caption>
+    <tr>
+        <td>Thanksgiving Start: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Thanksgiving End: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Chrismas Leave Start: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Christmas Leave End: </td><td>date</td>
+    </tr>
+</table>
+<table>
+<caption>Holidays</caption>
+    <tr>
+        <td>Labor Day: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Columbus Day: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Veterans Day: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>MLK Day: </td><td>date</td>
+    </tr>
+    <tr>
+        <td>Washingon Birthday</td><td>date</td>
+    </tr>
+</table>
+
+</form>
+{% endblock %}
