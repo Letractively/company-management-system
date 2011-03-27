@@ -46,7 +46,7 @@ urlpatterns = patterns('',
     #(r'^zero8/', include('zero8.urls')),
     
     (r'^weekends/', include('weekends.urls', namespace="weekends", app_name="weekends")),
-    (r'^movementOrders/', include('MO.urls', namespace="MO", app_name="MO")),
+    (r'^movementOrders/', include('movementorder.urls', namespace="movementorder", app_name="movementorder")),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:

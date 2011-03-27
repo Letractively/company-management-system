@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}MO Module{% endblock %}
+
+{% block content %}
+
+<h3>List of MO-s for the Company: </h3>
+<table>
+{% for p in lMO %}
+    <tr>
+        <td>{{ p.departDate }} - {{ p.returnDate }}</td>
+        <td>{{ p.movementOrderCode }}</td>
+        <td>{{ p.organization }}</td>
+        <td>{{ p.adminNote }}</td>
+    </tr>
+{% empty %}
+    <tr><td>You have not been on any MO-s.</td></tr>
+{% endfor %}
+</table>
+
+{{ lPart }}
+
+{% endblock %}
