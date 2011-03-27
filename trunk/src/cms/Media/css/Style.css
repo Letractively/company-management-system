@@ -4,7 +4,7 @@ body, header, footer, section, div, nav, menu {
 
 body {
   background-color: rgba(107, 144, 218, 1);
-  width: 800px;
+  width: 900px;
   position: relative;
   margin-left:auto;
   margin-right:auto;
@@ -17,7 +17,7 @@ body {
   margin-right:auto;
   padding: 10px;
   background-color: rgba(100, 125, 150, 1);
-  width: 800px;
+  width: 900px;
   border-radius: 5px;
   -moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
   -webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
@@ -103,7 +103,7 @@ ul, li {
 nav {
 	float:left;
 	padding: 0px 5px 5px 0px;
-	width: 215px;
+	width: 200px;
 }
 
 ul#menu, ul#menu ul {
