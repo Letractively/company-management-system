@@ -19,7 +19,7 @@
       <section id="notification">
       </section>
       <div id="menu">
-        {% if is_logged_in %}{% include "switchboard.html" %}{% endif %}
+        {% if is_logged_in %}{% include switchboard %}{% endif %}
       </div>
       <section id="main">
         {% block content %}
