@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Probations/Tours/Restriction{% endblock %}
+{% block content %}
+
+<h1>View Punishments: </h1>
+
+{% if cDisc %}
+    You currently have {{ cDisc.daysRemaining }} days of restriction and  
+    {{ cChit.toursRemaining }} tours remaining.<br />
+    
+    Your chit will expire on {{ cChit.endDate }}. 
+{% endif %}
+
+{% if cProb %}
+    You currently have {{ cProb.daysRemaining }} days of probation remaining. 
+{% endif %}
+
+<h3>Past Punishments: </h3>
+<table>
+    <tr>
+        <td>Start Date </td>
+        <td>Days Awarded </td>
+        <td>Tours Awarded </td>
+        <td>Admin Notes </td>
+    </tr>
+{% for p in lDisc %}
+    <tr>
+        <td>{{ p.startDate }}</td>
+        <td>{{ p.daysAwarded }}</td>
+        <td>{{ p.toursAwarded }}</td>
+        <td>{{ p.adminNotes }}</td>
+    </tr>
+{% empty %}
+    <tr><td colspan = 4>You have not been given any Restrictions/Torus.</td></tr>
+{% endfor %}
+
+{% for p in lProb %}
+    <tr>
+        <td>{{ p.startDate }}</td>
+        <td>{{ p.daysAwarded }}</td>
+        <td> 0 </td>
+        <td>{{ p.description }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
