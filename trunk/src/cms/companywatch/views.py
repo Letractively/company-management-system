@@ -45,7 +45,7 @@ def AcYear(request):
     if not isAdj:
         return HttpResponseRedirect('/')
     
-    
+    return render_to_response('companywatch/AcYear.html', { },context_instance=RequestContext(request))
     
     
     
