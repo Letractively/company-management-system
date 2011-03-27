@@ -110,10 +110,17 @@ def renderSwitchboard(request) :
         if p.billet == "PMO" and p.current :
             flagPMO = True
     
+    flagApt = False;
+    for p in lBillets :
+        if p.billet == "A/C" and p.current :
+            flagApt = True
+    
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
                                                         'firstie' : flagFirstie,
                                                         'PMO' : flagPMO,
-                                                        'admin' : flagAdmin },
+                                                        'admin' : flagAdmin,
+                                                        'Aptitude' : flagApt
+                                                        },
                                                         context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
@@ -575,8 +582,7 @@ def assessDiscipline(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lDisc = Discipline.objects.filter(daysRemaining > 0 or toursRemaining > 0
-                                      ).filter(Mid__company = cCompany).order_by('-alpha')
+    lDisc = Discipline.objects.filter(daysRemaining > 0 or toursRemaining > 0).filter(Mid__company = cCompany).order_by('-alpha')
     
     return render_to_response('mid/assessDiscipline.html', { 'cCompany' : cCompany, 
                                                             'lMids' : lMids },

@@ -21,14 +21,16 @@
         </td>
         <td>{{ p.PRT }}</td>
     </tr>
-{% empty %}
-    <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
-{% endfor %}
-{% if lMids %}    
     <tr>
         <td colspan="8">
             <input type="submit" value="Save" />
         </td>
     </tr>
-{% endif %}
+{% empty %}
+    <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
+{% endfor %}
+
+</form>
+</table>    
+   
 {% endblock %}
