@@ -45,7 +45,7 @@ section #main {
   overflow: auto;
 }
 
-/** Begin: Navigation **/
+/** Begin: Navigation 
 nav {
   height: 70px;
   background-color: rgba(100, 125, 200, 1);
@@ -97,7 +97,60 @@ ul, li {
     color: black;
     background-color: rgba(255, 255, 255, .7);
 }
-/** End: Navigation **/
+ End: Navigation **/
+
+/** Begin: Menu Section **/
+nav {
+	float:left;
+	padding: 0px 5px 5px 0px;
+	width: 215px;
+}
+
+ul#menu, ul#menu ul {
+	list-style-type:none;
+	margin: 0;
+	padding: 0;
+	opacity:0.8;
+}
+
+ul#menu span.link {
+	display: block;
+	text-decoration: none;	
+}
+
+ul#menu li {
+	margin-top: 0.1em;
+}
+
+ul#menu li span.link {
+	background: #001F7A;
+	color: #FFFFFF;	
+	padding: 0.5em;
+	border:hidden 5px #181919;
+}
+
+ul#menu li span.link:hover {
+	background: #000F3D;
+}
+
+ul#menu li ul li span.link {
+	background: #AFADE0;
+	color: #000000;
+	padding-left: 0.5em;
+	border:hidden 5px #181919;
+}
+
+ul#menu li ul li span.link:hover {
+	background: #8884E3;
+	border-left: 0.3em #000000 solid;
+	padding-left: 0.15;
+}
+
+.link {
+	cursor:pointer;
+}
+
+/** End: Menu Section **/
 
 footer {
   height: 10px;
