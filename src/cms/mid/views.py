@@ -150,7 +150,7 @@ def passChange(request) :
     cUser.set_password(password)
     cUser.save()
     
-    return HttpResponseRedirect(reverse('switchboard'))
+    return HttpResponseRedirect(reverse('mid:renderSwitchboard'))
 
 #Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
@@ -302,7 +302,7 @@ def saveUser(request) :
         cUser.is_staff = False
         cUser.save()
       
-    return HttpResponseRedirect('selectUser')
+    return HttpResponseRedirect('mid:selectUser')
 
 @login_required(redirect_field_name='/')
 def selectPassReset(request):
@@ -360,7 +360,7 @@ def passReset(request) :
     cUser.set_password(alpha)
     cUser.save()
     
-    return HttpResponseRedirect('selectPassReset')
+    return HttpResponseRedirect('mid:selectPassReset')
 
 @login_required(redirect_field_name='/')    
 def PRTSat(request) :
@@ -420,7 +420,7 @@ def savePRTSat(request):
         p.PRTSat = request.POST[p.alpha+'P']
         p.save()
 
-    return HttpResponseRedirect(reverse('PRTSat')) 
+    return HttpResponseRedirect(reverse('mid:PRTSat')) 
 
 @login_required(redirect_field_name='/')
 def enterDiscipline(request):

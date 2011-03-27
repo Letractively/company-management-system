@@ -123,7 +123,7 @@ def reqWeekend(request):
     
     cWeekend.save()
 
-    return HttpResponseRedirect(reverse('weekendIndex'))
+    return HttpResponseRedirect(reverse('weekends:weekendIndex'))
     #return HttpResponseRedirect('/weekends/')
     
 @login_required(redirect_field_name='/')
@@ -145,7 +145,7 @@ def cancelReqWeekend(request):
     cWeekend = Weekend.objects.filter(mid = cMid).filter(startDate = cNextWeekendBeg)
     cWeekend.delete()
 
-    return HttpResponseRedirect(reverse('weekendIndex'))
+    return HttpResponseRedirect(reverse('weekends:weekendIndex'))
     #return HttpResponseRedirect('/weekends/')
 
 @login_required(redirect_field_name='/')
@@ -241,7 +241,7 @@ def saveWeekendCount(request):
         p.weekendsComment = request.POST[p.alpha+'Comm']
         p.save()
 
-    return HttpResponseRedirect(reverse('weekendAdmin')) 
+    return HttpResponseRedirect(reverse('weekends:weekendAdmin')) 
     #return HttpResponseRedirect('/weekends/admin')
 
 #Following functions deal with CO's functionality - approval and disapproval of weekend requests
@@ -297,7 +297,7 @@ def approveWeekend(request):
         p.status = "A"
         p.save()
     
-    return HttpResponseRedirect(reverse('coApproval'))
+    return HttpResponseRedirect(reverse('weekends:coApproval'))
     
 @login_required(redirect_field_name='/')
 def denyWeekend(request): 
@@ -328,7 +328,7 @@ def denyWeekend(request):
         p.status = "D"
         p.save()
     
-    return HttpResponseRedirect(reverse('coApproval'))
+    return HttpResponseRedirect(reverse('weekends:coApproval'))
 
 @login_required(redirect_field_name='/')
 def approveAllWeekends(request):
@@ -354,7 +354,7 @@ def approveAllWeekends(request):
         p.status = "A"
         p.save()
         
-    return HttpResponseRedirect(reverse('coApproval'))
+    return HttpResponseRedirect(reverse('weekends:coApproval'))
 
 @login_required(redirect_field_name='/')
 def grantWeekends(request):
@@ -415,4 +415,4 @@ def commitWeekendGrant(request):
         
         cWeekend.save()
         
-    return HttpResponseRedirect(reverse('grantWeekends'))
+    return HttpResponseRedirect(reverse('weekends:grantWeekends'))

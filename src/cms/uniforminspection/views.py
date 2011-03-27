@@ -243,4 +243,4 @@ def uInsSave(request) :
     
     cuIns.save()
 
-    return HttpResponseRedirect(reverse('uInsSelect'))
+    return HttpResponseRedirect(reverse('uniforminspection:uInsSelect'))

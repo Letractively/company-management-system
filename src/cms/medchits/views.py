@@ -77,4 +77,4 @@ def medChitSubmit(request):
                      adminNotes = request.POST['adminNotes'])
         cChit.save()
     
-    return HttpResponseRedirect(reverse('medchits'))
+    return HttpResponseRedirect(reverse('medchits:medchits'))
