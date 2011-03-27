@@ -7,25 +7,31 @@
     <table>
     <form action="updateDiscipline" method="post"> 
     {% csrf_token %}
+    <tr><td>Mid: </td>
+    <td>Start date: </td>
+    <td>Days Awarded: </td>
+    <td>Days Remaining: </td>
+    <td>Tours Awarded: </td>
+    <td>Tours Remaining: </td>
+    </tr>
         {% for p in lDisc %}
             <tr>
-                <td>{{ p.mid.alpha }}</td>
-                <td>{{ p.mid.LName }}</td>
-                <td>{{ p.mid.alpha }}</td>
+                <td>{{ p.mid }}</td>
                 <td>{{ p.startDate }}</td>
                 <td>{{ p.daysAwarded }}</td>
                 <td>{{ p.daysRemaining }}</td>
                 <td>{{ p.toursAwarded }}</td>
                 <td>{{ p.toursRemaining }}</td>
-                <td><select name = "mod">
-                    <value name = "0">Keep</value>
-                    <value name = "1">-1</value></select>
+                <td><select name = "{{ p.id }}">
+                        <option value = "not">Do not account for a day</option>
+                        <option value = "true">Account for a day</option>
+                    </select>
                 </td>
             </tr>
         {% empty %}
             No Restrictions/Tours to update. 
         {% endfor %}
-    <tr><td colspan = 10><input type="submit" value="Enter" /></td></tr>
+    <tr><td colspan = 10><input type="submit" value="Update" /></td></tr>
     </form>
     </table>
 

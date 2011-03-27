@@ -14,8 +14,6 @@ namespace="cms"
 
 urlpatterns = patterns('',
     
-    #Initial login page    
-    
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
 
     url(r'^$', 'mid.views.loginPage', name = "base"),

@@ -16,21 +16,20 @@
         <td>
             <select name = "{{ p.alpha }}P">
                 <option value="True">SAT</option>
-                <option value="False" {% if not p.PRTSat %} selected {% endif %} >UNSAT</option>
+                <option value="False" {% if p.PRTSat == False %} selected {% endif %} >UNSAT</option>
             </select>
         </td>
-        <td>{{ p.PRT }}</td>
-    </tr>
-    <tr>
-        <td colspan="8">
-            <input type="submit" value="Save" />
-        </td>
+        <td>{{ p.score }}</td>
     </tr>
 {% empty %}
     <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
 {% endfor %}
-
+    <tr>
+        <td colspan="6">
+            <input type="submit" value="Save" />
+        </td>
+    </tr>
 </form>
-</table>    
+</table>
    
 {% endblock %}
