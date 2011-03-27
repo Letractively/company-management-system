@@ -6,13 +6,17 @@ admin.autodiscover()
 
 urlpatterns = patterns('mid.views',
 
+    #General Options
+    url(r'editPersonalInformation$', 'editPersonalInformation', name = "editPersonalInformation"),
+    (r'savePersonalInformation$', 'savePersonalInformation'),
+    (r'viewDiscipline$', 'viewDiscipline'),
+    url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
+    (r'passChange$', 'passChange'),
+
     #Admin options:
     url(r'selectUser$', 'selectUser', name = "selectUser"),
     (r'modifyUser$', 'modifyUser'),
     (r'saveUser$', 'saveUser'),
-    
-    url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
-    (r'passChange$', 'passChange'),
     (r'selectPassReset$', 'selectPassReset'),
     (r'passReset$', 'passReset'),
     
