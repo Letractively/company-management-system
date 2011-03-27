@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load filters %}
 {% block title %}Special Request Chit{% endblock %}
 {% block content %}
 
 <h1>Reviewing Special Request Chit {{ cChit.id }}.</h1>
 
-<table>
+<table border="1px">
 <tr>
 	<td> Special Request
 <tr class="SR_lable">
@@ -26,7 +27,7 @@
 </tr>
 <tr>
 	<td>{{ cChit.viaLine }}</td>
-	<td>20{{ cChit.mid.alpha}}[0:1]</td>
+	<td>{{ cChit.mid.alpha|alphaToClassYear}}</td>
 	<td>{{ cChit.mid.company }}</td>
 	<td>{{ cChit.mid.roomNumber }}</td>
 	<!--todo-->
