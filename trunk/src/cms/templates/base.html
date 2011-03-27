@@ -15,9 +15,9 @@
       </header>
       <section id="notification">
       </section>
-      <nav>
+      <div id="menu">
         {% if mid or co%}{% include "nav.html" %}{% endif %}
-      </nav>
+      </div>
       <section id="main">
         {% block content %}
         {% endblock %}
