@@ -13,13 +13,13 @@
       </header>
       <section id="notification">
       </section>
+      <nav>
+        {% if mid or co%}{% include "nav.html" %}{% endif %}
+      </nav>
       <section id="main">
         {% block content %}
         {% endblock %}
       </section>
-      <nav>
-        {% if mid %}{% include "nav.html" %}{% endif %}
-      </nav>
       <footer>
       </footer>
     </section>
