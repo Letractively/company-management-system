@@ -4,7 +4,7 @@ body, header, footer, section, div, nav, menu {
 
 body {
   background-color: rgba(107, 144, 218, 1);
-  width: 900px;
+  width: 800px;
   position: relative;
   margin-left:auto;
   margin-right:auto;
@@ -17,7 +17,7 @@ body {
   margin-right:auto;
   padding: 10px;
   background-color: rgba(100, 125, 150, 1);
-  width: 900px;
+  width: 800px;
   border-radius: 5px;
   -moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
   -webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
@@ -28,7 +28,7 @@ header, #notification, #main, nav, footer {
   padding: 2px;
   color: #ffffff;
   background-color: rgba(255, 255, 255, .3);
-  width: 100%;
+  width: 596px;
 }
 
 header {
@@ -102,53 +102,53 @@ ul, li {
 
 /** Begin: Menu Section **/
 nav {
-	float:left;
-	padding: 0px 5px 5px 0px;
-	width: 200px;
+    float:left;
+    padding: 0px 0px 0px 0px;
+    width: 200px;
 }
 
 ul#menu, ul#menu ul {
-	list-style-type:none;
-	margin: 0;
-	padding: 0;
-	opacity:0.8;
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+    opacity:0.8;
 }
 
 ul#menu span.link {
-	display: block;
-	text-decoration: none;	
+    display: block;
+    text-decoration: none;  
 }
 
 ul#menu li {
-	margin-top: 0.1em;
+    margin-top: 0.1em;
 }
 
 ul#menu li span.link {
-	background: #001F7A;
-	color: #FFFFFF;	
-	padding: 0.5em;
-	border:hidden 5px #181919;
+    background: #001F7A;
+    color: #FFFFFF; 
+    padding: 0.5em;
+    border:hidden 5px #181919;
 }
 
 ul#menu li span.link:hover {
-	background: #000F3D;
+    background: #000F3D;
 }
 
 ul#menu li ul li span.link {
-	background: #AFADE0;
-	color: #000000;
-	padding-left: 0.5em;
-	border:hidden 5px #181919;
+    background: #AFADE0;
+    color: #000000;
+    padding-left: 0.5em;
+    border:hidden 5px #181919;
 }
 
 ul#menu li ul li span.link:hover {
-	background: #8884E3;
-	border-left: 0.3em #000000 solid;
-	padding-left: 0.15;
+    background: #8884E3;
+    border-left: 0.3em #000000 solid;
+    padding-left: 0.15;
 }
 
 .link {
-	cursor:pointer;
+    cursor:pointer;
 }
 
 /** End: Menu Section **/
