@@ -108,6 +108,8 @@ def renderSwitchboard(request) :
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+        if p.billet == "ADMC" and p.current :
+            flagAdmin == True
             
     flagPMO = False;
     for p in lBillets :
@@ -126,6 +128,8 @@ def renderSwitchboard(request) :
                                                         'Aptitude' : flagApt
                                                         },
                                                         context_instance=RequestContext(request))
+
+
 
 @login_required(redirect_field_name='/')
 def logOut(request):
@@ -150,7 +154,58 @@ def passChange(request) :
     cUser.set_password(password)
     cUser.save()
     
-    return HttpResponseRedirect(reverse('switchboard'))
+    return HttpResponseRedirect(reverse('mid:switchboard'))
+
+@login_required(redirect_field_name='/')
+def editPersonalInformation(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    lRooms = Room.objects.filter(company = cCompany)
+    
+    return render_to_response('mid/editPersonalInformation.html', {'cMid' : cMid,
+                                                                   'lRoom' : lRooms
+                                                                   },
+                              context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')    
+def savePersonalInformation(request) :
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    roomNumber = request.POST['roomNumber']
+    roomNumber = Room.objects.get(roomNumber = roomNumber)
+    
+    cMid.roomNumber = roomNumber
+    cMid.phoneNumber = request.POST['phone']
+    cMid.CQPR = request.POST['CQPR']
+    cMid.SQPR = request.POST['SQPR']
+    cMid.performanceGrade = request.POST['perf']
+    cMid.conductGrade = request.POST['apt']
+    cMid.PRT = request.POST['PRT']
+    cMid.save()
+    
+    return HttpResponseRedirect(reverse('mid:editPersonalInformation'))
+
+@login_required(redirect_field_name='/')
+def viewDiscipline(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+
+    lDisc = Discipline.objects.filter(mid = cMid)
+    
+    return render_to_response('mid/viewDiscipline.html', {'cMid' : cMid, 
+                                                          'lDisc' : lDisc
+                                                          },
+                                                          context_instance=RequestContext(request))
 
 #Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
@@ -169,6 +224,8 @@ def selectUser(request):
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+        if p.billet == "ADMC" and p.current :
+            flagAdmin == True
 
     if not flagAdmin :
         return HttpResponseRedirect('/')
@@ -195,6 +252,8 @@ def modifyUser(request):
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+        if p.billet == "ADMC" and p.current :
+            flagAdmin == True
 
     if not flagAdmin :
         return HttpResponseRedirect('/')
@@ -233,6 +292,8 @@ def saveUser(request) :
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+        if p.billet == "ADMC" and p.current :
+            flagAdmin == True
 
     if not flagAdmin :
         return HttpResponseRedirect('/')
@@ -320,6 +381,8 @@ def selectPassReset(request):
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+        if p.billet == "ADMC" and p.current :
+            flagAdmin == True
 
     if not flagAdmin :
         return HttpResponseRedirect('/')
@@ -345,6 +408,8 @@ def passReset(request) :
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
+        if p.billet == "ADMC" and p.current :
+            flagAdmin == True
 
     if not flagAdmin :
         return HttpResponseRedirect('/')

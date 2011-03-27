@@ -35,7 +35,7 @@
         <tr>
             <td>Room number:</td>
             <td>
-                <select name = "roomNumber"/>
+                <select name = "roomNumber">
                     <option value="{{ cMid.roomNumber }}">{{ cMid.roomNumber }}</option>
                     {% for p in lRooms %}
                         <option value="{{ p.roomNumber }}">{{ p.roomNumber }}</option>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Modify user{% endblock %}
+
+{% block content %}
+
+<h3>Edit your information:</h3>
+
+<form action="savePersonalInformation" method="post">
+{% csrf_token %}
+    <table>
+        <tr><td>Phone Number: </td><td><input type = "text" name = "phone" value = "{{cMid.phoneNumber}}" /></td>
+        <tr><td>Room Number: </td>
+        <td>
+            <select name = "roomNumber"/>
+                <option value="{{ cMid.roomNumber }}">{{ cMid.roomNumber }}</option>
+                {% for p in lRooms %}
+                    <option value="{{ p.roomNumber }}">{{ p.roomNumber }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <tr><td>CQPR: </td><td><input type = "text" name = "CQPR" value = "{{cMid.CQPR}}" /></td>
+        <tr><td>SQPR: </td><td><input type = "text" name = "SQPR" value = "{{cMid.SQPR}}" /></td>
+        <tr><td>Performance Grade: </td><td><input type = "text" name = "perf" value = "{{cMid.performanceGrade}}"/></td>
+        <tr><td>Conduct Grade: </td><td><input type = "text" name = "apt" value = "{{cMid.conductGrade}}" /></td>
+        <tr><td>PRT Score: </td><td><input type = "text" name = "PRT" value = "{{cMid.PRT}}" /></td>
+    <tr><td colspan = 2><input type="submit" value="Save" /></td></tr>
+    </table>
+</form>
+
+{% endblock %}
