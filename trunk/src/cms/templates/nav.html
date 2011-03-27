@@ -1,52 +1,62 @@
-<ul id="menu">
-    <li>
-         <span class="link" onclick="location.href='{% url switchboard %}';">
-              Home
-         </span>
-    </li>
-	<li>
-		<span class="link">
-			Weekends
-		</span>
-		<ul>
-			<li>
-				<span class="link" onclick="location.href='{% url weekends:weekendIndex %}';">
-					Request Weekends
-				</span>
-			</li>
-			<li>
-				<span class="link" onclick="location.href='#';">
-					View Weekend List
-				</span>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<span class="link">
-			Forms
-		</span>
-		<ul>
-			<li><span class="link" onclick="location.href='{% url form1:form1 %}';">Review Form-1s</span></li>
-			<li><span class="link" onclick="location.href='#';">Medical Chits</span></li>
-			<li><span class="link" onclick="location.href='{% url specReq:specReq %}';">Special Request Chits</span></li>
-		    <li><del><span class="link" onclick="location.href='#';">ORM Chits</span></del></li>
-		</ul>
-	</li>
-	<li>
-		<span class="link">
-			Inspections
-		</span>
-		<ul class="menu" id="inspection_menu">
-			<li><span class="link" onclick="location.href='#';">Review Room Inspections</span></li>
-		    <li><span class="link" onclick="location.href='#';">Review Uniform Inspections</span></li>
-		</ul>
-	</li>
-	<li>
-		<span class="link">
-			Personal Information
-		</span>
-		<ul class="menu" id="personal_information_menu">
-			<li><span class="link" onclick="location.href='{% url mid:passChange %}';">Change Password</span></li>
-		</ul>
-	</li>
-</ul>
+<div id="menu"
+	<ul class="menu">
+	    <li>
+	         <a href='{% url switchboard %}'>
+	              Home
+	         </a>
+	    </li>
+		<li>
+			<a class="parent" href='#'>
+				Weekends
+			</a>
+			<div>
+				<ul>
+					<li>
+						<a href='{% url weekends:weekendIndex %}'>
+							Request Weekends
+						</a>
+					</li>
+					<li>
+						<a href='#'>
+							View Weekend List
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li>
+			<a class="parent" href='#'>
+				Forms
+			</a>
+			<div>
+				<ul>
+					<li><a href='{% url form1:form1 %}'>Review Form-1s</a></li>
+					<li><a href='#'>Medical Chits</a></li>
+					<li><a href='{% url specReq:specReq %}'>Special Request Chits</a></li>
+				    <li><del><a href='#'>ORM Chits</a></del></li>
+				</ul>
+			</div>
+		</li>
+		<li>
+			<a href='#' class='parent'>
+				Inspections
+			</a>
+			<div>
+				<ul class="menu" id="inspection_menu">
+					<li><a href='#'>Review Room Inspections</a></li>
+				    <li><a href='#'>Review Uniform Inspections</a></li>
+				</ul>
+			</div>
+		</li>
+		<li>
+			<a href='#' class='parent'>
+				Personal Information
+			</a>
+			<div>
+				<ul class="menu" id="personal_information_menu">
+					<li><a href='{% url mid:passChange %}'>Change Password</a></li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
