@@ -113,7 +113,7 @@ class WatchBill(models.Model):
     ACDO = models.ForeignKey("mid.Mid", related_name='+')
     
     def __unicode__(self):
-        return unicode(self.date) + self.dutySection
+        return unicode(self.date) + " Duty Secion: " + self.dutySection
     
 class Watch(models.Model):
     watchBill = models.ForeignKey(WatchBill)
