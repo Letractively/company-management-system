@@ -91,6 +91,8 @@ class AcYear(models.Model):
     springIntersessionalStart = models.DateField(null=True,blank=True)
     springIntersessionalEnd = models.DateField(null=True,blank=True)
     summerStart = models.DateField(null=True,blank=True)
+    def __unicode__(self):
+        return unicode(self.acYear)
     
 class AcWatch(models.Model):
     acYear = models.ForeignKey(AcYear)
@@ -99,6 +101,8 @@ class AcWatch(models.Model):
     dayOfWeek = models.IntegerField(max_length=1, choices=DAY_CHOICES)
     startTime = models.TimeField()
     mid = models.ForeignKey("mid.Mid")
+    def __unicode__(self):
+        return unicode(self.semester) + unicode(self.acYear)
     
 
 class WatchBill(models.Model):
@@ -124,6 +128,9 @@ class LogBook(models.Model):
     watchBill = models.ForeignKey(WatchBill)
     
 class LogEntry(models.Model):
-    watch = models.ForeignKey(Watch)
+    watch = models.ForeignKey(LogBook)
+    entryTime = models.TimeField()
     entry = models.TextField()
+    def __unicode__(self):
+        return unicode(self.LogBook.watchBill) + unicode(self.entryTime)
     
