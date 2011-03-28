@@ -215,13 +215,13 @@
     </tr>
     
     <tr>
-    {% if not 1LT %}
+    {% if not FLT %}
         <td colspan = 3>Currently there is no First Lieutenant</td>
     {% else %}
-        <td>First Lieutenant: </td><td>{{ 1LT.mid }}</td><td>{{ 1LT.startDate }}</td> 
+        <td>First Lieutenant: </td><td>{{ FLT.mid }}</td><td>{{ FLT.startDate }}</td> 
     {%endif%}
         <td>
-            <select name = '1LT'>
+            <select name = 'FLT'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsOne %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
@@ -359,13 +359,13 @@
     </tr>
     
     <tr>
-    {% if not 1SGT %}
+    {% if not FSGT %}
         <td colspan = 3>Currently there is no First Sargeant</td>
     {% else %}
-        <td>First Sargeant: </td><td>{{ 1SGT.mid }}</td><td>{{ 1SGT.startDate }}</td> 
+        <td>First Sargeant: </td><td>{{ FSGT.mid }}</td><td>{{ FSGT.startDate }}</td> 
     {%endif%}
         <td>
-            <select name = '1SGT'>
+            <select name = 'FSGT'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
