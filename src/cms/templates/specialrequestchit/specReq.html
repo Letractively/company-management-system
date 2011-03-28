@@ -57,10 +57,10 @@
                 {{ p.get_requestType_display }}
             {%endif%}
         </td>
-        <td>{% if p.approvalStatus == 0 %}APPROVED
+        <td>{% if p.approvalStatus == 10 %}APPROVED
             {%else%}
-                {% if p.approvalStatus == -1 %}DENIED{%endif%}
-                {% if p.approvalStatus > 0 %}PENDING{%endif%}
+                {% if p.approvalStatus == 11 %}DENIED{%endif%}
+                {% if p.approvalStatus < 9 %}PENDING{%endif%}
             {%endif%}
         </td>
             <td><input type = "hidden" name = "id" value = "{{ p.id }}" />

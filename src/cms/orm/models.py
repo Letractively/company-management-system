@@ -9,8 +9,8 @@ from django.db import models
 class OrmChit(models.Model):
     mid = models.ForeignKey("mid.Mid")
     date = models.DateField()
-    street1 = models.CharField(max_length=20)
-    street2 = models.CharField(max_length=20)
+    street1 = models.CharField(max_length=40)
+    street2 = models.CharField(max_length=40)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=2)
     zip = models.CharField(max_length=5)
@@ -24,12 +24,23 @@ class OrmChit(models.Model):
     
     #the approvalLevel is an int which should be set at run time after checking
     #the toLine for the level to which the chit needs to go.s
+    slApproval = models.NullBooleanField()
+    slComment = models.TextField(null=True,blank=True)
+    pcApproval = models.NullBooleanField()
+    pcComment = models.TextField(null=True,blank=True)
+    safApproval = models.NullBooleanField()
+    safComment = models.TextField(null=True,blank=True)
+    ccApproval = models.NullBooleanField()
+    ccComment = models.TextField(null=True,blank=True)
+    selApproval = models.NullBooleanField()
+    selComment = models.TextField(null=True,blank=True)
+    coApproval = models.NullBooleanField()
+    coComment = models.TextField(null=True,blank=True)
+    
+    #the approvalLevel is an int which should be set at run time after checking
+    #the toLine for the level to which the chit needs to go.s
     approvalLevel = models.IntegerField()
     approvalStatus = models.IntegerField()
-    safetyOfficerApproval = models.NullBooleanField()
-    companyOfficerApproval = models.NullBooleanField()
-    platoonCommander = models.NullBooleanField()
-    squadLeader = models.NullBooleanField()
     def __unicode__(self):
         return unicode(self.reportDate) + " - " + self.mid.LName
     
@@ -37,7 +48,7 @@ class OrmChit(models.Model):
 class LeisureActivites(models.Model):
     OrmChit = models.ForeignKey(OrmChit)
     activity = models.CharField(max_length=20)
-    duration = models.TimeField()
+    duration = models.CharField(max_length=20)
     RAC = models.IntegerField()
     def __unicode__(self):
         return self.activity
@@ -48,6 +59,5 @@ class MethodsOfTravel(models.Model):
     estimatedArrivalTime = models.DateTimeField()
     methodOfTravel = models.CharField(max_length=20)
     RAC = models.IntegerField()
-    RiskManagementPlan = models.TextField()
     def __unicode__(self):
         return self.methodOfTravel

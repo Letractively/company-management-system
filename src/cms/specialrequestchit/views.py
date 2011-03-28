@@ -67,8 +67,8 @@ def specReqSubmit(request):
                                justification = request.POST['justification'],
                                approvalLevel = approvalLevel,
                                approvalStatus = 1,
-                               clComment = "",
-                               plComment = "",
+                               slComment = "",
+                               pcComment = "",
                                ccComment = "",
                                selComment = "",
                                coComment = ""

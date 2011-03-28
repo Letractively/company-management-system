@@ -10,6 +10,7 @@
     <tr>
         <form action="specReqView" method = "post">
         {% csrf_token %}
+        <td>{{ p.mid }}</td>
         <td>{{ p.date }}</td>
         <td>{%if p.requestType == 'O' %}
                 {{ p.otherRequestType }}

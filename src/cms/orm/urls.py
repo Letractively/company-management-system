@@ -10,7 +10,9 @@ urlpatterns = patterns('orm.views',
     (r'^/$', 'orm'),
     
     url(r'addLeisure$', 'addLeisure', name = "addLeisure"),
+    (r'saveLeisure$', 'saveLeisure'),
     url(r'addTravel$', 'addTravel', name = "addTravel"),
+    (r'saveTravel$', 'saveTravel'),
     
     (r'ormSubmit$', 'ormSubmit'),
     (r'ormView$', 'ormView'),
