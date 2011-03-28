@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Attendance{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Attendance module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Review attendance records:</h3>
+
+<table>
+<form action="reviewAttendance" method="post">
+{% csrf_token %}
+{%if lInProgEvents%}
+<tr><td colspan = 2></td>Events with pending attendance:<td>
+{%endif%}
+{% for p in lInProgEvents %}
+<tr><td>{{ p.dateTime }}</td> <td>{{ p.get_type_display }}</td> <td>{{ p.location }}</td></tr>
+{%endfor%}
+
+<tr><td colspan = 2>
+    {% for p in lEvents %}
+        <select name = "event">
+            <option value = "{{ p.id }}">{{ p.dateTime }} {{ p.get_type_display }} {{ p.location }}</option>
+        </select>
+    {%empty%}
+        You have no events with completed attendance.
+    {%endfor%}
+</td></tr>
+
+{%if lEvents%}
+<tr><td colspan = 2><input type="submit" value="Select" /></td></tr>
+{%endif%}
+
+</form>
+</table>
+
+{% endblock %}

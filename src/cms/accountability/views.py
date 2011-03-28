@@ -44,7 +44,7 @@ def createEvent(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    return render_to_response('accountability/enterAttendance.html', {'cMid':cMid,
+    return render_to_response('accountability/createEvent.html', {'cMid':cMid,
                                                                       }, 
                                                                       context_instance=RequestContext(request))
 
@@ -76,11 +76,17 @@ def saveEvent(request):
     
     cEvent = Event(dateTime = request.POST['dateTime'],
                    type = request.POST['type'],
-                   location = request.POST['location']
+                   location = request.POST['location'],
+                   platoonOneSubmitted = False,
+                   platoonTwoSubmitted = False,
+                   platoonThreeSubmitted = False,
+                   platoonFourSubmitted = False,
+                   companyComplete = False,
+                   company = cCompany
                    )
     cEvent.save()
     
-    return HttpResponseRedirect('mid:switchboard')
+    return HttpResponseRedirect(reverse('accountability:createEvent'))
 
 @login_required(redirect_field_name='/')
 def enterAttendance(request):    
@@ -105,13 +111,13 @@ def enterAttendance(request):
     lMids = Mid.objects.filter(company = cCompany).filter(platoon = cPlatoon)
     
     if cPlatoon == "1":
-        lEvents = Event.objects.filter(company = cCompany).filter(not platoonOneSubmitted)
+        lEvents = Event.objects.filter(company = cCompany).filter(platoonOneSubmitted = False)
     elif cPlatoon == "2":
-        lEvents = Event.objects.filter(company = cCompany).filter(not platoonTwoSubmitted)
+        lEvents = Event.objects.filter(company = cCompany).filter(platoonTwoSubmitted = False)
     elif cPlatoon == "3":
-        lEvents = Event.objects.filter(company = cCompany).filter(not platoonThreeSubmitted)
+        lEvents = Event.objects.filter(company = cCompany).filter(platoonThreeSubmitted = False)
     elif cPlatoon == "4":
-        lEvents = Event.objects.filter(company = cCompany).filter(not platoonFourSubmitted)
+        lEvents = Event.objects.filter(company = cCompany).filter(platoonFourSubmitted  = False)
     
     return render_to_response('accountability/enterAttendance.html', {'cMid' : cMid, 
                                                                       'lMids' : lMids,
@@ -150,7 +156,7 @@ def saveAttendance(request):
     for p in lMids :
         cAttendance = Attendance(mid = p,
                                  event = cEvent,
-                                 tempStatus = request.POST[p.alpha+'A']                                
+                                 status = request.POST[p.alpha+'A']                                
                                  )
         cAttendance.save()
         
@@ -168,6 +174,64 @@ def saveAttendance(request):
     
     cEvent.save()
 
-    return HttpResponseRedirect('mid:switchboard')
+    return HttpResponseRedirect(reverse('accountability:enterAttendance'))
     
+@login_required(redirect_field_name='/')
+def selectEvent(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    FSGT = False
+    for p in lBillets :
+        if p.billet == "FSGT" and p.current :
+            FSGT = True
+
+    if not FSGT :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lEvents = Event.objects.filter(company = cCompany).filter(companyComplete = True)[0:20]
+    lInProgEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False)
+    
+    return render_to_response('accountability/selectEvent.html', {'cMid' : cMid, 
+                                                                      'lEvents' : lEvents,
+                                                                      'lInProgEvents' : lInProgEvents
+                                                                      }, 
+                                                                      context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def reviewAttendance(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    FSGT = False
+    for p in lBillets :
+        if p.billet == "FSGT" and p.current :
+            FSGT = True
+
+    if not FSGT :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cEvent = Event.objects.get(id = request.POST['event'])
+    lAttendance = Attendance.objects.filter(event = cEvent)
+    
+    return render_to_response('accountability/reviewAttendance.html', {'cMid' : cMid, 
+                                                                       'cEvent' : cEvent,
+                                                                       'lAttendance' : lAttendance
+                                                                       }, 
+                                                                       context_instance=RequestContext(request))
