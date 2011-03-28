@@ -6,6 +6,7 @@
 {% block content %}
 
 {% csrf_token %}
+<form action="AcYearSubmit" methon="post">
 <table border=1>
 <caption>EDIT VIEW! Fall Semester</caption>
     <tr>
@@ -96,7 +97,6 @@
         <td>Washingon Birthday</td><td><input type= "text" name="{{ acYear.washingtonsBirthday }}" size = 7 /></td>
     </tr>
 </table>
-<form action="AcYearEdit" method="post">
 <input type="submit" value="Edit this Ac Year" />
 </form>
 {% endblock %}
