@@ -9,12 +9,20 @@
 <table>
 <form action="reviewAttendance" method="post">
 {% csrf_token %}
-{%if lInProgEvents%}
-<tr><td colspan = 2></td>Events with pending attendance:<td>
-{%endif%}
-{% for p in lInProgEvents %}
-<tr><td>{{ p.dateTime }}</td> <td>{{ p.get_type_display }}</td> <td>{{ p.location }}</td></tr>
-{%endfor%}
+    {%if lInProgEvents%}
+        <tr><td colspan = 3>Events with pending attendance</td><td colspan = 4> Delinquent Platoons </td><tr>
+    {%endif%}
+    {% for p in lInProgEvents %}
+        <tr>
+            <td>{{ p.dateTime }}</td>
+            <td>{{ p.get_type_display }}</td>
+            <td>{{ p.location }}</td>
+            <td>{% if not p.platoonOneSubmitted %} 1st {% endif %} </td>
+            <td>{% if not p.platoonTwoSubmitted %} 2nd {% endif %} </td>
+            <td>{% if not p.platoonThreeSubmitted %} 3rd {% endif %} </td>
+            <td>{% if not p.platoonFourSubmitted %} 4th {% endif %} </td>
+        </tr>
+    {%endfor%}
 
 <tr><td colspan = 2>
     {% for p in lEvents %}
