@@ -29,9 +29,9 @@ from datetime import timedelta
 import re
 
 def loginPage(request):
-    #if user.is_authenticated:
-    #    return HttpResponseRedirect('switchboard')
-    #else:
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('switchboard')
+    else:
         return render_to_response('mid/loginPage.html', {}, 
                                   context_instance=RequestContext(request))
 
