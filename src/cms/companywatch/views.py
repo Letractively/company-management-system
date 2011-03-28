@@ -103,7 +103,6 @@ def AcYearSubmit(request):
     year = date.today().strftime("%y")
     acYear = AcYear.objects.get(acYear=year)
     
-    acYear.isInit =  request.POST['isInit']
     acYear.fallStart =  request.POST['fallStart']
     acYear.fallGoldWeekStart =  request.POST['fallGoldWeekStart']
     acYear.fall6Weeks =  request.POST['fall6Weeks']
