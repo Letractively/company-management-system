@@ -7,7 +7,7 @@
 <h3>Select midshipmen to serve in the Company Chain of Command.</h3>
     
 <table>
-<form action="saveAssignBillets" method="post">
+<form action="saveAssignCOC" method="post">
 {% csrf_token %}
     <tr>
         <td>Billet: </td>
@@ -89,13 +89,13 @@
     </tr>
     
     <tr>
-    {% if not PLS1 %}
+    {% if not PLTS1 %}
         <td colspan = 3>Currently there is no First Platoon Sargeant</td>
     {% else %}
-        <td>First Platoon Sargeant: </td><td>{{ PLS1.mid }}</td><td>{{ PLS1.startDate }}</td>
+        <td>First Platoon Sargeant: </td><td>{{ PLTS1.mid }}</td><td>{{ PLTS1.startDate }}</td>
     {%endif%}
         <td>
-            <select name = 'PLS1'>
+            <select name = 'PLTS1'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
@@ -107,13 +107,13 @@
     </tr>
     
     <tr>
-    {% if not PLS2 %}
+    {% if not PLTS2 %}
         <td colspan = 3>Currently there is no Second Platoon Sargeant</td>
     {% else %}
-        <td>Second Platoon Sargeant: </td><td>{{ PLS2.mid }}</td><td>{{ PLS2.startDate }}</td>
+        <td>Second Platoon Sargeant: </td><td>{{ PLTS2.mid }}</td><td>{{ PLTS2.startDate }}</td>
     {%endif%}
         <td>
-            <select name = 'PLS2'>
+            <select name = 'PLTS2'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
@@ -125,13 +125,13 @@
     </tr>
     
     <tr>
-    {% if not PLS3 %}
+    {% if not PLTS3 %}
         <td colspan = 3>Currently there is no Third Platoon Sargeant</td>
     {% else %}
-        <td>Third Platoon Sargeant: </td><td>{{ PLS3.mid }}</td><td>{{ PLS3.startDate }}</td>
+        <td>Third Platoon Sargeant: </td><td>{{ PLTS3.mid }}</td><td>{{ PLTS3.startDate }}</td>
     {%endif%}
         <td>
-            <select name = 'PLS3'>
+            <select name = 'PLTS3'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
@@ -143,195 +143,15 @@
     </tr>
     
     <tr>
-    {% if not PLS4 %}
+    {% if not PLTS4 %}
         <td colspan = 3>Currently there is no Fourth Platoon Sargeant</td>
     {% else %}
-        <td>Fourth Platoon Sargeant: </td><td>{{ PLS4.mid }}</td><td>{{ PLS4.startDate }}</td>
+        <td>Fourth Platoon Sargeant: </td><td>{{ PLTS4.mid }}</td><td>{{ PLTS4.startDate }}</td>
     {%endif%}
         <td>
-            <select name = 'PLS4'>
+            <select name = 'PLTS4'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL1 %}
-        <td colspan = 3>Currently there is no 1-1 Squad Leader</td>
-    {% else %}
-        <td>1-1 Squad Leader: </td><td>{{ SL1.mid }}</td><td>{{ SL1.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL1'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL2 %}
-        <td colspan = 3>Currently there is no 1-2 Squad Leader</td>
-    {% else %}
-        <td>1-2 Squad Leader: </td><td>{{ SL2.mid }}</td><td>{{ SL2.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL2'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL3 %}
-        <td colspan = 3>Currently there is no 1-3 Squad Leader</td>
-    {% else %}
-        <td>1-3 Squad Leader: </td><td>{{ SL3.mid }}</td><td>{{ SL3.startDate }}</td>
-    {%endif%}
-        <td>
-            <select name = 'SL3'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL4 %}
-        <td colspan = 3>Currently there is no 2-1 Squad Leader</td>
-    {% else %}
-        <td>2-1 Squad Leader: </td><td>{{ SL4.mid }}</td><td>{{ Sl4.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL4'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL5 %}
-        <td colspan = 3>Currently there is no 2-2 Squad Leader</td>
-    {% else %}
-        <td>2-2 Squad Leader: </td><td>{{ SL5.mid }}</td><td>{{ SL5.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL5'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL6 %}
-        <td colspan = 3>Currently there is no 2-3 Squad Leaderr</td>
-    {% else %}
-        <td>2-3 Squad Leader: </td><td>{{ SL6.mid }}</td><td>{{ SL6.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL6'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL7 %}
-        <td colspan = 3>Currently there is no 3-1 Squad Leader</td>
-    {% else %}
-        <td>3-1 Squad Leader: </td><td>{{ SL7.mid }}</td><td>{{ SL7.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL7'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL8 %}
-        <td colspan = 3>Currently there is no 3-2 Squad Leader</td>
-    {% else %}
-        <td>3-2 Squad Leader: </td><td>{{ SL8.mid }}</td><td>{{ SL8.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL8'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL9 %}
-        <td colspan = 3>Currently there is no 3-3 Squad Leader</td>
-    {% else %}
-        <td>3-3 Squad Leader: </td><td>{{ SL9.mid }}</td><td>{{ SL9.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL9'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
-                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
-                {% empty %}
-                    <option value = "000000">N/A</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-    {% if not SL10 %}
-        <td colspan = 3>Currently there is no 4-1 Squad Leader</td>
-    {% else %}
-        <td>4-1 Squad Leader: </td><td>{{ Sl10.mid }}</td><td>{{ Sl10.startDate }}</td> 
-    {%endif%}
-        <td>
-            <select name = 'SL10'>
-                <option value = "000000">No change</option>
-                {% for p in lMidsOne %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
                 {% empty %}
                     <option value = "000000">N/A</option>
@@ -342,9 +162,9 @@
     
     <tr>
     {% if not SL11 %}
-        <td colspan = 3>Currently there is no 4-2 Squad Leader</td>
+        <td colspan = 3>Currently there is no 1-1 Squad Leader</td>
     {% else %}
-        <td>Financial Officer: </td><td>{{ SL11.mid }}</td><td>{{ SL11.startDate }}</td> 
+        <td>1-1 Squad Leader: </td><td>{{ SL11.mid }}</td><td>{{ SL11.startDate }}</td> 
     {%endif%}
         <td>
             <select name = 'SL11'>
@@ -360,12 +180,192 @@
     
     <tr>
     {% if not SL12 %}
-        <td colspan = 3>Currently there is no 4-3 Squad Leader</td>
+        <td colspan = 3>Currently there is no 1-2 Squad Leader</td>
     {% else %}
-        <td>4-3 Squad Leader: </td><td>{{ SL12.mid }}</td><td>{{ Sl12.startDate }}</td> 
+        <td>1-2 Squad Leader: </td><td>{{ SL12.mid }}</td><td>{{ SL12.startDate }}</td> 
     {%endif%}
         <td>
             <select name = 'SL12'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL13 %}
+        <td colspan = 3>Currently there is no 1-3 Squad Leader</td>
+    {% else %}
+        <td>1-3 Squad Leader: </td><td>{{ SL13.mid }}</td><td>{{ SL13.startDate }}</td>
+    {%endif%}
+        <td>
+            <select name = 'SL13'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL21 %}
+        <td colspan = 3>Currently there is no 2-1 Squad Leader</td>
+    {% else %}
+        <td>2-1 Squad Leader: </td><td>{{ SL21.mid }}</td><td>{{ Sl21.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL21'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL22 %}
+        <td colspan = 3>Currently there is no 2-2 Squad Leader</td>
+    {% else %}
+        <td>2-2 Squad Leader: </td><td>{{ SL22.mid }}</td><td>{{ SL22.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL22'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL23 %}
+        <td colspan = 3>Currently there is no 2-3 Squad Leaderr</td>
+    {% else %}
+        <td>2-3 Squad Leader: </td><td>{{ SL23.mid }}</td><td>{{ SL23.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL23'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL31 %}
+        <td colspan = 3>Currently there is no 3-1 Squad Leader</td>
+    {% else %}
+        <td>3-1 Squad Leader: </td><td>{{ SL31.mid }}</td><td>{{ SL31.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL31'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL32 %}
+        <td colspan = 3>Currently there is no 3-2 Squad Leader</td>
+    {% else %}
+        <td>3-2 Squad Leader: </td><td>{{ SL32.mid }}</td><td>{{ SL32.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL32'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL33 %}
+        <td colspan = 3>Currently there is no 3-3 Squad Leader</td>
+    {% else %}
+        <td>3-3 Squad Leader: </td><td>{{ SL33.mid }}</td><td>{{ SL33.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL33'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL41 %}
+        <td colspan = 3>Currently there is no 4-1 Squad Leader</td>
+    {% else %}
+        <td>4-1 Squad Leader: </td><td>{{ Sl41.mid }}</td><td>{{ Sl41.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL41'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL42 %}
+        <td colspan = 3>Currently there is no 4-2 Squad Leader</td>
+    {% else %}
+        <td>Financial Officer: </td><td>{{ SL42.mid }}</td><td>{{ SL42.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL42'>
+                <option value = "000000">No change</option>
+                {% for p in lMidsOne %}
+                    <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+                {% empty %}
+                    <option value = "000000">N/A</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+    {% if not SL43 %}
+        <td colspan = 3>Currently there is no 4-3 Squad Leader</td>
+    {% else %}
+        <td>4-3 Squad Leader: </td><td>{{ SL43.mid }}</td><td>{{ Sl43.startDate }}</td> 
+    {%endif%}
+        <td>
+            <select name = 'SL43'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsOne %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
