@@ -136,5 +136,5 @@ class LogEntry(models.Model):
     entryTime = models.TimeField()
     entry = models.TextField()
     def __unicode__(self):
-        return self.watch.mid.LName + " Log entry on: " + unicode(self.logBook.watchBill.date) + " at " + unicode(self.entryTime) + 
+        return self.watch.mid.LName + " Log entry on: " + unicode(self.logBook.watchBill.date) + " at " + unicode(self.entryTime)
     
