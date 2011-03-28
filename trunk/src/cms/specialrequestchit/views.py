@@ -49,13 +49,13 @@ def specReqSubmit(request):
         approvalLevel = 2
     
     if request.POST['to'] == "CC" :
-        approvalLevel = 3
-    
-    if request.POST['to'] == "CSEL" :
         approvalLevel = 4
     
+    if request.POST['to'] == "CSEL" :
+        approvalLevel = 5
+    
     if request.POST['to'] == "CO" :
-        approvalLevel = 5    
+        approvalLevel = 6    
     
     cChit = SpecialRequestChit(mid = cMid,
                                date = date.today(),

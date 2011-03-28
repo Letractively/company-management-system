@@ -92,7 +92,7 @@
 </tr>
 {%endif%}
 
-{%if cChit.approvalLevel > 2 and cChit.approvalStatus > 2%}
+{%if cChit.approvalLevel > 3 and cChit.approvalStatus > 3%}
 <tr>
     <td>Company Commander: </td><td>{%if cChit.ccApproval == None %}
                                     PENDING
@@ -105,7 +105,7 @@
 </tr>
 {%endif%}
 
-{%if cChit.approvalLevel > 3 and cChit.approvalStatus > 3%}
+{%if cChit.approvalLevel > 4 and cChit.approvalStatus > 4%}
 <tr>
     <td>SEL: </td><td>{%if cChit.selApproval == None %}
                                      PENDING
@@ -118,7 +118,7 @@
 </tr>
 {%endif%}
 
-{%if cChit.approvalLevel > 4 and cChit.approvalStatus > 4%}
+{%if cChit.approvalLevel > 5 and cChit.approvalStatus > 5%}
 <tr>
     <td>Company Officer: </td><td>{%if cChit.coApproval == None %}
                                     PENDING
@@ -142,6 +142,7 @@
     <td>
 	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
 		<input type = "hidden" name = "level" value = "1" />
+		<input type = "hidden" name = "type" value = "src" />
 		<select name = "action">
             <option value="1">Approve</option>
             <option value="0">Deny</option>
@@ -168,6 +169,7 @@
     <td>
 	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
 		<input type = "hidden" name = "level" value = "2" />
+		<input type = "hidden" name = "type" value = "src" />
 		<select name = "action">
             <option value="1">Approve</option>
             <option value="0">Deny</option>
@@ -193,33 +195,8 @@
 	{% csrf_token %}
     <td>
 	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
-		<input type = "hidden" name = "level" value = "3" />
-		<select name = "action">
-            <option value="1">Approve</option>
-            <option value="0">Deny</option>
-        </select>
-    </td>
-    <td>
-        <input type = "text" name = "comment" size = "20" />
-    </td>
-    <td>
-    {%if cChit.approvalLevel > 3 %}
-        <input type = "submit" value = "Recommend" />
-    {% else%}
-        <input type = "submit" value = "Complete" />
-    {% endif%}
-    </td>
-    </form>
-</tr>
-{%endif%}
-
-{%if SEL%}
-<tr>
-    <form action="approveChit" method="post">
-	{% csrf_token %}
-    <td>
-	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
 		<input type = "hidden" name = "level" value = "4" />
+		<input type = "hidden" name = "type" value = "src" />
 		<select name = "action">
             <option value="1">Approve</option>
             <option value="0">Deny</option>
@@ -239,13 +216,14 @@
 </tr>
 {%endif%}
 
-{%if CO%}
+{%if SEL%}
 <tr>
     <form action="approveChit" method="post">
 	{% csrf_token %}
     <td>
 	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
 		<input type = "hidden" name = "level" value = "5" />
+		<input type = "hidden" name = "type" value = "src" />
 		<select name = "action">
             <option value="1">Approve</option>
             <option value="0">Deny</option>
@@ -256,6 +234,33 @@
     </td>
     <td>
     {%if cChit.approvalLevel > 5 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if CO%}
+<tr>
+    <form action="approveChit" method="post">
+	{% csrf_token %}
+    <td>
+	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+		<input type = "hidden" name = "level" value = "6" />
+		<input type = "hidden" name = "type" value = "src" />
+		<select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 6 %}
         <input type = "submit" value = "Recommend" />
     {% else%}
         <input type = "submit" value = "Complete" />

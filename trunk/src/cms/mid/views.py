@@ -1109,8 +1109,8 @@ def pendingApproval(request) :
     if re.match("CO", username) is not None :
         username = username.split('_')
         cCompany = username[1]
-        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
-        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
+        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "6")
+        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "6")
         
         return render_to_response('mid/pendingApproval.html', {'CO' : True, 
                                                                'lSRC' : lSRC,
@@ -1121,8 +1121,8 @@ def pendingApproval(request) :
     if re.match("SEL", username) is not None :
         username = username.split('_')
         cCompany = username[1]
-        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
-        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
+        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
         
         return render_to_response('mid/pendingApproval.html', {'SEL' : True, 
                                                                'lSRC' : lSRC,
@@ -1141,13 +1141,19 @@ def pendingApproval(request) :
     
     SL = False
     PC = False
+    SAF = False
     CC = False
     
     for p in lBillets :
         if p.billet == "CC" and p.current :
+            lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+            lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+            CC = True
+            
+        if p.billet == "SAF" and p.current :
             lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "3")
             lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "3")
-            CC = True
+            SAF = True
             
         if p.billet == "PC" and p.current :
             cPlatoon = cMid.platoon
@@ -1161,14 +1167,13 @@ def pendingApproval(request) :
             lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(mid__platoon = cPlatoon).filter(mid__squad = cSquad).filter(approvalStatus = "1")
             lORM = OrmChit.objects.filter(mid__company = cCompany).filter(mid__platoon = cPlatoon).filter(mid__squad = cSquad).filter(approvalStatus = "1")
             SL = True
-        
-        #lSRC = SpecialRequestChit.objects.all()
     
     return render_to_response('mid/pendingApproval.html', { 'cMid' : cMid, 
                                                             'lSRC' : lSRC,
                                                             'lORM' : lORM,
                                                             'SL' : SL,
                                                             'PC' : PC,
+                                                            'SAF': SAF,
                                                             'CC' : CC
                                                            },
                                                            context_instance=RequestContext(request))
@@ -1218,12 +1223,68 @@ def specReqView(request) :
                                                                       context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')    
+def ormView(request) :
+    
+    if request.POST['type'] == "src":
+        cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
+    else:
+        cChit = OrmChit.objects.get(id=request.POST['id'])
+        
+    username = request.user.username
+    
+    if re.match("CO", username) is not None :
+        return render_to_response('specialrequestchit/specReqView.html', {'CO' : True, 
+                                                                          'cChit' : cChit,
+                                                                          }, 
+                                                                          context_instance=RequestContext(request))
+        
+    elif re.match("SEL", username) is not None :
+        return render_to_response('specialrequestchit/specReqView.html', {'SEL' : True, 
+                                                                          'cChit' : cChit,
+                                                                          }, 
+                                                                          context_instance=RequestContext(request))
+    
+    else :
+        alpha = username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    SL = False
+    PC = False
+    CC = False
+    SAF = False
+    
+    for p in lBillets :
+        if p.billet == "SL" and p.current :
+            SL = True
+        if p.billet == "PC" and p.current :
+            PC = True
+        if p.billet == "CC" and p.current :
+            CC = True
+        if p.billet == "SAF" and p.current :
+            SAF = True
+
+    return render_to_response('orm/ormView.html', {'SL' : SL,
+                                                   'PC' : PC,
+                                                   'SAF': SAF,
+                                                   'CC' : CC, 
+                                                   'cChit' : cChit,
+                                                   }, 
+                                                   context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')    
 def approveChit(request) :
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
+    if request.POST['type'] == "src" :
+        cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
+    else :
+        cChit = OrmChit.objects.get(id=request.POST['id'])
     
     level = request.POST['level']
     action = request.POST['action']
@@ -1251,61 +1312,83 @@ def approveChit(request) :
             if cChit.approvalLevel == 2 :
                 cChit.approvalStatus = 10
             else:
-                cChit.approvalStatus = 3
+                if request.POST['type'] == "orm" :
+                    cChit.approvalStatus = 3
+                else :
+                    cChit.approvalStatus = 4
         else:
             cChit.pcApproval = False
             if cChit.approvalLevel == 2 :
                 cChit.approvalStatus = 11
             else:
-                cChit.approvalStatus = 3
+                if request.POST['type'] == "orm" :
+                    cChit.approvalStatus = 3
+                else :
+                    cChit.approvalStatus = 4
         
         cChit.pcComment = comment
     
     if level == "3" :
         if action == "1" :
-            cChit.ccApproval = True
+            cChit.safApproval = True
             if cChit.approvalLevel == 3 :
                 cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 4
         else:
-            cChit.ccApproval = False
+            cChit.safApproval = False
             if cChit.approvalLevel == 3 :
                 cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 4
         
-        cChit.ccComment = comment
+        cChit.safComment = comment
     
     if level == "4" :
         if action == "1" :
-            cChit.selApproval = True
+            cChit.ccApproval = True
             if cChit.approvalLevel == 4 :
                 cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 5
         else:
-            cChit.selApproval = False
+            cChit.ccApproval = False
             if cChit.approvalLevel == 4 :
                 cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 5
         
-        cChit.selComment = comment
+        cChit.ccComment = comment
     
     if level == "5" :
         if action == "1" :
-            cChit.coApproval = True
+            cChit.selApproval = True
             if cChit.approvalLevel == 5 :
                 cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 6
         else:
-            cChit.coApproval = False
+            cChit.selApproval = False
             if cChit.approvalLevel == 5 :
                 cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 6
+        
+        cChit.selComment = comment
+        
+    if level == "6" :
+        if action == "1" :
+            cChit.coApproval = True
+            if cChit.approvalLevel == 6 :
+                cChit.approvalStatus = 10
+            else:
+                cChit.approvalStatus = 7
+        else:
+            cChit.coApproval = False
+            if cChit.approvalLevel == 6 :
+                cChit.approvalStatus = 11
+            else:
+                cChit.approvalStatus = 7
         
         cChit.coComment = comment    
         

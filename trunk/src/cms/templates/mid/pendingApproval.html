@@ -19,11 +19,31 @@
             {%endif%}
         </td>
             <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+                <input type = "hidden" name = "type" value = "src" />
                 <input type = "submit" value = "View Chit" /></td>
         </form>
     </tr>
 {% empty %}
     <tr><td>You do not have any Special Request Chits pending approval.</td></tr>
+{% endfor %}
+</table>
+
+
+<h3>ORM Chits pending Approval/Denial: </h3>
+<table>
+{% for p in lORM %}
+    <tr>
+        <form action="ormView" method = "post">
+        {% csrf_token %}
+        <td>{{ p.mid }}</td>
+        <td>{{ p.dateDepart }} - {{ p.dateReturn }}</td>
+            <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+                <input type = "hidden" name = "type" value = "orm" />
+                <input type = "submit" value = "View Chit" /></td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>You do not have any ORM Chits pending approval.</td></tr>
 {% endfor %}
 </table>
 
