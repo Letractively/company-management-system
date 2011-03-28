@@ -96,8 +96,7 @@
         <td>Washingon Birthday</td><td>"{{ acYear.washingtonsBirthday }}"</td>
     </tr>
 </table>
-<form>
-<form action="AcYearEdit" method="post">
+<form action="{{ url companywatch:AcYearEdit }}" method="post">
 <input type="submit" value="Edit this Ac Year" />
 </form>
 {% endblock %}
