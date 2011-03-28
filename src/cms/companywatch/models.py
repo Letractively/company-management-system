@@ -1,6 +1,5 @@
 from django.db import models
-from datetime import date
-# Create your models here.
+
 WATCHBILL_TYPE_CHOICES = (
                           ('W','Work day'),
                           ('H','Holiday'),
@@ -78,7 +77,7 @@ class AcYear(models.Model):
     columbusDay = models.DateField(null=True,blank=True)
     veteransDay = models.DateField(null=True,blank=True)    
     fallEnd = models.DateField(null=True,blank=True)    
-    startSpring = models.DateField(null=True,blank=True)
+    springStart = models.DateField(null=True,blank=True)
     spring6Weeks = models.DateField(null=True,blank=True)
     spring12Weeks = models.DateField(null=True,blank=True)
     springXWeekStart = models.DateField(null=True,blank=True)
@@ -113,7 +112,6 @@ class WatchBill(models.Model):
     ACDO = models.ForeignKey("mid.Mid", related_name='+')
     
     def __unicode__(self):
-        
         return unicode(self.date) + " Duty Secion: " + self.dutySection
     
 class Watch(models.Model):

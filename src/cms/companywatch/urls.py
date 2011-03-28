@@ -8,9 +8,8 @@ urlpatterns = patterns('companywatch.views',
 
     # put url's to all the apps in this folder.
 
-    url(r'^$', 'AcYear', name = "AcYear"),
+    url(r'^$', 'AcYearView', name = "AcYearView"),
     (r'^/$', 'AcYear'),
-    (r'AcYearSubmit$', 'AcYearSubmit'),
     (r'AcYearView', 'AcYearView'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
