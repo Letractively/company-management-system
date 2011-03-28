@@ -92,7 +92,7 @@ class AcYear(models.Model):
     springIntersessionalEnd = models.DateField(null=True,blank=True)
     summerStart = models.DateField(null=True,blank=True)
     def __unicode__(self):
-        return "20" + self.acYear-1 + " - 20" + self.acYear
+        return "20" + str(self.acYear-1) + " - 20" + str(self.acYear)
     
 class AcWatch(models.Model):
     acYear = models.ForeignKey(AcYear)
