@@ -143,13 +143,13 @@
     </tr>
     
     <tr>
-    {% if not AC %}
+    {% if not APT %}
         <td colspan = 3>Currently there is no Aptitude/Conduct Officer</td>
     {% else %}
-        <td>Aptitude/Conduct Officer: </td><td>{{ AC.mid }}</td><td>{{ AC.startDate }}</td>
+        <td>Aptitude/Conduct Officer: </td><td>{{ APT.mid }}</td><td>{{ APT.startDate }}</td>
     {%endif%}
         <td>
-            <select name = 'AC'>
+            <select name = 'APT'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsOne %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
@@ -449,13 +449,13 @@
     </tr>
     
     <tr>
-    {% if not MISL %}
+    {% if not MISLO %}
         <td colspan = 3>Currently there is no MISLO</td>
     {% else %}
-        <td>MISLO: </td><td>{{ MISL.mid }}</td><td>{{ MISL.startDate }}</td> 
+        <td>MISLO: </td><td>{{ MISLO.mid }}</td><td>{{ MISLO.startDate }}</td> 
     {%endif%}
         <td>
-            <select name = 'MISL'>
+            <select name = 'MISLO'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
