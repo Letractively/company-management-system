@@ -60,7 +60,7 @@ AcYearChoices = (
                  )
 
 class AcYear(models.Model):
-    acYear = models.CharField(max_length=2,choices=AcYearChoices)
+    acYear = models.IntegerField(max_length=2,choices=AcYearChoices)
     isInit = models.NullBooleanField(null=True,blank=True)   
     fallStart = models.DateField(null=True,blank=True)
     fallGoldWeekStart = models.CharField(max_length=1, choices=Ac_WEEK_START,null=True,blank=True)
