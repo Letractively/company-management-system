@@ -101,8 +101,8 @@
 	    </li>
 	    {%endif%}
 		<li><a href="{% url mid:logout %}"><span>Logout</span></a></li>
-	{% else %}
+	{% endif %}
 	</ul>
-{% endif %}
+{% else %}
 	Please Login
 {% endif %}
