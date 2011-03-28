@@ -10,7 +10,8 @@
 	            </ul>
         	</div>
         <li><a href = "logout">Log out</a></li >
-	{% else if SEL %}
+    {% endif %}
+	{% if SEL %}
 	
 	{% else %}
 	    <li><a href='{% url switchboard %}'><span>Home</span></a></li>
