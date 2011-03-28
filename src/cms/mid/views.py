@@ -191,7 +191,7 @@ def editPersonalInformation(request):
     lRooms = Room.objects.filter(company = cCompany)
     
     return render_to_response('mid/editPersonalInformation.html', {'cMid' : cMid,
-                                                                   'lRoom' : lRooms
+                                                                   'lRooms' : lRooms
                                                                    },
                               context_instance=RequestContext(request))
     
