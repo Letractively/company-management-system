@@ -20,7 +20,7 @@ BILLET_CHOICES = (
     ('PMO','Physical Mission Officer'),
     ('AC','Academics Officer'),
     ('SAF','Safety Officer'),
-    ('A/C','Aptitiude/Conduct Officer'),
+    ('APT','Aptitiude/Conduct Officer'),
     ('ADEO','ADEO'),
     ('ATFP','ATFP'),
     ('TRN','Training Officer'),
@@ -151,7 +151,7 @@ class Grade(models.Model):
     
 class Billet(models.Model):
     mid = models.ForeignKey(Mid)
-    billet = models.CharField(max_length=4,choices=BILLET_CHOICES)
+    billet = models.CharField(max_length=5,choices=BILLET_CHOICES)
     startDate = models.DateField(null=True)
     endDate = models.DateField(null=True,blank=True)
     evaluation = models.TextField(null=True,blank=True)

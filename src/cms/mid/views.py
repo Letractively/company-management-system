@@ -29,8 +29,11 @@ from datetime import timedelta
 import re
 
 def loginPage(request):
-    return render_to_response('mid/loginPage.html', {}, 
-                              context_instance=RequestContext(request))
+    if user.is_authenticated:
+        return HttpResponseRedirect('switchboard')
+    else:
+        return render_to_response('mid/loginPage.html', {}, 
+                                  context_instance=RequestContext(request))
 
 def logIn(request):
     #Safety feature, makes sure we POST data to this view
@@ -124,7 +127,7 @@ def renderSwitchboard(request) :
     
     flagApt = False;
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
             
     flagAdj = False;
@@ -523,10 +526,10 @@ def assignBillets(request):
         if p.billet == "SAF" and p.current:
             cSAF = p
     
-    cAC = None
+    cAPT = None
     for p in lBillet:
-        if p.billet == "A/C" and p.current:
-            cAC = p
+        if p.billet == "APT" and p.current:
+            cAPT = p
     
     cADEO = None
     for p in lBillet:
@@ -608,41 +611,41 @@ def assignBillets(request):
         if p.billet == "ADMC" and p.current:
             cADMC = p
     
-    cMISL = None
+    cMISLO = None
     for p in lBillet:
         if p.billet == "MISLO" and p.current:
-            cMISL = p
+            cMISLO = p
 
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
-    lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
+    lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "2").order_by('alpha')
                                                                                                         
     return render_to_response('mid/assignBillets.html', {'lMidsOne' : lMidsOne, 
-                                                     'lMidsTwo' : lMidsTwo,
-                                                     'XO'  : cXO,
-                                                     'HA'  : cHA,
-                                                     'OPS' : cOPS,
-                                                     'ADJ' : cADJ,
-                                                     'PMO' : cPMO,
-                                                     'AC'  : cAC,
-                                                     'SAF' : cSAF,
-                                                     'AC'  : cAC,
-                                                     'ADEO': cADEO,
-                                                     'ATFP': cATFP,
-                                                     'TRN' : cTRN,
-                                                     '1LT' : c1LT,
-                                                     'ADM' : cADM,
-                                                     'PRO' : cPRO,
-                                                     'WRD' : cWRD,
-                                                     'DRL' : cDRL,
-                                                     'SAVI': cSAVI,
-                                                     'CMEO': cCMEO,
-                                                     'FIN' : cFIN,
-                                                     '1SGT': c1SGT,
-                                                     'TRS1': cTRS1,
-                                                     'TRS2': cTRS1,
-                                                     'DRLS': cDRLS,
-                                                     'ADMC': cADMC,
-                                                     'MISL': cMISL,
+                                                         'lMidsTwo' : lMidsTwo,
+                                                         'XO'  : cXO,
+                                                         'HA'  : cHA,
+                                                         'OPS' : cOPS,
+                                                         'ADJ' : cADJ,
+                                                         'PMO' : cPMO,
+                                                         'AC'  : cAC,
+                                                         'SAF' : cSAF,
+                                                         'APT' : cAPT,
+                                                         'ADEO': cADEO,
+                                                         'ATFP': cATFP,
+                                                         'TRN' : cTRN,
+                                                         '1LT' : c1LT,
+                                                         'ADM' : cADM,
+                                                         'PRO' : cPRO,
+                                                         'WRD' : cWRD,
+                                                         'DRL' : cDRL,
+                                                         'SAVI': cSAVI,
+                                                         'CMEO': cCMEO,
+                                                         'FIN' : cFIN,
+                                                         '1SGT': c1SGT,
+                                                         'TRS1': cTRS1,
+                                                         'TRS2': cTRS1,
+                                                         'DRLS': cDRLS,
+                                                         'ADMC': cADMC,
+                                                         'MISLO': cMISLO,
                                                      }, 
                                                      context_instance=RequestContext(request))
     
@@ -771,7 +774,7 @@ def assignCOC(request):
             cSL12 = p
 
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
-    lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
+    lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "2").order_by('alpha')
                                                                                                         
     return render_to_response('mid/assignCOC.html', {'lMidsOne' : lMidsOne, 
                                                      'lMidsTwo' : lMidsTwo,
@@ -780,7 +783,7 @@ def assignCOC(request):
                                                      'PC3' : cPC3,
                                                      'PC4' : cPC4,
                                                      'PLS1': cPLS1,
-                                                     'PLS2': cLS2,
+                                                     'PLS2': cPLS2,
                                                      'PLS3': cPLS3,
                                                      'PLS4': cPLS4,
                                                      'SL1' : cSL1,
@@ -798,10 +801,8 @@ def assignCOC(request):
                                                      }, 
                                                      context_instance=RequestContext(request))
     
-
-    
 @login_required(redirect_field_name='/')
-def saveAssignBillet(request):
+def saveAssignBillets(request):
     #Saves billet assignment    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
@@ -826,27 +827,33 @@ def saveAssignBillet(request):
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    alpha = request.POST['alpha']
-    
-    cMid = Mid.objects.get(alpha = alpha)
-    
     lBillet = Billet.objects.filter(mid__company = cCompany)
     
-    for p in lBillet:
-        if p.billet == "CC" :
-            p.endDate = cDate
-            p.current = False
-            p.save()
-    
-    cBillet = Billet(mid = cMid,
-                     billet = "CC",
-                     startDate = cDate,
-                     endDate = request.POST['endDate'],
-                     current = True
-                     )
-    cBillet.save()
+    L = ['XO', 'HA', 'OPS', 'ADJ', 'PMO', 'AC', 'SAF', 'APT', 'ADEO', 'ATFP', 'TRN', '1LT', 'ADM', 'PRO',
+         'WRD', 'DRL', 'SAVI', 'CMEO', 'FIN', '1SGT', 'DRLS', 'ADMC', 'MISLO']
+
+    for x in L:
+        alpha = request.POST[x]
+        if alpha != "000000" :    
+            for p in lBillet:
+                if p.billet == x and p.current :
+                    p.endDate = cDate
+                    p.current = False
+                    p.save()
+            cMid = Mid.objects.get(alpha = alpha)
+            cBillet = Billet(mid = cMid,
+                             billet = x,
+                             startDate = cDate,
+                             current = True
+                            )
+            cBillet.save()
                                                                                                         
-    return HttpResponseRedirect(reverse('mid:appointCC')) 
+    return HttpResponseRedirect(reverse('mid:assignBillets')) 
+
+@login_required(redirect_field_name='/')
+def saveAssignCOC(request):
+    
+    return HttpResponseRedirect(reverse('mid:assignCOC')) 
 
 @login_required(redirect_field_name='/')    
 def PRTSat(request) :
@@ -926,7 +933,7 @@ def enterDiscipline(request):
     
     flagApt = False
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
 
     if not flagApt :
@@ -953,7 +960,7 @@ def saveDiscipline(request):
     
     flagApt = False
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
 
     if not flagApt :
@@ -1005,7 +1012,7 @@ def enterProbation(request):
     
     flagApt = False
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
 
     if not flagApt :
@@ -1032,7 +1039,7 @@ def saveProbation(request):
     
     flagApt = False
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
 
     if not flagApt :
@@ -1072,7 +1079,7 @@ def assessDiscipline(request):
     
     flagApt = False
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
 
     if not flagApt :
@@ -1100,7 +1107,7 @@ def updateDiscipline(request):
     
     flagApt = False
     for p in lBillets :
-        if p.billet == "A/C" and p.current :
+        if p.billet == "APT" and p.current :
             flagApt = True
 
     if not flagApt :
@@ -1179,7 +1186,7 @@ def saveAppointCC(request):
     lBillet = Billet.objects.filter(mid__company = cCompany)
     
     for p in lBillet:
-        if p.billet == "CC" :
+        if p.billet == "CC" and p.current:
             p.endDate = cDate
             p.current = False
             p.save()
