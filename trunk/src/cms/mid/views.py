@@ -105,9 +105,7 @@ def renderSwitchboard(request) :
     cMid = Mid.objects.get(alpha = alpha)
                         
     lBillets = Billet.objects.filter(mid = cMid)
-    
-    
-    
+
     flagFirstie = False
     if cMid.rank == "1" :
         flagFirstie = True
@@ -140,13 +138,19 @@ def renderSwitchboard(request) :
         if p.billet == "CC" and p.current :
             flagCC = True
     
+    flagPLTS = False;
+    for p in lBillets :
+        if p.billet == "PLTS" and p.current :
+            flagPLTS = True
+    
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
                                                         'firstie' : flagFirstie,
                                                         'PMO' : flagPMO,
                                                         'admin' : flagAdmin,
                                                         'Aptitude' : flagApt,
                                                         'CC' : flagCC,
-                                                        'ADJ' : flagAdj
+                                                        'ADJ' : flagAdj,
+                                                        'PLTS' : flagPLTS,
                                                         },
                                                         context_instance=RequestContext(request))
 

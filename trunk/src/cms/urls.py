@@ -25,7 +25,6 @@ urlpatterns = patterns('',
     (r'^login$', 'mid.views.logIn'),
     (r'^logout$', 'mid.views.logOut'),
     url(r'^switchboard$', 'mid.views.renderSwitchboard', name = "switchboard"),
-
     
     (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),
     
@@ -40,11 +39,12 @@ urlpatterns = patterns('',
     (r'^uIns/', include('uniforminspection.urls', namespace="uIns", app_name="uniforminspection")),
     
     # All the other module's pages
-    #(r'^accountability/', include('accountability.urls')),
+    
     #(r'^companyblog/', include('companyblog.urls')),
     (r'^companywatch/', include('companywatch.urls', namespace="companywatch", app_name="companywatch")),
     #(r'^zero8/', include('zero8.urls')),
     
+    (r'^accountability/', include('accountability.urls', namespace = "accountability", app_name = "accountability")),
     (r'^weekends/', include('weekends.urls', namespace="weekends", app_name="weekends")),
     (r'^movementOrders/', include('movementorder.urls', namespace="movementorder", app_name="movementorder")),
     

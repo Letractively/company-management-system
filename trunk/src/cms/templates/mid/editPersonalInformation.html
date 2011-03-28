@@ -12,8 +12,8 @@
         <tr><td>Phone Number: </td><td><input type = "text" name = "phone" value = "{{cMid.phoneNumber}}" /></td>
         <tr><td>Room Number: </td>
         <td>
-            <select name = "roomNumber"/>
-                <option value="{{ cMid.roomNumber }}">{{ cMid.roomNumber }}</option>
+            <select name = "roomNumber">
+                    <option value="{{ cMid.roomNumber }}">{{ cMid.roomNumber }}</option>
                 {% for p in lRooms %}
                     <option value="{{ p.roomNumber }}">{{ p.roomNumber }}</option>
                 {% endfor %}
