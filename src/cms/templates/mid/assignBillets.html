@@ -377,13 +377,13 @@
     </tr>
     
     <tr>
-    {% if not TRS1 %}
+    {% if not TRNS1 %}
         <td colspan = 3>Currently there is no Training Sargeant (One)</td>
     {% else %}
-        <td>Training Sargeant (One): </td><td>{{ TRS1.mid }}</td><td>{{ TRS1.startDate }}</td> 
+        <td>Training Sargeant (One): </td><td>{{ TRNS1.mid }}</td><td>{{ TRNS1.startDate }}</td> 
     {%endif%}
         <td>
-            <select name = 'TRS1'>
+            <select name = 'TRNS1'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
@@ -395,13 +395,13 @@
     </tr>
     
     <tr>
-    {% if not TRS2 %}
+    {% if not TRNS2 %}
         <td colspan = 3>Currently there is no Training Sargeant (Two)</td>
     {% else %}
-        <td>Training Sargeant (Two): </td><td>{{ TRS2.mid }}</td><td>{{ TRS2.startDate }}</td> 
+        <td>Training Sargeant (Two): </td><td>{{ TRNS2.mid }}</td><td>{{ TRNS2.startDate }}</td> 
     {%endif%}
         <td>
-            <select name = 'TRS2'>
+            <select name = 'TRNS2'>
                 <option value = "000000">No change</option>
                 {% for p in lMidsTwo %}
                     <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
