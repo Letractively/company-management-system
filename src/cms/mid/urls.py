@@ -9,6 +9,7 @@ urlpatterns = patterns('mid.views',
     #General Options
     url(r'editPersonalInformation$', 'editPersonalInformation', name = "editPersonalInformation"),
     (r'savePersonalInformation$', 'savePersonalInformation'),
+    url(r'viewDiscipline$', 'viewDiscipline', name = "viewDiscipline"),
     (r'viewDiscipline$', 'viewDiscipline'),
     url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
     (r'passChange$', 'passChange'),
