@@ -128,9 +128,9 @@ class LogBook(models.Model):
     watchBill = models.ForeignKey(WatchBill)
     
 class LogEntry(models.Model):
-    watch = models.ForeignKey(LogBook)
+    logBook = models.ForeignKey(LogBook)
     entryTime = models.TimeField()
     entry = models.TextField()
     def __unicode__(self):
-        return unicode(self.LogBook.watchBill.date) + unicode(self.entryTime) + self.watch.mid.LName
+        return unicode(self.logBook.watchBill.date) + unicode(self.entryTime) + self.watch.mid.LName
     
