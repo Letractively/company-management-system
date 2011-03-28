@@ -44,29 +44,34 @@ def addLeisure(request):
         return HttpResponseRedirect('/')
     
     dateDepart = request.POST['dateDepart']
+    dateDepart = dateDepart.split('-')
+    dateDepart = date(int(dateDepart[0]), int(dateDepart[1]), int(dateDepart[2]))
+    
     dateReturn = request.POST['dateReturn']
-    daysLeave = timedelta(dateReturn - dateDepart);
+    dateReturn = dateReturn.split('-')
+    dateReturn = date(int(dateReturn[0]), int(dateReturn[1]), int(dateReturn[2]))
+    
+    daysLeave = dateReturn - dateDepart;
     daysTravel = request.POST['daysTravel']
-    travelRatio = daysTravel / daysLeave
+    travelRatio = int(daysTravel) / int(daysLeave)
 
     #ORM Chit not complete
     approvalStatus = -2   
     
-    cChit = SpecialRequestChit(mid = cMid,
+    cChit = OrmChit(mid = cMid,
                                date = date.today(),            
                                street1 = request.POST['street1'],
                                street2 = request.POST['street2'],
                                city = request.POST['city'],
                                state = request.POST['state'],
                                zip = request.POST['zip'],
-                               altPhone = request.POST['altPhone'],
                                dateDepart = dateDepart,
                                dateReturn = dateReturn,
                                daysTravel = daysTravel,
                                daysLeave = daysLeave,
                                travelRatio = travelRatio,
-                               riskMitigationPlan = request.POST['street1'],
-                               approvalLevel = 4,
+                               riskMitigationPlan = request.POST['risk_mitigation_plan'],
+                               approvalLevel = 6,
                                approvalStatus = approvalStatus
                                )
     cChit.save()
@@ -74,10 +79,10 @@ def addLeisure(request):
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     
     return render_to_response('orm/ormLeisure.html', {'cMid' : cMid, 
-                                               'lChits' : lChits,
-                                               'lLeisure' : lLeisure,
-                                              }, 
-                                              context_instance=RequestContext(request))
+                                                      'lChits' : lChits,
+                                                      'lLeisure' : lLeisure,
+                                                      }, 
+                                                      context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
 def saveLeisure(request) :

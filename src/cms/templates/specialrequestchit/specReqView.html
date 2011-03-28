@@ -72,70 +72,197 @@
     <td>Squad Leader: </td><td>{%if not cChit.squadLeaderApproval %}
                                     PENDING
                                {% else %}
-                                    {%if cChit.squadLeaderApproval == True%} APPROVED {% endif %}
-                                    {%if cChit.squadLeaderApproval == False%} DENIED {% endif %}
+                                    {% if cChit.squadLeaderApproval %} APPROVED {% endif %}
+                                    {% if not cChit.squadLeaderApproval  %} DENIED {% endif %}
                                {%endif%}
     </td>
+    <td>{{ cChit.slComment }}</td>
 </tr>
 
 {%if cChit.approvalLevel > 1 and cChit.approvalStatus > 1%}
 <tr>
     <td>Platoon Commander: </td><td>{%if not cChit.platoonLeaderApproval %}
-                                PENDING
+                                    PENDING
                                {% else %}
-                               {%if cChit.platoonLeaderApproval == True%}
-                               APPROVED{%endif%}
-                               {%if cChit.platoonLeaderApproval == False%}
-                               DENIED{%endif%}
-                               {%endif%}
+                                    {% if cChit.platoonLeaderApproval %} APPROVED {% endif %}
+                                    {% not if cChit.platoonLeaderApproval %} DENIED {% endif %}
+                               {% endif %}
     </td>
+    <td>{{ cChit.plComment }}</td>
 </tr>
 {%endif%}
 
 {%if cChit.approvalLevel > 2 and cChit.approvalStatus > 2%}
 <tr>
     <td>Company Commander: </td><td>{%if not cChit.companyCommanderApproval %}
-                                PENDING
+                                    PENDING
                                {% else %}
-                               {%if cChit.companyCommanderApproval == True%}
-                               APPROVED{%endif%}
-                               {%if cChit.companyCommanderApproval == False%}
-                               DENIED{%endif%}
-                               {%endif%}
+                                    {% if cChit.companyCommanderApproval %} APPROVED {% endif %}
+                                    {% if not cChit.companyCommanderApproval %} DENIED {% endif %}
+                               {% endif %}
     </td>
+    <td>{{ cChit.ccComment }}</td>
 </tr>
 {%endif%}
 
 {%if cChit.approvalLevel > 3 and cChit.approvalStatus > 3%}
 <tr>
     <td>SEL: </td><td>{%if not cChit.companySELApproval %}
-                                PENDING
+                                     PENDING
                                {% else %}
-                               {%if cChit.companySELApproval == True%}
-                               APPROVED{%endif%}
-                               {%if cChit.companySELApproval == False%}
-                               DENIED{%endif%}
-                               {%endif%}
+                                    {%if cChit.companySELApproval %} APPROVED {%endif%}
+                                    {%if not cChit.companySELApproval %} DENIED {%endif%}
+                               {% endif %}
     </td>
+    <td>{{ cChit.selComment }}</td>
 </tr>
 {%endif%}
 
 {%if cChit.approvalLevel > 4 and cChit.approvalStatus > 4%}
 <tr>
     <td>Company Officer: </td><td>{%if not cChit.companyOfficer %}
-                                PENDING
+                                    PENDING
                                {% else %}
-                               {%if cChit.companyOfficer == True%}
-                               APPROVED{%endif%}
-                               {%if cChit.companyOfficer == False%}
-                               DENIED{%endif%}
-                               {%endif%}
+                                    {% if cChit.companyOfficer %} APPROVED {% endif %}
+                                    {% not if cChit.companyOfficer %} DENIED {% endif %}
+                               {% endif %}
     </td>
+    <td>{{ cChit.coComment }}</td>
 </tr>
 {%endif%}
 
-{%if SL%}
+</table><br />
 
+<table>
+
+{%if SL%}
+<tr>
+    <form action="approveChit" method="post">
+	{% csrf_token %}
+    <td>
+	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+		<input type = "hidden" name = "level" value = "1" />
+		<select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 1 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if PC%}
+<tr>
+    <form action="approveChit" method="post">
+	{% csrf_token %}
+    <td>
+	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+		<input type = "hidden" name = "level" value = "2" />
+		<select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 2 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if CC%}
+<tr>
+    <form action="approveChit" method="post">
+	{% csrf_token %}
+    <td>
+	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+		<input type = "hidden" name = "level" value = "3" />
+		<select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 3 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if SEL%}
+<tr>
+    <form action="approveChit" method="post">
+	{% csrf_token %}
+    <td>
+	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+		<input type = "hidden" name = "level" value = "4" />
+		<select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 4 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if CO%}
+<tr>
+    <form action="approveChit" method="post">
+	{% csrf_token %}
+    <td>
+	    <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+		<input type = "hidden" name = "level" value = "5" />
+		<select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 5 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
 {%endif%}
 
 </table>

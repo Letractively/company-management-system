@@ -102,6 +102,11 @@ def renderSwitchboard(request) :
                                                            },
                                                            context_instance=RequestContext(request))
     
+    if re.match("SEL", request.user.username) is not None :
+        return render_to_response('mid/switchboard.html', { 'SEL' : True
+                                                           },
+                                                           context_instance=RequestContext(request))
+    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha = alpha)
@@ -986,6 +991,12 @@ def saveAssignBillets(request):
                     p.current = False
                     p.save()
             cMid = Mid.objects.get(alpha = alpha)
+            
+            if x == "XO" or x == "OPS" or x == "FSGT":
+                cMid.squad = "S"
+                cMid.platoon = "S"
+                cMid.save()
+            
             cBillet = Billet(mid = cMid,
                              billet = x,
                              startDate = cDate,
@@ -1092,25 +1103,211 @@ def saveAssignCOC(request):
 @login_required(redirect_field_name='/')    
 def pendingApproval(request) :
     #Generates a list of Special Request/ORM chits that need to be approved by this person...
-    alpha = request.user.username.split('m')
-    alpha = alpha[1]
-    cMid = Mid.objects.get(alpha=alpha)
-    cCompany = cMid.company
+    username = request.user.username
     
+    if re.match("CO", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+        
+        return render_to_response('mid/pendingApproval.html', {'CO' : True, 
+                                                               'lSRC' : lSRC,
+                                                               'lORM' : lORM, 
+                                                               },
+                                                               context_instance=RequestContext(request))
+        
+    elif re.match("SEL", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
+        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
+        
+        return render_to_response('mid/pendingApproval.html', {'SEL' : True, 
+                                                               'lSRC' : lSRC,
+                                                               'lORM' : lORM, 
+                                                               },
+                                                               context_instance=RequestContext(request))
+    
+    else :
+        alpha = username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+        cCompany = cMid.company
+
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
+    
+    SL = False
+    PC = False
+    CC = False
     
     for p in lBillets :
         if p.billet == "SL" and p.current :
             cSquad = cMid.squad
-            lSR = SpecialRequestChit.objects.filter(mid__squad = cSquad).filter(approvalStatus = "1")
+            lSRC = SpecialRequestChit.objects.filter(mid__squad = cSquad).filter(approvalStatus = "1")
+            lORM = OrmChit.objects.filter(mid__squad = cSquad).filter(approvalStatus = "1")
+            SL = True
+        elif p.billet == "PC" and p.current :
+            cPlatoon = cMid.platoon
+            lSRC = SpecialRequestChit.objects.filter(mid__platoon = cPlatoon).filter(approvalStatus = "2")
+            lORM = OrmChit.objects.filter(mid__platoon = cPlatoon).filter(approvalStatus = "2")
+            PC = True
+        if p.billet == "CC" and p.current :
+            cCompany = cMid.company
+            lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "3")
+            lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "3")
+            CC = True
     
     return render_to_response('mid/pendingApproval.html', { 'cMid' : cMid, 
-                                                           'lSR' : lSR,
+                                                            'lSRC' : lSRC,
+                                                            'lORM' : lORM,
+                                                            'SL' : SL,
+                                                            'PC' : PC,
+                                                            'CC' : CC
                                                            },
                                                            context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')    
+def specReqView(request) :
+    cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
+    username = request.user.username
+    
+    if re.match("CO", username) is not None :
+        return render_to_response('specialrequestchit/specReqView.html', {'CO' : True, 
+                                                                          'cChit' : cChit,
+                                                                          }, 
+                                                                          context_instance=RequestContext(request))
+        
+    elif re.match("SEL", username) is not None :
+        return render_to_response('specialrequestchit/specReqView.html', {'SEL' : True, 
+                                                                          'cChit' : cChit,
+                                                                          }, 
+                                                                          context_instance=RequestContext(request))
+    
+    else :
+        alpha = username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
 
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    SL = False
+    PC = False
+    CC = False
+    
+    for p in lBillets :
+        if p.billet == "SL" and p.current :
+            SL = True
+        elif p.billet == "PC" and p.current :
+            PC = True
+        if p.billet == "CC" and p.current :
+            CC = True
 
+    return render_to_response('specialrequestchit/specReqView.html', {'SL' : SL,
+                                                                      'PC' : PC,
+                                                                      'CC' : CC, 
+                                                                      'cChit' : cChit,
+                                                                      }, 
+                                                                      context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')    
+def approveChit(request) :
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
+    
+    level = request.POST['level']
+    action = request.POST['action']
+    comment = request.POST['comment']
+    
+    if level == "1" :
+        if action == "1" :
+            cChit.squadLeaderApproval = True
+            if cChit.approvalLevel == 1 :
+                cChit.approvalStatus = 0
+            else:
+                cChit.approvalStatus = 2
+        else:
+            cChit.squadLeaderApproval = False
+            if cChit.approvalLevel == 1 :
+                cChit.approvalStatus = -1
+            else:
+                cChit.approvalStatus = 2
+        
+        cChit.slComment = comment
+        
+    if level == "2" :
+        if action == "1" :
+            cChit.squadLeaderApproval = True
+            if cChit.approvalLevel == 2 :
+                cChit.approvalStatus = 0
+            else:
+                cChit.approvalStatus = 3
+        else:
+            cChit.squadLeaderApproval = False
+            if cChit.approvalLevel == 2 :
+                cChit.approvalStatus = -1
+            else:
+                cChit.approvalStatus = 3
+        
+        cChit.plComment = comment
+    
+    if level == "3" :
+        if action == "1" :
+            cChit.squadLeaderApproval = True
+            if cChit.approvalLevel == 3 :
+                cChit.approvalStatus = 0
+            else:
+                cChit.approvalStatus = 4
+        else:
+            cChit.squadLeaderApproval = False
+            if cChit.approvalLevel == 3 :
+                cChit.approvalStatus = -1
+            else:
+                cChit.approvalStatus = 4
+        
+        cChit.ccComment = comment
+    
+    if level == "4" :
+        if action == "1" :
+            cChit.squadLeaderApproval = True
+            if cChit.approvalLevel == 4 :
+                cChit.approvalStatus = 0
+            else:
+                cChit.approvalStatus = 5
+        else:
+            cChit.squadLeaderApproval = False
+            if cChit.approvalLevel == 4 :
+                cChit.approvalStatus = -1
+            else:
+                cChit.approvalStatus = 5
+        
+        cChit.selComment = comment
+    
+    if level == "5" :
+        if action == "1" :
+            cChit.squadLeaderApproval = True
+            if cChit.approvalLevel == 5 :
+                cChit.approvalStatus = 0
+            else:
+                cChit.approvalStatus = 6
+        else:
+            cChit.squadLeaderApproval = False
+            if cChit.approvalLevel == 5 :
+                cChit.approvalStatus = -1
+            else:
+                cChit.approvalStatus = 6
+        
+        cChit.coComment = comment    
+        
+    cChit.save()
+    
+    return HttpResponseRedirect(reverse('mid:pendingApproval')) 
+    
 @login_required(redirect_field_name='/')    
 def PRTSat(request) :
     #Aggregate list of people's physical status
@@ -1438,6 +1635,10 @@ def saveAppointCC(request):
     alpha = request.POST['alpha']
     
     cMid = Mid.objects.get(alpha = alpha)
+    cMid.squad = "S"
+    cMid.platoon = "S"
+    cMid.dutySection = "0"
+    cMid.save()
     
     lBillet = Billet.objects.filter(mid__company = cCompany)
     
