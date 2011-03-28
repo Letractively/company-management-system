@@ -128,7 +128,7 @@ class Watch(models.Model):
 class LogBook(models.Model):
     watchBill = models.ForeignKey(WatchBill)
     def __unicode__(self):
-        return unicode(self.watchBill.date) + " Duty Secion: " + self.watchBill.dutySection
+        return "LogBooK: " + unicode(self.watchBill.date) + " Duty Secion: " + self.watchBill.dutySection
     
 class LogEntry(models.Model):
     logBook = models.ForeignKey(LogBook)
