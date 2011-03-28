@@ -30,9 +30,9 @@
 					{% if firstie %}
 					<li><a href='{% url form1:form1Select %}'><span>Review Form-1s</span></a></li>
 					{% endif %}
-					<li><a href='{% url medChits:medChits %}'><span>Medical Chits</span></a></li>
+					<li><a href='{% url medchits:medchits %}'><span>Medical Chits</span></a></li>
 					<li><a href='{% url specReq:specReq %}'><span>Special Request Chits</span></a></li>
-				    <li><a href='{% url ORM:ORM %}'><span>ORM Chits</span></a></li>
+				    <li><a href='{% url orm:orm %}'><span>ORM Chits</span></a></li>
 				</ul>
 			</div>
 		</li>
@@ -40,7 +40,7 @@
 			<a href='#' class='parent'><span>Inspections</span></a>
 			<div>
 				<ul>
-					<li><a href="{% url bIns:bIns %}"><span>Review Room Inspections</span></a></li>
+					<li><a href="{% url bIns:bravoinspection %}"><span>Review Room Inspections</span></a></li>
 					{% if firstie %}
 					<li><a href="{% url bIns:bInsSelect %}"><span>Enter Bravo Room Inspection</span></a></li>
 					{% endif %}
