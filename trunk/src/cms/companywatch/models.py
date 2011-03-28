@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import date
 # Create your models here.
 WATCHBILL_TYPE_CHOICES = (
                           ('W','Work day'),
@@ -113,8 +113,8 @@ class WatchBill(models.Model):
     ACDO = models.ForeignKey("mid.Mid", related_name='+')
     
     def __unicode__(self):
-        d=isoformat()
-        return unicode(self.date) + " Duty Secion: " + self.dutySection + d.strftime(%y)
+        
+        return unicode(self.date) + " Duty Secion: " + self.dutySection
     
 class Watch(models.Model):
     watchBill = models.ForeignKey(WatchBill)
