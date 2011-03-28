@@ -29,9 +29,9 @@ from datetime import timedelta
 import re
 
 def loginPage(request):
-    if request.user.is_authenticated:
-        return HttpResponseRedirect('switchboard')
-    else:
+    #if request.user.is_authenticated:
+    #    return HttpResponseRedirect('switchboard')
+    #else:
         return render_to_response('mid/loginPage.html', {}, 
                                   context_instance=RequestContext(request))
 
@@ -645,7 +645,7 @@ def assignBillets(request):
                                                          'FIN' : FIN,
                                                          'FSGT': FSGT,
                                                          'TRNS1': TRNS1,
-                                                         'TRNS2': TRNS1,
+                                                         'TRNS2': TRNS2,
                                                          'DRLS': DRLS,
                                                          'ADMC': ADMC,
                                                          'MISLO': MISLO,
@@ -696,85 +696,85 @@ def assignCOC(request):
         if p.billet == "PC" and p.current and p.mid.platoon == "4" :
             cPC4 = p
     
-    cPLS1 = None
+    cPLTS1 = None
     for p in lBillet:
         if p.billet == "PLTS" and p.current and p.mid.platoon == "1" :
-            cPLS1 = p
+            cPLTS1 = p
     
-    cPLS2 = None
+    cPLTS2 = None
     for p in lBillet:
         if p.billet == "PLTS" and p.current and p.mid.platoon == "2" :
-            cPLS2 = p
+            cPLTS2 = p
     
-    cPLS3 = None
+    cPLTS3 = None
     for p in lBillet:
         if p.billet == "PLTS" and p.current and p.mid.platoon == "3" :
-            cPLS3 = p
+            cPLTS3 = p
     
-    cPLS4 = None
+    cPLTS4 = None
     for p in lBillet:
         if p.billet == "PLTS" and p.current and p.mid.platoon == "4" :
-            cPLS4 = p 
-    
-    cSL1 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "1" :
-            cSL1 = p
-    
-    cSL2 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "2" :
-            cSL2 = p
-    
-    cSL3 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "3" :
-            cSL3 = p
-    
-    cSL4 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "1" :
-            cSL4 = p
-    
-    cSL5 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "2" :
-            cSL5 = p
-    
-    cSL6 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "3" :
-            cSL6 = p
-    
-    cSL7 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "1" :
-            cSL7 = p
-    
-    cSL8 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "2" :
-            cSL8 = p
-    
-    cSL9 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "3" :
-            cSL9 = p
-    
-    cSL10 = None
-    for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "1" :
-            cSL10 = p
+            cPLTS4 = p 
     
     cSL11 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "2" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "1" :
             cSL11 = p
     
     cSL12 = None
     for p in lBillet:
-        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "3" :
+        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "2" :
             cSL12 = p
+    
+    cSL13 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "1" and p.mid.squad == "3" :
+            cSL13 = p
+    
+    cSL21 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "1" :
+            cSL21 = p
+    
+    cSL22 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "2" :
+            cSL22 = p
+    
+    cSL23 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "2" and p.mid.squad == "3" :
+            cSL23 = p
+    
+    cSL31 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "1" :
+            cSL31 = p
+    
+    cSL32 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "2" :
+            cSL32 = p
+    
+    cSL33 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "3" and p.mid.squad == "3" :
+            cSL33 = p
+    
+    cSL41 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "1" :
+            cSL41 = p
+    
+    cSL42 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "2" :
+            cSL42 = p
+    
+    cSL43 = None
+    for p in lBillet:
+        if p.billet == "SL" and p.current and p.mid.platoon == "4" and p.mid.squad == "3" :
+            cSL43 = p
 
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
     lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "2").order_by('alpha')
@@ -785,22 +785,22 @@ def assignCOC(request):
                                                      'PC2' : cPC2,
                                                      'PC3' : cPC3,
                                                      'PC4' : cPC4,
-                                                     'PLS1': cPLS1,
-                                                     'PLS2': cPLS2,
-                                                     'PLS3': cPLS3,
-                                                     'PLS4': cPLS4,
-                                                     'SL1' : cSL1,
-                                                     'SL2' : cSL2,
-                                                     'SL3' : cSL3,
-                                                     'SL4' : cSL4,
-                                                     'SL5' : cSL5,
-                                                     'SL6' : cSL6,
-                                                     'SL7' : cSL7,
-                                                     'SL8' : cSL8,
-                                                     'SL9' : cSL9,
-                                                     'SL10': cSL10,
-                                                     'SL11': cSL11,
-                                                     'SL12': cSL12,
+                                                     'PLTS1': cPLTS1,
+                                                     'PLTS2': cPLTS2,
+                                                     'PLTS3': cPLTS3,
+                                                     'PLTS4': cPLTS4,
+                                                     'SL11' : cSL11,
+                                                     'SL12' : cSL12,
+                                                     'SL13' : cSL13,
+                                                     'SL21' : cSL21,
+                                                     'SL22' : cSL22,
+                                                     'SL23' : cSL23,
+                                                     'SL31' : cSL31,
+                                                     'SL32' : cSL32,
+                                                     'SL33' : cSL33,
+                                                     'SL41': cSL41,
+                                                     'SL42': cSL42,
+                                                     'SL43': cSL43,
                                                      }, 
                                                      context_instance=RequestContext(request))
     
@@ -855,8 +855,97 @@ def saveAssignBillets(request):
 
 @login_required(redirect_field_name='/')
 def saveAssignCOC(request):
+    #Saves billet assignment    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
-    return HttpResponseRedirect(reverse('mid:assignCOC')) 
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    flagCC = False
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            flagCC = True
+
+    if not flagCC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    cDate = date.today()
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    lBillet = Billet.objects.filter(mid__company = cCompany)
+
+    L = ['1', '2', '3', '4']
+    R = ['1', '2', '3']
+    
+    for x in L :
+        alpha = request.POST['PC'+x]
+        if alpha != "000000" :    
+            for p in lBillet:
+                cMid = p.mid
+                if p.billet == 'PC' and p.current and cMid.platoon == x :
+                    p.endDate = cDate
+                    p.current = False
+                    p.save()
+            
+            cMid = Mid.objects.get(alpha = alpha)
+            cMid.platoon = x
+            cMid.squad = "S"
+            cBillet = Billet(mid = cMid,
+                             billet = "PC",
+                             startDate = cDate,
+                             current = True
+                            )
+            cBillet.save()
+            
+        alpha = request.POST['PLTS'+x]
+        if alpha != "000000" :    
+            for p in lBillet:
+                cMid = p.mid
+                if p.billet == 'PLTS' and p.current and cMid.platoon == x :
+                    p.endDate = cDate
+                    p.current = False
+                    p.save()
+            
+            cMid = Mid.objects.get(alpha = alpha)
+            cMid.platoon = x
+            cMid.squad = "S"
+            cMid.save()
+            cBillet = Billet(mid = cMid,
+                             billet = "PLTS",
+                             startDate = cDate,
+                             current = True
+                            )
+            cBillet.save()
+
+        for z in R:
+            alpha = request.POST['SL'+x+z]
+            if alpha != "000000" :    
+                for p in lBillet:
+                    if p.billet == 'SL' and p.current and p.mid.platoon == x and p.mid.squad == z :
+                        p.endDate = cDate
+                        p.current = False
+                        p.save()
+            
+                cMid = Mid.objects.get(alpha = alpha)
+                cMid.platoon = x
+                cMid.squad = z
+                cMid.save()
+                cBillet = Billet(mid = cMid,
+                                 billet = "SL",
+                                 startDate = cDate,
+                                 current = True
+                                )
+                cBillet.save()
+
+                                                                                                        
+    return HttpResponseRedirect(reverse('mid:assignCOC'))
 
 @login_required(redirect_field_name='/')    
 def PRTSat(request) :
