@@ -97,6 +97,7 @@
     </tr>
 </table>
 <form action="AcYearEdit" method="post">
+{% csrf_token %}
 <input type="submit" value="Edit this Ac Year" />
 </form>
 {% endblock %}
