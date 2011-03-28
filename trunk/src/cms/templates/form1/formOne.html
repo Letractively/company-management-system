@@ -8,7 +8,7 @@
 <table>
 {% for p in lFormOnes %}
     <tr>
-        <form action="formOneView" method = "post">
+        <form action="form1View" method = "post">
         {% csrf_token %}
         <td>{{ p.get_formType_display }}</td>
         <td>{{ p.formDate }}</td>

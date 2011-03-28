@@ -4,7 +4,7 @@
 
 <h1>Enter Form-1 for {{ cInspectee.LName }} ({{ cInspectee.alpha }}).</h1>
 
-<form action="formOneSave" method="post">
+<form action="form1Save" method="post">
 {% csrf_token %}
 <table>
     <tr><td>Form type: </td>
@@ -20,7 +20,7 @@
         <select name = "reason">
             <option value = "A">Appearance</option>
             <option value = "B">Bearing</option>
-            <option value = "MT">Motivalion</option>
+            <option value = "MT">Motivation</option>
             <option value = "CP">Competence</option>
             <option value = "PRO">Professionalism</option>
             <option value = "PHY">Physical Ability</option>
