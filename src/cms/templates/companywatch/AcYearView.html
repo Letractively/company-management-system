@@ -5,7 +5,6 @@
 
 {% block content %}
 
-#<form action="saveAcYear" method="post"> 
 {% csrf_token %}
 <table border=1>
 <caption>Fall Semester</caption>
@@ -98,7 +97,7 @@
     </tr>
 </table>
 <form>
-<input type="submit" value="AcYearEdit" />
+<form action="AcYearEdit" method="post">
+<input type="submit" value="Edit this Ac Year" />
 </form>
-#</form>
 {% endblock %}
