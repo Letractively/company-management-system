@@ -11,6 +11,10 @@ urlpatterns = patterns('companywatch.views',
     url(r'^$', 'AcYearView', name = "AcYearView"),
     (r'^/$', 'AcYear'),
     (r'AcYearView', 'AcYearView'),
+    url(r'^$', 'AcYearEdit',name = 'AcYearEdit'),
+    (r'^/$', 'AcYear'),
+    (r'AcYearEdit', 'AcYearEdit'),
+    
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
