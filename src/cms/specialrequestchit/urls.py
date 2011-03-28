@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
+namespace = "specialrequestchit"
+
 urlpatterns = patterns('specialrequestchit.views',
 
     url(r'^$', 'specReq', name = "specReq"),

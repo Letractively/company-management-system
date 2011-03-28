@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Special Request Chits{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Special Request Chits Approval module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Special Request Chits pending Approval/Denial: </h3>
+<table>
+{% for p in lChits %}
+    <tr>
+        <form action="specReqView" method = "post">
+        {% csrf_token %}
+        <td>{{ p.date }}</td>
+        <td>{%if p.requestType == 'O' %}
+                {{ p.otherRequestType }}
+            {% else %}
+                {{ p.get_requestType_display }}
+            {%endif%}
+        </td>
+        <td>{% if p.approvalStatus == 0 %}APPROVED
+            {%else%}
+                {% if p.approvalStatus == -1 %}DENIED{%endif%}
+                {% if p.approvalStatus > 0 %}PENDING{%endif%}
+            {%endif%}
+        </td>
+            <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+                <input type = "submit" value = "View Chit" /></td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>You do not have any Special Request Chits pending approval.</td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}

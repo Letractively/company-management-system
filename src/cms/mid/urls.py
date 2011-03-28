@@ -19,6 +19,7 @@ urlpatterns = patterns('mid.views',
     (r'saveAssignCOC$', 'saveAssignCOC'),
     url(r'assignBillets$', 'assignBillets', name = "assignBillets"),
     (r'saveAssignBillets$', 'saveAssignBillets'),
+    url(r'pendingApproval$', 'pendingApproval', name = "pendingApproval"),
 
     #Admin options:
     url(r'selectUser$', 'selectUser', name = "selectUser"),
