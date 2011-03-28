@@ -13,6 +13,8 @@ urlpatterns = patterns('orm.views',
     (r'saveLeisure$', 'saveLeisure'),
     url(r'addTravel$', 'addTravel', name = "addTravel"),
     (r'saveTravel$', 'saveTravel'),
+    url(r'addRMP$', 'addRMP', name = "addRMP"),
+    (r'saveRMP$', 'saveRMP'),
     
     (r'ormSubmit$', 'ormSubmit'),
     (r'ormView$', 'ormView'),

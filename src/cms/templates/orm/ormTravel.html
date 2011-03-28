@@ -4,9 +4,9 @@
 
 <h1>Welcome to the ORM module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
-<h3>Enter an ORM Chit Leisure Activities:</h3>
+<h3>Enter an ORM Chit Travel Plan:</h3>
 
-<form action="saveLeisure" method="post">
+<form action="saveTravel" method="post">
 {% csrf_token %}
         <table border="1" cellpadding="1" cellspacing="0" style="width: 800px; " summary="ORM Safety Worksheet">
             <caption>
@@ -84,10 +84,38 @@
                     <td>
                         &nbsp;</td>
                 </tr>
+                <tr>
+                    <td colspan="5" style="text-align: center; ">
+                        <strong>Leisure Activities</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="3" rowspan="1" style="text-align: center; ">
+                        <strong>Activity</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Duration</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>RAC</strong></td>
+                </tr>
+                
+                {% for p in lLeisure %}               
+                <tr>
+                    <td colspan="3" rowspan="1">
+                        {{ p.activity }}</td>
+                    <td>
+                        {{ p.duration }} </td>
+                    <td>
+                        {{ p.RAC }}</td>
+                </tr>      
+                {%endfor%}
+                
+                <tr>
+                    <td colspan="5" style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                </tr>
                 
                  <tr>
                     <td colspan="5">
-                        Use the RAC chart below to calculate the risks of your Leisure activities.</td>
+                        Use the RAC chart below to calculate the risks of your travel.</td>
                 </tr>
                 <tr>
                     <td style="text-align: center; ">
@@ -172,45 +200,56 @@
                 
                 <tr>
                     <td colspan="5" style="text-align: center; ">
-                        <strong>Leisure Activities</strong></td>
+                        <strong>Methods of Travel</strong></td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="1" style="text-align: center; ">
-                        <strong>Activity</strong></td>
                     <td style="text-align: center; ">
-                        <strong>Duration</strong></td>
+                        <strong>Departure Time</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Arrival Time</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Method</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Distance (miles)</strong></td>
                     <td style="text-align: center; ">
                         <strong>RAC</strong></td>
-                </tr>
+                </tr>            
                 
-                {% for p in lLeisure %}
-                
+                {% for p in lTravel %}
                 <tr>
-                    <td colspan="3" rowspan="1">
-                        {{ p.activity }}</td>
                     <td>
-                        {{ p.duration }} </td>
+                        {{ p.estimatedDepartTime }}</td>
+                    <td>
+                        {{ p.estimatedArrivalTime }} </td>
+                    <td>
+                        {{ p.methodOfTravel }}</td>
+                    <td>
+                        {{ p.distance }}</td>
                     <td>
                         {{ p.RAC }}</td>
-                </tr>
-                
+                </tr>              
                 {%endfor%}
                 
                 <tr>
-                    <td colspan="3" rowspan="1">
-                        <input type = "text" name = "activity" /></td>
                     <td>
-                        <input type = "text" name = "duration" /></td>
+                        <input type = "text" name = "estimatedDepartTime" /></td>
+                    <td>
+                        <input type = "text" name = "estimatedArrivalTime" /></td>
+                    <td>
+                        <input type = "text" name = "methodOfTravel" /></td>
+                    <td>
+                        <input type = "text" name = "distance" /></td>
                     <td>
                         <input type = "text" name = "RAC" /></td>
                 </tr>
-                <tr><td>Risk Mitigation Plan:</td><td colspan = 4><input type = "text" name = "riskMitigationPlan"  size = "80"/></td></tr>
+                <tr><td>Risk Mitigation Plan:</td><td colspan = 4><input type = "text" name = "riskMitigationPlan" size = "80"/></td></tr>
+                
             </tbody>
         </table><input type = "hidden" name = "id" value = "{{ cChit.id }}" />
-          <br /><input type="submit" value="Add Leisure Activity" /><br /><br />
+        <br /><input type="submit" value="Add Travel" /><br /><br />
 </form>
-<form action="addTravel" method="post">{% csrf_token %}
+<form action="addRMP" method="post">{% csrf_token %}
 <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
-<input type="submit" value="Complete Leisure, Add Travels" />
+<input type="submit" value="Complete Travel Plan, Submit Risk Mitigation Plan" />
 </form>
 {% endblock %}

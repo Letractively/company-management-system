@@ -95,7 +95,8 @@
     <tr>
         <form action="ormView" method = "post">
         {% csrf_token %}
-        <td>{{ p.date }}</td>
+        <td>{{ p.dateDepart }}</td>
+        <td>{{ p.dateReturn }}</td>
         <td>{% if p.approvalStatus == 0 %}APPROVED
             {%else%}
                 {% if p.approvalStatus == -1 %}DENIED{%endif%}
