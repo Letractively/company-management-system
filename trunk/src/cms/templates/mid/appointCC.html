@@ -9,8 +9,7 @@
 {%if not cBillet%}
     Currently there is no Company Commander.
 {% else %}
-    Current Company Commander is {{ cBillet.mid }}. His term as a Company Commander is due 
-    to expire on {{ cBillet.endDate }}. Appointing a new Company Commander will remove current 
+    Current Company Commander is {{ cBillet.mid }}. Appointing a new Company Commander will remove current 
     CC from office, effective immediately. 
 {%endif%}
 <br /><br />
@@ -23,9 +22,7 @@
             <option value = "null">N/A</option>
         {% endfor %}
     </select><br /><br />
-    
-    End of term: <input type = "input" name = "endDate" /><br /><br />
-    
+
     <input type="submit" value="Appoint, starting immediately" />
 </form>
 

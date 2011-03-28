@@ -1050,6 +1050,7 @@ def saveAssignCOC(request):
             cMid = Mid.objects.get(alpha = alpha)
             cMid.platoon = x
             cMid.squad = "S"
+            cMid.save()
             cBillet = Billet(mid = cMid,
                              billet = "PC",
                              startDate = cDate,
@@ -1108,8 +1109,8 @@ def pendingApproval(request) :
     if re.match("CO", username) is not None :
         username = username.split('_')
         cCompany = username[1]
-        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
-        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
+        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
         
         return render_to_response('mid/pendingApproval.html', {'CO' : True, 
                                                                'lSRC' : lSRC,
@@ -1117,11 +1118,11 @@ def pendingApproval(request) :
                                                                },
                                                                context_instance=RequestContext(request))
         
-    elif re.match("SEL", username) is not None :
+    if re.match("SEL", username) is not None :
         username = username.split('_')
         cCompany = username[1]
-        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
-        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "5")
+        lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
+        lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "4")
         
         return render_to_response('mid/pendingApproval.html', {'SEL' : True, 
                                                                'lSRC' : lSRC,
@@ -1143,21 +1144,25 @@ def pendingApproval(request) :
     CC = False
     
     for p in lBillets :
-        if p.billet == "SL" and p.current :
-            cSquad = cMid.squad
-            lSRC = SpecialRequestChit.objects.filter(mid__squad = cSquad).filter(approvalStatus = "1")
-            lORM = OrmChit.objects.filter(mid__squad = cSquad).filter(approvalStatus = "1")
-            SL = True
-        elif p.billet == "PC" and p.current :
-            cPlatoon = cMid.platoon
-            lSRC = SpecialRequestChit.objects.filter(mid__platoon = cPlatoon).filter(approvalStatus = "2")
-            lORM = OrmChit.objects.filter(mid__platoon = cPlatoon).filter(approvalStatus = "2")
-            PC = True
         if p.billet == "CC" and p.current :
-            cCompany = cMid.company
             lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "3")
             lORM = OrmChit.objects.filter(mid__company = cCompany).filter(approvalStatus = "3")
             CC = True
+            
+        if p.billet == "PC" and p.current :
+            cPlatoon = cMid.platoon
+            lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(mid__platoon = cPlatoon).filter(approvalStatus = "2")
+            lORM = OrmChit.objects.filter(mid__company = cCompany).filter(mid__platoon = cPlatoon).filter(approvalStatus = "2")
+            PC = True
+        
+        if p.billet == "SL" and p.current :
+            cSquad = cMid.squad
+            cPlatoon = cMid.platoon
+            lSRC = SpecialRequestChit.objects.filter(mid__company = cCompany).filter(mid__platoon = cPlatoon).filter(mid__squad = cSquad).filter(approvalStatus = "1")
+            lORM = OrmChit.objects.filter(mid__company = cCompany).filter(mid__platoon = cPlatoon).filter(mid__squad = cSquad).filter(approvalStatus = "1")
+            SL = True
+        
+        #lSRC = SpecialRequestChit.objects.all()
     
     return render_to_response('mid/pendingApproval.html', { 'cMid' : cMid, 
                                                             'lSRC' : lSRC,
@@ -1226,15 +1231,15 @@ def approveChit(request) :
     
     if level == "1" :
         if action == "1" :
-            cChit.squadLeaderApproval = True
+            cChit.slApproval = True
             if cChit.approvalLevel == 1 :
-                cChit.approvalStatus = 0
+                cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 2
         else:
-            cChit.squadLeaderApproval = False
+            cChit.slApproval = False
             if cChit.approvalLevel == 1 :
-                cChit.approvalStatus = -1
+                cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 2
         
@@ -1242,31 +1247,31 @@ def approveChit(request) :
         
     if level == "2" :
         if action == "1" :
-            cChit.squadLeaderApproval = True
+            cChit.pcApproval = True
             if cChit.approvalLevel == 2 :
-                cChit.approvalStatus = 0
+                cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 3
         else:
-            cChit.squadLeaderApproval = False
+            cChit.pcApproval = False
             if cChit.approvalLevel == 2 :
-                cChit.approvalStatus = -1
+                cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 3
         
-        cChit.plComment = comment
+        cChit.pcComment = comment
     
     if level == "3" :
         if action == "1" :
-            cChit.squadLeaderApproval = True
+            cChit.ccApproval = True
             if cChit.approvalLevel == 3 :
-                cChit.approvalStatus = 0
+                cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 4
         else:
-            cChit.squadLeaderApproval = False
+            cChit.ccApproval = False
             if cChit.approvalLevel == 3 :
-                cChit.approvalStatus = -1
+                cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 4
         
@@ -1274,15 +1279,15 @@ def approveChit(request) :
     
     if level == "4" :
         if action == "1" :
-            cChit.squadLeaderApproval = True
+            cChit.selApproval = True
             if cChit.approvalLevel == 4 :
-                cChit.approvalStatus = 0
+                cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 5
         else:
-            cChit.squadLeaderApproval = False
+            cChit.selApproval = False
             if cChit.approvalLevel == 4 :
-                cChit.approvalStatus = -1
+                cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 5
         
@@ -1290,15 +1295,15 @@ def approveChit(request) :
     
     if level == "5" :
         if action == "1" :
-            cChit.squadLeaderApproval = True
+            cChit.coApproval = True
             if cChit.approvalLevel == 5 :
-                cChit.approvalStatus = 0
+                cChit.approvalStatus = 10
             else:
                 cChit.approvalStatus = 6
         else:
-            cChit.squadLeaderApproval = False
+            cChit.coApproval = False
             if cChit.approvalLevel == 5 :
-                cChit.approvalStatus = -1
+                cChit.approvalStatus = 11
             else:
                 cChit.approvalStatus = 6
         
@@ -1651,7 +1656,6 @@ def saveAppointCC(request):
     cBillet = Billet(mid = cMid,
                      billet = "CC",
                      startDate = cDate,
-                     endDate = request.POST['endDate'],
                      current = True
                      )
     cBillet.save()

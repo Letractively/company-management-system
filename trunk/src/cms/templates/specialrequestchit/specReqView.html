@@ -69,11 +69,11 @@
 </tr>
 
 <tr>
-    <td>Squad Leader: </td><td>{%if not cChit.squadLeaderApproval %}
+    <td>Squad Leader: </td><td>{%if cChit.slApproval == None %}
                                     PENDING
                                {% else %}
-                                    {% if cChit.squadLeaderApproval %} APPROVED {% endif %}
-                                    {% if not cChit.squadLeaderApproval  %} DENIED {% endif %}
+                                    {% if cChit.slApproval %} APPROVED {% endif %}
+                                    {% if not cChit.slApproval %} DENIED {% endif %}
                                {%endif%}
     </td>
     <td>{{ cChit.slComment }}</td>
@@ -81,24 +81,24 @@
 
 {%if cChit.approvalLevel > 1 and cChit.approvalStatus > 1%}
 <tr>
-    <td>Platoon Commander: </td><td>{%if not cChit.platoonLeaderApproval %}
+    <td>Platoon Commander: </td><td>{%if cChit.pcApproval == None %}
                                     PENDING
                                {% else %}
-                                    {% if cChit.platoonLeaderApproval %} APPROVED {% endif %}
-                                    {% not if cChit.platoonLeaderApproval %} DENIED {% endif %}
+                                    {% if cChit.pcApproval %} APPROVED {% endif %}
+                                    {% if not cChit.pcApproval %} DENIED {% endif %}
                                {% endif %}
     </td>
-    <td>{{ cChit.plComment }}</td>
+    <td>{{ cChit.pcComment }}</td>
 </tr>
 {%endif%}
 
 {%if cChit.approvalLevel > 2 and cChit.approvalStatus > 2%}
 <tr>
-    <td>Company Commander: </td><td>{%if not cChit.companyCommanderApproval %}
+    <td>Company Commander: </td><td>{%if cChit.ccApproval == None %}
                                     PENDING
                                {% else %}
-                                    {% if cChit.companyCommanderApproval %} APPROVED {% endif %}
-                                    {% if not cChit.companyCommanderApproval %} DENIED {% endif %}
+                                    {% if cChit.ccApproval %} APPROVED {% endif %}
+                                    {% if not cChit.ccApproval %} DENIED {% endif %}
                                {% endif %}
     </td>
     <td>{{ cChit.ccComment }}</td>
@@ -107,11 +107,11 @@
 
 {%if cChit.approvalLevel > 3 and cChit.approvalStatus > 3%}
 <tr>
-    <td>SEL: </td><td>{%if not cChit.companySELApproval %}
+    <td>SEL: </td><td>{%if cChit.selApproval == None %}
                                      PENDING
                                {% else %}
-                                    {%if cChit.companySELApproval %} APPROVED {%endif%}
-                                    {%if not cChit.companySELApproval %} DENIED {%endif%}
+                                    {%if cChit.selApproval %} APPROVED {%endif%}
+                                    {%if not cChit.selApproval %} DENIED {%endif%}
                                {% endif %}
     </td>
     <td>{{ cChit.selComment }}</td>
@@ -120,11 +120,11 @@
 
 {%if cChit.approvalLevel > 4 and cChit.approvalStatus > 4%}
 <tr>
-    <td>Company Officer: </td><td>{%if not cChit.companyOfficer %}
+    <td>Company Officer: </td><td>{%if cChit.coApproval == None %}
                                     PENDING
                                {% else %}
-                                    {% if cChit.companyOfficer %} APPROVED {% endif %}
-                                    {% not if cChit.companyOfficer %} DENIED {% endif %}
+                                    {% if cChit.coApproval %} APPROVED {% endif %}
+                                    {% if not cChit.coApproval %} DENIED {% endif %}
                                {% endif %}
     </td>
     <td>{{ cChit.coComment }}</td>

@@ -52,6 +52,7 @@ def addLeisure(request):
     dateReturn = date(int(dateReturn[0]), int(dateReturn[1]), int(dateReturn[2]))
     
     daysLeave = dateReturn - dateDepart;
+    daysLeave = daysLeave.days;
     daysTravel = request.POST['daysTravel']
     travelRatio = int(daysTravel) / int(daysLeave)
 
@@ -70,7 +71,6 @@ def addLeisure(request):
                                daysTravel = daysTravel,
                                daysLeave = daysLeave,
                                travelRatio = travelRatio,
-                               riskMitigationPlan = request.POST['risk_mitigation_plan'],
                                approvalLevel = 6,
                                approvalStatus = approvalStatus
                                )
@@ -79,7 +79,7 @@ def addLeisure(request):
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     
     return render_to_response('orm/ormLeisure.html', {'cMid' : cMid, 
-                                                      'lChits' : lChits,
+                                                      'cChit' : cChit,
                                                       'lLeisure' : lLeisure,
                                                       }, 
                                                       context_instance=RequestContext(request))
@@ -91,16 +91,23 @@ def saveLeisure(request) :
     cMid = Mid.objects.get(alpha=alpha)
     
     lChits = OrmChit.objects.filter(mid=cMid).order_by('-date')
-    cChit = lChits[0]
+    cChit = OrmChit.objects.get(id=request.POST['id'])
+    
+    cLeisure = LeisureActivites(OrmChit = cChit,
+                                activity = request.POST['activity'],
+                                duration = request.POST['duration'],
+                                RAC = request.POST['RAC']
+                                )
+    cLeisure.save()
     
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     
     return render_to_response('orm/ormLeisure.html', {'cMid' : cMid, 
-                                               'cChit' : cChit,
-                                               'lChits' : lChits,
-                                               'lLeisure' : lLeisure,
-                                              }, 
-                                              context_instance=RequestContext(request))
+                                                      'cChit' : cChit,
+                                                      'lChits' : lChits,
+                                                      'lLeisure' : lLeisure,
+                                                      }, 
+                                                      context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def ormView(request):
@@ -110,9 +117,11 @@ def ormView(request):
     
     cChit = OrmChit.objects.get(id=request.POST['id'])
     
+    lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
+    
     return render_to_response('orm/ormView.html', {'cMid' : cMid, 
                                                    'cChit' : cChit,
                                                    'lLeisure' : lLeisure,
-                                                   'lTravel' : lTravel,
+                                                   #'lTravel' : lTravel,
                                                    }, 
                                                   context_instance=RequestContext(request))
