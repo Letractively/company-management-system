@@ -45,38 +45,55 @@ DS_CHOICES = (
     ('O','Out of Company'),              
               )
 
+AcYearChoices = (
+                 ('11','2010-2011'),
+                 ('12','2011-2012'),
+                 ('13','2012-2013'),
+                 ('14','2013-2014'),
+                 ('15','2014-2015'),
+                 ('16','2015-2016'),
+                 ('17','2016-2017'),
+                 ('18','2017-2018'),
+                 ('19','2018-2019'),
+                 ('20','2019-2020'),
+                 ('21','2020-2021'),
+                 )
+
 class AcYear(models.Model):
-    fallStart = models.DateField()
-    fallGoldWeekStart = models.CharField(max_length=1, choices=Ac_WEEK_START)
-    fall6Weeks = models.DateField()
-    fall12Weeks = models.DateField()
-    thanksgivingStart = models.DateField()
-    thanksgivingEnd = models.DateField()
-    fallXWeekStart = models.DateField()
-    fallXWeekEnd = models.DateField()
-    christmasStart = models.DateField()
-    christmasEnd = models.DateField()
-    christmasIntersessionalStart = models.DateField()
-    christmasIntersessionalEnd = models.DateField()    
-    laborDay = models.DateField()
-    columbusDay = models.DateField()
-    veteransDay = models.DateField()    
-    fallEnd = models.DateField()    
-    startSpring = models.DateField()
-    spring6Weeks = models.DateField()
-    spring12Weeks = models.DateField()
-    springXWeekStart = models.DateField()
-    springXWeekEnd = models.DateField()
-    springBreakStart = models.DateField()
-    springBreakEnd = models.DateField()
-    mlkDay = models.DateField()
-    washingtonBirthday = models.DateField()   
-    endSpring = models.DateField()
-    springIntersessionalStart = models.DateField()
-    springIntersessionalEnd = models.DateField()
-    startSummer = models.DateField()
+    acYear = models.CharField(max_length=2,choices=AcYearChoices)
+    isInit = models.NullBooleanField(null=True,blank=True)   
+    fallStart = models.DateField(null=True,blank=True)
+    fallGoldWeekStart = models.CharField(max_length=1, choices=Ac_WEEK_START,null=True,blank=True)
+    fall6Weeks = models.DateField(null=True,blank=True)
+    fall12Weeks = models.DateField(null=True,blank=True)
+    thanksgivingStart = models.DateField(null=True,blank=True)
+    thanksgivingEnd = models.DateField(null=True,blank=True)
+    fallXWeekStart = models.DateField(null=True,blank=True)
+    fallXWeekEnd = models.DateField(null=True,blank=True)
+    christmasStart = models.DateField(null=True,blank=True)
+    christmasEnd = models.DateField(null=True,blank=True)
+    christmasIntersessionalStart = models.DateField(null=True,blank=True)
+    christmasIntersessionalEnd = models.DateField(null=True,blank=True) 
+    laborDay = models.DateField(null=True,blank=True)
+    columbusDay = models.DateField(null=True,blank=True)
+    veteransDay = models.DateField(null=True,blank=True)    
+    fallEnd = models.DateField(null=True,blank=True)    
+    startSpring = models.DateField(null=True,blank=True)
+    spring6Weeks = models.DateField(null=True,blank=True)
+    spring12Weeks = models.DateField(null=True,blank=True)
+    springXWeekStart = models.DateField(null=True,blank=True)
+    springXWeekEnd = models.DateField(null=True,blank=True)
+    springBreakStart = models.DateField(null=True,blank=True)
+    springBreakEnd = models.DateField(null=True,blank=True)
+    mlkDay = models.DateField(null=True,blank=True)
+    washingtonBirthday = models.DateField(null=True,blank=True)   
+    springEnd = models.DateField(null=True,blank=True)
+    springIntersessionalStart = models.DateField(null=True,blank=True)
+    springIntersessionalEnd = models.DateField(null=True,blank=True)
+    summerStart = models.DateField(null=True,blank=True)
     
 class AcWatch(models.Model):
+    acYear = models.ForeignKey(AcYear)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     week = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     dayOfWeek = models.IntegerField(max_length=1, choices=DAY_CHOICES)
