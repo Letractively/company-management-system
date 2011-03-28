@@ -50,6 +50,7 @@ def AcYearView(request):
     acYear = AcYear.objects.get(acYear=year)
     return render_to_response('companywatch/AcYearView.html', { 'acYear': acYear },context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def AcYearEdit(request):
     #check to make sure the reqester is the Company Adj.
     #get requesting username and alpha
@@ -76,6 +77,7 @@ def AcYearEdit(request):
     
     return render_to_response('companywatch/AcYearEdit.html',{'acYear':acYear},context_instance=RequestContext(request))
 
+@login_required(redirect_field_name='/')
 def AcYearSubmit(request):
     #check to make sure the reqester is the Company Adj.
     #get requesting username and alpha
