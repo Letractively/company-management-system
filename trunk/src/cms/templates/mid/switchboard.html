@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 {%if CO%}
     <h1>Welcome, Company Officer.</h1>
     
@@ -17,6 +18,8 @@
                 <li><a href = "weekends/view">View Weekend List</a></li>
             </ul>
         
+        <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+        
         <li><a href = "mid/appointCC">Appoint Company Commander</a></li>
         <li><a href = "mid/changeCompany">Move a midshipman to another company</a></li>
         
@@ -24,174 +27,202 @@
     </ul>
 {%else%}
 
-    <h1>Welcome {{ mid.fName|lower|capfirst }} {{ mid.LName|lower|capfirst }}.</h1>
+    {%if SEL%}
+    
+    <h1>Welcome, Senior Enlisted Leader.</h1>
+    
+    <h3>What would you like to do?</h3>
+    
     <ul>
-        <li>Weekends:
+        <li>Weekends:</li>
             <ul>
-                <li><a href = "weekends/">Request Weekends</a></li>
                 <li><a href = "weekends/view">View Weekend List</a></li>
             </ul>
-        </li><br />
         
-        <li>Movement Orders:
-            <ul>
-                <li><a href = "movementOrders/">Check-out/Check-in</a></li>
-                <li><a href = "movementOrders/viewMOListCompany">View current MO-s for company</a></li>
-            </ul>
-        </li><br />
+        <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         
-        <li>Chits/Paperwork:
-            <ul>
-                <li><a href = "form1/">Review Form-1s</a></li>
-                {% if firstie %}
-                <li><a href = "form1/form1Select">Enter Form-1</a></li>
-                {% endif %}
-                <li><a href = "medchits/">Medical Chits</a></li>
-                <li><a href = "specReq/">Special Request Chits</a></li>
-                <li><a href = "ORM/">ORM Chits</a></li>
-            </ul>
-        </li><br />
-        
-        <li>Inspections:
-            <ul>
-                <li><a href = "bIns/">Review Room Inspections</a></li>
-                <li><a href = "uIns/">Review Uniform Inspections</a></li>
-                {% if firstie %}
-                <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
-                <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
-                {% endif %}
-            </ul>
-        </li><br />
-        
-        
-        <li><a href = "mid/viewDiscipline">View Restrictions/Probations/Tours</a></li>
-        <li><a href = "mid/editPersonalInformation">Personal Information</a></li>
-        <li><a href = "mid/selectPassChange">Change Password</a></li>
         <li><a href = "logout">Log out</a></li>
     </ul>
     
-    {% if CC %}
-    <h3>Company Commander options:</h3>
-    <ul>
-        <li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
-        <li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
-    </ul>
+    {%else%}
+        <h1>Welcome {{ mid.fName|lower|capfirst }} {{ mid.LName|lower|capfirst }}.</h1>
+        <ul>
+            <li>Weekends:
+                <ul>
+                    <li><a href = "weekends/">Request Weekends</a></li>
+                    <li><a href = "weekends/view">View Weekend List</a></li>
+                </ul>
+            </li><br />
+            
+            <li>Movement Orders:
+                <ul>
+                    <li><a href = "movementOrders/">Check-out/Check-in</a></li>
+                    <li><a href = "movementOrders/viewMOListCompany">View current MO-s for company</a></li>
+                </ul>
+            </li><br />
+            
+            <li>Chits/Paperwork:
+                <ul>
+                    <li><a href = "form1/">Review Form-1s</a></li>
+                    {% if firstie %}
+                    <li><a href = "form1/form1Select">Enter Form-1</a></li>
+                    {% endif %}
+                    <li><a href = "medchits/">Medical Chits</a></li>
+                    <li><a href = "specReq/">Special Request Chits</a></li>
+                    <li><a href = "ORM/">ORM Chits</a></li>
+                </ul>
+            </li><br />
+            
+            <li>Inspections:
+                <ul>
+                    <li><a href = "bIns/">Review Room Inspections</a></li>
+                    <li><a href = "uIns/">Review Uniform Inspections</a></li>
+                    {% if firstie %}
+                    <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
+                    <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
+                    {% endif %}
+                </ul>
+            </li><br />
+            
+            
+            <li><a href = "mid/viewDiscipline">View Restrictions/Probations/Tours</a></li>
+            <li><a href = "mid/editPersonalInformation">Personal Information</a></li>
+            <li><a href = "mid/selectPassChange">Change Password</a></li>
+            <li><a href = "logout">Log out</a></li>
+        </ul>
+        
+        {% if CC %}
+        <h3>Company Commander's options:</h3>
+        <ul>
+            <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+            <li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
+            <li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
+        </ul>
+        {%endif%}
+        
+        {% if XO %}
+        {%endif%}
+        
+        {% if PC %}
+        <h3>Platoon Commander's options:</h3>
+        <ul>
+            <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+        </ul>
+        {%endif%}
+        
+        {% if PLTS %}
+        <h3>Platoon Sargeant's options: </h3>
+        <ul>
+            <li><a href = "accountability/">Enter attendance for an event</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if SL %}
+        <h3>Squad Leader's options:</h3>
+        <ul>
+            <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+        </ul>
+        {%endif%}
+        
+        {% if HA %}
+        {%endif%}
+        
+        {% if OPS %}
+        {%endif%}
+        
+        {% if ADJ %}
+        <h3>Company Adjutant options:</h3>
+        <ul>
+            <li><a href = "companywatch/AcYearView">Create Duty Calendar</a></li>
+        </ul>
+        {%endif%}
+        
+        {% if PMO%}
+        <h3>Physical Mission Officer options: </h3>
+        <ul>
+            <li><a href = "mid/PRTSat">Physical Status</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if AC %}
+        {%endif%}
+        
+        {% if SAF %}
+        {%endif%}
+        
+        {% if APT %}
+        <h3>Aptitude/Conduct Officer options: </h3>
+        <ul>
+            <li><a href = "mid/assessDiscipline">Maintain Restriction/Tours</a></li>
+            <li><a href = "mid/enterDiscipline">Enter Restriction/Tours</a></li>
+            <li><a href = "mid/enterProbation">Enter Probation</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if ADEO %}
+        {%endif%}
+        
+        {% if ATFP %}
+        {%endif%}
+        
+        {% if TRN %}
+        {%endif%}
+        
+        {% if FLT %}
+        {%endif%}
+        
+        {% if ADM%}
+        <h3>Admin Officer options: </h3>
+        <ul>
+            <li><a href = "weekends/admin">View/Edit number of weekends</a></li>
+            <li><a href = "mid/selectUser">Edit/Add user</a></li>
+            <li><a href = "mid/selectPassReset">Restore user's password</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if PRO %}
+        {%endif%}
+        
+        {% if WRD %}
+        {%endif%}
+        
+        {% if DRL %}
+        {%endif%}
+        
+        {% if SAVI %}
+        {%endif%}
+        
+        {% if CMEO %}
+        {%endif%}
+        
+        {% if FIN %}
+        {%endif%}
+        
+        {% if FSGT %}
+        <h3>First Sargeant's options: </h3>
+        <ul>
+            <li><a href = "accountability/createEvent">Create a new event</a></li>
+            <li><a href = "accountability/selectEvent">Review attendance for a given event</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if TRNS1 or TRNS2 %}
+        {%endif%}
+        
+        {% if DRLS %}
+        {%endif%}
+        
+        {% if ADMC%}
+        <h3>Admin Chief's options: </h3>
+        <ul>
+            <li><a href = "mid/selectUser">Edit/Add user</a></li>
+            <li><a href = "mid/selectPassReset">Restore user's password</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if MISLO %}
+        {%endif%}
+        
     {%endif%}
-    
-    {% if XO %}
-    {%endif%}
-    
-    {% if PC %}
-    {%endif%}
-    
-    {% if PLTS %}
-    <h3>Platoon Sargeant's options: </h3>
-    <ul>
-        <li><a href = "accountability/">Enter attendance for an event</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if SL %}
-    {%endif%}
-    
-    {% if HA %}
-    {%endif%}
-    
-    {% if OPS %}
-    {%endif%}
-    
-    {% if ADJ %}
-    <h3>Company Adjutant options:</h3>
-    <ul>
-        <li><a href = "companywatch/AcYearView">Create Duty Calendar</a></li>
-    </ul>
-    {%endif%}
-    
-    {% if PMO%}
-    <h3>Physical Mission Officer options: </h3>
-    <ul>
-        <li><a href = "mid/PRTSat">Physical Status</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if AC %}
-    {%endif%}
-    
-    {% if SAF %}
-    {%endif%}
-    
-    {% if APT %}
-    <h3>Aptitude/Conduct Officer options: </h3>
-    <ul>
-        <li><a href = "mid/assessDiscipline">Maintain Restriction/Tours</a></li>
-        <li><a href = "mid/enterDiscipline">Enter Restriction/Tours</a></li>
-        <li><a href = "mid/enterProbation">Enter Probation</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if ADEO %}
-    {%endif%}
-    
-    {% if ATFP %}
-    {%endif%}
-    
-    {% if TRN %}
-    {%endif%}
-    
-    {% if FLT %}
-    {%endif%}
-    
-    {% if ADM%}
-    <h3>Admin Officer options: </h3>
-    <ul>
-        <li><a href = "weekends/admin">View/Edit number of weekends</a></li>
-        <li><a href = "mid/selectUser">Edit/Add user</a></li>
-        <li><a href = "mid/selectPassReset">Restore user's password</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if PRO %}
-    {%endif%}
-    
-    {% if WRD %}
-    {%endif%}
-    
-    {% if DRL %}
-    {%endif%}
-    
-    {% if SAVI %}
-    {%endif%}
-    
-    {% if CMEO %}
-    {%endif%}
-    
-    {% if FIN %}
-    {%endif%}
-    
-    {% if FSGT %}
-    <h3>First Sargeant's options: </h3>
-    <ul>
-        <li><a href = "accountability/createEvent">Create a new event</a></li>
-        <li><a href = "accountability/selectEvent">Review attendance for a given event</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if TRNS1 or TRNS2 %}
-    {%endif%}
-    
-    {% if DRLS %}
-    {%endif%}
-    
-    {% if ADMC%}
-    <h3>Admin Chief's options: </h3>
-    <ul>
-        <li><a href = "mid/selectUser">Edit/Add user</a></li>
-        <li><a href = "mid/selectPassReset">Restore user's password</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if MISLO %}
-    {%endif%}
-    
 {%endif%}
 {% endblock %}

@@ -66,7 +66,13 @@ def specReqSubmit(request):
                                otherRequestType = request.POST['otherType'],
                                justification = request.POST['justification'],
                                approvalLevel = approvalLevel,
-                               approvalStatus = 1)
+                               approvalStatus = 1,
+                               clComment = "",
+                               plComment = "",
+                               ccComment = "",
+                               selComment = "",
+                               coComment = ""
+                               )
     cChit.save()
     
     return HttpResponseRedirect(reverse('specialrequestchit:specReq'))

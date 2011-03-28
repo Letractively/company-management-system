@@ -2,11 +2,11 @@
 {% block title %}Special Request Chits{% endblock %}
 {% block content %}
 
-<h1>Welcome to the Special Request Chits Approval module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+<h1>Welcome to the Special Request Chits Approval module.</h1>
 
 <h3>Special Request Chits pending Approval/Denial: </h3>
 <table>
-{% for p in lChits %}
+{% for p in lSRC %}
     <tr>
         <form action="specReqView" method = "post">
         {% csrf_token %}
@@ -15,12 +15,6 @@
                 {{ p.otherRequestType }}
             {% else %}
                 {{ p.get_requestType_display }}
-            {%endif%}
-        </td>
-        <td>{% if p.approvalStatus == 0 %}APPROVED
-            {%else%}
-                {% if p.approvalStatus == -1 %}DENIED{%endif%}
-                {% if p.approvalStatus > 0 %}PENDING{%endif%}
             {%endif%}
         </td>
             <td><input type = "hidden" name = "id" value = "{{ p.id }}" />

@@ -20,6 +20,8 @@ urlpatterns = patterns('mid.views',
     url(r'assignBillets$', 'assignBillets', name = "assignBillets"),
     (r'saveAssignBillets$', 'saveAssignBillets'),
     url(r'pendingApproval$', 'pendingApproval', name = "pendingApproval"),
+    (r'specReqView$', 'specReqView'),
+    (r'approveChit$', 'approveChit'),
 
     #Admin options:
     url(r'selectUser$', 'selectUser', name = "selectUser"),
