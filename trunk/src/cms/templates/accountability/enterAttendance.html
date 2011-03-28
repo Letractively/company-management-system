@@ -14,16 +14,19 @@
 <tr><td colspan = 2>
     {% for p in lEvents %}
         <select name = "event">
-            <option value = "{{ p.id }}">{{ p }}</option>
+            <option value = "{{ p.id }}">{{ p.dateTime }} {{ p.get_type_display }} {{ p.location }}</option>
         </select>
+    {%empty%}
+        You have no unsubmitted attendances.
     {%endfor%}
 </td></tr>
 
+{% if lEvents %}
 </td></tr>
 {% for p in lMids%}
     <tr><td>{{ p }}</td>
     <td>
-        <select name = {{ p.alpha }}'A'>
+        <select name = "{{ p.alpha }}A">
             <option value = "P">Present</option>
             <option value = "A">Absent</option>
             <option value = "U">U/A</option>
@@ -32,6 +35,8 @@
     </td></tr>
 {%endfor%}
     <tr><td colspan = 2><input type="submit" value="Send" /></td></tr>
+    
+{%endif%}
 </form>
 </table>
 

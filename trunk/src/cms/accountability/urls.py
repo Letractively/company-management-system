@@ -13,6 +13,8 @@ urlpatterns = patterns('accountability.views',
     (r'saveAttendance$', 'saveAttendance'),
     url(r'createEvent', 'createEvent', name = "createEvent"),
     (r'saveEvent$', 'saveEvent'),
+    url(r'selectEvent$', 'selectEvent', name = "selectEvent"),
+    (r'reviewAttendance$', 'reviewAttendance'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
