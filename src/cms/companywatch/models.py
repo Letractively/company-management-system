@@ -122,7 +122,7 @@ class Watch(models.Model):
     endTime = models.TimeField()
     type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
     def __unicode__(self):
-        return self.mid.LName + " - " + self.watchBill + " - " + unicode(self.startTime)
+        return self.mid.LName + " - " + unicode(self.watchBill.date) + " - " + unicode(self.startTime)
     
 class LogBook(models.Model):
     watchBill = models.ForeignKey(WatchBill)
