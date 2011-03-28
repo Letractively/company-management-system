@@ -9,10 +9,7 @@ urlpatterns = patterns('companywatch.views',
     # put url's to all the apps in this folder.
 
     url(r'^$', 'AcYearView', name = "AcYearView"),
-    (r'^/$', 'AcYear'),
-    (r'AcYearView', 'AcYearView'),
-    url(r'^$', 'AcYearEdit',name = 'AcYearEdit'),
-    (r'^/$', 'AcYear'),
+    (r'^/$', 'AcYearView'),
     (r'AcYearEdit', 'AcYearEdit'),
     
 
