@@ -50,6 +50,7 @@ class LeisureActivites(models.Model):
     activity = models.CharField(max_length=20)
     duration = models.CharField(max_length=20)
     RAC = models.IntegerField()
+    riskMitigationPlan = models.TextField()
     def __unicode__(self):
         return self.activity
     
@@ -58,6 +59,8 @@ class MethodsOfTravel(models.Model):
     estimatedDepartTime = models.DateTimeField()
     estimatedArrivalTime = models.DateTimeField()
     methodOfTravel = models.CharField(max_length=20)
+    distance = models.IntegerField()
     RAC = models.IntegerField()
+    riskMitigationPlan = models.TextField()
     def __unicode__(self):
         return self.methodOfTravel
