@@ -10,6 +10,7 @@ urlpatterns = patterns('companywatch.views',
 
     url(r'^$', 'AcYearView', name = "AcYearView"),
     (r'^/$', 'AcYearView'),
+    (r'AcYearView','AcYearView'),
     (r'AcYearEdit', 'AcYearEdit'),
     
 
