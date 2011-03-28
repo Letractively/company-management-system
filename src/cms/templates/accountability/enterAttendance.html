@@ -6,23 +6,19 @@
 
 <h3>Enter a new attendance record:</h3>
 
-<form action="attendanceSave" method="post">
+<form action="saveAttendance" method="post">
 {% csrf_token %}
 
 <table>
-<tr><td>Date and Time:</td><td><input type = "text" name = "dateTime"</td></tr>
-<tr><td>Location:</td><td><input type = "text" name = "location"</td></tr>
-<tr><td>Type:</td><td>
-    <select name = 'type'>
-        <option value = "MMF">Morning Meal Formation</option>
-        <option value = "NMF">Noon Meal Formation</option>
-        <option value = "EMF">Evening Meal Formation</option>
-        <option value = "TAP">TAPS</option>
-        <option value = "FOR">Forrestal Lecture</option>
-        <option value = "DRL">Drill</option>
-        <option value = "CAL">Officers Call</option>
-        <option value = "OTH">Other Special Event</option>
-    </select>
+
+<tr><td colspan = 2>
+    {% for p in lEvents %}
+        <select name = "event">
+            <option value = "{{ p.id }}">{{ p }}</option>
+        </select>
+    {%endfor%}
+</td></tr>
+
 </td></tr>
 {% for p in lMids%}
     <tr><td>{{ p }}</td>

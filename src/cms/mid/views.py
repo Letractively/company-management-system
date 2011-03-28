@@ -99,58 +99,193 @@ def renderSwitchboard(request) :
                                                            },
                                                            context_instance=RequestContext(request))
     
-    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha = alpha)
                         
     lBillets = Billet.objects.filter(mid = cMid)
+    
+    CC = False
+    XO = False
+    HA = False
+    OPS = False
+    ADJ = False
+    PMO = False
+    AC = False
+    SAF = False
+    APT = False
+    ADEO = False
+    ATFP = False
+    TRN = False
+    FLT = False
+    ADM = False
+    PRO = False
+    WRD = False
+    DRL = False
+    SAVI = False
+    CMEO = False
+    FIN = False
+    FSGT = False
+    DRLS = False
+    ADMC = False
+    MISLO = False
+    TRNS1 = False
+    TRNS2 = False
+    PLTS = False
+    PC = False
+    SL = False
 
-    flagFirstie = False
+    firstie = False
     if cMid.rank == "1" :
-        flagFirstie = True
+        firstie = True
     
-    #Here we assign permissions based on billets.
-    flagAdmin = False;
     for p in lBillets :
-        if p.billet == "ADM" and p.current :
-            flagAdmin = True
-        if p.billet == "ADMC" and p.current :
-            flagAdmin == True
+        if p.billet == 'CC' and p.current :
+            CC = True
+    
+    for p in lBillets :
+        if p.billet == 'XO' and p.current :
+            XO = True
+    
+    for p in lBillets :
+        if p.billet == 'HA' and p.current :
+            HA = True
             
-    flagPMO = False;
     for p in lBillets :
-        if p.billet == "PMO" and p.current :
-            flagPMO = True
-    
-    flagApt = False;
-    for p in lBillets :
-        if p.billet == "APT" and p.current :
-            flagApt = True
+        if p.billet == 'OPS' and p.current :
+            OPS = True
             
-    flagAdj = False;
     for p in lBillets :
-        if p.billet == "ADJ" and p.current :
-            flagAdj = True
+        if p.billet == 'ADJ' and p.current :
+            ADJ = True
             
-    flagCC = False;
     for p in lBillets :
-        if p.billet == "CC" and p.current :
-            flagCC = True
-    
-    flagPLTS = False;
+        if p.billet == 'PMO' and p.current :
+            PMO = True
+            
     for p in lBillets :
-        if p.billet == "PLTS" and p.current :
-            flagPLTS = True
+        if p.billet == 'AC' and p.current :
+            AC = True
+            
+    for p in lBillets :
+        if p.billet == 'SAF' and p.current :
+            SAF = True
+            
+    for p in lBillets :
+        if p.billet == 'APT' and p.current :
+            APT = True
+            
+    for p in lBillets :
+        if p.billet == 'ADEO' and p.current :
+            ADEO = True
+            
+    for p in lBillets :
+        if p.billet == 'ATFP' and p.current :
+            ATFP = True
+            
+    for p in lBillets :
+        if p.billet == 'TRN' and p.current :
+            TRN = True
     
+    for p in lBillets :
+        if p.billet == 'FLT' and p.current :
+            FLT = True
+            
+    for p in lBillets :
+        if p.billet == 'ADM' and p.current :
+            ADM = True
+            
+    for p in lBillets :
+        if p.billet == 'PRO' and p.current :
+            PRO = True
+            
+    for p in lBillets :
+        if p.billet == 'WRD' and p.current :
+            WRD = True
+            
+    for p in lBillets :
+        if p.billet == 'DRL' and p.current :
+            DRL = True
+            
+    for p in lBillets :
+        if p.billet == 'SAVI' and p.current :
+            SAVI = True
+            
+    for p in lBillets :
+        if p.billet == 'CMEO' and p.current :
+            CMEO = True
+            
+    for p in lBillets :
+        if p.billet == 'FIN' and p.current :
+            FIN = True
+            
+    for p in lBillets :
+        if p.billet == 'FSGT' and p.current :
+            FSGT = True
+            
+    for p in lBillets :
+        if p.billet == 'DRLS' and p.current :
+            DRLS = True
+            
+    for p in lBillets :
+        if p.billet == 'ADMC' and p.current :
+            ADMC = True
+            
+    for p in lBillets :
+        if p.billet == 'MISLO' and p.current :
+            MISLO = True
+            
+    for p in lBillets :
+        if p.billet == 'TRNS1' and p.current :
+            TRNS1 = True
+            
+    for p in lBillets :
+        if p.billet == 'TRNS2' and p.current :
+            TRNS2 = True
+            
+    for p in lBillets :
+        if p.billet == 'PC' and p.current :
+            PC = True
+    
+    for p in lBillets :
+        if p.billet == 'PLTS' and p.current :
+            PLTS = True
+    
+    for p in lBillets :
+        if p.billet == 'SL' and p.current :
+            SL = True
+   
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
-                                                        'firstie' : flagFirstie,
-                                                        'PMO' : flagPMO,
-                                                        'admin' : flagAdmin,
-                                                        'Aptitude' : flagApt,
-                                                        'CC' : flagCC,
-                                                        'ADJ' : flagAdj,
-                                                        'PLTS' : flagPLTS,
+                                                        'firstie' : firstie,
+                                                        'CC' : CC,
+                                                        'XO'  : XO,
+                                                        'HA'  : HA,
+                                                        'OPS' : OPS,
+                                                        'ADJ' : ADJ,
+                                                        'PMO' : PMO,
+                                                        'AC'  : AC,
+                                                        'SAF' : SAF,
+                                                        'APT' : APT,
+                                                        'ADEO': ADEO,
+                                                        'ATFP': ATFP,
+                                                        'TRN' : TRN,
+                                                        'FLT' : FLT,
+                                                        'ADM' : ADM,
+                                                        'PRO' : PRO,
+                                                        'WRD' : WRD,
+                                                        'DRL' : DRL,
+                                                        'SAVI': SAVI,
+                                                        'CMEO': CMEO,
+                                                        'FIN' : FIN,
+                                                        'FSGT': FSGT,
+                                                        'TRNS1': TRNS1,
+                                                        'TRNS2': TRNS2,
+                                                        'DRLS': DRLS,
+                                                        'ADMC': ADMC,
+                                                        'MISLO': MISLO,
+                                                        'PLTS' : PLTS,
+                                                        'PC' : PC,
+                                                        'SL' : SL
                                                         },
                                                         context_instance=RequestContext(request))
 

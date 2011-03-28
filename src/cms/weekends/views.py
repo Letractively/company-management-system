@@ -197,8 +197,6 @@ def admin(request):
     for p in lBillets :
         if p.billet == "ADM" and p.current :
             flagAdmin = True
-        if p.billet == "ADMC" and p.current :
-            flagAdmin == True
 
     if not flagAdmin :
         return HttpResponseRedirect('/')
