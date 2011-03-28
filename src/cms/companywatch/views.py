@@ -48,7 +48,7 @@ def AcYearView(request):
     
     year = date.today().strftime("%y")
     acYear = AcYear.objects.get(acYear=year)
-    return render_to_response('companywatch/AcYear.html', { 'acYear': acYear },context_instance=RequestContext(request))
+    return render_to_response('companywatch/AcYearView.html', { 'acYear': acYear },context_instance=RequestContext(request))
 
 def AcYearEdit(request):
     #check to make sure the reqester is the Company Adj.
