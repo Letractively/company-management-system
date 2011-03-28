@@ -29,9 +29,9 @@ from datetime import timedelta
 import re
 
 def loginPage(request):
-    if user.is_authenticated:
-        return HttpResponseRedirect('switchboard')
-    else:
+    #if user.is_authenticated:
+    #    return HttpResponseRedirect('switchboard')
+    #else:
         return render_to_response('mid/loginPage.html', {}, 
                                   context_instance=RequestContext(request))
 
@@ -491,161 +491,164 @@ def assignBillets(request):
     
     lBillet = Billet.objects.filter(mid__company = cCompany)
     
-    cXO = None
-    for p in lBillet:
-        if p.billet == "XO" and p.current:
-            cXO = p
+    L = ['XO', 'HA', 'OPS', 'ADJ', 'PMO', 'AC', 'SAF', 'APT', 'ADEO', 'ATFP', 'TRN', 'FLT', 'ADM', 'PRO',
+         'WRD', 'DRL', 'SAVI', 'CMEO', 'FIN', 'FSGT', 'DRLS', 'ADMC', 'MISLO', 'TRNS1', 'TRNS2']
     
-    cHA = None
+    XO = None
+    for p in lBillet:
+        if p.billet == 'XO' and p.current:
+            XO = p
+    
+    HA = None
     for p in lBillet:
         if p.billet == "HA" and p.current:
-            cHA = p
+            HA = p
     
-    cOPS = None
+    OPS = None
     for p in lBillet:
         if p.billet == "OPS" and p.current:
-            cOPS = p
+            OPS = p
     
-    cADJ = None
+    ADJ = None
     for p in lBillet:
         if p.billet == "ADJ" and p.current:
-            cADJ = p
+            ADJ = p
     
-    cPMO = None
+    PMO = None
     for p in lBillet:
         if p.billet == "PMO" and p.current:
-            cPMO = p
+            PMO = p
     
-    cAC = None
+    AC = None
     for p in lBillet:
         if p.billet == "AC" and p.current:
-            cAC = p
+            AC = p
     
-    cSAF = None
+    SAF = None
     for p in lBillet:
         if p.billet == "SAF" and p.current:
-            cSAF = p
+            SAF = p
     
-    cAPT = None
+    APT = None
     for p in lBillet:
         if p.billet == "APT" and p.current:
-            cAPT = p
+            APT = p
     
-    cADEO = None
+    ADEO = None
     for p in lBillet:
         if p.billet == "ADEO" and p.current:
-            cADEO = p
+            ADEO = p
     
-    cATFP = None
+    ATFP = None
     for p in lBillet:
         if p.billet == "ATFP" and p.current:
-            cATFP = p
+            ATFP = p
     
-    cTRN = None
+    TRN = None
     for p in lBillet:
         if p.billet == "TRN" and p.current:
-            cTRN = p
+            TRN = p
     
-    c1LT = None
+    FLT = None
     for p in lBillet:
-        if p.billet == "1LT" and p.current:
-            c1LT = p
+        if p.billet == "FLT" and p.current:
+            FLT = p
     
-    cADM = None
+    ADM = None
     for p in lBillet:
         if p.billet == "ADM" and p.current:
-            cADM = p
+            ADM = p
     
-    cPRO = None
+    PRO = None
     for p in lBillet:
         if p.billet == "PRO" and p.current:
-            cPRO = p
+            PRO = p
     
-    cWRD = None
+    WRD = None
     for p in lBillet:
         if p.billet == "WRD" and p.current:
-            cWRD = p
+            WRD = p
     
-    cDRL = None
+    DRL = None
     for p in lBillet:
         if p.billet == "DRL" and p.current:
-            cDRL = p
+            DRL = p
     
-    cSAVI = None
+    SAVI = None
     for p in lBillet:
         if p.billet == "SAVI" and p.current:
-            cSAVI = p
+            SAVI = p
     
-    cCMEO = None
+    CMEO = None
     for p in lBillet:
         if p.billet == "CMEO" and p.current:
-            cCMEO = p
+            CMEO = p
     
-    cFIN = None
+    FIN = None
     for p in lBillet:
         if p.billet == "FIN" and p.current:
-            cFIN = p
+            FIN = p
     
-    c1SGT = None
+    FSGT = None
     for p in lBillet:
-        if p.billet == "1SGT" and p.current:
-            c1SGT = p
+        if p.billet == "FSGT" and p.current:
+            FSGT = p
     
-    cTRS1 = None
+    TRNS1 = None
     for p in lBillet:
-        if p.billet == "TRNS" and p.current:
-            cTRS1 = p
+        if p.billet == "TRNS1" and p.current:
+            TRNS1 = p
     
-    cTRS2 = None
+    TRNS2 = None
     for p in lBillet:
-        if p.billet == "TRNS" and p.current and p.evaluation == "2" :
-            cTRS2 = p
+        if p.billet == "TRNS2" and p.current:
+            TRNS2 = p
     
-    cDRLS = None
+    DRLS = None
     for p in lBillet:
         if p.billet == "DRLS" and p.current:
-            cDRLS = p
+            DRLS = p
     
-    cADMC = None
+    ADMC = None
     for p in lBillet:
         if p.billet == "ADMC" and p.current:
-            cADMC = p
+            ADMC = p
     
-    cMISLO = None
+    MISLO = None
     for p in lBillet:
         if p.billet == "MISLO" and p.current:
-            cMISLO = p
+            MISLO = p
 
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
     lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "2").order_by('alpha')
                                                                                                         
     return render_to_response('mid/assignBillets.html', {'lMidsOne' : lMidsOne, 
                                                          'lMidsTwo' : lMidsTwo,
-                                                         'XO'  : cXO,
-                                                         'HA'  : cHA,
-                                                         'OPS' : cOPS,
-                                                         'ADJ' : cADJ,
-                                                         'PMO' : cPMO,
-                                                         'AC'  : cAC,
-                                                         'SAF' : cSAF,
-                                                         'APT' : cAPT,
-                                                         'ADEO': cADEO,
-                                                         'ATFP': cATFP,
-                                                         'TRN' : cTRN,
-                                                         '1LT' : c1LT,
-                                                         'ADM' : cADM,
-                                                         'PRO' : cPRO,
-                                                         'WRD' : cWRD,
-                                                         'DRL' : cDRL,
-                                                         'SAVI': cSAVI,
-                                                         'CMEO': cCMEO,
-                                                         'FIN' : cFIN,
-                                                         '1SGT': c1SGT,
-                                                         'TRS1': cTRS1,
-                                                         'TRS2': cTRS1,
-                                                         'DRLS': cDRLS,
-                                                         'ADMC': cADMC,
-                                                         'MISLO': cMISLO,
+                                                         'XO'  : XO,
+                                                         'HA'  : HA,
+                                                         'OPS' : OPS,
+                                                         'ADJ' : ADJ,
+                                                         'PMO' : PMO,
+                                                         'AC'  : AC,
+                                                         'SAF' : SAF,
+                                                         'APT' : APT,
+                                                         'ADEO': ADEO,
+                                                         'ATFP': ATFP,
+                                                         'TRN' : TRN,
+                                                         'FLT' : FLT,
+                                                         'ADM' : ADM,
+                                                         'PRO' : PRO,
+                                                         'WRD' : WRD,
+                                                         'DRL' : DRL,
+                                                         'SAVI': SAVI,
+                                                         'CMEO': CMEO,
+                                                         'FIN' : FIN,
+                                                         'FSGT': FSGT,
+                                                         'TRNS1': TRNS1,
+                                                         'TRNS2': TRNS1,
+                                                         'DRLS': DRLS,
+                                                         'ADMC': ADMC,
+                                                         'MISLO': MISLO,
                                                      }, 
                                                      context_instance=RequestContext(request))
     
@@ -829,8 +832,8 @@ def saveAssignBillets(request):
     
     lBillet = Billet.objects.filter(mid__company = cCompany)
     
-    L = ['XO', 'HA', 'OPS', 'ADJ', 'PMO', 'AC', 'SAF', 'APT', 'ADEO', 'ATFP', 'TRN', '1LT', 'ADM', 'PRO',
-         'WRD', 'DRL', 'SAVI', 'CMEO', 'FIN', '1SGT', 'DRLS', 'ADMC', 'MISLO']
+    L = ['XO', 'HA', 'OPS', 'ADJ', 'PMO', 'AC', 'SAF', 'APT', 'ADEO', 'ATFP', 'TRN', 'FLT', 'ADM', 'PRO',
+         'WRD', 'DRL', 'SAVI', 'CMEO', 'FIN', 'FSGT', 'DRLS', 'ADMC', 'MISLO', 'TRNS1', 'TRNS2']
 
     for x in L:
         alpha = request.POST[x]
