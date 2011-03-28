@@ -83,7 +83,7 @@
 	    <li><span>Admin</span>
 		    <div>
 			    <ul>
-			        <li><a href="{% url weekends:admin %}"><span>View/Edit number of weekends</span></a></li>
+			        <li><a href="{% url weekends:weekendAdmin %}"><span>View/Edit number of weekends</span></a></li>
 			        <li><a href="{% url mid:selectUser %}"><span>Edit/Add user</span></a></li>
 			        <li><a href="{% url mid:selectPassReset %}"><span>Restore user's password</span></a></li>
 			    </ul>
@@ -99,7 +99,7 @@
 		    </div>
 	    </li>
 	    {%endif%}
-		<li><a href="#"><span>Logout</span></a></li>
+		<li><a href="logout"><span>Logout</span></a></li>
 	{% endif %}
 	</ul>
 {% else %}
