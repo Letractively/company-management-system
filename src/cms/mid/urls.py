@@ -45,7 +45,7 @@ urlpatterns = patterns('mid.views',
     url(r'changeCompany$', 'changeCompany', name = "changeCompany"),
     (r'saveChangeCompany$', 'saveChangeCompany'),
     
-    # put url's to all the apps in this folder.
+    url(r'logout$', 'logout', name="logout"),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
