@@ -18,9 +18,11 @@
       </header>
       <section id="notification">
       </section>
+      {% if user.is_authenticated %}
       <div id="menu">
         {% include "nav.html" %}
       </div>
+      {% endif %}
       <section id="main">
         {% block content %}
         {% endblock %}
