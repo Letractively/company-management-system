@@ -55,11 +55,9 @@
         <li>Inspections:
             <ul>
                 <li><a href = "bIns/">Review Room Inspections</a></li>
-                {% if firstie %}
-                <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
-                {% endif %}
                 <li><a href = "uIns/">Review Uniform Inspections</a></li>
                 {% if firstie %}
+                <li><a href = "bIns/bInsSelect">Enter Bravo Room Inspection</a></li>
                 <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
                 {% endif %}
             </ul>
@@ -80,28 +78,11 @@
     </ul>
     {%endif%}
     
-    {% if ADJ %}
-    <h3>Company Adjutant options:</h3>
-    <ul>
-        #<li><a href = "companywatch/AcYear">Create Duty Calendar</a></li>
-    </ul>
+    {% if XO %}
     {%endif%}
     
-    {% if Aptitude %}
-    <h3>Aptitude/Conduct Officer options: </h3>
-    <ul>
-        <li><a href = "mid/assessDiscipline">Maintain Restriction/Tours</a></li>
-        <li><a href = "mid/enterDiscipline">Enter Restriction/Tours</a></li>
-        <li><a href = "mid/enterProbation">Enter Probation</a></li>
-    </ul>
-    {% endif %}
-    
-    {% if PMO%}
-    <h3>Physical Mission Officer options: </h3>
-    <ul>
-        <li><a href = "mid/PRTSat">Physical Status</a></li>
-    </ul>
-    {% endif %}
+    {% if PC %}
+    {%endif%}
     
     {% if PLTS %}
     <h3>Platoon Sargeant's options: </h3>
@@ -110,7 +91,57 @@
     </ul>
     {% endif %}
     
-    {% if admin%}
+    {% if SL %}
+    {%endif%}
+    
+    {% if HA %}
+    {%endif%}
+    
+    {% if OPS %}
+    {%endif%}
+    
+    {% if ADJ %}
+    <h3>Company Adjutant options:</h3>
+    <ul>
+        #<li><a href = "companywatch/AcYear">Create Duty Calendar</a></li>
+    </ul>
+    {%endif%}
+    
+    {% if PMO%}
+    <h3>Physical Mission Officer options: </h3>
+    <ul>
+        <li><a href = "mid/PRTSat">Physical Status</a></li>
+    </ul>
+    {% endif %}
+    
+    {% if AC %}
+    {%endif%}
+    
+    {% if SAF %}
+    {%endif%}
+    
+    {% if APT %}
+    <h3>Aptitude/Conduct Officer options: </h3>
+    <ul>
+        <li><a href = "mid/assessDiscipline">Maintain Restriction/Tours</a></li>
+        <li><a href = "mid/enterDiscipline">Enter Restriction/Tours</a></li>
+        <li><a href = "mid/enterProbation">Enter Probation</a></li>
+    </ul>
+    {% endif %}
+    
+    {% if ADEO %}
+    {%endif%}
+    
+    {% if ATFP %}
+    {%endif%}
+    
+    {% if TRN %}
+    {%endif%}
+    
+    {% if FLT %}
+    {%endif%}
+    
+    {% if ADM%}
     <h3>Admin Officer options: </h3>
     <ul>
         <li><a href = "weekends/admin">View/Edit number of weekends</a></li>
@@ -118,5 +149,48 @@
         <li><a href = "mid/selectPassReset">Restore user's password</a></li>
     </ul>
     {% endif %}
+    
+    {% if PRO %}
+    {%endif%}
+    
+    {% if WRD %}
+    {%endif%}
+    
+    {% if DRL %}
+    {%endif%}
+    
+    {% if SAVI %}
+    {%endif%}
+    
+    {% if CMEO %}
+    {%endif%}
+    
+    {% if FIN %}
+    {%endif%}
+    
+    {% if FSGT %}
+    <h3>First Sargeant's options: </h3>
+    <ul>
+        <li><a href = "accountability/createEvent">Create a new event</a></li>
+    </ul>
+    {% endif %}
+    
+    {% if TRNS1 or TRNS2 %}
+    {%endif%}
+    
+    {% if DRLS %}
+    {%endif%}
+    
+    {% if ADMC%}
+    <h3>Admin Chief's options: </h3>
+    <ul>
+        <li><a href = "mid/selectUser">Edit/Add user</a></li>
+        <li><a href = "mid/selectPassReset">Restore user's password</a></li>
+    </ul>
+    {% endif %}
+    
+    {% if MISLO %}
+    {%endif%}
+    
 {%endif%}
 {% endblock %}
