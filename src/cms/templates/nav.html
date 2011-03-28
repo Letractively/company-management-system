@@ -4,9 +4,9 @@
         <li><a href="#" class="parent"><span>Weekends</span></a></li>
             <div>
 	            <ul>
-	                <li><a href = "{% url weekends:co %}">Approve Weekends</a></li>
+	                <li><a href = "{% url weekends:coApproval %}">Approve Weekends</a></li>
 	                <li><a href = "{% url weekends:grantWeekends %}">Manually Add Midshipmen</a></li>
-	                <li><a href = "{% url weekends:view %}">View Weekend List</a></li>
+	                <li><a href = "{% url weekends:weekendIndex %}">View Weekend List</a></li>
 	            </ul>
         	</div>
         <li><a href = "logout">Log out</a></li >
@@ -28,7 +28,7 @@
 				<ul>
 					<li><a href='{% url form1:form1 %}'><span>Review Form-1s</span></a></li>
 					{% if firstie %}
-					<li><a href='{% url form1:form1Select %}'><span>Review Form-1s</span></a></li>
+					<li><a href='{% url form1:form1Select %}'><span>Enters Form-1s</span></a></li>
 					{% endif %}
 					<li><a href='{% url medchits:medchits %}'><span>Medical Chits</span></a></li>
 					<li><a href='{% url specReq:specReq %}'><span>Special Request Chits</span></a></li>
