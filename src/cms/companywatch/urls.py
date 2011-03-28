@@ -11,6 +11,7 @@ urlpatterns = patterns('companywatch.views',
     url(r'^$', 'AcYearView', name = 'AcYearView'),
     (r'^AcYearView$','AcYearView'),
     (r'^AcYearEdit$', 'AcYearEdit'),
+    (r'^AcYearSubmit', 'AcYearSubmit'),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
