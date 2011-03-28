@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     #Chits/Paperwork
     (r'^form1/',include('form1.urls', namespace="form1", app_name="form1")),
     (r'^medchits/', include('medchits.urls', namespace="medchits", app_name="medchits")),
-    (r'^specReq/', include('specialrequestchit.urls', namespace="specReq", app_name="specReq")),
+    (r'^specReq/', include('specialrequestchit.urls', namespace="specialrequestchit", app_name="specialrequestchit")),
     (r'^ORM/', include('orm.urls', namespace="orm", app_name="orm")),
 
     #Inspections

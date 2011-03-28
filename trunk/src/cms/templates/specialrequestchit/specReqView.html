@@ -11,12 +11,12 @@
 <tr class="SR_lable">
     <td>To: </td>
     <td>From: </td>
-    <td>Alpha Number
+    <td>Alpha Number</td>
 </tr>
 <tr class="SR_field">
 	<td>{{ cChit.get_toLine_display }}</td>
 	<td>{{ cChit.fromLine }}</td>
-	<td>{{ cChit.mid.aplha }}</td>
+	<td>{{ cChit.mid.alpha }}</td>
 </tr>
 <tr>
     <td>Via: </td>
@@ -30,15 +30,14 @@
 	<td>{{ cChit.mid.alpha|alphaToClassYear}}</td>
 	<td>{{ cChit.mid.company }}</td>
 	<td>{{ cChit.mid.roomNumber }}</td>
-	<!--todo-->
-	<td>MIDN _/C</td>
+	<td>MIDN {{ cChit.mid.get_rank_display }}</td>
 </tr>
 <tr>
-	<td>REF<td>
+	<td>REF</td>
 	<td>SQPR</td>
-	<td>SQPR</td>
+	<td>CQPR</td>
 	<td>Perf. Grade</td>
-	<Conduct Grade</td>
+	<td>Conduct Grade</td>
 </tr>
 <tr>
 	<td>COMDTMIDNINST 5400.6M (17 Aug 10)</td>
@@ -133,6 +132,10 @@
                                {%endif%}
     </td>
 </tr>
+{%endif%}
+
+{%if SL%}
+
 {%endif%}
 
 </table>

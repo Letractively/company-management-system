@@ -11,6 +11,9 @@ from mid.models import PRT
 from mid.models import Discipline
 from mid.models import Probation
 
+from specialrequestchit.models import SpecialRequestChit
+from orm.models import OrmChit
+
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -1085,6 +1088,28 @@ def saveAssignCOC(request):
 
                                                                                                         
     return HttpResponseRedirect(reverse('mid:assignCOC'))
+
+@login_required(redirect_field_name='/')    
+def pendingApproval(request) :
+    #Generates a list of Special Request/ORM chits that need to be approved by this person...
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    for p in lBillets :
+        if p.billet == "SL" and p.current :
+            cSquad = cMid.squad
+            lSR = SpecialRequestChit.objects.filter(mid__squad = cSquad).filter(approvalStatus = "1")
+    
+    return render_to_response('mid/pendingApproval.html', { 'cMid' : cMid, 
+                                                           'lSR' : lSR,
+                                                           },
+                                                           context_instance=RequestContext(request))
+
 
 @login_required(redirect_field_name='/')    
 def PRTSat(request) :
