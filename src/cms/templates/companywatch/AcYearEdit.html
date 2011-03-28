@@ -6,7 +6,7 @@
 {% block content %}
 
 {% csrf_token %}
-<form action="{{ url companywatch:AcYearSubmit }}" method="post">
+<form action="{% url companywatch:AcYearSubmit %}" method="post">
 <table border=1>
 <caption>EDIT VIEW! Fall Semester</caption>
     <tr>
