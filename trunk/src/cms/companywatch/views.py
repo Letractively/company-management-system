@@ -20,7 +20,7 @@ from django.core.context_processors import csrf
 
 from django.contrib.auth.decorators import login_required
 
-from datetime import date
+from datetime import date, timedelta
 
 
 @login_required(redirect_field_name='/')
@@ -140,15 +140,11 @@ def AcYearSubmit(request):
     numberOfDays = acYear.springEnd - acYear.fallStart
     count = 0
     while (count < numberOfDays.days):
-        Bill = WatchBill(date=acYear.fallStart + count,type='W')
-        Bill.save()
+        WatchBill.objects.create(date=acYear.fallStart + timedelta(days=count),type='W')
         
     #Set the types of watch for all Leave dates
     #for Thanksgiving set type of Watchbill to Leave
-    dayOfThanksgiving = acYear.thanksgivingEnd - acYear.thanksgivingStart
-    count = 0
-    while (count < daysOfThanksgiving)
-        Bill = WatchBill.objects.get(date=thanksgivingStart+count)
+    leaveThanksgiving = WatchBill.objects.filter(WatchBill.date__range(acYear.thanksgivingStart,acYear.thanksgivingEnd))
     
     return HttpResponseRedirect(reverse('companywatch:AcYearView'))
 
