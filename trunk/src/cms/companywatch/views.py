@@ -72,6 +72,7 @@ def AcYearEdit(request):
     # if either of these statements are false then redirect back to /
     if not isAdj:
         return HttpResponseRedirect('/')
+    
     year = date.today().strftime("%y")
     acYear = AcYear.objects.get(acYear=year)
     
@@ -103,28 +104,28 @@ def AcYearSubmit(request):
     year = date.today().strftime("%y")
     acYear = AcYear.objects.get(acYear=year)
     
-    acYear.fallStart =  request.POST['fallStart']
-    acYear.fallGoldWeekStart =  request.POST['fallGoldWeekStart']
-    acYear.fall6Weeks =  request.POST['fall6Weeks']
-    acYear.fall12Weeks =  request.POST['fall12Weeks']
-    acYear.thanksgivingStart =  request.POST['thanksgivingStart']
-    acYear.thanksgivingEnd =  request.POST['thanksgivingEnd']
-    acYear.fallXWeekStart =  request.POST['fallXWeekStart']
-    acYear.fallXWeekEnd =  request.POST['fallXWeekEnd']
-    acYear.christmasStart =  request.POST['christmasStart']
-    acYear.christmasEnd =  request.POST['christmasEnd']
-    acYear.christmasIntersessionalStart =  request.POST['christmasIntersessionalStart']
-    acYear.christmasIntersessionalEnd =  request.POST['christmasIntersessionalEnd']
-    acYear.laborDay =  request.POST['laborDay']
-    acYear.columbusDay =  request.POST['columbusDay']
-    acYear.veteransDay =  request.POST['veteransDay']
-    acYear.fallEnd =  request.POST['fallEnd']
-    acYear.startSpring =  request.POST['startSpring']
-    acYear.spring6Weeks =  request.POST['spring6Weeks']
-    acYear.spring12Weeks =  request.POST['spring12Weeks']
-    acYear.springXWeekStart =  request.POST['springXWeekStart']
-    acYear.springXWeekEnd =  request.POST['springXWeekEnd']
-    acYear.springBreakStart =  request.POST['springBreakStart']
+    acYear.fallStart = request.POST['fallStart']
+    acYear.fallGoldWeekStart = request.POST['fallGoldWeekStart']
+    acYear.fall6Weeks = request.POST['fall6Weeks']
+    acYear.fall12Weeks = request.POST['fall12Weeks']
+    acYear.thanksgivingStart = request.POST['thanksgivingStart']
+    acYear.thanksgivingEnd = request.POST['thanksgivingEnd']
+    acYear.fallXWeekStart = request.POST['fallXWeekStart']
+    acYear.fallXWeekEnd = request.POST['fallXWeekEnd']
+    acYear.christmasStart = request.POST['christmasStart']
+    acYear.christmasEnd = request.POST['christmasEnd']
+    acYear.christmasIntersessionalStart = request.POST['christmasIntersessionalStart']
+    acYear.christmasIntersessionalEnd = request.POST['christmasIntersessionalEnd']
+    acYear.laborDay = request.POST['laborDay']
+    acYear.columbusDay = request.POST['columbusDay']
+    acYear.veteransDay = request.POST['veteransDay']
+    acYear.fallEnd = request.POST['fallEnd']
+    acYear.startSpring = request.POST['startSpring']
+    acYear.spring6Weeks = request.POST['spring6Weeks']
+    acYear.spring12Weeks = request.POST['spring12Weeks']
+    acYear.springXWeekStart = request.POST['springXWeekStart']
+    acYear.springXWeekEnd = request.POST['springXWeekEnd']
+    acYear.springBreakStart = request.POST['springBreakStart']
     acYear.springBreakEnd =  request.POST['springBreakEnd']
     acYear.mlkDay =  request.POST['mlkDay']
     acYear.washingtonBirthday =  request.POST['washingtonBirthday']
@@ -134,8 +135,40 @@ def AcYearSubmit(request):
     acYear.summerStart =  request.POST['summerStart']
     
     acYear.save()        
-            
+    
+    #create all of the watchbills for a the semester
+    numberOfDays = acYear.springEnd - acYear.fallStart
+    count = 0
+    while (count < numberOfDays.days):
+        Bill = WatchBill(date=acYear.fallStart + count,type='W')
+        Bill.save()
+        
+    #Set the types of watch for all Leave dates
+    #for Thanksgiving set type of Watchbill to Leave
+    dayOfThanksgiving = acYear.thanksgivingEnd - acYear.thanksgivingStart
+    count = 0
+    while (count < daysOfThanksgiving)
+        Bill = WatchBill.objects.get(date=thanksgivingStart+count)
+    
     return HttpResponseRedirect(reverse('companywatch:AcYearView'))
+
+def WatchBill(request):
+    
+def WatchBillView(request):
+
+def WatchBillSave(request):
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
