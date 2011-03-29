@@ -25,13 +25,16 @@
     {%endfor%}
 
 <tr><td colspan = 2>
-    {% for p in lEvents %}
-        <select name = "event">
+    {%if lEvents %}
+    <select name = "event">
+        {% for p in lEvents %}
             <option value = "{{ p.id }}">{{ p.dateTime }} {{ p.get_type_display }} {{ p.location }}</option>
-        </select>
-    {%empty%}
+        {%endfor%}
+    </select>
+    {%else%}
         You have no events with completed attendance.
-    {%endfor%}
+    {%endif%}
+    
 </td></tr>
 
 {%if lEvents%}

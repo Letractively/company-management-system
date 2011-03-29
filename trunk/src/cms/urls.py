@@ -39,15 +39,13 @@ urlpatterns = patterns('',
     (r'^uIns/', include('uniforminspection.urls', namespace="uIns", app_name="uniforminspection")),
     
     # All the other module's pages
-    
     #(r'^companyblog/', include('companyblog.urls')),
     (r'^companywatch/', include('companywatch.urls', namespace="companywatch", app_name="companywatch")),
-    #(r'^zero8/', include('zero8.urls')),
     
     (r'^accountability/', include('accountability.urls', namespace = "accountability", app_name = "accountability")),
     (r'^weekends/', include('weekends.urls', namespace="weekends", app_name="weekends")),
     (r'^movementOrders/', include('movementorder.urls', namespace="movementorder", app_name="movementorder")),
-    
+    (r'^zero8/', include('zero8.urls', namespace = "zero8", app_name = "zero8")),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
