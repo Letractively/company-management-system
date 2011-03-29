@@ -4,11 +4,14 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+namespace = "zero8"
 
-    # put url's to all the apps in this folder.
+urlpatterns = patterns('zero8.views',
 
-    # (r'^cms/', include('cms.foo.urls')),
+    url(r'createSignificantEvent', 'createSignificantEvent', name = "createSignificantEvent"),
+    (r'saveSignificantEvent$', 'saveSignificantEvent'),
+    url(r'viewReport$', 'viewReport', name = "viewReport"),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -16,3 +19,4 @@ urlpatterns = patterns('',
     # enabled the admin
      (r'^admin/', include(admin.site.urls)),
 )
+

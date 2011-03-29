@@ -6,6 +6,7 @@ from mid.models import Mid
 from mid.models import Billet
 from accountability.models import Event
 from accountability.models import Attendance
+from zero8.models import Zero8
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -20,6 +21,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 from datetime import date
+from datetime import time
+from datetime import datetime
 from datetime import timedelta
 
 import re
@@ -87,6 +90,73 @@ def saveEvent(request):
     cEvent.save()
     
     return HttpResponseRedirect(reverse('accountability:createEvent'))
+
+@login_required(redirect_field_name='/')
+def makeDay(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company  
+    
+    cEvent = Event(dateTime = datetime.combine(date.today(), time(07, 00, 00)),
+                   type = "MMF",
+                   location = "Company Area",
+                   platoonOneSubmitted = False,
+                   platoonTwoSubmitted = False,
+                   platoonThreeSubmitted = False,
+                   platoonFourSubmitted = False,
+                   companyComplete = False,
+                   company = cCompany
+                   )
+    cEvent.save()
+    
+    cEvent = Event(dateTime = datetime.combine(date.today(), time(12, 05, 00)),
+                   type = "NMF",
+                   location = "Tecumseh Court",
+                   platoonOneSubmitted = False,
+                   platoonTwoSubmitted = False,
+                   platoonThreeSubmitted = False,
+                   platoonFourSubmitted = False,
+                   companyComplete = False,
+                   company = cCompany
+                   )
+    cEvent.save()
+    
+    cEvent = Event(dateTime = datetime.combine(date.today(), time(18, 30, 00)),
+                   type = "EMF",
+                   location = "Company Area",
+                   platoonOneSubmitted = False,
+                   platoonTwoSubmitted = False,
+                   platoonThreeSubmitted = False,
+                   platoonFourSubmitted = False,
+                   companyComplete = False,
+                   company = cCompany
+                   )
+    cEvent.save()
+    
+    cEvent = Event(dateTime = datetime.combine(date.today(), time(23, 55, 00)),
+                   type = "TAP",
+                   location = "Company Area",
+                   platoonOneSubmitted = True,
+                   platoonTwoSubmitted = True,
+                   platoonThreeSubmitted = True,
+                   platoonFourSubmitted = True,
+                   companyComplete = False,
+                   company = cCompany
+                   )
+    cEvent.save()
+    
+    cReport = Zero8(offgoingCDO = cMid,
+                    oncomingCDO = cMid,
+                    reportDate = date.today(),
+                    forceProtectionCondition = "A",
+                    workOrderActive = 0,
+                    workOrderClosed = 0,
+                    workOrderOverdue = 0
+                    )
+    cReport.save()
+    
+    return HttpResponseRedirect(reverse('switchboard'))
 
 @login_required(redirect_field_name='/')
 def enterAttendance(request):    
@@ -195,14 +265,74 @@ def selectEvent(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lEvents = Event.objects.filter(company = cCompany).filter(companyComplete = True)[0:20]
-    lInProgEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False)
+    lEvents = Event.objects.filter(company = cCompany).filter(companyComplete = True).order_by('dateTime')[0:20]
+    lInProgEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False).order_by('dateTime')
     
     return render_to_response('accountability/selectEvent.html', {'cMid' : cMid, 
-                                                                      'lEvents' : lEvents,
-                                                                      'lInProgEvents' : lInProgEvents
-                                                                      }, 
-                                                                      context_instance=RequestContext(request))
+                                                                  'lEvents' : lEvents,
+                                                                  'lInProgEvents' : lInProgEvents
+                                                                  }, 
+                                                                  context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def cancelEvent(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    CC = False
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            CC = True
+
+    if not CC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False).order_by('dateTime')[0:40]
+    
+    return render_to_response('accountability/cancelEvent.html', {'cMid' : cMid, 
+                                                                  'lEvents' : lEvents,
+                                                                  }, 
+                                                                  context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveCancelEvent(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    CC = False
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            CC = True
+
+    if not CC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cEvent = Event.objects.get(id = request.POST['event'])
+    
+    lAttendance = Attendance.objects.filter(event = cEvent)
+    
+    for p in lAttendance :
+        p.delete()
+        
+    cEvent.delete()
+    
+    return HttpResponseRedirect(reverse('accountability:cancelEvent'))
     
 @login_required(redirect_field_name='/')
 def reviewAttendance(request):    

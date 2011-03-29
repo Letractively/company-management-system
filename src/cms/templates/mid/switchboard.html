@@ -82,19 +82,29 @@
                     <li><a href = "uIns/uInsSelect">Enter Uniform Inspection</a></li>
                     {% endif %}
                 </ul>
-            </li><br />
-            
-            
+            </li>
+            <br />
             <li><a href = "mid/viewDiscipline">View Restrictions/Probations/Tours</a></li>
             <li><a href = "mid/editPersonalInformation">Personal Information</a></li>
             <li><a href = "mid/selectPassChange">Change Password</a></li>
             <li><a href = "logout">Log out</a></li>
         </ul>
         
+        <h3>CDO options:</h3>
+        <ul>
+        {%if not init%}
+            <li><a href = "accountability/makeDay">Initialize daily events</a></li>
+        {%else%}
+            <li><a href = "zero8/viewReport">View 0800 Report</a></li>
+            <li><a href = "zero8/createSignificantEvent">Report Significant Event</a></li>
+        {%endif%}
+        </ul>
+        
         {% if CC %}
-        <h3>Company Commander's options:</h3>
+        <h3>Company Commander options:</h3>
         <ul>
             <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+            <li><a href = "accountability/cancelEvent">Cancel formation/Event</a></li>
             <li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
             <li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
         </ul>
@@ -104,21 +114,21 @@
         {%endif%}
         
         {% if PC %}
-        <h3>Platoon Commander's options:</h3>
+        <h3>Platoon Commander options:</h3>
         <ul>
             <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         </ul>
         {%endif%}
         
         {% if PLTS %}
-        <h3>Platoon Sargeant's options: </h3>
+        <h3>Platoon Sargeant options: </h3>
         <ul>
             <li><a href = "accountability/">Enter attendance for an event</a></li>
         </ul>
         {% endif %}
         
         {% if SL %}
-        <h3>Squad Leader's options:</h3>
+        <h3>Squad Leader options:</h3>
         <ul>
             <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         </ul>

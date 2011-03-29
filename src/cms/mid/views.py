@@ -10,6 +10,7 @@ from mid.models import Room
 from mid.models import PRT
 from mid.models import Discipline
 from mid.models import Probation
+from zero8.models import Zero8
 
 from specialrequestchit.models import SpecialRequestChit
 from orm.models import OrmChit
@@ -27,6 +28,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 from datetime import date
+from datetime import time
+from datetime import datetime
 from datetime import timedelta
 
 import re
@@ -262,9 +265,15 @@ def renderSwitchboard(request) :
     for p in lBillets :
         if p.billet == 'SL' and p.current :
             SL = True
+    
+    init = False
+    if Zero8.objects.filter(reportDate = date.today()):
+        init = True
+                                                 
    
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
                                                         'firstie' : firstie,
+                                                        'init' : init,
                                                         'CC' : CC,
                                                         'XO'  : XO,
                                                         'HA'  : HA,
