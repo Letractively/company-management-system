@@ -35,6 +35,10 @@ urlpatterns = patterns('mid.views',
     url(r'PRTSat$', 'PRTSat', name = "PRTSat"),
     (r'savePRT$', 'savePRT'),
     
+    #AC options:
+    url(r'ACSat$', 'ACSat', name = "ACSat"),
+    (r'saveAC$', 'saveAC'),
+    
     #A/C Options
     url(r'enterDiscipline$', 'enterDiscipline', name = "enterDiscipline"),
     (r'saveDiscipline$', 'saveDiscipline'),

@@ -1408,12 +1408,12 @@ def PRTSat(request) :
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
     
-    flagPMO = False
+    PMO = False
     for p in lBillets :
         if p.billet == "PMO" and p.current :
-            flagPMO = True
+            PMO = True
 
-    if not flagPMO :
+    if not PMO :
         return HttpResponseRedirect('/')
     #End of second check
     
@@ -1435,12 +1435,12 @@ def savePRT(request):
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
     
-    flagPMO = False
+    PMO = False
     for p in lBillets :
         if p.billet == "PMO" and p.current :
-            flagPMO = True
+            PMO = True
 
-    if not flagPMO :
+    if not PMO :
         return HttpResponseRedirect('/')
     #End of second check
     
@@ -1459,6 +1459,70 @@ def savePRT(request):
         p.save()
  
     return HttpResponseRedirect(reverse('mid:PRTSat')) 
+
+@login_required(redirect_field_name='/')    
+def ACSat(request) :
+    #Aggregate list of people's academic status
+    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    AC = False
+    for p in lBillets :
+        if p.billet == "AC" and p.current :
+            AC = True
+
+    if not AC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
+    
+    return render_to_response('mid/ACSat.html', { 'cCompany' : cCompany, 
+                                                   'lMids' : lMids },
+                                                   context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveAC(request):
+    #Save updated academic status
+
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    AC = False
+    for p in lBillets :
+        if p.billet == "AC" and p.current :
+            AC = True
+
+    if not AC :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+       return HttpResponseRedirect("/")
+    
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+
+    for p in lMids :
+        if request.POST[p.alpha+'P'] == "True" :
+            p.acSAT = True
+        else :
+            p.acSAT = False
+            
+        p.save()
+ 
+    return HttpResponseRedirect(reverse('mid:ACSat')) 
 
 @login_required(redirect_field_name='/')
 def enterDiscipline(request):

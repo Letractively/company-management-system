@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% load filters %}
 
-{% block title %}Current Physical Status for {{ cCompany|numberToText }} Company: {% endblock %}
+{% block title %}Current Academic Status for {{ cCompany|numberToText }} Company: {% endblock %}
 
 {% block content %}
 <table>
-<form action= "savePRT" method="post"> 
+<form action= "saveAC" method="post"> 
 {% csrf_token %}
 
     <tr>
         <td>MIDN</td>
-        <td>PT SAT</td>
-        <td>PRT Score</td>
+        <td>AC SAT</td>
+        <td>SQPR</td>
+        <td>CQPR</td>
     </tr>
 {% for p in lMids %}
     <tr>
@@ -19,16 +20,17 @@
         <td>
             <select name = "{{ p.alpha }}P">
                 <option value="True">SAT</option>
-                <option value="False" {% if not p.PRTSat %} selected {% endif %} >UNSAT</option>
+                <option value="False" {% if not p.acSAT %} selected {% endif %} >UNSAT</option>
             </select>
         </td>
-        <td>{{ p.PRT }}</td>
+        <td>{{ p.SQPR }}</td>
+        <td>{{ p.CQPR }}</td>
     </tr>
 {% empty %}
     <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
 {% endfor %}
     <tr>
-        <td colspan="3">
+        <td colspan="6">
             <input type="submit" value="Save" />
         </td>
     </tr>
