@@ -33,8 +33,8 @@ class SignificantEvents(models.Model):
                      )
     section = models.CharField(max_length=1, choices=SECTION_CHOICES)
     name = models.ForeignKey("mid.Mid")
-    description = models.CharField(max_length=30)
-    adminNote = models.CharField(max_length=90)
+    description = models.CharField(max_length=60)
+    adminNote = models.CharField(max_length=300)
     
 #FOR YOUR WEEKENDS LIST GO TO THE WEEKENDS APPLICATION
 
