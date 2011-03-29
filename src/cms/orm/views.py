@@ -2,6 +2,7 @@
 # Author: Dimitri Hatley
 
 from mid.models import Mid
+from mid.models import Billet
 
 from orm.models import OrmChit
 from orm.models import LeisureActivites
@@ -221,6 +222,64 @@ def saveRMP(request) :
     RMP = request.POST['RMP']
     cChit.riskMitigationPlan = RMP
     cChit.approvalStatus = 1
+    
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            cChit.approvalStatus = 5
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            cChit.ccApproval = True
+            cChit.ccComment = "DEFAULT"
+            cChit.safApproval = True
+            cChit.safComment = "DEFAULT"
+            
+        if p.billet == "XO" and p.current :
+            cChit.approvalStatus = 3
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            
+        if p.billet == "OPS" and p.current :
+            cChit.approvalStatus = 3
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            
+        if p.billet == "FSGT" and p.current :
+            cChit.approvalStatus = 3
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+        
+        if p.billet == "PC" and p.current :
+            cChit.approvalStatus = 3
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            
+        if p.billet == "PLTS" and p.current :
+            cChit.approvalStatus = 2
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+        
+        if p.billet == "SL" and p.current :
+            cChit.approvalStatus = 2
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+    
+    cChit.save()
+    
+    if cChit.approvalLevel < cChit.approvalStatus :
+        cChit.approvalStatus = 10
+    
     cChit.save()
     
     return render_to_response('orm/ormView.html', {'cMid' : cMid, 
