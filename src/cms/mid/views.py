@@ -1708,6 +1708,18 @@ def saveDiscipline(request):
     
     if toursAwarded < daysAwarded :
             toursAwarded = daysAwarded
+            
+    lDisc = Discipline.objects.filter(mid = Mid.objects.get(alpha = alpha))
+    
+    for p in lDisc :
+        if p.startDate < date.today() and p.daysRemaining > 0 :
+            startDate = date.today() + timedelta(days = p.daysRemaining)
+            
+    lProbation = Probation.objects.filter(mid=cMid).order_by('-startDate')
+      
+    for p in lProbation :
+        if p.startDate < date.today() and p.startDate + timedelta(days=p.daysAwarded) < date.today() :
+            p.delete()
 
     cDisc = Discipline(mid = Mid.objects.get(alpha = alpha),
                        conductHonor = honor,
@@ -1720,7 +1732,6 @@ def saveDiscipline(request):
                        adminNotes = adminNotes,
                        checked = date.today(),
                        )
-    
     cDisc.save()
     
     return HttpResponseRedirect(reverse('mid:enterDiscipline')) 
@@ -1781,6 +1792,12 @@ def saveProbation(request):
     startDate = request.POST['startDate']
     daysAwarded = request.POST['daysAwarded']
     adminNotes = request.POST['adminNotes']
+    
+    lProbation = Probation.objects.filter(mid=cMid).order_by('-startDate')
+      
+    for p in lProbation :
+        if p.startDate < date.today() and p.startDate + timedelta(days=p.daysAwarded) < date.today() :
+            startDate = p.startDate + timedelta(days= (p.daysAwarded + 1))
 
     cDisc = Probation(mid = Mid.objects.get(alpha = alpha),
                        startDate = startDate,
@@ -1813,7 +1830,9 @@ def assessDiscipline(request):
         return HttpResponseRedirect('/')
     #End of second check
     
-    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0)
+    cDate = date.today()
+    
+    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')
     
     return render_to_response('mid/assessDiscipline.html', { 'cCompany' : cCompany, 
                                                              'lDisc' : lDisc,
@@ -1845,7 +1864,7 @@ def updateDiscipline(request):
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0)
+    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')
                                       
     for p in lDisc :
         if p.daysRemaining > 0 and request.POST[str(p.id)] == "true":
