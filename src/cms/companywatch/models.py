@@ -108,8 +108,8 @@ class WatchBill(models.Model):
     date = models.DateField()
     type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
     dutySection = models.CharField(max_length=1, choices=DS_CHOICES, null=True, blank=True)
-    CDO = models.ForeignKey("mid.Mid", related_name='+')
-    ACDO = models.ForeignKey("mid.Mid", related_name='+')
+    CDO = models.ForeignKey("mid.Mid", related_name='+', null=True, blank=True)
+    ACDO = models.ForeignKey("mid.Mid", related_name='+', null=True, blank=True)
     
     def __unicode__(self):
         return unicode(self.date) + " Duty Secion: " + self.dutySection
