@@ -1524,6 +1524,128 @@ def saveAC(request):
  
     return HttpResponseRedirect(reverse('mid:ACSat')) 
 
+@login_required(redirect_field_name='/')    
+def roomAssignment(request) :
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    FLT = False
+    for p in lBillets :
+        if p.billet == "FLT" and p.current :
+            FLT = True
+
+    if not FLT :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
+    lRooms = Room.objects.filter(company = cCompany)
+    
+    return render_to_response('mid/roomAssignment.html', { 'cCompany' : cCompany, 
+                                                           'lMids' : lMids,
+                                                           'lRooms' : lRooms 
+                                                           },
+                                                           context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveRoomAssignment(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    FLT = False
+    for p in lBillets :
+        if p.billet == "FLT" and p.current :
+            FLT = True
+
+    if not FLT :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+       return HttpResponseRedirect("/")
+    
+    lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
+
+    for p in lMids :
+        roomNumber = request.POST[p.alpha+'P']
+        if roomNumber == "0000" :
+            cRoom = p.roomNumber
+        else :
+            cRoom = Room.objects.get(roomNumber = request.POST[p.alpha+'P'])
+            
+        p.roomNumber = cRoom
+        p.save()
+ 
+    return HttpResponseRedirect(reverse('mid:roomAssignment')) 
+
+@login_required(redirect_field_name='/')
+def changeCompanyRoom(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    FLT = False
+    for p in lBillets :
+        if p.billet == "FLT" and p.current :
+            FLT = True
+
+    if not FLT :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    lRooms = Room.objects.filter(company = cCompany)
+                                                                                                        
+    return render_to_response('mid/changeCompanyRoom.html', {'lRooms' : lRooms 
+                                                             }, 
+                                                             context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveChangeCompanyRoom(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
+    FLT = False
+    for p in lBillets :
+        if p.billet == "FLT" and p.current :
+            FLT = True
+
+    if not FLT :
+        return HttpResponseRedirect('/')
+    #End of second check
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    roomNumber = request.POST['roomNumber']
+    
+    cRoom = Room.objects.get(roomNumber = roomNumber)
+    
+    cRoom.company = request.POST['company']
+    cRoom.save()
+                                                                                                        
+    return HttpResponseRedirect(reverse('mid:changeCompanyRoom')) 
+
 @login_required(redirect_field_name='/')
 def enterDiscipline(request):
     #Enter Restriction/Tours

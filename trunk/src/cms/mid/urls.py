@@ -39,6 +39,12 @@ urlpatterns = patterns('mid.views',
     url(r'ACSat$', 'ACSat', name = "ACSat"),
     (r'saveAC$', 'saveAC'),
     
+    #FLT options:
+    url(r'roomAssignment$', 'roomAssignment', name = "roomAssignment"),
+    (r'saveRoomAssignment$', 'saveRoomAssignment'),
+    url(r'changeCompanyRoom$', 'changeCompanyRoom', name = "changeCompanyRoom"),
+    (r'saveChangeCompanyRoom$', 'saveChangeCompanyRoom'),
+    
     #A/C Options
     url(r'enterDiscipline$', 'enterDiscipline', name = "enterDiscipline"),
     (r'saveDiscipline$', 'saveDiscipline'),

@@ -2,6 +2,7 @@
 # Author: Dimitri Hatley
 
 from mid.models import Mid
+from mid.models import Billet
 
 from specialrequestchit.models import SpecialRequestChit
 
@@ -57,6 +58,9 @@ def specReqSubmit(request):
     if request.POST['to'] == "CO" :
         approvalLevel = 6    
     
+    #List of current mid's billets
+    lBillets = Billet.objects.filter(mid=cMid)
+    
     cChit = SpecialRequestChit(mid = cMid,
                                date = date.today(),
                                toLine = request.POST['to'],
@@ -73,6 +77,61 @@ def specReqSubmit(request):
                                selComment = "",
                                coComment = ""
                                )
+    cChit.save()
+    
+    for p in lBillets :
+        if p.billet == "CC" and p.current :
+            cChit.approvalStatus = 5
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            cChit.ccApproval = True
+            cChit.ccComment = "DEFAULT"
+            
+        if p.billet == "XO" and p.current :
+            cChit.approvalStatus = 4
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            
+        if p.billet == "OPS" and p.current :
+            cChit.approvalStatus = 4
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            
+        if p.billet == "FSGT" and p.current :
+            cChit.approvalStatus = 4
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+        
+        if p.billet == "PC" and p.current :
+            cChit.approvalStatus = 4
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            cChit.pcApproval = True
+            cChit.pcComment = "DEFAULT"
+            
+        if p.billet == "PLTS" and p.current :
+            cChit.approvalStatus = 2
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+        
+        if p.billet == "SL" and p.current :
+            cChit.approvalStatus = 2
+            cChit.slApproval = True
+            cChit.slComment = "DEFAULT"
+            
+    cChit.save()
+    
+    if cChit.approvalLevel < cChit.approvalStatus :
+        cChit.approvalStatus = 10
+    
     cChit.save()
     
     return HttpResponseRedirect(reverse('specialrequestchit:specReq'))
