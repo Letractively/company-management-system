@@ -322,7 +322,7 @@ def passChange(request) :
     cUser.set_password(password)
     cUser.save()
     
-    return HttpResponseRedirect(reverse('mid:switchboard'))
+    return HttpResponseRedirect(reverse('switchboard'))
 
 @login_required(redirect_field_name='/')
 def editPersonalInformation(request):
