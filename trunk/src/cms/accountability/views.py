@@ -299,10 +299,8 @@ def saveTAPS(request):
     
     cMid = Mid.objects.get(alpha = request.POST['alpha'])
     
-    cAttendance = Attendance(mid = cMid,
-                             event = cEvent,
-                             status = request.POST[cMid.alpha+'A']                                
-                             )
+    cAttendance = Attendance.objects.get(mid = cMid, event = cEvent)
+    cAttendance.status = request.POST[cMid.alpha+'A']
     cAttendance.save()
 
     return HttpResponseRedirect(reverse('accountability:taps'))
