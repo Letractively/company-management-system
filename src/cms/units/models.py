@@ -1,4 +1,4 @@
-#orm models.py
+#units models.py
 # Author: Michael Harrison
 
 from django.db import models
