@@ -64,7 +64,7 @@ class Event(models.Model):
    platoonFourSubmitted = models.NullBooleanField()
    companyComplete = models.NullBooleanField()
    def __unicode_(self):
-        return self.type + " - " + unicode(self.dateTime) + " - "+ self.location
+        return u'%s at %s: %s' %(self.type,self.dateTime,self.location)
     
 class Attendance(models.Model):
     event = models.ForeignKey(Event) 
@@ -73,4 +73,4 @@ class Attendance(models.Model):
     comment = models.TextField(null=True)
     tempStatus = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
     def __unicode__(self):
-        return self.mid.LName + " - " + self.event.type + " " + self.event.location
+        return u'%s %s from: %s at %s' % (self.mid.LName,self.status,self.event.type,self.event.location)
