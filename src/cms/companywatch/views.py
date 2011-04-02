@@ -155,11 +155,7 @@ def initWatchBills(request):
     WatchBill.objects.filter(date__range=(acYear.springIntersessionalStart,acYear.springIntersessionalEnd)).update(type='L')
     
     #set Holidays as type H
-    holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]
-    for day in holidays:
-        WatchBill.objects.filter(date=day).update(type='H')
-    
-    #Change all weekend days to holidays
+    holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]e all weekend days to holidays
     bills = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
     for bill in bills:
         if bill.date.weekday() == 5:
