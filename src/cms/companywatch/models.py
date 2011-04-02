@@ -99,6 +99,7 @@ class AcWatch(models.Model):
     week = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     dayOfWeek = models.IntegerField(max_length=1, choices=DAY_CHOICES)
     startTime = models.TimeField()
+    
     mid = models.ForeignKey("mid.Mid")
     def __unicode__(self):
         return unicode(self.semester) + unicode(self.acYear)
