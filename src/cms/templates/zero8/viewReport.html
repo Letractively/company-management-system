@@ -2,46 +2,118 @@
 {% block title %}0800 REPORT{% endblock %}
 {% block content %}
 
-<h3>Enter a new Significant Event:</h3>
-
 <table>
-<form action="saveSignificantEvent" method="post">
-{% csrf_token %}
+<tr>
+    <td colspan = 7>FOR OFFICIAL USE ONLY – PRIVACY SENSITIVE</td>
+</tr>
+<tr>
+    <td colspan = 7>Any misuse or unauthorized disclosure can result in both civil and criminal penalties.</td>
+</tr>
 
 <tr>
-    <td>MIDN:</td>
-    <td>
-        <select name = "alpha">
-        {% for p in lMids %}
-            <option value = "{{ p.alpha }}">{{ p }}</option>
-        {% endfor %}
-        </select>
-    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>{{ cReport.reportDate }}</td>
+</tr>
+
+<tr>
+    <td colspan = 7> {{ cCompany }} COMPANY DAILY 0800 REPORT</td>
+</tr>
+
+<tr>
+    <td>FROM:</td><td colspan = 6> {{ cReport.offgoingCDO }}, USN, {{ cCompany }} COMPANY DUTY OFFICER</td>
 </tr>
 <tr>
-    <td>Type:</td>
-    <td>
-        <select name = "section">
-            <option value = "A">Family Crisis/Hospitalization/Death Notifications</option>
-            <option value = "B">Major Conduct Offense</option>
-            <option value = "C">Bancroft Hall Thefts</option>
-        </select>
-    </td>
+    <td>TO:</td><td colspan = 6>LT Igawa, USN, {{ cCompany }} Company Officer</td>
 </tr>
 <tr>
-    <td>Description/Action:</td>
-    <td><input type = "text" name = "description" size = 70</td>
+    <td></td><td colspan = 6>AECS MORRING, USN, {{ cCompany }} Company Senior Enlisted Leader</td>
 </tr>
 <tr>
-    <td>Admin Note:</td>
-    <td><textarea cols = 80 rows = 6 name = "adminNote"></textarea></td>
+    <td></td><td colspan = 6>MIDN LT Tagan, USN, {{ cCompany }} Company Commander</td>
 </tr>
 <tr>
-    <td colspan = 2><input type="submit" value="Save" /></td>
+    <td>SUBJ: </td><td colspan = 6> 25TH COMPANY 0800 REPORT FROM 0800 {{ cReport.reportDate }} to 0800 {{ cDate }}</td>
+</tr
+
+<tr>
+    <td>1</td>
+    <td colspan = 6>Oncoming CDO: {{ cReport.oncomingCDO }}</td>
 </tr>
-</form>
+
+<tr>
+    <td>2</td>
+    <td colspan = 6>Current Force Protection Condition: {{ cReport.get_forceProtectionCondition_display }}</td>
+</tr>
+
+<tr>
+    <td>3</td>
+    <td colspan = 6>Significant Events: </td>
+</tr>
+
+<tr>
+    <td></td>
+    <td>A.</td>
+    <td colspan = 3>FAMILY CRISIS/HOSPITALIZATION/DEATH NOTIFICATION/OTHER: </td>
+    <td colspan = 2>{{ cSigEventsA }}</td>
+</tr>
+
+    {% for p in lSigEventsA %}
+    <tr><td></td><td></td>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td>{{ p.description }}</td>
+        <td><a href="#{{p.section}}{{p.id}}">INFO</a></td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+    
+<tr>
+    <td></td>
+    <td>B.</td>
+    <td colspan = 3>MAJOR CONDUCT OFFENSES THAT OCCURRED THIS DATE: </td>
+    <td colspan = 2>{{ cSigEventsB }}</td>
+</tr>
+    
+    {% for p in lSigEventsB %}
+    <tr><td></td><td></td>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td>{{ p.description }}</td>
+        <td><a href="#{{p.section}}{{p.id}}">INFO</a></td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+    
+<tr>
+    <td></td>
+    <td>C.</td>
+    <td colspan = 3>BANCROFT HALL THEFTS: </td>
+    <td colspan = 2>{{ cSigEventsC }}</td>
+</tr>
+    
+    {% for p in lSigEventsC %}
+    <tr><td></td><td></td>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td>{{ p.description }}</td>
+        <td><a href="#{{p.section}}{{p.id}}">INFO</a></td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
 
 </table>
+
+<ol>
+    {% for p in lSigEventsA %}
+    <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+    {% for p in lSigEventsB %}
+    <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+    {% for p in lSigEventsC %}
+    <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+
+</ol>
 
 {% endblock %}
 
