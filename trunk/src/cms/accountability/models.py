@@ -73,4 +73,4 @@ class Attendance(models.Model):
     comment = models.TextField(null=True)
     tempStatus = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
     def __unicode__(self):
-        return self.mid.LName + " - " + self.event 
+        return self.mid.LName + " - " + self.event.type + " " + self.event.location
