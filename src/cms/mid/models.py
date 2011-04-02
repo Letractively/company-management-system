@@ -107,7 +107,7 @@ class Room(models.Model):
     maxOccupants = models.CharField(max_length=1)
     company = models.CharField(max_length=2, choices=CO_CHOICES)
     def __unicode__(self):
-        return self.roomNumber
+        return u'%s' % (self.roomNumber)
     
 class Mid(models.Model):
     alpha = models.CharField(max_length=6,primary_key=True)
@@ -131,7 +131,7 @@ class Mid(models.Model):
     conductGrade = models.CharField(max_length=1,null=True,blank=True)
     PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     def __unicode__(self):
-        return self.alpha + ", " + self.LName + ", " + self.fName + " " + self.mName
+        return u'%s, %s, %s %s' % (self.alpha,self.LName,self.fName,self.mName)
         
 class Grade(models.Model):
     mid = models.ForeignKey(Mid)
@@ -158,7 +158,7 @@ class Billet(models.Model):
     evaluation = models.TextField(null=True,blank=True)
     current = models.NullBooleanField()
     def __unicode__(self):
-        return self.billet
+        return u'%s' % (self.billet)
 
 class PRT(models.Model):
     mid = models.ForeignKey(Mid)
