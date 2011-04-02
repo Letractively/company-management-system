@@ -156,6 +156,15 @@ def makeDay(request):
                     )
     cReport.save()
     
+    lMids = Mid.objects.filter(company = cCompany)
+    
+    for p in lMids :
+        cAttendance = Attendance(mid = p,
+                                 event = cEvent,
+                                 status = "U"                                
+                                 )
+        cAttendance.save()
+    
     return HttpResponseRedirect(reverse('switchboard'))
 
 @login_required(redirect_field_name='/')
@@ -245,6 +254,58 @@ def saveAttendance(request):
     cEvent.save()
 
     return HttpResponseRedirect(reverse('accountability:enterAttendance'))
+
+@login_required(redirect_field_name='/')
+def taps(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cDT = datetime.combine(cDate, time(23, 55, 00))
+    
+    cEvent = Event.objects.filter(company = cCompany).filter(type = "TAP").filter(dateTime = cDT)
+    cEvent = cEvent[0]
+    
+    lAttendance = Attendance.objects.filter(event = cEvent).exclude(status = "P")
+
+    return render_to_response('accountability/taps.html', {'cMid' : cMid, 
+                                                           'cEvent' : cEvent,
+                                                           'lAttendance' : lAttendance
+                                                           }, 
+                                                           context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveTAPS(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cDT = datetime.combine(cDate, time(23, 55, 00))
+    
+    cEvent = Event.objects.filter(company = cCompany).filter(type = "TAP").filter(dateTime = cDT)
+    cEvent = cEvent[0]
+    
+    cMid = Mid.objects.get(alpha = request.POST['alpha'])
+    
+    cAttendance = Attendance(mid = cMid,
+                             event = cEvent,
+                             status = request.POST[cMid.alpha+'A']                                
+                             )
+    cAttendance.save()
+
+    return HttpResponseRedirect(reverse('accountability:taps'))
     
 @login_required(redirect_field_name='/')
 def selectEvent(request):    

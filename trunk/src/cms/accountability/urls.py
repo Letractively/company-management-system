@@ -17,6 +17,8 @@ urlpatterns = patterns('accountability.views',
     (r'reviewAttendance$', 'reviewAttendance'),
     url(r'cancelEvent$', 'cancelEvent', name = "cancelEvent"),
     (r'saveCancelEvent$', 'saveCancelEvent'),
+    url(r'taps', 'taps', name = "taps"),
+    (r'saveTAPS$', 'saveTAPS'),
     (r'makeDay$', 'makeDay'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
