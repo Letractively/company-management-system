@@ -162,6 +162,41 @@ def AcYearSubmit(request):
     
     return HttpResponseRedirect(reverse('companywatch:AcYearView'))
 
+def initWatchBills(request):
+    #create all of the watchbills for a the semester
+    numberOfDays = acYear.springEnd - acYear.fallStart
+    count = 0
+    while (count < numberOfDays.days):
+        WatchBill.objects.create(date=acYear.fallStart + timedelta(days=count),type='W')
+        
+    #Set the types of watch for all Leave dates
+    #for Thanksgiving set type of Watchbill to Leave
+    WatchBill.objects.filter(date__range=(acYear.thanksgivingStart,acYear.thanksgivingEnd)).update(type='L')
+    #For Christmas Leave
+    WatchBill.objects.filter(date__range=(acYear.christmasStart,acYear.christmasEnd)).update(type='L')
+    WatchBill.objects.filter(date__range=(acYear.christmasIntersessionalStart,acYear.christmasIntersessionalEnd)).update(type='L')
+    #For Spring Break
+    WatchBill.objects.filter(date__range=(acYear.springBreakStart,acYear.springBreakEnd)).update(type='L')
+    WatchBill.objects.filter(date__range=(acYear.springIntersessionalStart,acYear.springIntersessionalEnd)).update(type='L')
+    
+    #set Holidays as type H
+    holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]
+    for day in holidays:
+        WatchBill.objects.filter(date=day).update(type='H')
+    
+    #Change all weekend days to holidays
+    bills = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
+    for bill in bills:
+        if bill.date.weekday() == 5:
+            if bill.type == 'W':
+                bill.type = 'H'
+                bill.save()
+        elif bill.date.weekday() == 6:
+            if bill.type == 'W':
+                bill.type = 'H'
+                bill.save()
+                
+
 def WatchBill(request):
     
 def WatchBillView(request):
