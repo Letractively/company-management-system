@@ -9,7 +9,6 @@ from companywatch.models import WatchBill
 from companywatch.models import Watch
 from companywatch.models import LogBook
 from companywatch.models import LogEntry
-
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -144,7 +143,22 @@ def AcYearSubmit(request):
         
     #Set the types of watch for all Leave dates
     #for Thanksgiving set type of Watchbill to Leave
-    leaveThanksgiving = WatchBill.objects.filter(WatchBill.date__range(acYear.thanksgivingStart,acYear.thanksgivingEnd))
+    WatchBill.objects.filter(date__range=(acYear.thanksgivingStart,acYear.thanksgivingEnd)).update(type='L')
+    #For Christmas Leave
+    WatchBill.objects.filter(date__range=(acYear.christmasStart,acYear.christmasEnd)).update(type='L')
+    WatchBill.objects.filter(date__range=(acYear.christmasIntersessionalStart,acYear.christmasIntersessionalEnd)).update(type='L')
+    #For Spring Break
+    WatchBill.objects.filter(date__range=(acYear.springBreakStart,acYear.springBreakEnd)).update(type='L')
+    WatchBill.objects.filter(date__range=(acYear.springIntersessionalStart,acYear.springIntersessionalEnd)).update(type='L')
+    
+    #reset Holidays
+    holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]
+    for day in holidays:
+        bill = WatchBill.objects.get(date=day)
+        bill.type='H'
+        bill.save()
+     yearWatchBill = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))   
+    
     
     return HttpResponseRedirect(reverse('companywatch:AcYearView'))
 
