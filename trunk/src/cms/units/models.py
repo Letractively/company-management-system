@@ -45,8 +45,20 @@ CO_CHOICES = (
               ('30','30th Company'),              
               )
 
+BILLET_CHOICES = (
+                  ('DANT','Commendant of Midshipman'),
+                  ('DDANT','Deputy Commendant of Midshipman'),
+                  ('BO','Battalion Officer'),
+                  ('CO','Company Officer'),
+                  ('SEL','Company Senior Enlisted'),
+                  )
 
+class rank(models.Model):
+    rsNumber = models.IntegerField(max_length=2,null=True,blank=True)
+    rank = models.CharField(null=True,blank=True)
 
+    def __unicode__(self):
+        return u'%s' % (self.rank)
 
 class units(models.Model):
     battalion = models.CharField(max_length=1,choices=BATTALION_CHOICES)
@@ -56,9 +68,22 @@ class units(models.Model):
     thirdClassCount = models.IntegerField()
     fourthClassCount = models.IntegerField()
     
+    def __unicode__(self):
+        return u'%s company, %s Battalion' % (self.company,self.battalion)
+    
 class unitLeaders(models.Model):
     LName = models.CharField(max_length=30)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30)
-    rank = models.CharField(max_length=1,choices=RANK_CHOICES,null=True, blank=True)
+    rank = models.ForeignKey(rank)
+    officePhone = models.CharField(max_length=10)
+    cellPhone = models.CharField(max_length=10)
+    email = models.EmailField()
+    roomNumber = models.ForeignKey('mid.Room')
+    unit = models.ForeignKey(units)
+    billet = models.CharField(max_length=5,choices=BILLET_CHOICES)
+    
+    def __unicode__(self):
+        return u'%s %s' % (self.rank.rank,self.LName)
+    
     
