@@ -20,6 +20,8 @@ ATTEND_STATUS_CHOICES = (
                          ('A','Absent'),
                          ('U','Unauthorized Absent'),
                          ('E','Excused'),
+                         ('M','MO'),
+                         ('W','Weekend'),
                          )
 CO_CHOICES = (
               ('1','1st Company'),
