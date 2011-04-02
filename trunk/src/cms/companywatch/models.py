@@ -117,11 +117,11 @@ class WatchBill(models.Model):
     
 class Watch(models.Model):
     watchBill = models.ForeignKey(WatchBill)
-    mid = models.ForeignKey("mid.Mid")
-    post = models.CharField(max_length=20)
-    startTime = models.TimeField()
-    endTime = models.TimeField()
-    type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES)
+    mid = models.ForeignKey("mid.Mid", null=True, blank=True)
+    post = models.CharField(max_length=20, null=True, blank=True)
+    startTime = models.TimeField(null=True, blank=True)
+    endTime = models.TimeField(null=True, blank=True)
+    type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES, null=True, blank=True)
     def __unicode__(self):
         return self.mid.LName + " - " + unicode(self.watchBill.date) + " - " + unicode(self.startTime)
     
