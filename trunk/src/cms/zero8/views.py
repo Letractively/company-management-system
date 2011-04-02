@@ -34,24 +34,25 @@ def viewReport(request):
     cCompany = cMid.company
     
     cReport = Zero8.objects.get(reportDate = date.today())
-    cDate = cReport.reportDate
+    cDate = cReport.reportDate + timedelta(days = 1)
     
     lSigEventsA = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "A")
-    cSigEventsA = lSigEventsC.count()
+    cSigEventsA = lSigEventsA.count()
     lSigEventsB = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "B")
     cSigEventsB = lSigEventsB.count()
     lSigEventsC = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "C")
-    cSigEventsB = lSigEventsC.count()
+    cSigEventsC = lSigEventsC.count()
     
     return render_to_response('zero8/viewReport.html', {'cMid':cMid,
                                                         'cReport' : cReport,
                                                         'cDate' : cDate,
+                                                        'cCompany' : cCompany, 
                                                         'lSigEventsA' : lSigEventsA,
                                                         'cSigEventsA' : cSigEventsA,
                                                         'lSigEventsB' : lSigEventsB,
                                                         'cSigEventsB' : cSigEventsB,
                                                         'lSigEventsC' : lSigEventsC,
-                                                        'cSigEventsB' : cSigEventsC,
+                                                        'cSigEventsC' : cSigEventsC,
                                                        }, 
                                                        context_instance=RequestContext(request))
 
@@ -80,7 +81,13 @@ def saveSignificantEvent(request):
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
-    cReport = Zero8.objects.get(reportDate = date.today())
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+                cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
     
     cEvent = SignificantEvents(zero8 = cReport,
                                section = request.POST['section'],
