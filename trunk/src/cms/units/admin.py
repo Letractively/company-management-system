@@ -1,4 +1,8 @@
 from django.contrib import admin
-from orm.models import OrmChit
+from units.models import Rank
+from units.models import Units
+from units.models import UnitLeaders
 
-admin.site.register(OrmChit)
+admin.site.register(Rank)
+admin.site.register(Units)
+admin.site.register(UnitLeaders)
