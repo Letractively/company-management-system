@@ -20,6 +20,8 @@ from discipline.models import Probation
 from medchits.models import Chit
 from zero8.models import Candidates
 from zero8.models import Inspections
+from uniforminspection.models import UniformInspection
+from bravoinspection.models import BravoInspection
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -145,8 +147,12 @@ def viewReport(request):
     cCand = lCand.count()
     
     #Inspections of all kinds
-    lDutySectionMuster = Inspections.objects.filter(zero8 = cReport)
+    lDutySectionMuster = Inspections.objects.filter(zero8 = cReport).filter(type = "W")
     cDutySectionMuster = lDutySectionMuster.count()
+    lUniform = UniformInspection.objects.filter(mid__company = cCompany).filter(inspectionDate = cReport.reportDate)
+    cUniform = lUniform.count()
+    lRoom = BravoInspection.objects.filter(room__company = cCompany).filter(inspectionDate = cReport.reportDate)
+    cRoom = lRoom.count()
     
     return render_to_response('zero8/viewReport.html', {#'cMid':cMid,
                                                         'cReport' : cReport,
@@ -209,6 +215,10 @@ def viewReport(request):
                                                         'cCand' : cCand,
                                                         'lDutySectionMuster' : lDutySectionMuster,
                                                         'cDutySectionMuster' : cDutySectionMuster,
+                                                        'lUniform' : lUniform,
+                                                        'cUniform' : cUniform,
+                                                        'lRoom' : lRoom,
+                                                        'cRoom' : cRoom,
                                                         
                                                        }, 
                                                        context_instance=RequestContext(request))
@@ -316,4 +326,57 @@ def removeCandidate(request):
     
     return HttpResponseRedirect(reverse('zero8:candidates'))
     
+@login_required(redirect_field_name='/')
+def dutySectionMuster(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cDuty = cMid.dutySection
     
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    lMids = Mid.objects.filter(company = cCompany).filter(dutySection = cDuty)
+    lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "W")
+    
+    return render_to_response('zero8/dutySectionMuster.html', {'cMid':cMid,
+                                                               'lMids' : lMids,
+                                                               'lMusters' : lMusters
+                                                               }, 
+                                                               context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveDutySectionMuster(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    cInspection = Inspections(zero8 = cReport,
+                              type = "W",
+                              inspector = cMid,
+                              inspectee = Mid.objects.get(alpha = request.POST['alpha']),
+                              time = time(8,0,0),
+                              scoreEarned = 0,
+                              scorePossible = 0,
+                              SAT = request.POST['SAT'],
+                              comment = request.POST['comment']
+                              )
+    cInspection.save()
+    
+    return HttpResponseRedirect(reverse('zero8:dutySectionMuster'))
