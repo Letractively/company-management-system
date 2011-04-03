@@ -55,7 +55,8 @@ BILLET_CHOICES = (
 
 class Rank(models.Model):
     rsNumber = models.IntegerField(max_length=2,null=True,blank=True)
-    rank = models.CharField(max_length=20,null=True,blank=True,primary_key=True)
+    rank = models.CharField(max_length=20,null=True,blank=True,)
+    unique_together = (("rsNumber","rank"),)
 
     def __unicode__(self):
         return u'%s' % (self.rank)
@@ -76,7 +77,7 @@ class UnitLeader(models.Model):
     LName = models.CharField(max_length=30,null=True,blank=True)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30,null=True,blank=True)
-    rank = models.ForeignKey('Rank.rank',null=True,blank=True)
+    rank = models.ForeignKey(Rank,null=True,blank=True)
     officePhone = models.CharField(max_length=10,null=True,blank=True)
     cellPhone = models.CharField(max_length=10,null=True,blank=True)
     email = models.EmailField(null=True,blank=True)
