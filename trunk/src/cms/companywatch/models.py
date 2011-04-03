@@ -86,7 +86,7 @@ class AcYear(models.Model):
     springBreakEnd = models.DateField(null=True,blank=True)
     mlkDay = models.DateField(null=True,blank=True)
     washingtonBirthday = models.DateField(null=True,blank=True)   
-    springEwatnd = models.DateField(null=True,blank=True)
+    springEnd = models.DateField(null=True,blank=True)
     springIntersessionalStart = models.DateField(null=True,blank=True)
     springIntersessionalEnd = models.DateField(null=True,blank=True)
     summerStart = models.DateField(null=True,blank=True)
