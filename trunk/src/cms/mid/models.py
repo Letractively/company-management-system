@@ -169,40 +169,4 @@ class PRT(models.Model):
     score = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     
 
-class Absence(models.Model):
-    zero8 = models.ForeignKey("zero8.Zero8")
-    name = models.ForeignKey(Mid)
-    authorized = models.NullBooleanField()
-    description = models.CharField(max_length=20)
-    adminNote = models.CharField(max_length=90)
-    REASON_CHOICES = (
-                     ('AA','Authorized Absence'),
-                     ('UA','Unauthorized Absence'),
-                     ('WE','Weekend'),
-                     ('MO','Movement Order'),
-                     )
-    reason = models.CharField(max_length=2,choices=REASON_CHOICES)    
- 
-class Discipline(models.Model):
-    mid = models.ForeignKey(Mid)
-    conductHonor = models.BooleanField()
-    dateOffence = models.DateField()
-    startDate = models.DateField()
-    daysAwarded = models.IntegerField()
-    daysRemaining = models.IntegerField()
-    toursAwarded = models.IntegerField()
-    toursRemaining = models.IntegerField()
-    adminNotes = models.CharField(max_length=90)
-    checked = models.DateField()
-    
-class Separation(models.Model):
-    zero8 = models.ForeignKey("zero8.Zero8")
-    mid = models.ForeignKey("Mid")
-    pending = models.BooleanField()
-    adminNote = models.CharField(max_length=90)
-    
-class Probation(models.Model):
-    mid = models.ForeignKey(Mid)
-    startDate = models.DateField()
-    daysAwarded = models.IntegerField()
-    description = models.CharField(max_length=50)
+   
