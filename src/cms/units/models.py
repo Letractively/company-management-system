@@ -75,12 +75,12 @@ class UnitLeaders(models.Model):
     LName = models.CharField(max_length=30,null=True,blank=True)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30,null=True,blank=True)
-    rank = models.ForeignKey(rank,null=True,blank=True)
+    rank = models.ForeignKey(Rank,null=True,blank=True)
     officePhone = models.CharField(max_length=10,null=True,blank=True)
     cellPhone = models.CharField(max_length=10,null=True,blank=True)
     email = models.EmailField(null=True,blank=True)
     roomNumber = models.ForeignKey('mid.Room',null=True,blank=True)
-    unit = models.ForeignKey(units,null=True,blank=True)
+    unit = models.ForeignKey(Units,null=True,blank=True)
     billet = models.CharField(max_length=5,choices=BILLET_CHOICES,null=True,blank=True)
     
     def __unicode__(self):
