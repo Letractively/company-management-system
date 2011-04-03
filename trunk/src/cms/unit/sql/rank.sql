@@ -1,4 +1,4 @@
-INSERT INTO units_rank(rsNumber,rank) VALUES
+INSERT INTO unit_rank(rsNumber,rank) VALUES
 ('33','ADM'),
 ('32','CAPT'),
 ('31','Col'),
