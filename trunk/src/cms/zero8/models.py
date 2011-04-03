@@ -61,6 +61,7 @@ class Inspections(models.Model):
     type = models.CharField(max_length=1,choices=TYPE_CHOICES)
     inspector = models.ForeignKey("mid.Mid", related_name='+')
     inspectee = models.ForeignKey("mid.Mid", related_name='+', null = True, blank = True)
+    room = models.ForeignKey('mid.Room',null=True,blank=True)
     time = models.TimeField()
     scoreEarned = models.IntegerField(null=True,blank=True)
     scorePossible = models.IntegerField(null=True,blank=True)
