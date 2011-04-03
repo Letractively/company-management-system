@@ -118,7 +118,7 @@ INSTALLED_APPS = (
     'accountability',
     'bravoinspection',
     'discipline',
-    'units',
+    'unit',
     #'Company_Blog',
     'companywatch',
     'form1',
