@@ -735,10 +735,40 @@
 </tr>
 <tr><td>&nbsp;</td></tr>
 
-    
-
-
-
+<tr><td colspan = 9>
+    <table>
+    {% if lRestCheck %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>MIDN: </td>
+            <td>Room: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lRestCheck %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.inspectee }}</td>
+            <td>{{ p.inspectee.roomNumber }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
 
 <tr><td>&nbsp;</td></tr>
 <tr>

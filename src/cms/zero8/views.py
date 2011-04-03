@@ -158,7 +158,7 @@ def viewReport(request):
     cBedCheck = lBedCheck.count()
     lStudyHour = Inspections.objects.filter(zero8 = cReport).filter(type = "S")
     cStudyHour = lStudyHour.count()
-    lRestCheck = Inspections.objects.filter(zero8 = cReport).filter(type = "R")
+    lRestCheck = Inspections.objects.filter(zero8 = cReport).filter(type = "C")
     cRestCheck = lRestCheck.count()
     lBAC = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
     cBAC = lBAC.count()
@@ -550,7 +550,7 @@ def saveBAC(request):
                               inspector = cMid,
                               inspectee = Mid.objects.get(alpha = request.POST['alpha']),
                               time = time(8,0,0),
-                              cscoreEarned = 0,
+                              scoreEarned = 0,
                               scorePossible = 0,
                               SAT = request.POST['SAT'],
                               comment = request.POST['comment']
@@ -558,3 +558,55 @@ def saveBAC(request):
     cInspection.save()
     
     return HttpResponseRedirect(reverse('zero8:BAC'))
+
+@login_required(redirect_field_name='/')
+def restrictees(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    lRest = Restriction.objects.filter(mid__company = cCompany
+                                       ).filter(daysRemaining__gt= 0
+                                                ).filter(checked__lt = date.today()
+                                                         ).order_by('startDate')
+    
+    return render_to_response('zero8/restrictees.html', {'cMid':cMid,
+                                                         'lRest' : lRest
+                                                         }, 
+                                                         context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveRestrictees(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cRest = Restriction.objects.get(daysRemaining__gt = 0, mid = Mid.objects.get(alpha = request.POST['alpha']))
+    cRest.checked = date.today()
+    cRest.save()
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    cInspection = Inspections(zero8 = cReport,
+                              type = "C",
+                              inspector = cMid,
+                              inspectee = Mid.objects.get(alpha = request.POST['alpha']),
+                              time = time(8,0,0),
+                              scoreEarned = 0,
+                              scorePossible = 0,
+                              SAT = True,
+                              comment = ""
+                              )
+    cInspection.save()
+    
+    return HttpResponseRedirect(reverse('zero8:restrictees'))
