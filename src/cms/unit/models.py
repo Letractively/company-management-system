@@ -78,6 +78,6 @@ class UnitLeader(models.Model):
     billet = models.CharField(max_length=5,choices=BILLET_CHOICES,null=True,blank=True)
     
     def __unicode__(self):
-        return u'%s %s' % (self.rank.rank,self.LName)
+        return u'%s %s %s %s' % (self.rank,self.LName,self.mName,self.fName)
     
     
