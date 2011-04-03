@@ -449,3 +449,27 @@ def reviewAttendance(request):
                                                                        'lAttendance' : lAttendance
                                                                        }, 
                                                                        context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def viewAttendance(request):
+    if request.method != "POST" :
+        alpha = request.user.username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+    else :
+        cMid = Mid.objects.get(alpha = request.POST['alpha'])
+    
+    cCompany = cMid.company
+    
+    lAttendance = Attendance.objects.filter(mid = cMid).exclude(status = "P")
+    
+    return render_to_response('accountability/viewAttendance.html', {'cMid' : cMid, 
+                                                                     'lAttendance' : lAttendance
+                                                                    }, 
+                                                                    context_instance=RequestContext(request))
+        
+        
+        
+        
+        
+          

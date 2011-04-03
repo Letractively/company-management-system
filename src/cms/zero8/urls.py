@@ -13,6 +13,8 @@ urlpatterns = patterns('zero8.views',
     url(r'candidates', 'candidates', name = "candidates"),
     (r'saveCandidate$', 'saveCandidate'),
     (r'removeCandidate$', 'removeCandidate'),
+    url(r'dutySectionMuster$', 'dutySectionMuster', name = "dutySectionMuster"),
+    (r'saveDutySectionMuster$', 'saveDutySectionMuster'),
     url(r'viewReport$', 'viewReport', name = "viewReport"),
 
 

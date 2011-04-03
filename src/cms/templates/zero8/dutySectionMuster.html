@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Record a Watch Inspection:</h3>
+
+<table>
+<form action="saveDutySectionMuster" method="post">
+{% csrf_token %}
+
+<tr>
+    <td>Watchstander:</td>
+    <td>
+        <select name = "alpha">
+        {% for p in lMids %}
+            <option value = "{{ p.alpha }}">{{ p }}</option>
+        {% endfor %}
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Pass/Fail:</td>
+    <td>
+        <select name = "SAT">
+            <option value = "True">SAT</option>
+            <option value = "False">UNSAT</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Comments:</td>
+    <td><textarea cols = 80 rows = 6 name = "comment"></textarea></td>
+</tr>
+<tr>
+    <td colspan = 2><input type="submit" value="Record" /></td>
+</tr>
+
+</form>
+</table>
+
+<h3>Previous watch inspections: </h3>
+<table>
+    {% if lMusters %}
+    <tr>
+        <td>Watchstander: </td>
+        <td>Inspector: </td>
+        <td>SAT/UNSAT: </td>
+        <td>Comment: </td>
+    </tr>
+    {% endif %}
+
+    {% for p in lMusters %}
+        <tr>
+            <td>{{ p.inspectee }}</td>
+            <td>{{ p.inspector }} </td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan = 6>No previously reported watch inspections.</td></tr>
+   {%endfor%}
+</table>
+
+{% endblock %}
+

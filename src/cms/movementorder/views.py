@@ -103,19 +103,3 @@ def checkInMO(request):
     cMO.save()
     
     return HttpResponseRedirect(reverse('movementorder:MO'))
-
-@login_required(redirect_field_name='/')
-def viewMOListCompany(request):
-    alpha = request.user.username.split('m')
-    alpha = alpha[1]
-    cMid = Mid.objects.get(alpha=alpha)
-    cCompany = cMid.company
-    
-    lMO = MovementOrder.objects.filter(moparticipant__participant__company = cCompany).filter(returnDate = "3000-01-01").order_by('-departDate').distinct()
-    lMids = Mid.objects.filter(company = cCompany).filter(moparticipant__MO__returnDate = "3000-01-01").order_by('alpha')
-    
-    return render_to_response('movementorder/viewMOListCompany.html', {'lMO' : lMO,
-                                                                       'cCompany' : cCompany,
-                                                                       'lPart' : lMids
-                                                                       }, 
-                                                                       context_instance=RequestContext(request))

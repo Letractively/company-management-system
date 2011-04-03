@@ -531,8 +531,8 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>Watchstander: </td>
+            <td>SAT/UNSAT: </td>
             <td>Inspector: </td>
-            <td>Pass/Fail: </td>
             <td>Comments: </td>
         </tr>
     {% endif %}
@@ -541,9 +541,11 @@
             <td></td>
             <td></td>
             <td>{{ p.inspectee }}</td>
-            <td>{{ p.inspector }}</td>
-            <td>{{ p.SAT }}</td>
-            <td>{{ p.comments }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
         </tr>
     {%empty%}
         <tr>
@@ -558,10 +560,94 @@
 <tr><td>&nbsp;</td></tr>
 <tr>
     <td></td>
-    <td>A.</td>
-    <td colspan = 7>Watch Inspections/Surprise Duty Section Muster: {{ cWatch }}</td>
+    <td>B.</td>
+    <td colspan = 7>Uniform Inspections: {{ cUniform }}</td>
 </tr>
 <tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lUniform %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Inspectee: </td>
+            <td>Score: </td>
+            <td>Pass/Fail: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lUniform %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.mid }}</td>
+            <td>{{ p.score }}/19</td>
+            <td>
+                {% if p.fail %}Fail{% else %}Pass{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>C.</td>
+    <td colspan = 7>Room Inspections: {{ cRoom }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lRoom %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Room: </td>
+            <td>Score:</td>
+            <td>Pass/Fail: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lRoom %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.room }}</td>
+            <td>{{ p.score }}/23</td>
+            <td>
+                {% if p.fail %}Fail{% else %}Pass{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+    
+    
+    
+    
+    
+    
     
 <tr><td>&nbsp;</td></tr>
 <tr>

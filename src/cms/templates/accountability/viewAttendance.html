@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Form-1{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Attendance module.</h1>
+
+<h3>Attendance records for {{ cMid }}: </h3>
+
+<p>Module only lists excused and unexcused absences; <br/>
+It is assumed that all MIDN are present for the great majority of required events.</p>
+
+<table>
+    {%if lAttendance %}
+        <tr>
+            <td colspan=2>Event:</td>
+            <td>Location:</td>
+            <td>Status:</td>
+            <td>Comment:</td>
+        </tr>
+    {%endif%}
+    
+    {% for p in lAttendance %}
+        <tr>
+            <td>{{ p.event.dateTime }}</td>
+            <td>{{ p.event.get_type_display }}</td>
+            <td>{{ p.event.location }}</td>
+            <td>{{ p.get_status_display }}</td>
+            <td>{{ p.comment }}</td>
+        </tr>
+    {% empty %}
+        <tr><td>All required events were successfully attended.</td></tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

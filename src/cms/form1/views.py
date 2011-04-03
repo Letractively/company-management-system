@@ -27,7 +27,7 @@ def form1(request):
     if cMid.rank == "1" :
         firstie = True
     
-    lMids = Mid.objects.filter(company = cCompany)
+    lMids = Mid.objects.filter(company = cCompany).exclude(alpha = cMid.alpha)
     lForms = Form1.objects.filter(mid=cMid).order_by('-formDate')
     
     return render_to_response('form1/formOne.html', {'cMid' : cMid, 
