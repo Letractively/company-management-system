@@ -643,7 +643,151 @@
     </table>
 </td></tr>
     
-    
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>D.</td>
+    <td colspan = 7>Bed Checks: {{ cBedCheck }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lBedCheck %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Room: </td>
+            <td>Present:</td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lBedCheck %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.room }}</td>
+            <td>{{ p.scoreEarned }}/{{ p.room.maxOccupants }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>E.</td>
+    <td colspan = 7>Study Hour Checks: {{ cStudyHour }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lStudyHour %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Room: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lStudyHour %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.room }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>F.</td>
+    <td colspan = 7>Restrictee Checks: {{ cRestCheck }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+
+
+
+
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>G.</td>
+    <td colspan = 7>BAC Checks: {{ cBAC }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr> 
+
+<tr><td colspan = 9>
+    <table>
+    {% if lBAC %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>MIDN: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lBAC %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.inspectee }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>H.</td>
+    <td colspan = 7>Restrictee Checks: {{ cRestCheck }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
     
     
     

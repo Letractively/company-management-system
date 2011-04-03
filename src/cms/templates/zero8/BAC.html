@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Record a BAC Check:</h3>
+
+<table>
+<form action="sBAC" method="post">
+{% csrf_token %}
+
+<tr>
+    <td>MIDN:</td>
+    <td>
+        <select name = "alpha">
+        {% for p in lMids %}
+            <option value = "{{ p.alpha }}">{{ p }}</option>
+        {% endfor %}
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>SAT/UNSAT:</td>
+    <td>
+        <select name = "SAT">
+            <option value = "True">SAT</option>
+            <option value = "False">UNSAT</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Comments:</td>
+    <td><textarea cols = 80 rows = 6 name = "comment"></textarea></td>
+</tr>
+<tr>
+    <td colspan = 2><input type="submit" value="Record" /></td>
+</tr>
+
+</form>
+</table>
+
+<h3>Previous watch inspections: </h3>
+<table>
+    {% if lMusters %}
+    <tr>
+        <td>MIDN: </td>
+        <td>SAT/UNSAT: </td>
+        <td>Inspector: </td>
+        <td>Comments: </td>
+    </tr>
+    {% endif %}
+
+    {% for p in lMusters %}
+        <tr>
+            <td>{{ p.room }}</td>
+            <td>{{ p.scoreEarned }}/{{ p.room.maxOccupants }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan = 6>No previously reported BAC checks.</td></tr>
+   {%endfor%}
+</table>
+
+{% endblock %}
+

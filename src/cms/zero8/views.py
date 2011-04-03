@@ -4,6 +4,7 @@
 
 from mid.models import Mid
 from mid.models import Billet
+from mid.models import Room
 from units.models import Units
 from units.models import UnitLeaders
 from zero8.models import Zero8
@@ -153,6 +154,14 @@ def viewReport(request):
     cUniform = lUniform.count()
     lRoom = BravoInspection.objects.filter(room__company = cCompany).filter(inspectionDate = cReport.reportDate)
     cRoom = lRoom.count()
+    lBedCheck = Inspections.objects.filter(zero8 = cReport).filter(type = "B")
+    cBedCheck = lBedCheck.count()
+    lStudyHour = Inspections.objects.filter(zero8 = cReport).filter(type = "S")
+    cStudyHour = lStudyHour.count()
+    lRestCheck = Inspections.objects.filter(zero8 = cReport).filter(type = "R")
+    cRestCheck = lRestCheck.count()
+    lBAC = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
+    cBAC = lBAC.count()
     
     return render_to_response('zero8/viewReport.html', {#'cMid':cMid,
                                                         'cReport' : cReport,
@@ -219,7 +228,14 @@ def viewReport(request):
                                                         'cUniform' : cUniform,
                                                         'lRoom' : lRoom,
                                                         'cRoom' : cRoom,
-                                                        
+                                                        'lBedCheck' : lBedCheck,
+                                                        'cBedCheck' : cBedCheck,
+                                                        'lStudyHour' : lStudyHour,
+                                                        'cStudyHour' : cStudyHour,
+                                                        'lRestCheck' : lRestCheck, 
+                                                        'cRestCheck' : cRestCheck, 
+                                                        'lBAC' : lBAC,
+                                                        'cBAC' : cBAC,
                                                        }, 
                                                        context_instance=RequestContext(request))
 
@@ -380,3 +396,165 @@ def saveDutySectionMuster(request):
     cInspection.save()
     
     return HttpResponseRedirect(reverse('zero8:dutySectionMuster'))
+
+@login_required(redirect_field_name='/')
+def bedCheck(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    lRooms = Room.objects.filter(company = cCompany)
+    lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "B")
+    
+    return render_to_response('zero8/bedCheck.html', {'cMid':cMid,
+                                                       'lRooms' : lRooms,
+                                                       'lMusters' : lMusters
+                                                        }, 
+                                                        context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveBedCheck(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    cInspection = Inspections(zero8 = cReport,
+                              type = "B",
+                              inspector = cMid,
+                              room = Room.objects.get(roomNumber = request.POST['roomNumber']),
+                              time = time(8,0,0),
+                              scoreEarned = request.POST['people'],
+                              scorePossible = 0,
+                              SAT = request.POST['SAT'],
+                              comment = request.POST['comment']
+                              )
+    cInspection.save()
+    
+    return HttpResponseRedirect(reverse('zero8:bedCheck'))
+
+@login_required(redirect_field_name='/')
+def studyHour(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    lRooms = Room.objects.filter(company = cCompany)
+    lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "S")
+    
+    return render_to_response('zero8/studyHour.html', {'cMid':cMid,
+                                                       'lRooms' : lRooms,
+                                                       'lMusters' : lMusters
+                                                        }, 
+                                                        context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveStudyHour(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    cInspection = Inspections(zero8 = cReport,
+                              type = "S",
+                              inspector = cMid,
+                              room = Room.objects.get(roomNumber = request.POST['roomNumber']),
+                              time = time(8,0,0),
+                              scoreEarned = 0,
+                              scorePossible = 0,
+                              SAT = request.POST['SAT'],
+                              comment = request.POST['comment']
+                              )
+    cInspection.save()
+    
+    return HttpResponseRedirect(reverse('zero8:studyHour'))
+
+@login_required(redirect_field_name='/')
+def BAC(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    lMids = Mid.objects.filter(company = cCompany)
+    lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
+    
+    return render_to_response('zero8/BAC.html', {'cMid':cMid,
+                                                 'lMids' : lMids,
+                                                 'lMusters' : lMusters
+                                                 }, 
+                                                 context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def sBAC(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cReport = Zero8.objects.get(reportDate = cDate)
+    
+    cInspection = Inspections(zero8 = cReport,
+                              type = "A",
+                              inspector = cMid,
+                              inspectee = Mid.objects.get(alpha = request.POST['alpha']),
+                              time = time(8,0,0),
+                              scoreEarned = 0,
+                              scorePossible = 0,
+                              SAT = request.POST['SAT'],
+                              comment = request.POST['comment']
+                              )
+    cInspection.save()
+    
+    return HttpResponseRedirect(reverse('zero8:BAC'))

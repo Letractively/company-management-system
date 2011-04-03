@@ -15,6 +15,13 @@ urlpatterns = patterns('zero8.views',
     (r'removeCandidate$', 'removeCandidate'),
     url(r'dutySectionMuster$', 'dutySectionMuster', name = "dutySectionMuster"),
     (r'saveDutySectionMuster$', 'saveDutySectionMuster'),
+    url(r'bedCheck$', 'bedCheck', name = "bedCheck"),
+    (r'saveBedCheck$', 'saveBedCheck'),
+    url(r'studyHour$', 'studyHour', name = "studyHour"),
+    (r'saveStudyHour$', 'saveStudyHour'),
+    url(r'BAC$', 'BAC', name = "BAC"),
+    (r'sBAC$', 'sBAC'),
+    
     url(r'viewReport$', 'viewReport', name = "viewReport"),
 
 
