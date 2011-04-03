@@ -86,12 +86,13 @@ def saveDiscipline(request):
     
     if toursAwarded < daysAwarded :
         toursAwarded = daysAwarded
-            
+    
+    #Restriction
     lDisc = Restriction.objects.filter(mid = Mid.objects.get(alpha = alpha))
     
     cDisc = None
     for p in lDisc :
-        if p.startDate < date.today() and p.daysRemaining > 0 :
+        if p.daysRemaining > 0 :
             cDisc = p
             
     if cDisc is None :
@@ -106,23 +107,32 @@ def saveDiscipline(request):
                                 checked = date.today()
                                 )
             cDisc.save()
-            
-        if toursAwarded > 0 :
-            cDisc = Tours(mid = Mid.objects.get(alpha = alpha),
-                          conductHonor = honor,
-                          dateOffence = dateOffense,
-                          startDate = startDate,
-                          toursAwarded = toursAwarded,
-                          toursRemaining = toursAwarded,
-                          adminNotes = adminNotes,
-                          )
-        cDisc.save()
-    
     else :
         cDisc.daysRemaining = cDisc.daysRemaining + daysAwarded
         cDisc.daysAwarded = cDisc.daysAwarded+daysAwarded
         cDisc.save()
-        cDisc = Tours.objects.get(startDate = cDisc.startDate)
+    
+    
+    #Tours    
+    lDisc = Tours.objects.filter(mid = Mid.objects.get(alpha = alpha))
+    
+    cDisc = None
+    for p in lDisc :
+        if p.toursRemaining > 0 :
+            cDisc = p
+
+    if cDisc is None :
+        if toursAwarded > 0 :
+                cDisc = Tours(mid = Mid.objects.get(alpha = alpha),
+                              conductHonor = honor,
+                              dateOffence = dateOffense,
+                              startDate = startDate,
+                              toursAwarded = toursAwarded,
+                              toursRemaining = toursAwarded,
+                              adminNotes = adminNotes,
+                              )
+        cDisc.save()
+    else:
         cDisc.toursRemaining = cDisc.toursRemaining + toursAwarded
         cDisc.toursAwarded = cDisc.toursAwarded+toursAwarded
         cDisc.save()
@@ -266,12 +276,12 @@ def updateDiscipline(request):
     lT = Tours.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')                                     
     
     for p in lR :
-        if request.POST[p.id+'R'] == "true" :
+        if request.POST[str(p.id)+'R'] == "true" :
             p.daysRemaining = p.daysRemaining - 1
             p.save()
     
     for p in lT :
-        if request.POST[p.id+'T'] == "true" :
+        if request.POST[str(p.id)+'T'] == "true" :
             p.toursRemaining = p.toursRemaining - 1
             p.save()
     

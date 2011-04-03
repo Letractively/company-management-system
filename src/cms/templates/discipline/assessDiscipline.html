@@ -7,43 +7,79 @@
     <table>
     <form action="updateDiscipline" method="post"> 
     {% csrf_token %}
-    <tr><td>Mid: </td>
+    
+    {% if lR %}
+    <tr><td><h4>Restrictions:</h4></td></tr>
+    <tr>
+    <td>Mid: </td>
     <td>Start date: </td>
-    <td>Days/Tours Awarded: </td>
-    <td>Days/Tours Remaining: </td>
+    <td>Days Awarded: </td>
+    <td>Days Remaining: </td>
+    <td></td>
+    <td>Admin Notes</td>
     </tr>
+    {% endif %}
+    
         {% for p in lR %}
             <tr>
                 <td>{{ p.mid }}</td>
                 <td>{{ p.startDate }}</td>
-                <td>{{ p.daysAwarded }}</td>
-                <td>{{ p.daysRemaining }}</td>
+                <td>{{ p.daysAwarded }} days</td>
+                <td>{{ p.daysRemaining }} days</td>
                 <td><select name = "{{ p.id }}R">
                         <option value = "not">Missed musters</option>
                         <option value = "true">Met all musters</option>
                     </select>
                 </td>
+                <td>{{ p.adminNotes }}</td>
             </tr>
         {% empty %}
             <tr><td>No Restrictions to update. </td></tr>
         {% endfor %}
+</table>
+<table>
+
+    {% if lT %}
+    <tr><td><h4>Tours:</h4></td></tr>
+    <tr>
+    <td>Mid: </td>
+    <td>Start date: </td>
+    <td>Tours Awarded: </td>
+    <td>Tours Remaining: </td>
+    <td></td>
+    <td>Admin Notes</td>
+    </tr>
+    {% endif %}
 
         {% for p in lT %}
             <tr>
                 <td>{{ p.mid }}</td>
                 <td>{{ p.startDate }}</td>
-                <td>{{ p.toursAwarded }}</td>
-                <td>{{ p.toursRemaining }}</td>
+                <td>{{ p.toursAwarded }} tours</td>
+                <td>{{ p.toursRemaining }} tours</td>
                 <td><select name = "{{ p.id }}T">
                         <option value = "not">Did not march tours</option>
                         <option value = "true">Marched tours</option>
                     </select>
                 </td>
+                <td>{{ p.adminNotes }}</td>
             </tr>
         {% empty %}
             <tr><td>No Tours to update. </td></tr>
         {% endfor %}
         
+</table>
+<table>
+    {% if lP %}
+    <tr><td><h4>Probations:</h4></td></tr>
+    <tr>
+    <td>Mid: </td>
+    <td>Start date: </td>
+    <td>DaysAwarded: </td>
+    <td>Admin Notes</td>
+    </tr>
+    {% endif %}
+
         {% for p in lP %}
             <tr>
                 <td>{{ p.mid }}</td>

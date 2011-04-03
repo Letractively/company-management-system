@@ -9,6 +9,9 @@ from mid.models import Billet
 from mid.models import Room
 from mid.models import PRT
 from zero8.models import Zero8
+from discipline.models import Restriction
+from discipline.models import Tours
+from discipline.models import Probation
 
 from specialrequestchit.models import SpecialRequestChit
 from orm.models import OrmChit
@@ -374,31 +377,40 @@ def viewDiscipline(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
-
-    #lDisc - list of user's errors in judgement
-    lDisc = Discipline.objects.filter(mid = cMid)
-    lProb = Probation.objects.filter(mid = cMid)
-    #Current date 
-    cDate = date.today()
+    cCompany = cMid.company
     
-    #Check if the user is currently on chit
-    cDisc = None
-    for p in lDisc :
+    lR = Restriction.objects.filter(mid = cMid).order_by('startDate')
+    lT = Tours.objects.filter(mid = cMid).order_by('startDate')
+    lP = Probation.objects.filter(mid = cMid).order_by('startDate')
+    
+    cR = None
+    cT = None
+    cP = None
+    pDaysLeft = None
+    
+    for p in lR:
         if p.daysRemaining > 0 :
-            cDisc = p
+            cR = p
+            
+    for p in lT:
+        if p.toursRemaining > 0 :
+            cT = p
+            
+    for p in lP:
+        if p.startDate + timedelta(days = daysAwarded) > date.today() :
+            cP = p
+            pDaysLeft = date.today - (p.startDate + timedelta(days = daysAwarded))
     
-    cProb = None
-    for p in lProb :
-        if p.startDate + timedelta(days = p.daysAwarded) > cDate :
-            cProb = p
-    
-    return render_to_response('mid/viewDiscipline.html', {'cMid' : cMid, 
-                                                          'cDisc' : cDisc,
-                                                          'lDisc' : lDisc,
-                                                          'cProb' : cProb,
-                                                          'lProb' : lProb
-                                                          },
-                                                          context_instance=RequestContext(request))
+    return render_to_response('mid/viewDiscipline.html', { 'cCompany' : cCompany, 
+                                                           'lR' : lR,
+                                                           'lT' : lT,
+                                                           'lP' : lP,
+                                                           'cR' : cR,
+                                                           'cT' : cT,
+                                                           'cP' : cP,
+                                                           'pDaysLeft' : pDaysLeft,
+                                                           },
+                                                           context_instance=RequestContext(request))
 
 #Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
