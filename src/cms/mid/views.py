@@ -12,6 +12,12 @@ from zero8.models import Zero8
 from discipline.models import Restriction
 from discipline.models import Tours
 from discipline.models import Probation
+from uniforminspection.models import UniformInspection
+from bravoinspection.models import BravoInspection
+from form1.models import Form1
+from medchits.models import Chit
+from movementorder import MOParticipant
+from movementorder import MovementOrder
 
 from specialrequestchit.models import SpecialRequestChit
 from orm.models import OrmChit
@@ -1778,3 +1784,72 @@ def saveChangeCompany(request):
     cMid.save()
                                                                                                         
     return HttpResponseRedirect(reverse('mid:changeCompany')) 
+
+@login_required(redirect_field_name='/')
+def viewSubordinates(request):
+    #Called on /weekends/view -> generates a current weekend list, no additional functionality
+    username = request.user.username
+    
+    lMids = []
+    
+    if re.match("CO", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        lMids = Mid.objects.filter(company = cCompany)
+        
+    elif re.match("SEL", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        lMids = Mid.objects.filter(company = cCompany)
+    
+    else :
+        alpha = username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+        cCompany = cMid.company
+    
+        lBillets = Billet.objects.filter(mid=cMid)
+        
+        for p in lBillets : 
+            if p.billet == "CC" and p.current :
+                lMids = Mid.objects.filter(company = cCompany)
+        
+        for p in lBillets :     
+            if p.billet == "XO" and p.current :
+                lMids = Mid.objects.filter(company = cCompany)
+            
+        for p in lBillets :     
+            if p.billet == "PC" and p.current :
+                lMids = Mid.objects.filter(company = cCompany).filter(platoon = cMid.platoon)
+                
+        for p in lBillets :     
+            if p.billet == "SL" and p.current :
+                lMids = Mid.objects.filter(company = cCompany).filter(platoon = cMid.platoon).filter(squad = cMid.squad)
+    
+    return render_to_response('mid/viewSubordinates.html', {'cCompany' : cCompany,
+                                                             'lMids' : lMids
+                                                             }, 
+                                                             context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def listDetails(request):
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    cMid = Mid.objects.get(alpha = request.POST['id'])
+    
+    lUI = UniformInspection.objects.filter(mid = cMid)
+    lRI = BravoInspection.objects.filter(mid = cMid)
+    lF1 = Form1.objects.filter(mid = cMid)
+    lSRC = SpecialRequestChit.objects.filter(mid = cMid)
+    lORM = OrmChit.objects.filter(mid = cMid)
+    lAtt = Attendance.objects.filter(mid = cMid)
+    lMed = Chit.objects.filter(mid = cMid)
+    lR = Restriction.objects.filter(mid = cMid)
+    lT = Tours.objects.filter(mid = cMid)
+    lP = Probation.objects.filter(mid = cMid)
+    
+    return render_to_response('mid/listDetails.html', {'cMid' : cMid,
+                                                       }, 
+                                                       context_instance=RequestContext(request))

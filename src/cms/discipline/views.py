@@ -104,7 +104,7 @@ def saveDiscipline(request):
                                 daysAwarded = daysAwarded,
                                 daysRemaining = daysAwarded,
                                 adminNotes = adminNotes,
-                                checked = date.today()
+                                checked = date(3000, 1, 1)
                                 )
             cDisc.save()
     else :

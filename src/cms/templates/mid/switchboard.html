@@ -18,6 +18,7 @@
                 <li><a href = "weekends/view">View Weekend List</a></li>
             </ul>
         
+        <li><a href = "mid/viewSubordinates">View Subordinates</a></li>
         <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         
         <li><a href = "mid/appointCC">Appoint Company Commander</a></li>
@@ -40,6 +41,7 @@
                 <li><a href = "weekends/view">View Weekend List</a></li>
             </ul>
         
+        <li><a href = "mid/viewSubordinates">View Subordinates</a></li>
         <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         
         <li><a href = "logout">Log out</a></li>
@@ -117,6 +119,7 @@
         <h3>Company Commander options:</h3>
         <ul>
             <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+            <li><a href = "mid/viewSubordinates">View Subordinates</a></li>
             <li><a href = "accountability/cancelEvent">Cancel formation/Event</a></li>
             <li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
             <li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
@@ -124,11 +127,16 @@
         {%endif%}
         
         {% if XO %}
+        <h3>Executive Officer options:</h3>
+        <ul>
+            <li><a href = "mid/viewSubordinates">View Subordinates</a></li>
+        </ul>
         {%endif%}
         
         {% if PC %}
         <h3>Platoon Commander options:</h3>
         <ul>
+            <li><a href = "mid/viewSubordinates">View Subordinates</a></li>
             <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         </ul>
         {%endif%}
@@ -143,6 +151,7 @@
         {% if SL %}
         <h3>Squad Leader options:</h3>
         <ul>
+            <li><a href = "mid/viewSubordinates">View Subordinates</a></li>
             <li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
         </ul>
         {%endif%}
