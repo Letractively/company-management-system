@@ -12,12 +12,17 @@
         <td>{{ p.movementOrderCode }}</td>
         <td>{{ p.organization }}</td>
         <td>{{ p.adminNote }}</td>
+        <td colspan = 2>
+                {% for x in p.moparticipant_set.all %}
+                {% if x.participant.company == cCompany %}
+                    {{ x.participant }} <br />
+                {% endif %}
+                {%endfor%}
+        </td>
     </tr>
 {% empty %}
     <tr><td>Nobody from this company is currently on an MO.</td></tr>
 {% endfor %}
 </table>
-
-{{ lPart }}
 
 {% endblock %}
