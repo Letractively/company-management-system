@@ -117,6 +117,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'accountability',
     'bravoinspection',
+    'discipline',
+    'units',
     #'Company_Blog',
     'companywatch',
     'form1',
