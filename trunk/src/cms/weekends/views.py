@@ -5,8 +5,7 @@
 
 from mid.models import Mid
 from mid.models import Billet
-from mid.models import Discipline
-from mid.models import Probation
+from discipline.models import Restriction
 
 from weekends.models import Weekend
 
@@ -67,12 +66,6 @@ def index(request):
     for p in lDiscipline :
        if p.startDate < cDate and p.daysRemaining > 0 :
             onRestriction = True
-    
-    #Check if user is currently on probation
-    onProbation = False  
-    for p in lProbation :
-        if p.startDate < cDate and p.startDate + timedelta(days=p.daysAwarded) < cDate :
-            onProbation = True
             
     #Check for the current weekend
     cWeekend = None

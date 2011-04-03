@@ -28,7 +28,6 @@ from datetime import timedelta
 @login_required(redirect_field_name='/')
 def enterDiscipline(request):
     #Enter Restriction/Tours
-    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
@@ -81,37 +80,52 @@ def saveDiscipline(request):
     honor = request.POST['honor']
     dateOffense = request.POST['dateOffense']
     startDate = request.POST['startDate']
-    daysAwarded = request.POST['daysAwarded']
-    toursAwarded = request.POST['toursAwarded']
+    daysAwarded = int(request.POST['daysAwarded'])
+    toursAwarded = int(request.POST['toursAwarded'])
     adminNotes = request.POST['adminNotes']
     
     if toursAwarded < daysAwarded :
-            toursAwarded = daysAwarded
+        toursAwarded = daysAwarded
             
-    lDisc = Discipline.objects.filter(mid = Mid.objects.get(alpha = alpha))
+    lDisc = Restriction.objects.filter(mid = Mid.objects.get(alpha = alpha))
     
+    cDisc = None
     for p in lDisc :
         if p.startDate < date.today() and p.daysRemaining > 0 :
-            startDate = date.today() + timedelta(days = p.daysRemaining)
+            cDisc = p
             
-    lProbation = Probation.objects.filter(mid=cMid).order_by('-startDate')
-      
-    for p in lProbation :
-        if p.startDate < date.today() and p.startDate + timedelta(days=p.daysAwarded) < date.today() :
-            p.delete()
-
-    cDisc = Discipline(mid = Mid.objects.get(alpha = alpha),
-                       conductHonor = honor,
-                       dateOffence = dateOffense,
-                       startDate = startDate,
-                       daysAwarded = daysAwarded,
-                       daysRemaining = daysAwarded,
-                       toursAwarded = toursAwarded,
-                       toursRemaining = toursAwarded,
-                       adminNotes = adminNotes,
-                       checked = date.today(),
-                       )
-    cDisc.save()
+    if cDisc is None :
+        if daysAwarded > 0 :
+            cDisc = Restriction(mid = Mid.objects.get(alpha = alpha),
+                                conductHonor = honor,
+                                dateOffence = dateOffense,
+                                startDate = startDate,
+                                daysAwarded = daysAwarded,
+                                daysRemaining = daysAwarded,
+                                adminNotes = adminNotes,
+                                checked = date.today()
+                                )
+            cDisc.save()
+            
+        if toursAwarded > 0 :
+            cDisc = Tours(mid = Mid.objects.get(alpha = alpha),
+                          conductHonor = honor,
+                          dateOffence = dateOffense,
+                          startDate = startDate,
+                          toursAwarded = toursAwarded,
+                          toursRemaining = toursAwarded,
+                          adminNotes = adminNotes,
+                          )
+        cDisc.save()
+    
+    else :
+        cDisc.daysRemaining = cDisc.daysRemaining + daysAwarded
+        cDisc.daysAwarded = cDisc.daysAwarded+daysAwarded
+        cDisc.save()
+        cDisc = Tours.objects.get(startDate = cDisc.startDate)
+        cDisc.toursRemaining = cDisc.toursRemaining + toursAwarded
+        cDisc.toursAwarded = cDisc.toursAwarded+toursAwarded
+        cDisc.save()
     
     return HttpResponseRedirect(reverse('discipline:enterDiscipline')) 
 
@@ -211,12 +225,17 @@ def assessDiscipline(request):
     
     cDate = date.today()
     
-    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')
+    lR = Restriction.objects.filter(mid__company = cCompany).filter(daysRemaining__gt= 0).order_by('startDate')
+    lT = Tours.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')
+    
+    lP = Probation.objects.filter(mid__company = cCompany).order_by('startDate')
     
     return render_to_response('discipline/assessDiscipline.html', { 'cCompany' : cCompany, 
-                                                             'lDisc' : lDisc,
-                                                             },
-                                                            context_instance=RequestContext(request))
+                                                                    'lR' : lR,
+                                                                    'lT' : lT,
+                                                                    'lP' : lP,
+                                                                    },
+                                                                    context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
 def updateDiscipline(request):
@@ -243,19 +262,18 @@ def updateDiscipline(request):
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    lDisc = Discipline.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')
-                                      
-    for p in lDisc :
-        if p.daysRemaining > 0 and request.POST[str(p.id)] == "true":
-            p.daysRemaining = p.daysRemaining -1
-        
-        if p.toursRemaining > 0 and request.POST[str(p.id)] == "true":
-            p.toursRemaining = p.toursRemaining -1
-        
-        if p.toursRemaining < p.daysRemaining :
-            p.toursRemaining = p.daysRemaining
-        
-        p.save()
+    lR = Restriction.objects.filter(mid__company = cCompany).filter(daysRemaining__gt= 0).order_by('startDate')
+    lT = Tours.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')                                     
+    
+    for p in lR :
+        if request.POST[p.id+'R'] == "true" :
+            p.daysRemaining = p.daysRemaining - 1
+            p.save()
+    
+    for p in lT :
+        if request.POST[p.id+'T'] == "true" :
+            p.toursRemaining = p.toursRemaining - 1
+            p.save()
     
     return HttpResponseRedirect(reverse('discipline:assessDiscipline')) 
 

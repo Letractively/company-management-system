@@ -9,29 +9,55 @@
     {% csrf_token %}
     <tr><td>Mid: </td>
     <td>Start date: </td>
-    <td>Days Awarded: </td>
-    <td>Days Remaining: </td>
-    <td>Tours Awarded: </td>
-    <td>Tours Remaining: </td>
+    <td>Days/Tours Awarded: </td>
+    <td>Days/Tours Remaining: </td>
     </tr>
-        {% for p in lDisc %}
+        {% for p in lR %}
             <tr>
                 <td>{{ p.mid }}</td>
                 <td>{{ p.startDate }}</td>
                 <td>{{ p.daysAwarded }}</td>
                 <td>{{ p.daysRemaining }}</td>
-                <td>{{ p.toursAwarded }}</td>
-                <td>{{ p.toursRemaining }}</td>
-                <td><select name = "{{ p.id }}">
-                        <option value = "not">Do not account for a day</option>
-                        <option value = "true">Account for a day</option>
+                <td><select name = "{{ p.id }}R">
+                        <option value = "not">Missed musters</option>
+                        <option value = "true">Met all musters</option>
                     </select>
                 </td>
             </tr>
         {% empty %}
-            No Restrictions/Tours to update. 
+            <tr><td>No Restrictions to update. </td></tr>
         {% endfor %}
-    <tr><td colspan = 10><input type="submit" value="Update" /></td></tr>
+
+        {% for p in lT %}
+            <tr>
+                <td>{{ p.mid }}</td>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.toursAwarded }}</td>
+                <td>{{ p.toursRemaining }}</td>
+                <td><select name = "{{ p.id }}T">
+                        <option value = "not">Did not march tours</option>
+                        <option value = "true">Marched tours</option>
+                    </select>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td>No Tours to update. </td></tr>
+        {% endfor %}
+        
+        {% for p in lP %}
+            <tr>
+                <td>{{ p.mid }}</td>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.daysAwarded }}</td>
+                <td>{{ p.description }}</td>
+            </tr>
+        {% empty %}
+            No Probations. 
+        {% endfor %}
+    
+    <tr>
+        <td colspan = 10><input type="submit" value="Update" /></td>
+    </tr>
     </form>
     </table>
 
