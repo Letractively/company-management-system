@@ -61,11 +61,11 @@ class Inspections(models.Model):
     type = models.CharField(max_length=1,choices=TYPE_CHOICES)
     inspector = models.ForeignKey("mid.Mid", related_name='+')
     inspectee = models.ForeignKey("mid.Mid", related_name='+', null = True, blank = True)
-    time = models.TimeField()(null=True,blank=True)
-    scoreEarned = models.IntegerField()(null=True,blank=True)
-    scorePossible = models.IntegerField()(null=True,blank=True)
+    time = models.TimeField()
+    scoreEarned = models.IntegerField(null=True,blank=True)
+    scorePossible = models.IntegerField(null=True,blank=True)
     SAT = models.BooleanField()
-    comment = models.CharField(max_length=100)(null=True,blank=True)
+    comment = models.CharField(max_length=100, null=True,blank=True)
     
 class OtherMaterialDiscrepancies(models.Model):
     zero8 = models.ForeignKey(Zero8)
