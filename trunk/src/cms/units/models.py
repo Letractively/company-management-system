@@ -55,7 +55,7 @@ BILLET_CHOICES = (
 
 class Rank(models.Model):
     rsNumber = models.IntegerField(max_length=2,null=True,blank=True)
-    rank = models.CharField(max_length=20,null=True,blank=True)
+    rank = models.CharField(max_length=20,null=True,blank=True,primary_key=True)
 
     def __unicode__(self):
         return u'%s' % (self.rank)
@@ -67,7 +67,8 @@ class Units(models.Model):
     secondClassCount = models.IntegerField(null=True,blank=True)
     thirdClassCount = models.IntegerField(null=True,blank=True)
     fourthClassCount = models.IntegerField(null=True,blank=True)
-    
+    unique_together = (("battalion", "company"),)
+
     def __unicode__(self):
         return u'%s company, %s Battalion' % (self.company,self.battalion)
     
