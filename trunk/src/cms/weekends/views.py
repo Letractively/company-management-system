@@ -37,10 +37,7 @@ def index(request):
     lWeekends = Weekend.objects.filter(mid=cMid).order_by('-startDate')
     
     #lDiscipline - list of Discipline objects
-    lDiscipline = Discipline.objects.filter(mid=cMid).order_by('-startDate')
-    
-    #lProbation - list of Probation objects
-    lProbation = Probation.objects.filter(mid=cMid).order_by('-startDate')
+    lRestriction = Restriction.objects.filter(mid=cMid).order_by('-startDate')
     
     #Current date 
     cDate = date.today()
@@ -63,7 +60,7 @@ def index(request):
     
     #Check if the user is currently on restriction
     onRestriction = False
-    for p in lDiscipline :
+    for p in lRestriction :
        if p.startDate < cDate and p.daysRemaining > 0 :
             onRestriction = True
             
