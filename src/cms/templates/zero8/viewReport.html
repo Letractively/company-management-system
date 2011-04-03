@@ -520,13 +520,13 @@
 <tr>
     <td></td>
     <td>A.</td>
-    <td colspan = 7>Watch Inspections/Surprise Duty Section Muster: {{ cWatch }}</td>
+    <td colspan = 7>Watch Inspections/Surprise Duty Section Muster: {{ cDutySectionMuster }}</td>
 </tr>
 <tr><td>&nbsp;</td></tr>
 
 <tr><td colspan = 9>
     <table>
-    {% if lCand %}
+    {% if lDutySectionMuster %}
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -534,20 +534,16 @@
             <td>Inspector: </td>
             <td>Pass/Fail: </td>
             <td>Comments: </td>
-            <td>Arrive: </td>
-            <td colspan = 3>Admin Note: </td>
         </tr>
     {% endif %}
-    {% for p in lCand %}
+    {% for p in lDutySectionMuster %}
         <tr>
             <td></td>
             <td></td>
-            <td>{{ p.name }}</td>
-            <td>{{ p.host }}</td>
-            <td>{{ p.host.roomNumber }}</td>
-            <td>{{ p.source }}</td>
-            <td>{{ p.arriveDate }}</td>
-            <td colspan = 3>{{ p.adminNote }}</td>
+            <td>{{ p.inspectee }}</td>
+            <td>{{ p.inspector }}</td>
+            <td>{{ p.SAT }}</td>
+            <td>{{ p.comments }}</td>
         </tr>
     {%empty%}
         <tr>
