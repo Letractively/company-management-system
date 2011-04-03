@@ -1,4 +1,4 @@
-INSERT INTO unit_unitleader(LName,mName,fName,rank_id,officePhone,cellPhone,email,roomNumber_id,unit_id,billet) VALUES
+INSERT INTO unit_unitleader(LName,mName,fName,rank,officePhone,cellPhone,email,roomNumber_id,unit_id,billet) VALUES
 ('Guluzian','','David','CDR','4102937100','1111111111','bat1ofcr@usna.edu','3022','0','BO'),
 ('Healey','P.','Daniel','Lcol','4102937200','','bat2ofcr@usna.edu','5041','0','BO'),
 ('Hoskins','','Keith','CDR','4102937300','','bat3ofcr@usna.edu','7009','0','BO'),
