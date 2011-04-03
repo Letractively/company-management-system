@@ -76,3 +76,17 @@ class Attendance(models.Model):
     tempStatus = models.CharField(max_length=1, choices=ATTEND_STATUS_CHOICES,null=True)
     def __unicode__(self):
         return u'%s %s from: %s at %s' % (self.mid.LName,self.status,self.event.type,self.event.location)
+    
+class Absence(models.Model):
+    zero8 = models.ForeignKey("zero8.Zero8")
+    name = models.ForeignKey(Mid)
+    authorized = models.NullBooleanField()
+    description = models.CharField(max_length=20)
+    adminNote = models.CharField(max_length=90)
+    REASON_CHOICES = (
+                     ('AA','Authorized Absence'),
+                     ('UA','Unauthorized Absence'),
+                     ('WE','Weekend'),
+                     ('MO','Movement Order'),
+                     )
+    reason = models.CharField(max_length=2,choices=REASON_CHOICES) 
