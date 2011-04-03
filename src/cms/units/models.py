@@ -55,7 +55,7 @@ BILLET_CHOICES = (
 
 class Rank(models.Model):
     rsNumber = models.IntegerField(max_length=2,null=True,blank=True)
-    rank = models.CharField(null=True,blank=True)
+    rank = models.CharField(max_length=20,null=True,blank=True)
 
     def __unicode__(self):
         return u'%s' % (self.rank)
