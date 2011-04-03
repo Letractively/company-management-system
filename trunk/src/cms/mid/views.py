@@ -1853,3 +1853,5 @@ def listDetails(request):
     return render_to_response('mid/listDetails.html', {'cMid' : cMid,
                                                        }, 
                                                        context_instance=RequestContext(request))
+    
+    
