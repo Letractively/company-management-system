@@ -4,11 +4,12 @@
 
 <table>
 <tr>
-    <td colspan = 7>FOR OFFICIAL USE ONLY – PRIVACY SENSITIVE</td>
+    <td colspan = 9>FOR OFFICIAL USE ONLY – PRIVACY SENSITIVE</td>
 </tr>
 <tr>
-    <td colspan = 7>Any misuse or unauthorized disclosure can result in both civil and criminal penalties.</td>
+    <td colspan = 9>Any misuse or unauthorized disclosure can result in both civil and criminal penalties.</td>
 </tr>
+<tr><td></td></tr>
 
 <tr>
     <td></td>
@@ -17,55 +18,70 @@
     <td></td>
     <td></td>
     <td></td>
-    <td>{{ cReport.reportDate }}</td>
+    <td colspan = 3>{{ cReport.reportDate }}</td>
 </tr>
+<tr><td></td></tr>
 
 <tr>
-    <td colspan = 7> {{ cCompany }} COMPANY DAILY 0800 REPORT</td>
+    <td colspan = 9> {{ cCompany }} COMPANY DAILY 0800 REPORT</td>
 </tr>
+<tr><td></td></tr>
 
 <tr>
-    <td>FROM:</td><td colspan = 6> {{ cReport.offgoingCDO }}, USN, {{ cCompany }} COMPANY DUTY OFFICER</td>
+    <td>FROM:</td><td colspan = 8> {{ cReport.offgoingCDO }}, USN, {{ cCompany }} COMPANY DUTY OFFICER</td>
 </tr>
 <tr>
-    <td>TO:</td><td colspan = 6>LT Igawa, USN, {{ cCompany }} Company Officer</td>
+    <td>TO:</td><td colspan = 8>LT Igawa, USN, {{ cCompany }} Company Officer</td>
 </tr>
 <tr>
-    <td></td><td colspan = 6>AECS MORRING, USN, {{ cCompany }} Company Senior Enlisted Leader</td>
+    <td></td><td colspan = 8>AECS MORRING, USN, {{ cCompany }} Company Senior Enlisted Leader</td>
 </tr>
 <tr>
-    <td></td><td colspan = 6>MIDN LT Tagan, USN, {{ cCompany }} Company Commander</td>
+    <td></td><td colspan = 8>MIDN LT Tagan, USN, {{ cCompany }} Company Commander</td>
 </tr>
 <tr>
-    <td>SUBJ: </td><td colspan = 6> 25TH COMPANY 0800 REPORT FROM 0800 {{ cReport.reportDate }} to 0800 {{ cDate }}</td>
-</tr
+    <td>SUBJ: </td><td colspan = 8> 25TH COMPANY 0800 REPORT FROM 0800 {{ cReport.reportDate }} to 0800 {{ cDate }}</td>
+</tr>
+<tr><td></td></tr>
 
 <tr>
-    <td>1</td>
-    <td colspan = 6>Oncoming CDO: {{ cReport.oncomingCDO }}</td>
+    <td>1.</td>
+    <td colspan = 9>Oncoming CDO: {{ cReport.oncomingCDO }}</td>
 </tr>
+<tr><td></td></tr>
 
 <tr>
-    <td>2</td>
-    <td colspan = 6>Current Force Protection Condition: {{ cReport.get_forceProtectionCondition_display }}</td>
+    <td>2.</td>
+    <td colspan = 9>Current Force Protection Condition: {{ cReport.get_forceProtectionCondition_display }}</td>
 </tr>
+<tr><td></td></tr>
 
 <tr>
-    <td>3</td>
-    <td colspan = 6>Significant Events: </td>
+    <td>3.</td>
+    <td colspan = 9>Significant Events: </td>
 </tr>
+<tr><td></td></tr>
 
 <tr>
     <td></td>
     <td>A.</td>
-    <td colspan = 3>FAMILY CRISIS/HOSPITALIZATION/DEATH NOTIFICATION/OTHER: </td>
-    <td colspan = 2>{{ cSigEventsA }}</td>
+    <td colspan = 6>FAMILY CRISIS/HOSPITALIZATION/DEATH NOTIFICATION/OTHER: </td>
+    <td colspan = 1>{{ cSigEventsA }}</td>
 </tr>
 
+    {% if cSigEventsA > 0 %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
     {% for p in lSigEventsA %}
     <tr><td></td><td></td>
-        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td>{{ p.description }}</td>
-        <td><a href="#{{p.section}}{{p.id}}">INFO</a></td></tr>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.section}}{{p.id}}">INFO</a>
+        {% endif %}
+        </td></tr>
     {%empty%}
     <tr><td></td><td></td><td>None</td></tr>
     {%endfor%}
@@ -73,14 +89,24 @@
 <tr>
     <td></td>
     <td>B.</td>
-    <td colspan = 3>MAJOR CONDUCT OFFENSES THAT OCCURRED THIS DATE: </td>
-    <td colspan = 2>{{ cSigEventsB }}</td>
+    <td colspan = 6>MAJOR CONDUCT OFFENSES THAT OCCURRED THIS DATE: </td>
+    <td colspan = 1>{{ cSigEventsB }}</td>
 </tr>
+    
+    {% if lSigEventsB %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
     
     {% for p in lSigEventsB %}
     <tr><td></td><td></td>
-        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td>{{ p.description }}</td>
-        <td><a href="#{{p.section}}{{p.id}}">INFO</a></td></tr>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.section}}{{p.id}}">INFO</a>
+        {% endif %}
+        </td></tr>
     {%empty%}
     <tr><td></td><td></td><td>None</td></tr>
     {%endfor%}
@@ -88,17 +114,221 @@
 <tr>
     <td></td>
     <td>C.</td>
-    <td colspan = 3>BANCROFT HALL THEFTS: </td>
-    <td colspan = 2>{{ cSigEventsC }}</td>
+    <td colspan = 6>BANCROFT HALL THEFTS: </td>
+    <td colspan = 1>{{ cSigEventsC }}</td>
 </tr>
+    
+    {% if lSigEventsC %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
     
     {% for p in lSigEventsC %}
     <tr><td></td><td></td>
-        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td>{{ p.description }}</td>
-        <td><a href="#{{p.section}}{{p.id}}">INFO</a></td></tr>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.section}}{{p.id}}">INFO</a>
+        {% endif %}
+        </td></tr>
     {%empty%}
     <tr><td></td><td></td><td>None</td></tr>
     {%endfor%}
+
+<tr>
+    <td>4.</td>
+    <td colspan = 6>Accountability at TAPS: </td>
+</tr>
+<tr><td></td></tr>
+
+<tr>
+    <td></td>
+    <td>A.</td>
+    <td colspan = 7>TAPS Report: </td>
+</tr>
+    <table>
+    <tr><td colspan = 9>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Rank:</td>
+            <td>Present:</td>
+            <td>AA:</td>
+            <td>WKND:</td>
+            <td>MO:</td>
+            <td>UA:</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 1/C:</td>
+            <td>{{ cTAPS1P }}</td>
+            <td>{{ cTAPS1A }}</td>
+            <td>{{ cTAPS1W }}</td>
+            <td>{{ cTAPS1M }}</td>
+            <td>{{ cTAPS1U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 2/C:</td>
+            <td>{{ cTAPS2P }}</td>
+            <td>{{ cTAPS2A }}</td>
+            <td>{{ cTAPS2W }}</td>
+            <td>{{ cTAPS2M }}</td>
+            <td>{{ cTAPS2U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 3/C:</td>
+            <td>{{ cTAPS3P }}</td>
+            <td>{{ cTAPS3A }}</td>
+            <td>{{ cTAPS3W }}</td>
+            <td>{{ cTAPS3M }}</td>
+            <td>{{ cTAPS3U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 4/C:</td>
+            <td>{{ cTAPS4P }}</td>
+            <td>{{ cTAPS4A }}</td>
+            <td>{{ cTAPS4W }}</td>
+            <td>{{ cTAPS4M }}</td>
+            <td>{{ cTAPS4U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total: </td>
+            <td>{{ cTotalP }}</td>
+            <td>{{ cTotalA }}</td>
+            <td>{{ cTotalW }}</td>
+            <td>{{ cTotalM }}</td>
+            <td>{{ cTotalU }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        <tr><td></td></tr>
+    </td></tr>
+    </table>
+
+<table>
+<tr>
+    <td></td>
+    <td>B.</td>
+    <td colspan = 7>Unauthorised Absences: </td>
+</tr>
+
+    {% if lU %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
+    {% for p in lU %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.id}}ATT">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr>
+    <td></td>
+    <td>C.</td>
+    <td colspan = 7>Authorised Absences - Special Liberty/Leave: </td>
+</tr>
+    
+    {% if lA %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
+    {% for p in lA %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.id}}ATT">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+    
+<tr>
+    <td></td>
+    <td>D.</td>
+    <td colspan = 7>Weekend List: </td>
+</tr>
+    
+    {% if lW %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 5>Destination (Phone)</td>
+        </tr>
+    {% endif %}
+    {% for p in lW %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 5>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+    
+<tr>
+    <td></td>
+    <td>E.</td>
+    <td colspan = 7>Movement Orders: </td>
+</tr>
+<tr><td colspan = 9>    
+    <table>
+    
+        {% if lM %}
+        <tr><td></td><td></td>
+            <td>Organization:</td><td>MO Code:</td><td colspan = 2>Assigned:</td><td>Depart:</td><td>Return:</td>
+            </tr>
+        {% endif %}
+        {% for p in lM %}
+        <tr><td></td><td></td>
+            <td>{{ p.organization }}</td><td>{{ p.movementOrderCode }}</td>
+            <td colspan = 2>
+                {% for x in p.moparticipant_set.all %}
+                {% if x.participant.company == cCompany %}
+                    {{ x.participant }} <br />
+                {% endif %}
+                {%endfor%}
+            </td><td>{{ p.departDate }}</td><td>{{ p.returnDateProjected }}</td>
+            </tr>
+        {%empty%}
+        <tr><td></td><td></td><td>None</td></tr>
+        {%endfor%}
+    </table>
+</td></tr>
+
+
+<table>
+
+
+
+<tr>
+    <td>10.</td>
+    <td colspan = 6>Administrative Notes: </td>
+</tr>
+<tr><td></td></tr>
 
 </table>
 
@@ -111,6 +341,12 @@
     {%endfor%}
     {% for p in lSigEventsC %}
     <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+    {% for p in lUA %}
+    <li><a name="{{p.id}}ATT">{{ p.comment }}</a></li>
+    {%endfor%}
+    {% for p in lA %}
+    <li><a name="{{p.id}}ATT">{{ p.comment }}</a></li>
     {%endfor%}
 
 </ol>

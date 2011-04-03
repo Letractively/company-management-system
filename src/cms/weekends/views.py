@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import date
 from datetime import timedelta
+from django.db.models import Q
 
 import re
 
@@ -51,8 +52,15 @@ def index(request):
         late = False
     
     #Assign next weekend's beginning and end
-    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBeg = None
+    cNextWeekendEnd = None
+    
+    if cMid.rank == "3" or cMid.rank == "4" :
+        cNextWeekendBeg = date.today() + timedelta(days=(6 - cDate.isoweekday()));
+        cNextWeekendEnd = cNextWeekendBeg + timedelta(days=1);
+    else :
+        cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+        cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
     #Check if the user is currently on restriction
     onRestriction = False
@@ -111,8 +119,15 @@ def reqWeekend(request):
     cMid = Mid.objects.get(alpha=alpha)
     
     cDate = date.today()
-    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBeg = None
+    cNextWeekendEnd = None
+    
+    if cMid.rank == "3" or cMid.rank == "4" :
+        cNextWeekendBeg = date.today() + timedelta(days=(6 - cDate.isoweekday()));
+        cNextWeekendEnd = cNextWeekendBeg + timedelta(days=1);
+    else :
+        cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+        cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
         
     cWeekend = Weekend(mid=cMid, 
                        startDate=cNextWeekendBeg, 
@@ -139,7 +154,13 @@ def cancelReqWeekend(request):
     cMid = Mid.objects.get(alpha=alpha)
     
     cDate = date.today()
-    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendBeg = None
+    cNextWeekendEnd = None
+    
+    if cMid.rank == "3" or cMid.rank == "4" :
+        cNextWeekendBeg = date.today() + timedelta(days=(6 - cDate.isoweekday()));
+    else :
+        cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
     
     #Find and kill specified weekend    
     cWeekend = Weekend.objects.filter(mid = cMid).filter(startDate = cNextWeekendBeg)
@@ -164,20 +185,24 @@ def viewList(request):
     else :
         alpha = username.split('m')
         alpha = alpha[1]
-        cCompany = Mid.objects.get(alpha=alpha)
-        cCompany = cCompany.company
+        cMid = Mid.objects.get(alpha=alpha)
+        cCompany = cMid.company
     
     #date assignment block
     cDate = date.today()
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBegAlt = date.today() + timedelta(days=(6 - cDate.isoweekday()));
     
+    lWeekends1 = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='A').order_by('-mid')
+    lWeekends2 = Weekend.objects.filter(startDate = cNextWeekendBegAlt).filter(mid__company = cCompany).filter(status='A').order_by('-mid')
+    lWeekends = lWeekends1 | lWeekends2
+
     #list of current approved weekends
-    lWeekends = Weekend.objects.filter(mid__company=cCompany).filter(startDate = cNextWeekendBeg).filter(status = 'A').order_by('-mid')
+    lWeekends = Weekend.objects.filter(mid__company=cCompany).filter( Q(startDate = cNextWeekendBeg) | Q(startDate = cNextWeekendBegAlt)).filter(status = 'A').order_by('-mid')
       
     return render_to_response('weekends/list.html', { 'cCompany' : cCompany,
                                                       'lWeekends' : lWeekends }, 
-                              context_instance=RequestContext(request))
+                                                      context_instance=RequestContext(request))
 
 #Following functions deal with the Admin Officer functionality
 @login_required(redirect_field_name='/')
@@ -260,12 +285,16 @@ def coApproval(request):
     #date assignment block
     cDate = date.today()
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBegAlt = date.today() + timedelta(days=(6 - cDate.isoweekday()));
     
     #list of current non-approved weekends
-    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
-                                                                                                        
-    return render_to_response('weekends/co.html', { 'lWeekends' : lWeekends }, 
+    lWeekends1 = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
+    lWeekends2 = Weekend.objects.filter(startDate = cNextWeekendBegAlt).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
+    lWeekends = lWeekends1 | lWeekends2
+    
+    
+    return render_to_response('weekends/co.html', { 'lWeekends' : lWeekends,
+                                                   }, 
                               context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')    
@@ -285,12 +314,17 @@ def approveWeekend(request):
         return HttpResponseRedirect("/")
     
     alpha = request.POST['mid'] 
-    cMid = Mid.objects.filter(alpha=alpha)
+    cMid = Mid.objects.get(alpha=alpha)
     
     #date assignment block
     cDate = date.today()
-    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBeg = None
+    cNextWeekendEnd = None
+    
+    if cMid.rank == "3" or cMid.rank == "4" :
+        cNextWeekendBeg = date.today() + timedelta(days=(6 - cDate.isoweekday()));
+    else :
+        cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
     
     cWeekend = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid=cMid)
     for p in cWeekend :
@@ -316,12 +350,17 @@ def denyWeekend(request):
         return HttpResponseRedirect("/")
     
     alpha = request.POST['mid'] 
-    cMid = Mid.objects.filter(alpha=alpha)
+    cMid = Mid.objects.get(alpha=alpha)
     
     #date assignment block
     cDate = date.today()
-    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBeg = None
+    cNextWeekendEnd = None
+    
+    if cMid.rank == "3" or cMid.rank == "4" :
+        cNextWeekendBeg = date.today() + timedelta(days=(6 - cDate.isoweekday()));
+    else :
+        cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
     
     cWeekend = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid=cMid)
     for p in cWeekend :
@@ -345,10 +384,13 @@ def approveAllWeekends(request):
     #date assignment block
     cDate = date.today()
     cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendBegAlt = date.today() + timedelta(days=(6 - cDate.isoweekday()));
     cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
     #list of current non-approved weekends
-    lWeekends = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
+    lWeekends1 = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
+    lWeekends2 = Weekend.objects.filter(startDate = cNextWeekendBegAlt).filter(mid__company = cCompany).filter(status='P').order_by('-mid')
+    lWeekends = lWeekends1 | lWeekends2
     
     for p in lWeekends :
         p.status = "A"
@@ -394,8 +436,8 @@ def commitWeekendGrant(request):
     
     #date assignment block
     cDate = date.today()
-    cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
-    cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
+    cNextWeekendBeg = None
+    cNextWeekendEnd = None
     
     if request.method != "POST" :
         return HttpResponseRedirect('/')
@@ -405,6 +447,13 @@ def commitWeekendGrant(request):
     
     if alpha != "null" :
         cMid = Mid.objects.get(alpha=alpha)
+    
+        if cMid.rank == "3" or cMid.rank == "4" :
+            cNextWeekendBeg = date.today() + timedelta(days=(6 - cDate.isoweekday()));
+            cNextWeekendEnd = cNextWeekendBeg + timedelta(days=1);
+        else :
+            cNextWeekendBeg = date.today() + timedelta(days=(5 - cDate.isoweekday()));
+            cNextWeekendEnd = cNextWeekendBeg + timedelta(days=2);
     
         cWeekend = Weekend(mid=cMid, 
                            startDate=cNextWeekendBeg, 
