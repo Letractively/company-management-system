@@ -4,6 +4,8 @@
 
 from mid.models import Mid
 from mid.models import Billet
+from units.models import Units
+from units.models import UnitLeaders
 from zero8.models import Zero8
 from zero8.models import SignificantEvents
 from accountability.models import Event
@@ -11,6 +13,7 @@ from accountability.models import Attendance
 from weekends.models import Weekend
 from movementorder.models import MovementOrder
 from movementorder.models import MOParticipant
+from discipline.models import Separation
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -38,8 +41,13 @@ def viewReport(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
-    cReport = Zero8.objects.get(reportDate = date.today())
-    cDate = cReport.reportDate + timedelta(days = 1)
+    if request.method != "POST" :
+        return HttpResponseRedirect("/")
+    
+    #Get date for the 0800 review
+    #reportDate = request.POST['date']
+    reportDate = date.today()
+    cReport = Zero8.objects.get(reportDate = reportDate)
     
     lSigEventsA = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "A")
     cSigEventsA = lSigEventsA.count()
@@ -96,13 +104,17 @@ def viewReport(request):
     cTotalW = cTAPS1W + cTAPS2W + cTAPS3W + cTAPS4W
     cTotalM = cTAPS1M + cTAPS2M + cTAPS3M + cTAPS4M
     
-    
     lA = Attendance.objects.filter(event = cEvent).filter(status = "A").order_by('mid')
     lU = Attendance.objects.filter(event = cEvent).filter(status = "U").order_by('mid')
     lW = Attendance.objects.filter(event = cEvent).filter(status = "W").order_by('mid')
-    lM = MovementOrder.objects.filter(moparticipant__participant__company = cCompany).filter(returnDate = "3000-01-01").order_by('-departDate').distinct() 
+    lM = MovementOrder.objects.filter(moparticipant__participant__company = cCompany).filter(returnDate = "3000-01-01").order_by('-departDate').distinct()
+    lPS = Separation.objects.filter(zero8 = cReport).filter(pending = True)
+    lFS = Separation.objects.filter(zero8 = cReport).filter(pending = False)
     
-    return render_to_response('zero8/viewReport.html', {'cMid':cMid,
+    lR = 
+    lT = 
+    
+    return render_to_response('zero8/viewReport.html', {#'cMid':cMid,
                                                         'cReport' : cReport,
                                                         'cDate' : cDate,
                                                         'cCompany' : cCompany, 
@@ -141,6 +153,9 @@ def viewReport(request):
                                                         'lA' : lA,
                                                         'lW' : lW,
                                                         'lM' : lM,
+                                                        'lPS' : lPS,
+                                                        'lFS' : lFS,
+                                                        
                                                        }, 
                                                        context_instance=RequestContext(request))
 

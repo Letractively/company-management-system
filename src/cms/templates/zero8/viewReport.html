@@ -319,8 +319,43 @@
     </table>
 </td></tr>
 
-
 <table>
+<tr>
+    <td></td>
+    <td>F.</td>
+    <td colspan = 7>Pending Separation: </td>
+</tr>
+    
+    {% if lPS %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 5>Note</td></tr>
+    {% endif %}
+    {% for p in lPS %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 5>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+    
+<tr>
+    <td></td>
+    <td>G.</td>
+    <td colspan = 7>Separated: </td>
+</tr>
+    
+    {% if FS %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 5>Note</td></tr>
+    {% endif %}
+    {% for p in lFS %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 5>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
 
 
 
