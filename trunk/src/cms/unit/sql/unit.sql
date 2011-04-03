@@ -1,5 +1,5 @@
 INSERT INTO unit_unit(battalion,company,firstClassCount,secondClassCount,thirdClassCount,fourthClassCount) VALUES
-('-1','-1','0','0','0','0'),
+('0','-1','0','0','0','0'),
 ('0','0','1890','2109','2092','2187'),
 ('1','0','170','199','208','199'),
 ('1','1','35','39','39','41'),
