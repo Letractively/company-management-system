@@ -7,6 +7,7 @@ from mid.models import Billet
 from accountability.models import Event
 from accountability.models import Attendance
 from zero8.models import Zero8
+from weekends.models import Weekend
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -156,7 +157,7 @@ def makeDay(request):
                     )
     cReport.save()
     
-    lMids = Mid.objects.filter(company = cCompany)
+    lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     
     for p in lMids :
         cAttendance = Attendance(mid = p,
@@ -164,6 +165,27 @@ def makeDay(request):
                                  status = "U"                                
                                  )
         cAttendance.save()
+    
+    cDate = date.today()
+    cNextWeekendBeg = cDate + timedelta(days=(5 - cDate.isoweekday()));
+    cNextWeekendBegAlt = cDate + timedelta(days=(6 - cDate.isoweekday()));
+    
+    lWeekends = []
+    
+    if date.today().isoweekday() == 5 :
+        lWeekends = Weekend.objects.filter(startDate = date.today()).filter(mid__company = cCompany).filter(status='A').order_by('-mid')
+ 
+    if date.today().isoweekday() == 6 :
+        lWeekends1 = Weekend.objects.filter(startDate = cNextWeekendBeg).filter(mid__company = cCompany).filter(status='A').order_by('-mid')
+        lWeekends2 = Weekend.objects.filter(startDate = cNextWeekendBegAlt).filter(mid__company = cCompany).filter(status='A').order_by('-mid')
+        lWeekends = lWeekends1 | lWeekends2
+
+    for p in lWeekends :
+        tMid = p.mid
+        tAttendance = Attendance.objects.get(mid = tMid, event = cEvent)
+        tAttendance.status = "W"
+        tAttendance.comment = p.location + " (" + p.contactNumber + ")"
+        tAttendance.save()
     
     return HttpResponseRedirect(reverse('switchboard'))
 
@@ -272,7 +294,10 @@ def taps(request):
     cEvent = Event.objects.filter(company = cCompany).filter(type = "TAP").filter(dateTime = cDT)
     cEvent = cEvent[0]
     
-    lAttendance = Attendance.objects.filter(event = cEvent).exclude(status = "P")
+    lAttendance = Attendance.objects.filter(event = cEvent
+                                            ).exclude(status = "P"
+                                                      ).exclude(status = "W"
+                                                                ).exclude(status = "M").order_by('mid')
 
     return render_to_response('accountability/taps.html', {'cMid' : cMid, 
                                                            'cEvent' : cEvent,
