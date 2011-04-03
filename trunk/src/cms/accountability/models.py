@@ -79,7 +79,7 @@ class Attendance(models.Model):
     
 class Absence(models.Model):
     zero8 = models.ForeignKey("zero8.Zero8")
-    name = models.ForeignKey(Mid)
+    name = models.ForeignKey('mid.Mid')
     authorized = models.NullBooleanField()
     description = models.CharField(max_length=20)
     adminNote = models.CharField(max_length=90)
