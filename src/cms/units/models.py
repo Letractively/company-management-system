@@ -53,14 +53,14 @@ BILLET_CHOICES = (
                   ('SEL','Company Senior Enlisted'),
                   )
 
-class rank(models.Model):
+class Rank(models.Model):
     rsNumber = models.IntegerField(max_length=2,null=True,blank=True)
     rank = models.CharField(null=True,blank=True)
 
     def __unicode__(self):
         return u'%s' % (self.rank)
 
-class units(models.Model):
+class Units(models.Model):
     battalion = models.CharField(max_length=1,choices=BATTALION_CHOICES)
     company = models.CharField(max_length=2, choices=CO_CHOICES)
     firstClassCount = models.IntegerField(null=True,blank=True)
@@ -71,7 +71,7 @@ class units(models.Model):
     def __unicode__(self):
         return u'%s company, %s Battalion' % (self.company,self.battalion)
     
-class unitLeaders(models.Model):
+class UnitLeaders(models.Model):
     LName = models.CharField(max_length=30,null=True,blank=True)
     mName = models.CharField(max_length=3, null=True, blank=True)
     fName = models.CharField(max_length=30,null=True,blank=True)
