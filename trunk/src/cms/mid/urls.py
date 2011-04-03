@@ -13,6 +13,7 @@ urlpatterns = patterns('mid.views',
     (r'viewDiscipline$', 'viewDiscipline'),
     url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
     (r'passChange$', 'passChange'),
+    (r'viewSubordinates$', 'viewSubordinates'),
 
     #CC Options
     url(r'assignCOC$', 'assignCOC', name = "assignCOC"),

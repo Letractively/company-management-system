@@ -2,14 +2,14 @@
 {% block title %}0800 REPORT{% endblock %}
 {% block content %}
 
-<h3>Record a BAC Check:</h3>
+<h3>Record a BAC Test:</h3>
 
 <table>
-<form action="sBAC" method="post">
+<form action="saveBAC" method="post">
 {% csrf_token %}
 
 <tr>
-    <td>MIDN:</td>
+    <td>Watchstander:</td>
     <td>
         <select name = "alpha">
         {% for p in lMids %}
@@ -45,14 +45,13 @@
         <td>MIDN: </td>
         <td>SAT/UNSAT: </td>
         <td>Inspector: </td>
-        <td>Comments: </td>
+        <td>Comment: </td>
     </tr>
     {% endif %}
 
     {% for p in lMusters %}
         <tr>
-            <td>{{ p.room }}</td>
-            <td>{{ p.scoreEarned }}/{{ p.room.maxOccupants }}</td>
+            <td>{{ p.inspectee }}</td>
             <td>
                 {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
             </td>
@@ -60,7 +59,7 @@
             <td>{{ p.comment }} </td>
         </tr>
     {% empty %}
-        <tr><td colspan = 6>No previously reported BAC checks.</td></tr>
+        <tr><td colspan = 6>No previously reported BAC tests.</td></tr>
    {%endfor%}
 </table>
 

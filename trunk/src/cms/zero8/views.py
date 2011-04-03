@@ -529,7 +529,7 @@ def BAC(request):
                                                  context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
-def sBAC(request):
+def saveBAC(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
@@ -550,7 +550,7 @@ def sBAC(request):
                               inspector = cMid,
                               inspectee = Mid.objects.get(alpha = request.POST['alpha']),
                               time = time(8,0,0),
-                              scoreEarned = 0,
+                              cscoreEarned = 0,
                               scorePossible = 0,
                               SAT = request.POST['SAT'],
                               comment = request.POST['comment']

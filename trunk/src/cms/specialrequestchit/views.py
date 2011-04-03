@@ -79,6 +79,18 @@ def specReqSubmit(request):
                                )
     cChit.save()
     
+    if cMid.squad == "O" or cMid.squad == "S" :
+         cChit.approvalStatus = 2
+         cChit.slApproval = True
+         cChit.slComment = "DEFAULT"
+         cChit.save()
+         
+    if cMid.platoon == "O" or cMid.platoon == "S" :
+         cChit.approvalStatus = 4
+         cChit.pcApproval = True
+         cChit.pcComment = "DEFAULT"
+         cChit.save()
+    
     for p in lBillets :
         if p.billet == "CC" and p.current :
             cChit.approvalStatus = 5
