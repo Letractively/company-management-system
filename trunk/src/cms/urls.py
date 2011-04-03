@@ -44,6 +44,7 @@ urlpatterns = patterns('',
     
     (r'^accountability/', include('accountability.urls', namespace = "accountability", app_name = "accountability")),
     (r'^weekends/', include('weekends.urls', namespace="weekends", app_name="weekends")),
+    (r'^discipline/', include('discipline.urls', namespace="discipline", app_name="discipline")),
     (r'^movementOrders/', include('movementorder.urls', namespace="movementorder", app_name="movementorder")),
     (r'^zero8/', include('zero8.urls', namespace = "zero8", app_name = "zero8")),
 

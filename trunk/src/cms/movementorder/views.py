@@ -62,13 +62,16 @@ def checkOutMO(request):
         return HttpResponseRedirect('/')
     
     code = request.POST['code']
+    cDate = date(request.POST['returnDateProjected'])
+    cTime = time(request.POST['returnTimeProjected'])
+    returnDateProjected = datetime(date, cTime.hour(), cTime.minute(), cTime.second())
     
     #New MO
     if code == "0000000" :
         cMO = MovementOrder(organization = request.POST['organization'],
                             movementOrderCode = request.POST['movementOrderCode'],
-                            departDate = date.today(),
-                            returnDateProjected = request.POST['returnDateProjected'],
+                            departDate = datetime.now(),
+                            returnDateProjected = returnDateProjected,
                             returnDate = "3000-01-01",
                             adminNote = request.POST['adminNotes'],
                             )
@@ -112,6 +115,7 @@ def viewMOListCompany(request):
     lMids = Mid.objects.filter(company = cCompany).filter(moparticipant__MO__returnDate = "3000-01-01").order_by('alpha')
     
     return render_to_response('movementorder/viewMOListCompany.html', {'lMO' : lMO,
+                                                                       'cCompany' : cCompany,
                                                                        'lPart' : lMids
                                                                        }, 
                                                                        context_instance=RequestContext(request))

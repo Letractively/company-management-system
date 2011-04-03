@@ -45,14 +45,6 @@ urlpatterns = patterns('mid.views',
     url(r'changeCompanyRoom$', 'changeCompanyRoom', name = "changeCompanyRoom"),
     (r'saveChangeCompanyRoom$', 'saveChangeCompanyRoom'),
     
-    #A/C Options
-    url(r'enterDiscipline$', 'enterDiscipline', name = "enterDiscipline"),
-    (r'saveDiscipline$', 'saveDiscipline'),
-    url(r'enterProbation$', 'enterProbation', name = "enterProbation"),
-    (r'saveProbation$', 'saveProbation'),
-    url(r'assessDiscipline$', 'assessDiscipline', name = "assessDiscipline"),
-    (r'updateDiscipline$', 'updateDiscipline'),
-    
     #CO options
     url(r'appointCC$', 'appointCC', name = "appointCC"),
     (r'saveAppointCC$', 'saveAppointCC'),
