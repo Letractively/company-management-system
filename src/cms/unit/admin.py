@@ -1,7 +1,7 @@
 from django.contrib import admin
-from units.models import Rank
-from units.models import Unit
-from units.models import UnitLeader
+from unit.models import Rank
+from unit.models import Unit
+from unit.models import UnitLeader
 
 admin.site.register(Rank)
 admin.site.register(Unit)
