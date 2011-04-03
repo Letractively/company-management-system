@@ -236,8 +236,7 @@ def assessDiscipline(request):
     cDate = date.today()
     
     lR = Restriction.objects.filter(mid__company = cCompany).filter(daysRemaining__gt= 0).order_by('startDate')
-    lT = Tours.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate')
-    
+    lT = Tours.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('startDate') 
     lP = Probation.objects.filter(mid__company = cCompany).order_by('startDate')
     
     return render_to_response('discipline/assessDiscipline.html', { 'cCompany' : cCompany, 

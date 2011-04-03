@@ -14,6 +14,12 @@ from weekends.models import Weekend
 from movementorder.models import MovementOrder
 from movementorder.models import MOParticipant
 from discipline.models import Separation
+from discipline.models import Restriction
+from discipline.models import Tours
+from discipline.models import Probation
+from medchits.models import Chit
+from zero8.models import Candidates
+from zero8.models import Inspections
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -42,24 +48,22 @@ def viewReport(request):
     cCompany = cMid.company
     
     if request.method != "POST" :
-        return HttpResponseRedirect("/")
+        if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+            reportDate = date.today() - timedelta(days = 1)
+        else :
+            reportDate = date.today()
+    else :
+        reportDate = request.POST['date']
     
-    #Get date for the 0800 review
-    #reportDate = request.POST['date']
-    reportDate = date.today()
     cReport = Zero8.objects.get(reportDate = reportDate)
     
+    #Sig events
     lSigEventsA = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "A")
     cSigEventsA = lSigEventsA.count()
     lSigEventsB = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "B")
     cSigEventsB = lSigEventsB.count()
     lSigEventsC = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "C")
     cSigEventsC = lSigEventsC.count()
-    
-    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
-        cDate = date.today() - timedelta(days = 1)
-    else :
-        cDate = date.today()
     
     cDT = datetime.combine(cReport.reportDate, time(23, 55, 00))
     
@@ -73,6 +77,7 @@ def viewReport(request):
         tAttendance.status = "M"
         tAttendance.save()
     
+    #TAPS
     cTAPS1P = Attendance.objects.filter(event = cEvent).filter(status = "P").filter(mid__rank = 1).count()
     cTAPS2P = Attendance.objects.filter(event = cEvent).filter(status = "P").filter(mid__rank = 2).count()
     cTAPS3P = Attendance.objects.filter(event = cEvent).filter(status = "P").filter(mid__rank = 3).count()
@@ -104,19 +109,48 @@ def viewReport(request):
     cTotalW = cTAPS1W + cTAPS2W + cTAPS3W + cTAPS4W
     cTotalM = cTAPS1M + cTAPS2M + cTAPS3M + cTAPS4M
     
+    #TAPS in detail
     lA = Attendance.objects.filter(event = cEvent).filter(status = "A").order_by('mid')
     lU = Attendance.objects.filter(event = cEvent).filter(status = "U").order_by('mid')
     lW = Attendance.objects.filter(event = cEvent).filter(status = "W").order_by('mid')
     lM = MovementOrder.objects.filter(moparticipant__participant__company = cCompany).filter(returnDate = "3000-01-01").order_by('-departDate').distinct()
+    
+    cA = lA.count()
+    cU = lU.count()
+    cW = lW.count()
+    cM = lM.count()
+    
+    #Discipline
     lPS = Separation.objects.filter(zero8 = cReport).filter(pending = True)
     lFS = Separation.objects.filter(zero8 = cReport).filter(pending = False)
+    lR = Restriction.objects.filter(mid__company = cCompany).filter(daysRemaining__gt= 0).order_by('mid')
+    lT = Tours.objects.filter(mid__company = cCompany).filter(toursRemaining__gt= 0).order_by('mid') 
+    lP = Probation.objects.filter(mid__company = cCompany).order_by('mid')
     
-    lR = 
-    lT = 
+    cPS = lPS.count()
+    cFS = lFS.count()
+    cR = lR.count()
+    cT = lT.count()
+    cP = lP.count()
+    
+    #Chits
+    lMChit = Chit.objects.filter(mid__company = cCompany).filter(endDate__gt = cReport.reportDate).filter(disposition = "LLD").order_by('mid')
+    lSChit = Chit.objects.filter(mid__company = cCompany).filter(endDate__gt = cReport.reportDate).exclude(disposition = "LLD").order_by('mid')
+    
+    cMChit = lMChit.count()
+    cSChit = lSChit.count()
+    
+    #MIDN 6/C =)
+    lCand = Candidates.objects.filter(host__company = cCompany).filter(departDate = "3000-01-01")
+    cCand = lCand.count()
+    
+    #Inspections of all kinds
+    lDutySectionMuster = Inspections.objects.filter(zero8 = cReport)
+    cDutySectionMuster = lDutySectionMuster.count()
     
     return render_to_response('zero8/viewReport.html', {#'cMid':cMid,
                                                         'cReport' : cReport,
-                                                        'cDate' : cDate,
+                                                        'cDate' : cReport.reportDate,
                                                         'cCompany' : cCompany, 
                                                         'lSigEventsA' : lSigEventsA,
                                                         'cSigEventsA' : cSigEventsA,
@@ -153,8 +187,28 @@ def viewReport(request):
                                                         'lA' : lA,
                                                         'lW' : lW,
                                                         'lM' : lM,
+                                                        'cU' : cU,
+                                                        'cA' : cA,
+                                                        'cW' : cW,
+                                                        'cM' : cM,
                                                         'lPS' : lPS,
                                                         'lFS' : lFS,
+                                                        'lR' : lR,
+                                                        'lT' : lT,
+                                                        'lP' : lP,
+                                                        'cPS' : cPS,
+                                                        'cFS' : cFS,
+                                                        'cR' : cR,
+                                                        'cT' : cT,
+                                                        'cP' : cP,
+                                                        'lMChit' : lMChit,
+                                                        'lSChit' : lSChit,
+                                                        'cMChit' : cMChit,
+                                                        'cSChit' : cSChit,
+                                                        'lCand' : lCand,
+                                                        'cCand' : cCand,
+                                                        'lDutySectionMuster' : lDutySectionMuster,
+                                                        'cDutySectionMuster' : cDutySectionMuster,
                                                         
                                                        }, 
                                                        context_instance=RequestContext(request))
@@ -185,7 +239,7 @@ def saveSignificantEvent(request):
         return HttpResponseRedirect('/')
     
     if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
-                cDate = date.today() - timedelta(days = 1)
+        cDate = date.today() - timedelta(days = 1)
     else :
         cDate = date.today()
         
@@ -201,3 +255,65 @@ def saveSignificantEvent(request):
     cEvent.save()
     
     return HttpResponseRedirect(reverse('zero8:createSignificantEvent'))
+
+@login_required(redirect_field_name='/')
+def candidates(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    lMids = Mid.objects.filter(company = cCompany)
+    lCand = Candidates.objects.filter(host__company = cCompany).filter(departDate = "3000-01-01")
+    
+    return render_to_response('zero8/candidates.html', {'cMid':cMid,
+                                                        'lMids' : lMids,
+                                                        'lCand' : lCand
+                                                        }, 
+                                                        context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def saveCandidate(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+    
+    cCandidate = Candidates(host = Mid.objects.get(alpha = request.POST['alpha']),
+                           name = request.POST['name'],
+                           source = request.POST['source'],
+                           adminNote = request.POST['adminNote'],
+                           arriveDate = cDate,
+                           departDate = date(3000, 1, 1)
+                           )
+    cCandidate.save()
+    
+    return HttpResponseRedirect(reverse('zero8:candidates'))
+    
+@login_required(redirect_field_name='/')
+def removeCandidate(request):    
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    cCandidate = Candidates.objects.get(id = request.POST['id'])
+    cCandidate.departDate = date.today()
+    cCandidate.save()
+    
+    return HttpResponseRedirect(reverse('zero8:candidates'))
+    
+    

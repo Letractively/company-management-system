@@ -10,6 +10,9 @@ urlpatterns = patterns('zero8.views',
 
     url(r'createSignificantEvent', 'createSignificantEvent', name = "createSignificantEvent"),
     (r'saveSignificantEvent$', 'saveSignificantEvent'),
+    url(r'candidates', 'candidates', name = "candidates"),
+    (r'saveCandidate$', 'saveCandidate'),
+    (r'removeCandidate$', 'removeCandidate'),
     url(r'viewReport$', 'viewReport', name = "viewReport"),
 
 
