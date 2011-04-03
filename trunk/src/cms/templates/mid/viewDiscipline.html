@@ -4,44 +4,79 @@
 
 <h1>View Punishments: </h1>
 
-{% if cDisc %}
-    You currently have {{ cDisc.daysRemaining }} days of restriction and  
-    {{ cChit.toursRemaining }} tours remaining.<br />
-    
-    Your chit will expire on {{ cChit.endDate }}. 
+{% if cR %}
+    You currently have {{ cR.daysRemaining }} days of restriction. <br />
 {% endif %}
 
-{% if cProb %}
-    You currently have {{ cProb.daysRemaining }} days of probation remaining. 
+{% if cT %}
+    You currently have {{ cT.toursRemaining }} tours. <br />
 {% endif %}
 
-<h3>Past Punishments: </h3>
+{% if cP %}
+    You currently have {{ pDaysLeft }} days of probation remaining. <br />
+{% endif %}
+
+<h3>History of Punishments: </h3>
 <table>
+    {%if lR%}
+    <h4>Restrictions:</h4>
     <tr>
-        <td>Start Date </td>
-        <td>Days Awarded </td>
-        <td>Tours Awarded </td>
+        <td>Start Date: </td>
+        <td>Days Awarded: </td>
+        <td>Days Remaining: </td>
         <td>Admin Notes </td>
     </tr>
-{% for p in lDisc %}
+    {%endif%}   
+    {% for p in lR %}
+            <tr>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.daysAwarded }} days</td>
+                <td>{{ p.daysRemaining }} days</td>
+                <td>{{ p.adminNotes }}</td>
+            </tr>
+    {% empty %}
+            <tr><td><h4>No past restrictions.</h4></td></tr>
+    {% endfor %}
+</table>
+<table> 
+    <h4>Tours:</h4>
+    {%if lT%}
     <tr>
-        <td>{{ p.startDate }}</td>
-        <td>{{ p.daysAwarded }}</td>
-        <td>{{ p.toursAwarded }}</td>
-        <td>{{ p.adminNotes }}</td>
+        <td>Start Date: </td>
+        <td>Tours Awarded: </td>
+        <td>Tours Remaining: </td>
+        <td>Admin Notes </td>
     </tr>
-{% empty %}
-    <tr><td colspan = 4>You have not been given any Restrictions/Torus.</td></tr>
-{% endfor %}
-
-{% for p in lProb %}
+    {%endif%}   
+    {% for p in lT %}
+            <tr>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.toursAwarded }} days</td>
+                <td>{{ p.toursRemaining }} days</td>
+                <td>{{ p.adminNotes }}</td>
+            </tr>
+    {% empty %}
+            <tr><td><h4>No past tours.</h4> </td></tr>
+    {% endfor %}
+</table>
+<table> 
+    {%if lP%}
+    <h4>Probations:</h4>
+    <tr>
+        <td>Start Date: </td>
+        <td>Days Awarded: </td>
+        <td>Admin Notes </td>
+    </tr>
+    {%endif%}   
+    {% for p in lP %}
     <tr>
         <td>{{ p.startDate }}</td>
         <td>{{ p.daysAwarded }}</td>
-        <td> 0 </td>
         <td>{{ p.description }}</td>
     </tr>
-{% endfor %}
+    {% empty %}
+        <tr><td><h4>No past probations. </h4></td></tr>
+    {% endfor %}
 </table>
 
 {% endblock %}
