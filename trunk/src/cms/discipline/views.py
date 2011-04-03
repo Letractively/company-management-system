@@ -104,7 +104,7 @@ def saveDiscipline(request):
                                 daysAwarded = daysAwarded,
                                 daysRemaining = daysAwarded,
                                 adminNotes = adminNotes,
-                                checked = date(3000, 1, 1)
+                                checked = date(1000, 1, 1)
                                 )
             cDisc.save()
     else :
@@ -162,9 +162,10 @@ def enterProbation(request):
     
     lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
-    return render_to_response('discipline/enterProbation.html', { 'cCompany' : cCompany, 
-                                                            'lMids' : lMids },
-                                                            context_instance=RequestContext(request))
+    return render_to_response('discipline/enterProbation.html', {'cCompany' : cCompany, 
+                                                                 'lMids' : lMids 
+                                                                 },
+                                                                 context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def saveProbation(request):

@@ -19,7 +19,9 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
 from datetime import date
+from datetime import time
 from datetime import timedelta
+from datetime import datetime
 
 @login_required(redirect_field_name='/')
 def MO(request):
@@ -62,9 +64,9 @@ def checkOutMO(request):
         return HttpResponseRedirect('/')
     
     code = request.POST['code']
-    cDate = date(request.POST['returnDateProjected'])
-    cTime = time(request.POST['returnTimeProjected'])
-    returnDateProjected = datetime(date, cTime.hour(), cTime.minute(), cTime.second())
+    cDate = request.POST['returnDateProjected']
+    cTime = request.POST['returnTimeProjected']
+    returnDateProjected = cDate + " " + cTime
     
     #New MO
     if code == "0000000" :

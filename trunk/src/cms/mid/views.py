@@ -16,8 +16,8 @@ from uniforminspection.models import UniformInspection
 from bravoinspection.models import BravoInspection
 from form1.models import Form1
 from medchits.models import Chit
-from movementorder import MOParticipant
-from movementorder import MovementOrder
+from movementorder.models import MOParticipant
+from movementorder.models import MovementOrder
 
 from specialrequestchit.models import SpecialRequestChit
 from orm.models import OrmChit
