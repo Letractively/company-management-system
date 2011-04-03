@@ -167,6 +167,3 @@ class PRT(models.Model):
     sitUps = models.IntegerField(null=True,blank=True)
     runTime = models.TimeField(null=True,blank=True)
     score = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
-    
-
-   
