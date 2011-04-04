@@ -12,7 +12,7 @@ class ChoiceInline(admin.StackedInline):
 
 class MidAdmin(admin.ModelAdmin):
     search_fields = ['fName','LName','alpha']
-    list_filter = ['company']
+    list_filter = ['company','rank']
 
 admin.site.register(Mid, MidAdmin)
 admin.site.register(Room)
