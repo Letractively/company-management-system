@@ -14,7 +14,7 @@ class MidAdmin(admin.ModelAdmin):
     search_fields = ['fName','LName','alpha']
     list_filter = ['company']
 
-admin.site.register(Mid)
+admin.site.register(Mid, MidAdmin)
 admin.site.register(Room)
 admin.site.register(Billet)
 admin.site.register(Grade)
