@@ -131,7 +131,7 @@ class Mid(models.Model):
     conductGrade = models.CharField(max_length=1,null=True,blank=True)
     PRT = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
     def __unicode__(self):
-        return u'%s, %s, %s %s' % (self.alpha,self.LName,self.fName,self.mName)
+        return u'%s - %s, %s %s' % (self.alpha,self.LName,self.fName,self.mName)
         
 class Grade(models.Model):
     mid = models.ForeignKey(Mid)
