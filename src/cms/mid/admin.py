@@ -11,11 +11,8 @@ class ChoiceInline(admin.StackedInline):
     extra = 0
 
 class MidAdmin(admin.ModelAdmin):
-    fieldsets = [
-                 ('alpha:', {'fields':['alpha']}),
-                 ('Name:', {'fields': ['LName']}),
-                 ]
-    inlines = [ChoiceInline]
+    search_fields = ['fName','LName','alpha']
+    list_filter = ['company']
 
 admin.site.register(Mid)
 admin.site.register(Room)
