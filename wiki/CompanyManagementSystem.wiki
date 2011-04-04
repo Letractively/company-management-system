@@ -9,9 +9,9 @@ Company Management System (CMS) is a web-based application developed for the U.S
 
 Currently the CMS employs the following modules: 
 
- - Company/Battalion/Brigade 0800 report
+ - Company 0800 report
 
- - Attendance record
+ - Attendance record (formations, TAPS, etc)
 
  - Uniform inspections management tool
 
@@ -24,3 +24,11 @@ Currently the CMS employs the following modules:
  - ORM Chit generator
 
  - Special Request Chit generator
+
+ - Conduct Tracking
+
+ - Movement Order (MO) management tool
+
+ - Medical chit tool
+
+ - Form1 tool
