@@ -143,7 +143,7 @@ def initWatchBills(request):
     count = 0
     while (count < numberOfDays.days):
         WatchBill.objects.create(date=acYear.fallStart + timedelta(days=count),type='W')
-        
+        count = count + 1
     #Set the types of watch for all Leave dates
     #for Thanksgiving set type of Watchbill to Leave
     WatchBill.objects.filter(date__range=(acYear.thanksgivingStart,acYear.thanksgivingEnd)).update(type='L')
@@ -155,7 +155,7 @@ def initWatchBills(request):
     WatchBill.objects.filter(date__range=(acYear.springIntersessionalStart,acYear.springIntersessionalEnd)).update(type='L')
     
     #set Holidays as type H
-    holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]e all weekend days to holidays
+    holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]
     bills = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
     for bill in bills:
         if bill.date.weekday() == 5:
@@ -167,6 +167,9 @@ def initWatchBills(request):
                 bill.type = 'H'
                 bill.save()
     yearWatchBill = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
+    acBillTimes = ['0630-0700','0700-0750','0750-0850','0850-0950','0950-1050','1050-1150','1150-1220','1220-1250','1250-1325','1325-1425','1425-1530','1530-1600','1600-1700','1700-1800','1800-1900','1900-2000','2000-2100','2100-2200','2200-2300','2300-0000',]
+
+    
 
 def WatchBill(request):
     
