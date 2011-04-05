@@ -4,6 +4,7 @@ $(document).ready(
 		$(".datepicker").datepicker("option","dateFormat","yy-mm-dd");
 		$(".timepicker").timepicker();
 	}
+	
 );
 
 function isValidDate(dateStr){
