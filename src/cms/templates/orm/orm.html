@@ -14,15 +14,15 @@
 			<tbody>
 				<tr>
 					<td>
-						<strong>Name:</strong></td>
+						<label for="name">Name:</lable></td>
 					<td colspan="2">
-						&nbsp;</td>
+						<input type="text" id="name" value="{{ cMid.fName }} {{ cMid.LName }}" readonly="readonly"/></td>
 					<td colspan="2">
-						<strong>Leave Address:</strong></td>
+						<label>Leave Address:</label></td>
 				</tr>
 				<tr>
 					<td>
-						<strong>Date of Departure:</strong></td>
+						<label for="departDate">Date of Departure:</label></td>
 					<td>
 						<input type = "text" class="datepicker" 
 						id="departDate" readonly="readonly" name = "dateDepart"/></td>
@@ -35,7 +35,7 @@
 				</tr>
                 <tr>
 					<td>
-						<strong>Date of Return:</strong></td>
+						<label for="returnDate">Date of Return:</label></td>
 					<td>
 						<input type = "text" class="datepicker" 
 						id="returnDate" readonly="readonly" 
@@ -47,21 +47,34 @@
 				</tr>
 				<tr>
 					<td>
-						<strong>Total Days of Leave:</strong></td>
+						<label for="daysLeave">Total Days of Leave:</label></td>
 					<td>
-						<input type="text" readonly="readonly" id="daysLeave" /></td>
+						<input type="text" id="daysLeave" readonly="readonly" /></td>
 					<td style="background-color: rgb(204, 204, 204); ">
 						&nbsp;</td>
 					<td>
 						City</td>
 					<td>
-						<input type = "text" name = "city" /></td>
+						<input type="text" name="city" /></td>
 				</tr>
 				<tr>
 					<td>
-						<strong>Total Days of Travel:</strong></td>
+						<label for="daysTravel">Total Days of Travel:</label></td>
 					<td>
-						<input type = "text" name = "daysTravel"/></td>
+						<select id="daysTravel" name="daysTravel" onchange="travelRatio();"/>
+							<option value="0">0<option>
+							<option value="1">1<option>
+							<option value="2">2<option>
+							<option value="3">3<option>
+							<option value="4">4<option>
+							<option value="5">5<option>
+							<option value="6">6<option>
+							<option value="7">7<option>
+							<option value="8">8<option>
+							<option value="9">9<option>
+							<option value="10">10<option>
+						</select>
+					</td>
 					<td style="background-color: rgb(204, 204, 204); ">
 						&nbsp;</td>
 					<td>
@@ -71,9 +84,9 @@
 				</tr>
 				<tr>
 					<td>
-						<strong>Travel Ratio:</strong></td>
+						<label for="travelRatio">Travel Ratio:</label></td>
 					<td>
-						&nbsp;</td>
+						<input type="text" id="travelRatio" readonly="readonly"/></td>
 					<td style="background-color: rgb(204, 204, 204); ">
 						&nbsp;</td>
 					<td>
