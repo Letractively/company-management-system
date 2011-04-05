@@ -8,7 +8,7 @@ $(document).ready(
 );
 
 function isValidDate(dateStr){
-	var datePat = /^(\d{4})(-)(\d{2})(-)(\d{2})$/; // requires 4 digit year
+	var datePat = /^(\d{4})(-)(\d{2})(-)(\d{2})$/;
 	var matchArray = dateStr.match(datePat);
 	
 	if (matchArray == null) {
@@ -43,6 +43,8 @@ function dateDiff() {
 	var date2 = new Date();
 	var diff  = new Date();
 	var days = 0;
+	var departD = $("#departDate").value;
+	alert(departD);
 	
 	if (isValidDate($("#departDate").value)) {
 		date1 = new Date($("#departDate").value);
