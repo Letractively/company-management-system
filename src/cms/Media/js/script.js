@@ -43,16 +43,14 @@ function dateDiff() {
 	var date2 = new Date();
 	var diff  = new Date();
 	var days = 0;
-	var departD = $("#departDate").val();
-	alert(departD);
 	
-	if (isValidDate($("#departDate").value)) {
-		date1 = new Date($("#departDate").value);
+	if (isValidDate($("#departDate").val())) {
+		date1 = new Date($("#departDate").val());
 	}
 	else return false;
 	
-	if (isValidDate($("#returnDate").value)){
-		date2 = new Date($("#returnDate").value);
+	if (isValidDate($("#returnDate").val())){
+		date2 = new Date($("#returnDate").val());
 	}
 	else return false;
 	
