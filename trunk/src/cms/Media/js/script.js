@@ -50,7 +50,6 @@ function isValidDate(dateStr){
 		return false;
 	   }
 	}
-	alert(year+" "+month+" "+day);
 	return true;
 }
 
