@@ -9,11 +9,12 @@ $(document).ready(
 
 function isValidDate(dateStr){
 	var datePat = /^(\d{4})(-)(\d{2})(-)(\d{2})$/;
-	var matchArray = dateStr.match(datePat);
 	
-	if (matchArray == null) {
+	if (dateStr.match(datePat) == null) {
 		return false;
 	}
+	
+	var matchArray = dateStr.split("-");
 	
 	var month = matchArray[4]; // parse date into variables
 	var day = matchArray[2];
