@@ -74,7 +74,8 @@ CO_CHOICES = (
               ('27','27th Company'),
               ('28','28th Company'),
               ('29','29th Company'),
-              ('30','30th Company'),              
+              ('30','30th Company'),
+              ('-1','No Company'),            
               )
 PLT_CHOICES = (
     ('1','1st Platoon'),
