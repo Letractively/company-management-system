@@ -6,7 +6,7 @@ $(document).ready(
 	}
 );
 
-isValidDate(dateStr){
+function isValidDate(dateStr){
 	var datePat = /^(\d{4})(-)(\d{2})(-)(\d{2})$/; // requires 4 digit year
 	var matchArray = dateStr.match(datePat);
 	
