@@ -24,7 +24,8 @@
 					<td>
 						<strong>Date of Departure:</strong></td>
 					<td>
-						<input type = "text" name = "dateDepart"/></td>
+						<input type = "text" class="datepicker" 
+						id="departDate" readonly="readonly" name = "dateDepart"/></td>
 					<td style="background-color: rgb(204, 204, 204); ">
 						&nbsp;</td>
 					<td rowspan="2">
@@ -36,7 +37,9 @@
 					<td>
 						<strong>Date of Return:</strong></td>
 					<td>
-						<input type = "text" name = "dateReturn"/></td>
+						<input type = "text" class="datepicker" 
+						id="returnDate" readonly="readonly" 
+						onchange="dateDiff();" name = "dateReturn"/></td>
 					<td style="background-color: rgb(204, 204, 204); ">
 						&nbsp;</td>
 					<td>
@@ -46,7 +49,7 @@
 					<td>
 						<strong>Total Days of Leave:</strong></td>
 					<td>
-						&nbsp;</td>
+						<span id="daysLeave"></span></td>
 					<td style="background-color: rgb(204, 204, 204); ">
 						&nbsp;</td>
 					<td>
