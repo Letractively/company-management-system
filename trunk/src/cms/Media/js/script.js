@@ -70,8 +70,9 @@ function dateDiff() {
 	$("#daysLeave").val(days);
 }
 
-function travelRatio(){
+function travelRatio() {
 	var leave = parseInt($("#daysLeave").val());
 	var travel = parseInt($("#daysTravel").val());
 	$("#travelRatio").val(leave/travel);
+	return true;
 }
