@@ -168,17 +168,18 @@ def initWatchBills(request):
                 bill.save()
     yearWatchBill = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
     
-    acBillTimes = [time(06,30),time(07,00),time(07,50),time(08,50),time(09,50),time(),time(),time(),time(),time(),time(),time(),time(),time(),time(),time(),time(),time(),time(),time()]
+    acBillTimes = [time(6,30),time(7,00),time(7,50),time(8,50),time(9,50),time(10,50),time(11,50),time(12,20),time(12,50),time(13,25),time(14,25),time(15,30),time(16,00),time(17,00),time(18,00),time(19,00),time(20,00),time(21,00),time(22,00),time(23,00),time(00,00)]
     
     #Get all of the watchBills who's type is work day ('W')
-    Bills = WatchBill.objects.filter(type='W')
+    bills = WatchBill.objects.filter(type='W')
     
     #loop through those watch and create all of the watches for that watchBill given the start and ending times in acBillTimes
-    for bill in Bills:
-        for times in acBillTimes:
-            startTime #split the start hour and minutes
-            endTime # split the end hour and minutes
-            Watch.objects.create(id=billstart,startTime=startTime,endTime=endTime)
+    noMid = Mid.objects.get(alpha=100000)
+    for bill in bills:
+        count = 0
+        while count < 20:
+            Watch.objects.create(watchBill_id=bill,mid_id=noMid,startTime=acBillTimes[count],acBillTimes[count+1],post='Company Area')
+            count = count +1
             
     #and so on...
     
