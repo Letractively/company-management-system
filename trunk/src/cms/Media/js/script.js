@@ -3,9 +3,17 @@ $(document).ready(
 		$(".datepicker").datepicker();
 		$(".datepicker").datepicker("option","dateFormat","yy-mm-dd");
 		$(".timepicker").timepicker();
+		$("#ormForm").validate();
 	}
 	
 );
+
+// Begin: Form Validation
+
+
+
+// End: Form Validation
+
 
 function isValidDate(dateStr){
 	var datePat = /^(\d{4})(-)(\d{2})(-)(\d{2})$/;
@@ -16,7 +24,7 @@ function isValidDate(dateStr){
 	
 	var matchArray = dateStr.split("-");
 	
-	var month = matchArray[4]; // parse date into variables
+	var month = matchArray[1]; // parse date into variables
 	var day = matchArray[2];
 	var year = matchArray[0];
 	
@@ -56,8 +64,18 @@ function dateDiff() {
 	}
 	else return false;
 	
+	if( ( date1.getTime() - date2.getTime() ) < 0 ){
+		$("#daysLeave").val("Must Be Positive");
+		return false;
+	}
 	diff.setTime(Math.abs(date1.getTime() - date2.getTime()));
 	timediff = diff.getTime();
 	days = Math.floor(timediff / (1000 * 60 * 60 * 24)); 
-	$("daysLeave").val(days);
+	$("#daysLeave").val(days);
+}
+
+function travelRatio(){
+	var leave = parseInt($("#daysLeave").val());
+	var travel = parseInt($("#daysTravel").val());
+	$("#travelRatio").val(leave/travel);
 }
