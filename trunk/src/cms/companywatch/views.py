@@ -168,8 +168,7 @@ def initWatchBills(request):
                 bill.save()
     yearWatchBill = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
     
-    acBillTimes = [time(6,30),time(7,00),time(7,50),time(8,50),time(9,50),time(10,50),time(11,50),time(12,20),time(12,50),time(13,25),time(14,25),time(15,30),time(16,00),time(17,00),time(18,00),time(19,00),time(20,00),time(21,00),time(22,00),time(23,00),time(00,00)]
-    
+    workBillTimes = [time(6,30),time(7,00),time(7,50),time(8,50),time(9,50),time(10,50),time(11,50),time(12,20),time(12,50),time(13,25),time(14,25),time(15,30),time(16,00),time(17,00),time(18,00),time(19,00),time(20,00),time(21,00),time(22,00),time(23,00),time(00,00)]
     #Get all of the watchBills who's type is work day ('W')
     bills = WatchBill.objects.filter(type='W')
     
@@ -181,9 +180,14 @@ def initWatchBills(request):
             Watch.objects.create(watchBill_id=bill,mid_id=noMid,startTime=acBillTimes[count],acBillTimes[count+1],post='Company Area')
             count = count +1
             
-    #and so on...
-    
     # do the same thing only by hour for the holiday days
+    bills = WatchBill.objects.filter(type='H')
+    for bill in bills:
+        count = 0
+        while count < 24:
+            Watch.objects.create(watchBill_id=bill.id,mid_id=noMid,startTime=time(count,0),endTime=time(count+1,0))
+            count = count + 1
+
 
 def WatchBill(request):
     
