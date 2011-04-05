@@ -49,7 +49,7 @@ function dateDiff() {
 	}
 	else return false;
 	
-	if (isValidDate($("returnDate").value)){
+	if (isValidDate($("#returnDate").value)){
 		date2 = new Date($("#returnDate").value);
 	}
 	else return false;
