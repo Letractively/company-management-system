@@ -69,6 +69,11 @@ function dateDiff() {
 	}
 	else return false;
 	
+	if( date1.getTime() - date2.getTime() > 0 ){
+		$("#daysLeave").val("0");
+		return false;
+	}
+	
 	diff.setTime(Math.abs(date1.getTime() - date2.getTime()));
 	timediff = diff.getTime();
 	days = Math.floor(timediff / (1000 * 60 * 60 * 24)); 
