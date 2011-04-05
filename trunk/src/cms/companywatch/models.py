@@ -91,7 +91,7 @@ class AcYear(models.Model):
     springIntersessionalEnd = models.DateField(null=True,blank=True)
     summerStart = models.DateField(null=True,blank=True)
     def __unicode__(self):
-        return "20" + str(self.acYear-1) + " - 20" + str(self.acYear)
+        return u'20%s - 20%s' % (self.acYear-1,self.acYear)
     
 class AcWatch(models.Model):
     acYear = models.ForeignKey(AcYear)
@@ -102,7 +102,7 @@ class AcWatch(models.Model):
     
     mid = models.ForeignKey("mid.Mid")
     def __unicode__(self):
-        return unicode(self.semester) + unicode(self.acYear)
+        return u'%s %s' % (self.semester, self.acYear)
     
 
 class WatchBill(models.Model):
@@ -123,12 +123,12 @@ class Watch(models.Model):
     endTime = models.TimeField(null=True, blank=True)
     type = models.CharField(max_length=4,choices=WATCH_TYPE_CHOICES, null=True, blank=True)
     def __unicode__(self):
-        return self.mid.LName + " - " + unicode(self.watchBill.date) + " - " + unicode(self.startTime)
+        return u'%s %s %s' % (self.mid.LName, self.watchBill.date, self.startTime)
     
 class LogBook(models.Model):
     watchBill = models.ForeignKey(WatchBill)
     def __unicode__(self):
-        return "LogBook: " + unicode(self.watchBill.date) + " Duty Secion: " + self.watchBill.dutySection
+        return u'LogBook: %s Duty Secion: ' % (self.watchBill.date, self.watchBill.dutySection)
     
 class LogEntry(models.Model):
     logBook = models.ForeignKey(LogBook)
@@ -136,5 +136,5 @@ class LogEntry(models.Model):
     entryTime = models.TimeField()
     entry = models.TextField()
     def __unicode__(self):
-        return self.watch.mid.LName + " Log entry on: " + unicode(self.logBook.watchBill.date) + " at " + unicode(self.entryTime)
+        return u'%s Log entry on: %s at %s' % (self.watch.mid.LName, self.logBook.watchBill.date, self.entryTime)
     
