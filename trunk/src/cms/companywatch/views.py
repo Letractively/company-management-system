@@ -139,6 +139,7 @@ def AcYearSubmit(request):
 
 def initWatchBills(request):
     #create all of the watchbills for a the semester
+    acYear = AcYear.objects.get(acYear=11)
     numberOfDays = acYear.springEnd - acYear.fallStart
     count = 0
     while (count < numberOfDays.days):
@@ -156,6 +157,9 @@ def initWatchBills(request):
     
     #set Holidays as type H
     holidays = [acYear.laborDay,acYear.columbusDay,acYear.veteransDay,acYear.mlkDay,acYear.washingtonBirthday]
+    for h in holidays:
+        WatchBill.objects.get(date=h).update(type='H')
+    
     bills = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
     for bill in bills:
         if bill.date.weekday() == 5:
@@ -166,27 +170,23 @@ def initWatchBills(request):
             if bill.type == 'W':
                 bill.type = 'H'
                 bill.save()
-    yearWatchBill = WatchBill.objects.filter(date__range=(acYear.fallStart,acYear.springEnd))
-    
-    workBillTimes = [time(6,30),time(7,00),time(7,50),time(8,50),time(9,50),time(10,50),time(11,50),time(12,20),time(12,50),time(13,25),time(14,25),time(15,30),time(16,00),time(17,00),time(18,00),time(19,00),time(20,00),time(21,00),time(22,00),time(23,00),time(00,00)]
-    #Get all of the watchBills who's type is work day ('W')
-    bills = WatchBill.objects.filter(type='W')
-    
-    #loop through those watch and create all of the watches for that watchBill given the start and ending times in acBillTimes
     noMid = Mid.objects.get(alpha=100000)
+    workBillTimes = [time(6,30),time(7,00),time(7,50),time(8,50),time(9,50),time(10,50),time(11,50),time(12,20),time(12,50),time(13,25),time(14,25),time(15,30),time(16,00),time(17,00),time(18,00),time(19,00),time(20,00),time(21,00),time(22,00),time(23,00),time(00,00)]
+
+    #Go through each Watch bill for the year and create all of the watches for each bill    
     for bill in bills:
-        count = 0
-        while count < 20:
-            Watch.objects.create(watchBill_id=bill,mid_id=noMid,startTime=acBillTimes[count],acBillTimes[count+1],post='Company Area')
-            count = count +1
-            
-    # do the same thing only by hour for the holiday days
-    bills = WatchBill.objects.filter(type='H')
-    for bill in bills:
-        count = 0
-        while count < 24:
-            Watch.objects.create(watchBill_id=bill.id,mid_id=noMid,startTime=time(count,0),endTime=time(count+1,0))
-            count = count + 1
+        if bill.type=='W': # For each work day use the times in the workBillTimes to generate the start and end times for the watches
+            count = 0
+            while count < 20:
+                Watch.objects.create(watchBill_id=bill,mid_id=noMid.alpha,startTime=workBillTimes[count],workBillTimes[count+1],post='Company Area')
+                count = count +1
+        elif bill.type=='H': # For each holiday all watches start at the top of the hour on the hour
+            count = 0
+            while count < 23: # from 0 to 23 is 23 watches
+                Watch.objects.create(watchBill_id=bill.id,mid_id=noMid.alpha,startTime=time(count,0),endTime=time(count+1,0))
+                count = count + 1
+            # Last watch of the day is made seprately because time() will not accept a '24' as an hour
+            Watch.objects.create(watchBill_id=bill.id,mid_id=noMid.alpha,startTime=time(count,0),endTime=time(0,0))
 
 
 def WatchBill(request):
