@@ -21,6 +21,9 @@ class Zero8(models.Model):
     workOrderActive = models.IntegerField()
     workOrderClosed = models.IntegerField()
     workOrderOverdue = models.IntegerField()
+    company = models.ForeignKey("unit.unit")
+    unique_together = (("reportDate", "company"),)
+    
     def __unicode__(self):
         return unicode(self.reportDate) + " - " + self.offgoingCDO.LName
     
