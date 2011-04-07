@@ -140,7 +140,7 @@ def AcYearSubmit(request):
 def initWatchBills(request):
     #create all of the watchbills for a the semester
     acYear = AcYear.objects.get(acYear=11)
-    numberOfDays = acYear.springEnd - acYear.fallStart
+    numberOfDays = acYear.summerStart - acYear.fallStart
     count = 0
     while (count < numberOfDays.days):
         WatchBill.objects.create(date=acYear.fallStart + timedelta(days=count),type='W')
