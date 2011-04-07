@@ -128,7 +128,7 @@ class Watch(models.Model):
 class LogBook(models.Model):
     watchBill = models.ForeignKey(WatchBill)
     def __unicode__(self):
-        return u'LogBook: %s Duty Secion: %s' % (self.watchBill.date, self.watchBill.dutySection)
+        return u'LogBook: %s Duty Section: %s' % (self.watchBill.date, self.watchBill.dutySection)
     
 class LogEntry(models.Model):
     logBook = models.ForeignKey(LogBook)
