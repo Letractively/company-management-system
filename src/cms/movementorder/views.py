@@ -31,6 +31,8 @@ def MO(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #lChits - list of user's MO-s
     lMO = MovementOrder.objects.filter(moparticipant__participant = cMid).exclude(returnDate = "3000-01-01").order_by('-departDate')
     lAllMO = MovementOrder.objects.filter(returnDate = "3000-01-01").order_by('-departDate')
@@ -45,7 +47,8 @@ def MO(request):
     for p in temp :
         cMO = p
     
-    return render_to_response('movementorder/MO.html', {'cMid' : cMid, 
+    return render_to_response('movementorder/MO.html', {'cMid' : cMid,
+                                                        'lBillets' : lBillets,
                                                         'cMO' : cMO, 
                                                         'lMO' : lMO,
                                                         'lAllMO' : lAllMO,

@@ -27,9 +27,12 @@ def orm(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lChits = OrmChit.objects.filter(mid=cMid).exclude(approvalStatus = -2).order_by('-date')
     
     return render_to_response('orm/orm.html', {'cMid' : cMid, 
+                                               'lBillets' : lBillets,
                                                'lChits' : lChits,
                                               }, 
                                               context_instance=RequestContext(request))
@@ -39,6 +42,8 @@ def addLeisure(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
 
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -86,6 +91,7 @@ def addLeisure(request):
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     
     return render_to_response('orm/ormLeisure.html', {'cMid' : cMid, 
+                                                      'lBillets' : lBillets,
                                                       'cChit' : cChit,
                                                       'lLeisure' : lLeisure,
                                                       }, 
@@ -125,6 +131,8 @@ def addTravel(request) :
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
@@ -134,7 +142,8 @@ def addTravel(request) :
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     lTravel = MethodsOfTravel.objects.filter(OrmChit = cChit)
     
-    return render_to_response('orm/ormTravel.html', {'cMid' : cMid, 
+    return render_to_response('orm/ormTravel.html', { 'cMid' : cMid, 
+                                                      'lBillets' : lBillets,
                                                       'cChit' : cChit,
                                                       'lLeisure' : lLeisure,
                                                       'lTravel' : lTravel
@@ -146,6 +155,8 @@ def saveTravel(request) :
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -166,7 +177,8 @@ def saveTravel(request) :
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     lTravel = MethodsOfTravel.objects.filter(OrmChit = cChit)
 
-    return render_to_response('orm/ormTravel.html', {'cMid' : cMid, 
+    return render_to_response('orm/ormTravel.html', { 'cMid' : cMid, 
+                                                      'lBillets' : lBillets,
                                                       'cChit' : cChit,
                                                       'lLeisure' : lLeisure,
                                                       'lTravel' : lTravel
@@ -178,6 +190,8 @@ def addRMP(request) :
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -197,6 +211,7 @@ def addRMP(request) :
         RMP = RMP + " " + p.riskMitigationPlan
     
     return render_to_response('orm/ormRMP.html', {'cMid' : cMid, 
+                                                  'lBillets' : lBillets,
                                                       'cChit' : cChit,
                                                       'lLeisure' : lLeisure,
                                                       'lTravel' : lTravel,
@@ -209,6 +224,8 @@ def saveRMP(request) :
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -295,6 +312,7 @@ def saveRMP(request) :
     cChit.save()
     
     return render_to_response('orm/ormView.html', {'cMid' : cMid, 
+                                                   'lBillets' : lBillets,
                                                    'cChit' : cChit,
                                                    'lLeisure' : lLeisure,
                                                    'lTravel' : lTravel,
@@ -307,12 +325,15 @@ def ormView(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     cChit = OrmChit.objects.get(id=request.POST['id'])
     
     lLeisure = LeisureActivites.objects.filter(OrmChit = cChit)
     lTravel = MethodsOfTravel.objects.filter(OrmChit = cChit)
     
     return render_to_response('orm/ormView.html', {'cMid' : cMid, 
+                                                   'lBillets' : lBillets,
                                                    'cChit' : cChit,
                                                    'lLeisure' : lLeisure,
                                                    'lTravel' : lTravel,

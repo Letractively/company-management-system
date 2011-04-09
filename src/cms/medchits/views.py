@@ -26,6 +26,8 @@ def medchits(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #lChits - list of user's medical chits
     lChits = Chit.objects.filter(mid=cMid).order_by('-endDate')
     
@@ -42,6 +44,7 @@ def medchits(request):
                 endDate = p.endDate
     
     return render_to_response('medchits/medchit.html', {'cMid' : cMid, 
+                                                        'lBillets' : lBillets,
                                                         'cChit' : cChit, 
                                                         'lChits' : lChits,
                                                         }, 

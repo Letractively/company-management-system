@@ -24,9 +24,12 @@ def specReq(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lChits = SpecialRequestChit.objects.filter(mid=cMid).order_by('-date')
     
     return render_to_response('specialrequestchit/specReq.html', {'cMid' : cMid, 
+                                                                  'lBillets' : lBillets,
                                                                   'lChits' : lChits,
                                                                   }, 
                                                                   context_instance=RequestContext(request))
@@ -154,9 +157,12 @@ def specReqView(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     cChit = SpecialRequestChit.objects.get(id=request.POST['id'])
     
     return render_to_response('specialrequestchit/specReqView.html', {'cMid' : cMid, 
+                                                                      'lBillets' : lBillets,
                                                                       'cChit' : cChit,
                                                                       }, 
                                                                       context_instance=RequestContext(request))

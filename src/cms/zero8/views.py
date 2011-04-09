@@ -44,12 +44,17 @@ from datetime import timedelta
 import re
 
 @login_required(redirect_field_name='/')
-def viewReport(request):    
+def viewReport(request):
+    
+    #ADD CO/SEL ABILITY
+        
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     cUnit = Unit.objects.get(company = cCompany)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     if request.method != "POST" :
         if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
@@ -171,6 +176,7 @@ def viewReport(request):
                                                         'CO' : CO,
                                                         'SEL' : SEL,
                                                         'CC' : CC,
+                                                        'lBillets' : lBillets,
                                                         'cReport' : cReport,
                                                         'cDate' : cReport.reportDate,
                                                         'cCompany' : cCompany, 
@@ -253,9 +259,12 @@ def createSignificantEvent(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lMids = Mid.objects.filter(company = cCompany)
     
     return render_to_response('zero8/createSignificantEvent.html', {'cMid':cMid,
+                                                                    'lBillets' : lBillets,
                                                                     'lMids' : lMids,
                                                                     }, 
                                                                     context_instance=RequestContext(request))
@@ -296,10 +305,13 @@ def candidates(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lMids = Mid.objects.filter(company = cCompany)
     lCand = Candidates.objects.filter(host__company = cCompany).filter(departDate = "3000-01-01")
     
     return render_to_response('zero8/candidates.html', {'cMid':cMid,
+                                                        'lBillets' : lBillets,
                                                         'lMids' : lMids,
                                                         'lCand' : lCand
                                                         }, 
@@ -357,6 +369,8 @@ def dutySectionMuster(request):
     cCompany = cMid.company
     cDuty = cMid.dutySection
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
         cDate = date.today() - timedelta(days = 1)
     else :
@@ -368,6 +382,7 @@ def dutySectionMuster(request):
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "W")
     
     return render_to_response('zero8/dutySectionMuster.html', {'cMid':cMid,
+                                                               'lBillets' : lBillets,
                                                                'lMids' : lMids,
                                                                'lMusters' : lMusters
                                                                }, 
@@ -411,6 +426,8 @@ def bedCheck(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
         cDate = date.today() - timedelta(days = 1)
     else :
@@ -421,7 +438,8 @@ def bedCheck(request):
     lRooms = Room.objects.filter(company = cCompany)
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "B")
     
-    return render_to_response('zero8/bedCheck.html', {'cMid':cMid,
+    return render_to_response('zero8/bedCheck.html', { 'cMid':cMid,
+                                                       'lBillets' : lBillets,
                                                        'lRooms' : lRooms,
                                                        'lMusters' : lMusters
                                                         }, 
@@ -465,6 +483,8 @@ def studyHour(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
         cDate = date.today() - timedelta(days = 1)
     else :
@@ -476,6 +496,7 @@ def studyHour(request):
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "S")
     
     return render_to_response('zero8/studyHour.html', {'cMid':cMid,
+                                                       'lBillets' : lBillets,
                                                        'lRooms' : lRooms,
                                                        'lMusters' : lMusters
                                                         }, 
@@ -519,6 +540,8 @@ def BAC(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
         cDate = date.today() - timedelta(days = 1)
     else :
@@ -530,6 +553,7 @@ def BAC(request):
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
     
     return render_to_response('zero8/BAC.html', {'cMid':cMid,
+                                                 'lBillets' : lBillets,
                                                  'lMids' : lMids,
                                                  'lMusters' : lMusters
                                                  }, 
@@ -573,12 +597,15 @@ def restrictees(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lRest = Restriction.objects.filter(mid__company = cCompany
                                        ).filter(daysRemaining__gt= 0
                                                 ).filter(checked__lt = date.today()
                                                          ).order_by('startDate')
     
     return render_to_response('zero8/restrictees.html', {'cMid':cMid,
+                                                         'lBillets' : lBillets,
                                                          'lRest' : lRest
                                                          }, 
                                                          context_instance=RequestContext(request))
