@@ -38,7 +38,7 @@ def createEvent(request):
     cPlatoon = cMid.platoon
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     flagFSGT = False
     for p in lBillets :
@@ -50,8 +50,9 @@ def createEvent(request):
     #End of second check
     
     return render_to_response('accountability/createEvent.html', {'cMid':cMid,
-                                                                      }, 
-                                                                      context_instance=RequestContext(request))
+                                                                  'lBillets' : lBillets,
+                                                                  }, 
+                                                                  context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def saveEvent(request):    
@@ -200,7 +201,7 @@ def enterAttendance(request):
     cPlatoon = cMid.platoon
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     flagPLTS = False
     for p in lBillets :
@@ -222,7 +223,8 @@ def enterAttendance(request):
     elif cPlatoon == "4":
         lEvents = Event.objects.filter(company = cCompany).filter(platoonFourSubmitted  = False)
     
-    return render_to_response('accountability/enterAttendance.html', {'cMid' : cMid, 
+    return render_to_response('accountability/enterAttendance.html', {'cMid' : cMid,
+                                                                      'lBillets' : lBillets,
                                                                       'lMids' : lMids,
                                                                       'lEvents' : lEvents,
                                                                       }, 
@@ -286,6 +288,8 @@ def taps(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
         cDate = date.today() - timedelta(days = 1)
     else :
@@ -302,6 +306,7 @@ def taps(request):
                                                                 ).exclude(status = "M").order_by('mid')
 
     return render_to_response('accountability/taps.html', {'cMid' : cMid, 
+                                                           'lBillets', lBillets,
                                                            'cEvent' : cEvent,
                                                            'lAttendance' : lAttendance
                                                            }, 
@@ -340,7 +345,7 @@ def selectEvent(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     FSGT = False
     for p in lBillets :
@@ -355,6 +360,7 @@ def selectEvent(request):
     lInProgEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False).order_by('dateTime')
     
     return render_to_response('accountability/selectEvent.html', {'cMid' : cMid, 
+                                                                  'lBillets', : lBillets,
                                                                   'lEvents' : lEvents,
                                                                   'lInProgEvents' : lInProgEvents
                                                                   }, 
@@ -368,7 +374,7 @@ def cancelEvent(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     CC = False
     for p in lBillets :
@@ -382,6 +388,7 @@ def cancelEvent(request):
     lEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False).order_by('dateTime')[0:40]
     
     return render_to_response('accountability/cancelEvent.html', {'cMid' : cMid, 
+                                                                  'lBillets', lBillets,
                                                                   'lEvents' : lEvents,
                                                                   }, 
                                                                   context_instance=RequestContext(request))
@@ -428,7 +435,7 @@ def reviewAttendance(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     FSGT = False
     for p in lBillets :
@@ -447,6 +454,7 @@ def reviewAttendance(request):
     lAttendance = Attendance.objects.filter(event = cEvent)
     
     return render_to_response('accountability/reviewAttendance.html', {'cMid' : cMid, 
+                                                                       'lBillets' : lBillets,
                                                                        'cEvent' : cEvent,
                                                                        'lAttendance' : lAttendance
                                                                        }, 
@@ -461,17 +469,14 @@ def viewAttendance(request):
     else :
         cMid = Mid.objects.get(alpha = request.POST['alpha'])
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     cCompany = cMid.company
     
     lAttendance = Attendance.objects.filter(mid = cMid).exclude(status = "P")
     
     return render_to_response('accountability/viewAttendance.html', {'cMid' : cMid, 
+                                                                     'lBillets' : lBillets,
                                                                      'lAttendance' : lAttendance
                                                                     }, 
                                                                     context_instance=RequestContext(request))
-        
-        
-        
-        
-        
-          

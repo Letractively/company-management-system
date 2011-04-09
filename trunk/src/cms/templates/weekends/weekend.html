@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Weekends Module{% endblock %}
 {% block content %}
-<h1>Welcome to the weekends module, {{ mid.fName }} {{ mid.LName }}.</h1>
+<h1>Welcome to the weekends module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
 
-<p>You have been awarded {{ mid.weekends }} weekends. {{ mid.weekendsComment }}</p>
+<p>You have been awarded {{ cMid.weekends }} weekends. {{ cMid.weekendsComment }}</p>
 <p>You have taken {{ WT }} weekends; you have {{ WL }} weekends left.</p>
 
 {% if not cWeekend %}

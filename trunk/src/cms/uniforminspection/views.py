@@ -21,10 +21,13 @@ def uIns(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #lWeekends - list of user's medical chits
     luIns = UniformInspection.objects.filter(mid=cMid).order_by('-inspectionDate')
     
-    return render_to_response('uniforminspection/uIns.html', {'cMid' : cMid,  
+    return render_to_response('uniforminspection/uIns.html', {'cMid' : cMid, 
+                                                              'lBillets' : lBillets, 
                                                               'luIns' : luIns,
                                                               }, 
                                                               context_instance=RequestContext(request))
@@ -37,13 +40,16 @@ def uInsView(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
     cuIns = UniformInspection.objects.get(id=request.POST['id'])
     
-    return render_to_response('uniforminspection/uInsView.html', {'cMid' : cMid,  
+    return render_to_response('uniforminspection/uInsView.html', {'cMid' : cMid,
+                                                                  'lBillets' : lBillets,
                                                                   'cuIns' : cuIns,
                                                                   }, 
                                                                   context_instance=RequestContext(request))
@@ -56,9 +62,12 @@ def uInsSelect(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     
-    return render_to_response('uniforminspection/uInsSelect.html', {'cMid' : cMid,  
+    return render_to_response('uniforminspection/uInsSelect.html', {'cMid' : cMid,
+                                                                    'lBillets' : lBillets,
                                                                     'lMids' : lMids,
                                                                     }, 
                                                                     context_instance=RequestContext(request))
@@ -70,6 +79,8 @@ def uInsSubmit(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
@@ -78,6 +89,7 @@ def uInsSubmit(request):
     cInspectee = Mid.objects.get(alpha=cInspectee)
     
     return render_to_response('uniforminspection/uInsSubmit.html', {'cMid' : cMid,  
+                                                                    'lBillets' : lBillets,
                                                                     'cInspectee' : cInspectee,
                                                                     }, 
                                                                     context_instance=RequestContext(request))

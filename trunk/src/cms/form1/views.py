@@ -23,6 +23,8 @@ def form1(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     firstie = False
     if cMid.rank == "1" :
         firstie = True
@@ -31,6 +33,7 @@ def form1(request):
     lForms = Form1.objects.filter(mid=cMid).order_by('-formDate')
     
     return render_to_response('form1/formOne.html', {'cMid' : cMid, 
+                                                     'lBillets' : lBillets,
                                                      'firstie' : firstie, 
                                                      'lMids' : lMids,
                                                      'lFormOnes' : lForms,
@@ -68,13 +71,16 @@ def form1View(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
     cForm = Form1.objects.get(id=request.POST['id'])
     
-    return render_to_response('form1/formOneView.html', {'cMid' : cMid,  
+    return render_to_response('form1/formOneView.html', {'cMid' : cMid,
+                                                         'lBillet' : lBillet, 
                                                          'cForm' : cForm,
                                                         }, 
                                                         context_instance=RequestContext(request))

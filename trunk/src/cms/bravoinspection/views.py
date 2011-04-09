@@ -24,10 +24,13 @@ def bIns(request):
     cMid = Mid.objects.get(alpha=alpha)
     cRoom = cMid.roomNumber
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #lWeekends - list of user's medical chits
     lbIns = BravoInspection.objects.filter(room=cRoom).order_by('-inspectionDate')
     
     return render_to_response('bravoinspection/bIns.html', {'cMid' : cMid,
+                                                            'lBillets' : lBillets,
                                                             'lbIns' : lbIns,
                                                             }, 
                                                             context_instance=RequestContext(request))
@@ -40,13 +43,16 @@ def bInsView(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
     cbIns = BravoInspection.objects.get(id=request.POST['id'])
     
-    return render_to_response('bravoinspection/bInsView.html', {'cMid' : cMid,  
+    return render_to_response('bravoinspection/bInsView.html', {'cMid' : cMid,
+                                                                'lBillets' : lBillets,  
                                                                 'cbIns' : cbIns,
                                                                 }, 
                                                                 context_instance=RequestContext(request))
@@ -59,9 +65,12 @@ def bInsSelect(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lRooms = Room.objects.filter(company = cCompany).order_by('roomNumber')
     
-    return render_to_response('bravoinspection/bInsSelect.html', {'cMid' : cMid,  
+    return render_to_response('bravoinspection/bInsSelect.html', {'cMid' : cMid,
+                                                                  'lBillets' : lBillets,  
                                                                   'lRooms' : lRooms,
                                                                   }, 
                                                                   context_instance=RequestContext(request))
@@ -73,13 +82,16 @@ def bInsSubmit(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect('/')
     
     cRoom = Room.objects.get(roomNumber=request.POST['room'])
     
-    return render_to_response('bravoinspection/bInsSubmit.html', {'cMid' : cMid,  
+    return render_to_response('bravoinspection/bInsSubmit.html', {'cMid' : cMid,
+                                                                  'lBillets' : lBillets,
                                                                   'cRoom' : cRoom,
                                                                   }, 
                                                                   context_instance=RequestContext(request))

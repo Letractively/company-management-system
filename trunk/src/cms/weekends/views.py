@@ -33,6 +33,8 @@ def index(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     #lWeekends - list of currently requested weekends
     lWeekends = Weekend.objects.filter(mid=cMid).order_by('-startDate')
     
@@ -88,10 +90,11 @@ def index(request):
 
     #ALERT!!! ('late' : False); switch back to ('late' : late) for production
     # Laws - 4-5-2011 : i just changed the above switch for production.
-    return render_to_response('weekends/weekend.html', { 'mid' : cMid, 'lWeekends' : lWeekends, 'cWeekend' : cWeekend,
+    return render_to_response('weekends/weekend.html', { 'cMid' : cMid, 'lWeekends' : lWeekends, 'cWeekend' : cWeekend,
                                                          'WT' : WT, 'WL' : WL, 'WE' : WE, 
                                                          'today' : cDate, 'late' : late,
                                                          'NWB' : cNextWeekendBeg, 'NWE' : cNextWeekendEnd,
+                                                         'lBillets' : lBillets
                                                         }, 
                                                         context_instance=RequestContext(request))
 
@@ -165,19 +168,26 @@ def viewList(request):
     #Called on /weekends/view -> generates a current weekend list, no additional functionality
     username = request.user.username
     
+    CO = False
+    SEL = False
+    lBillets = []
+    
     if re.match("CO", username) is not None :
         username = username.split('_')
         cCompany = username[1]
+        CO = True
         
     elif re.match("SEL", username) is not None :
         username = username.split('_')
         cCompany = username[1]
+        SEL = True
     
     else :
         alpha = username.split('m')
         alpha = alpha[1]
         cMid = Mid.objects.get(alpha=alpha)
         cCompany = cMid.company
+        lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     #date assignment block
     cDate = date.today()
@@ -191,7 +201,10 @@ def viewList(request):
     #list of current approved weekends
     lWeekends = Weekend.objects.filter(mid__company=cCompany).filter( Q(startDate = cNextWeekendBeg) | Q(startDate = cNextWeekendBegAlt)).filter(status = 'A').order_by('-mid')
       
-    return render_to_response('weekends/list.html', { 'cCompany' : cCompany,
+    return render_to_response('weekends/list.html', { 'CO' : True,
+                                                      'SEL' : True,
+                                                      'lBillets' : lBillets,
+                                                      'cCompany' : cCompany,
                                                       'lWeekends' : lWeekends }, 
                                                       context_instance=RequestContext(request))
 
@@ -207,7 +220,7 @@ def admin(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     flagAdmin = False
     for p in lBillets :
@@ -220,7 +233,9 @@ def admin(request):
     
     lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
-    return render_to_response('weekends/admin.html', { 'cCompany' : cCompany, 
+    return render_to_response('weekends/admin.html', { 'cMid' : cMid,
+                                                       'lBillets' : lBillets,
+                                                       'cCompany' : cCompany, 
                                                        'lMids' : lMids },
                               context_instance=RequestContext(request))
     
@@ -284,9 +299,10 @@ def coApproval(request):
     lWeekends = lWeekends1 | lWeekends2
     
     
-    return render_to_response('weekends/co.html', { 'lWeekends' : lWeekends,
+    return render_to_response('weekends/co.html', {'CO' : True, 
+                                                   'lWeekends' : lWeekends,
                                                    }, 
-                              context_instance=RequestContext(request))
+                                                   context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')    
 def approveWeekend(request):
@@ -408,7 +424,8 @@ def grantWeekends(request):
     #lMidsOnWeekend = Mid.objects.filter(weekend__startDate = cNextWeekendBeg)
     lMids = Mid.objects.filter(company = cCompany).exclude(weekend__startDate = cNextWeekendBeg).order_by('alpha')
                                                                                                         
-    return render_to_response('weekends/grantWeekends.html', {  'NWB' : cNextWeekendBeg,
+    return render_to_response('weekends/grantWeekends.html', {  'CO' : True,
+                                                                'NWB' : cNextWeekendBeg,
                                                                 'NWE' : cNextWeekendEnd,
                                                                 'lMids' : lMids }, 
                               context_instance=RequestContext(request))

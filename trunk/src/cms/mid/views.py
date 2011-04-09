@@ -121,7 +121,7 @@ def renderSwitchboard(request) :
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha = alpha)
                         
-    lBillets = Billet.objects.filter(mid = cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     CC = False
     XO = False
@@ -279,6 +279,7 @@ def renderSwitchboard(request) :
                                                  
    
     return render_to_response('mid/switchboard.html', { 'mid' : cMid,
+                                                        'lBillets' : lBillets,
                                                         'firstie' : firstie,
                                                         'init' : init,
                                                         'CC' : CC,
@@ -347,12 +348,15 @@ def editPersonalInformation(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lRooms = Room.objects.filter(company = cCompany)
     
     return render_to_response('mid/editPersonalInformation.html', {'cMid' : cMid,
+                                                                   'lBillets' : lBillets,
                                                                    'lRooms' : lRooms
                                                                    },
-                              context_instance=RequestContext(request))
+                                                                   context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')    
 def savePersonalInformation(request) :
@@ -385,6 +389,8 @@ def viewDiscipline(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
     lR = Restriction.objects.filter(mid = cMid).order_by('startDate')
     lT = Tours.objects.filter(mid = cMid).order_by('startDate')
     lP = Probation.objects.filter(mid = cMid).order_by('startDate')
@@ -407,7 +413,9 @@ def viewDiscipline(request):
             cP = p
             pDaysLeft = date.today - (p.startDate + timedelta(days = daysAwarded))
     
-    return render_to_response('mid/viewDiscipline.html', { 'cCompany' : cCompany, 
+    return render_to_response('mid/viewDiscipline.html', { 'cMid' : cMid,
+                                                           'lBillets' : lBillets,
+                                                           'cCompany' : cCompany, 
                                                            'lR' : lR,
                                                            'lT' : lT,
                                                            'lP' : lP,
@@ -430,7 +438,7 @@ def selectUser(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+   lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     for p in lBillets :
         if p.billet == "ADM" and p.current :
@@ -444,8 +452,11 @@ def selectUser(request):
     
     lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
-    return render_to_response('mid/selectUser.html', { 'lMids' : lMids },
-                              context_instance=RequestContext(request))
+    return render_to_response('mid/selectUser.html', {'cMid' : cMid, 
+                                                      'lBillets' : lBillets, 
+                                                      'lMids' : lMids 
+                                                      },
+                                                      context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')
 def modifyUser(request):
@@ -458,7 +469,7 @@ def modifyUser(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     for p in lBillets :
         if p.billet == "ADM" and p.current :
@@ -483,9 +494,11 @@ def modifyUser(request):
         
     lRooms = Room.objects.filter(company = cCompany).order_by('roomNumber')
     
-    return render_to_response('mid/modifyUser.html', { 'cMid' : cMid, 
-                                                       'lRooms' : lRooms, },
-                              context_instance=RequestContext(request))
+    return render_to_response('mid/modifyUser.html', { 'cMid' : cMid,
+                                                       'lBillets' : lBillets,
+                                                       'lRooms' : lRooms, 
+                                                       },
+                                                       context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')    
 def saveUser(request) :
@@ -587,7 +600,7 @@ def selectPassReset(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     for p in lBillets :
         if p.billet == "ADM" and p.current :
@@ -601,7 +614,10 @@ def selectPassReset(request):
     
     lMids = Mid.objects.filter(company=cCompany).order_by('alpha')
     
-    return render_to_response('mid/selectPassReset.html', { 'lMids' : lMids },
+    return render_to_response('mid/selectPassReset.html', {'cMid' : cMid,
+                                                           'lBillets' : lBillets, 
+                                                           'lMids' : lMids 
+                                                           },
                               context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')    
@@ -650,7 +666,7 @@ def assignBillets(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     flagCC = False
     for p in lBillets :
@@ -794,7 +810,9 @@ def assignBillets(request):
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
     lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "2").order_by('alpha')
                                                                                                         
-    return render_to_response('mid/assignBillets.html', {'lMidsOne' : lMidsOne, 
+    return render_to_response('mid/assignBillets.html', {'cMid' : cMid,
+                                                         'lBillets' : lBillets,
+                                                         'lMidsOne' : lMidsOne, 
                                                          'lMidsTwo' : lMidsTwo,
                                                          'XO'  : XO,
                                                          'HA'  : HA,
@@ -835,7 +853,7 @@ def assignCOC(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     flagCC = False
     for p in lBillets :
@@ -951,7 +969,9 @@ def assignCOC(request):
     lMidsOne = Mid.objects.filter(company=cCompany).filter(rank = "1").order_by('alpha')
     lMidsTwo = Mid.objects.filter(company=cCompany).filter(rank = "2").order_by('alpha')
                                                                                                         
-    return render_to_response('mid/assignCOC.html', {'lMidsOne' : lMidsOne, 
+    return render_to_response('mid/assignCOC.html', {'cMid' : cMid,
+                                                     'lBillets' : lBillets,
+                                                     'lMidsOne' : lMidsOne, 
                                                      'lMidsTwo' : lMidsTwo,
                                                      'PC1' : cPC1,
                                                      'PC2' : cPC2,
@@ -1162,7 +1182,7 @@ def pendingApproval(request) :
         cCompany = cMid.company
 
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     SL = False
     PC = False
@@ -1194,6 +1214,7 @@ def pendingApproval(request) :
             SL = True
     
     return render_to_response('mid/pendingApproval.html', { 'cMid' : cMid, 
+                                                            'lBillets' : lBillets,
                                                             'lSRC' : lSRC,
                                                             'lORM' : lORM,
                                                             'SL' : SL,
@@ -1226,7 +1247,7 @@ def specReqView(request) :
         cMid = Mid.objects.get(alpha=alpha)
 
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     SL = False
     PC = False
@@ -1240,7 +1261,9 @@ def specReqView(request) :
         if p.billet == "CC" and p.current :
             CC = True
 
-    return render_to_response('specialrequestchit/specReqView.html', {'SL' : SL,
+    return render_to_response('specialrequestchit/specReqView.html', {'cMid' : cMid,
+                                                                      'lBillets' : lBillets,
+                                                                      'SL' : SL,
                                                                       'PC' : PC,
                                                                       'CC' : CC, 
                                                                       'cChit' : cChit,
@@ -1275,7 +1298,7 @@ def ormView(request) :
         cMid = Mid.objects.get(alpha=alpha)
 
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     SL = False
     PC = False
@@ -1292,7 +1315,9 @@ def ormView(request) :
         if p.billet == "SAF" and p.current :
             SAF = True
 
-    return render_to_response('orm/ormView.html', {'SL' : SL,
+    return render_to_response('orm/ormView.html', {'cMid' : cMid,
+                                                   'lBillets' : lBillets,
+                                                   'SL' : SL,
                                                    'PC' : PC,
                                                    'SAF': SAF,
                                                    'CC' : CC, 
@@ -1431,7 +1456,7 @@ def PRTSat(request) :
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+   lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     PMO = False
     for p in lBillets :
@@ -1444,7 +1469,9 @@ def PRTSat(request) :
     
     lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     
-    return render_to_response('mid/PRTSat.html', { 'cCompany' : cCompany, 
+    return render_to_response('mid/PRTSat.html', { 'cMid' : cMid,
+                                                   'lBillets' : lBillets,
+                                                   'cCompany' : cCompany, 
                                                    'lMids' : lMids },
                                                    context_instance=RequestContext(request))
     
@@ -1495,7 +1522,7 @@ def ACSat(request) :
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     AC = False
     for p in lBillets :
@@ -1508,8 +1535,11 @@ def ACSat(request) :
     
     lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     
-    return render_to_response('mid/ACSat.html', { 'cCompany' : cCompany, 
-                                                   'lMids' : lMids },
+    return render_to_response('mid/ACSat.html', {  'cMid' : cMid,
+                                                   'lBillets' : lBillets,
+                                                   'cCompany' : cCompany, 
+                                                   'lMids' : lMids 
+                                                   },
                                                    context_instance=RequestContext(request))
     
 @login_required(redirect_field_name='/')
@@ -1557,7 +1587,7 @@ def roomAssignment(request) :
     cCompany = cMid.company
     
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     FLT = False
     for p in lBillets :
@@ -1571,7 +1601,9 @@ def roomAssignment(request) :
     lMids = Mid.objects.filter(company = cCompany).order_by('alpha')
     lRooms = Room.objects.filter(company = cCompany)
     
-    return render_to_response('mid/roomAssignment.html', { 'cCompany' : cCompany, 
+    return render_to_response('mid/roomAssignment.html', { 'cMid' : cMid,
+                                                           'lBillets' : lBillets,
+                                                           'cCompany' : cCompany, 
                                                            'lMids' : lMids,
                                                            'lRooms' : lRooms 
                                                            },
@@ -1622,7 +1654,7 @@ def changeCompanyRoom(request):
     cCompany = cMid.company
 
     #List of current mid's billets
-    lBillets = Billet.objects.filter(mid=cMid)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     FLT = False
     for p in lBillets :
@@ -1635,7 +1667,9 @@ def changeCompanyRoom(request):
     
     lRooms = Room.objects.filter(company = cCompany)
                                                                                                         
-    return render_to_response('mid/changeCompanyRoom.html', {'lRooms' : lRooms 
+    return render_to_response('mid/changeCompanyRoom.html', {'cMid' : cMid,
+                                                             'lBillets' : lBillets,
+                                                             'lRooms' : lRooms 
                                                              }, 
                                                              context_instance=RequestContext(request))
     
@@ -1694,7 +1728,8 @@ def appointCC(request):
     
     lMids = Mid.objects.filter(company = cCompany).filter(rank = "1")
                                                                                                         
-    return render_to_response('mid/appointCC.html', {'cBillet' : cBillet, 
+    return render_to_response('mid/appointCC.html', {'CO' : True,
+                                                     'cBillet' : cBillet, 
                                                      'lMids' : lMids 
                                                      }, 
                                                      context_instance=RequestContext(request))
@@ -1756,7 +1791,8 @@ def changeCompany(request):
     
     lMids = Mid.objects.filter(company = cCompany)
                                                                                                         
-    return render_to_response('mid/changeCompany.html', {'lMids' : lMids 
+    return render_to_response('mid/changeCompany.html', {'CO' : True,
+                                                         'lMids' : lMids 
                                                          }, 
                                                          context_instance=RequestContext(request))
     
@@ -1791,16 +1827,20 @@ def viewSubordinates(request):
     username = request.user.username
     
     lMids = []
+    CO = False
+    SEL = False
     
     if re.match("CO", username) is not None :
         username = username.split('_')
         cCompany = username[1]
         lMids = Mid.objects.filter(company = cCompany)
+        CO = True
         
     elif re.match("SEL", username) is not None :
         username = username.split('_')
         cCompany = username[1]
         lMids = Mid.objects.filter(company = cCompany)
+        SEL = True
     
     else :
         alpha = username.split('m')
@@ -1826,7 +1866,9 @@ def viewSubordinates(request):
             if p.billet == "SL" and p.current :
                 lMids = Mid.objects.filter(company = cCompany).filter(platoon = cMid.platoon).filter(squad = cMid.squad)
     
-    return render_to_response('mid/viewSubordinates.html', {'cCompany' : cCompany,
+    return render_to_response('mid/viewSubordinates.html', { 'CO' : CO,
+                                                             'SEL' : SEL,
+                                                             'cCompany' : cCompany,
                                                              'lMids' : lMids
                                                              }, 
                                                              context_instance=RequestContext(request))
@@ -1836,6 +1878,9 @@ def listDetails(request):
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect("/")
+    
+    CO = False
+    SEL = False
     
     cMid = Mid.objects.get(alpha = request.POST['id'])
     
@@ -1850,7 +1895,9 @@ def listDetails(request):
     lT = Tours.objects.filter(mid = cMid)
     lP = Probation.objects.filter(mid = cMid)
     
-    return render_to_response('mid/listDetails.html', {'cMid' : cMid,
+    return render_to_response('mid/listDetails.html', {'CO' : CO,
+                                                       'SEL' : SEL,
+                                                       'cMid' : cMid,
                                                        }, 
                                                        context_instance=RequestContext(request))
     
