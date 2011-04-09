@@ -107,7 +107,7 @@ TEMPLATE_DIRS = (
 
 
 # time until the session cookie times out on the browser.  in seconds
-SESSION_COOKIE_AGE = 5000000
+SESSION_COOKIE_AGE = 7200 # maybe 2 hours?
 
 INSTALLED_APPS = (
     'django.contrib.auth',
