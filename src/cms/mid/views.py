@@ -274,7 +274,7 @@ def renderSwitchboard(request) :
             SL = True
     
     init = False
-    if Zero8.objects.filter(reportDate = date.today()):
+    if Zero8.objects.filter(reportDate = date.today(), company = cMid.company):
         init = True
                                                  
    
