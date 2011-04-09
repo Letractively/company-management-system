@@ -49,6 +49,7 @@ def viewReport(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     if request.method != "POST" :
         if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
@@ -58,7 +59,10 @@ def viewReport(request):
     else :
         reportDate = request.POST['date']
     
-    cReport = Zero8.objects.get(reportDate = reportDate)
+    cReport = Zero8.objects.get(reportDate = reportDate, company = cUnit)
+    CO = UnitLeader.objects.get(unit = cUnit, billet = "CO")
+    SEL = UnitLeader.objects.get(unit = cUnit, billet = "SEL")
+    CC = Billet.objects.get(mid__company = cCompany, billet = "CC", current = True)
     
     #Sig events
     lSigEventsA = SignificantEvents.objects.filter(zero8 = cReport).filter(section = "A")
@@ -164,6 +168,9 @@ def viewReport(request):
     cBAC = lBAC.count()
     
     return render_to_response('zero8/viewReport.html', {#'cMid':cMid,
+                                                        'CO' : CO,
+                                                        'SEL' : SEL,
+                                                        'CC' : CC,
                                                         'cReport' : cReport,
                                                         'cDate' : cReport.reportDate,
                                                         'cCompany' : cCompany, 

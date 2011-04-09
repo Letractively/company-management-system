@@ -8,6 +8,7 @@ from accountability.models import Event
 from accountability.models import Attendance
 from zero8.models import Zero8
 from weekends.models import Weekend
+from unit.models import Unit
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -153,7 +154,8 @@ def makeDay(request):
                     forceProtectionCondition = "A",
                     workOrderActive = 0,
                     workOrderClosed = 0,
-                    workOrderOverdue = 0
+                    workOrderOverdue = 0,
+                    company = Unit.objects.get(company = cMid.company)
                     )
     cReport.save()
     
