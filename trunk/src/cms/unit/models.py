@@ -75,6 +75,7 @@ class UnitLeader(models.Model):
     email = models.EmailField(null=True,blank=True)
     roomNumber = models.ForeignKey('mid.Room',null=True,blank=True)
     unit = models.ForeignKey(Unit,null=True,blank=True)
+    unitNumber = models.CharField(max_length=2,null=True,blank=True)
     billet = models.CharField(max_length=5,choices=BILLET_CHOICES,null=True,blank=True)
     
     def __unicode__(self):

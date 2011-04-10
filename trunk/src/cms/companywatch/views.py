@@ -143,7 +143,7 @@ def initWatchBills(request):
     numberOfDays = acYear.summerStart - acYear.fallStart
     count = 0
     while (count < numberOfDays.days):
-        WatchBill.objects.create(date=acYear.fallStart + timedelta(days=count),type='W')
+        WatchBill.objects.create(date=acYear.fallStart + timedelta(days=count),type='W',dutySection=0)
         count = count + 1
     #Set the types of watch for all Leave dates
     #for Thanksgiving set type of Watchbill to Leave
@@ -178,7 +178,7 @@ def initWatchBills(request):
         if bill.type=='W': # For each work day use the times in the workBillTimes to generate the start and end times for the watches
             count = 0
             while count < 20:
-                Watch.objects.create(watchBill_id=bill,mid_id=noMid.alpha,startTime=workBillTimes[count],workBillTimes[count+1],post='Company Area')
+                Watch.objects.create(watchBill_id=bill,mid_id=noMid.alpha,startTime=workBillTimes[count],endTime=workBillTimes[count+1],post='Company Area')
                 count = count +1
         elif bill.type=='H': # For each holiday all watches start at the top of the hour on the hour
             count = 0
