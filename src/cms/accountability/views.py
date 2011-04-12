@@ -388,7 +388,7 @@ def cancelEvent(request):
     lEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False).order_by('dateTime')[0:40]
     
     return render_to_response('accountability/cancelEvent.html', {'cMid' : cMid, 
-                                                                  'lBillets', lBillets,
+                                                                  'lBillets' : lBillets,
                                                                   'lEvents' : lEvents,
                                                                   }, 
                                                                   context_instance=RequestContext(request))
