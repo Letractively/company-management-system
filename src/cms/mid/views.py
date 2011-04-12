@@ -394,20 +394,20 @@ def viewDiscipline(request):
     lR = Restriction.objects.filter(mid = cMid).order_by('startDate')
     lT = Tours.objects.filter(mid = cMid).order_by('startDate')
     lP = Probation.objects.filter(mid = cMid).order_by('startDate')
-    
+
     cR = None
     cT = None
     cP = None
     pDaysLeft = None
-    
+
     for p in lR:
         if p.daysRemaining > 0 :
             cR = p
-            
+
     for p in lT:
         if p.toursRemaining > 0 :
             cT = p
-            
+
     for p in lP:
         if p.startDate + timedelta(days = daysAwarded) > date.today() :
             cP = p
@@ -438,7 +438,7 @@ def selectUser(request):
     cCompany = cMid.company
     
     #List of current mid's billets
-   lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     for p in lBillets :
         if p.billet == "ADM" and p.current :
@@ -1509,7 +1509,7 @@ def savePRT(request):
             p.PRTSat = False
             
         p.save()
- 
+
     return HttpResponseRedirect(reverse('mid:PRTSat')) 
 
 @login_required(redirect_field_name='/')    
@@ -1576,7 +1576,7 @@ def saveAC(request):
             p.acSAT = False
             
         p.save()
- 
+
     return HttpResponseRedirect(reverse('mid:ACSat')) 
 
 @login_required(redirect_field_name='/')    
@@ -1643,7 +1643,7 @@ def saveRoomAssignment(request):
             
         p.roomNumber = cRoom
         p.save()
- 
+
     return HttpResponseRedirect(reverse('mid:roomAssignment')) 
 
 @login_required(redirect_field_name='/')
@@ -1672,7 +1672,7 @@ def changeCompanyRoom(request):
                                                              'lRooms' : lRooms 
                                                              }, 
                                                              context_instance=RequestContext(request))
-    
+
 @login_required(redirect_field_name='/')
 def saveChangeCompanyRoom(request):
     alpha = request.user.username.split('m')
@@ -1682,7 +1682,7 @@ def saveChangeCompanyRoom(request):
 
     #List of current mid's billets
     lBillets = Billet.objects.filter(mid=cMid)
-    
+
     FLT = False
     for p in lBillets :
         if p.billet == "FLT" and p.current :
@@ -1695,7 +1695,7 @@ def saveChangeCompanyRoom(request):
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect("/")
-    
+
     roomNumber = request.POST['roomNumber']
     
     cRoom = Room.objects.get(roomNumber = roomNumber)
