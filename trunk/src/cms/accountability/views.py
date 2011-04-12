@@ -360,7 +360,7 @@ def selectEvent(request):
     lInProgEvents = Event.objects.filter(company = cCompany).filter(companyComplete = False).order_by('dateTime')
     
     return render_to_response('accountability/selectEvent.html', {'cMid' : cMid, 
-                                                                  'lBillets', : lBillets,
+                                                                  'lBillets' : lBillets,
                                                                   'lEvents' : lEvents,
                                                                   'lInProgEvents' : lInProgEvents
                                                                   }, 
