@@ -306,8 +306,8 @@ def taps(request):
                                                                 ).exclude(status = "M").order_by('mid')
 
     return render_to_response('accountability/taps.html', {'cMid' : cMid, 
-                                                           'lBillets', lBillets,
-                                                           'cEvent' : cEvent,
+                                                           'lBillets', lBillets, 
+                                                           'cEvent' : cEvent, 
                                                            'lAttendance' : lAttendance
                                                            }, 
                                                            context_instance=RequestContext(request))
