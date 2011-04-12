@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     
     
     (r'^login$', 'mid.views.logIn'),
-    (r'^logout$', 'mid.views.logOut'),
+    url(r'^logout$', 'mid.views.logOut', name="logout"),
     url(r'^switchboard$', 'mid.views.renderSwitchboard', name = "switchboard"),
     
     (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),

@@ -65,7 +65,7 @@ class Event(models.Model):
    platoonThreeSubmitted = models.NullBooleanField()
    platoonFourSubmitted = models.NullBooleanField()
    companyComplete = models.NullBooleanField()
-   def __unicode_(self):
+   def __unicode__(self):
         return u'%s at %s: %s' %(self.type,self.dateTime,self.location)
     
 class Attendance(models.Model):
