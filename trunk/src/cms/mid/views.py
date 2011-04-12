@@ -1456,7 +1456,7 @@ def PRTSat(request) :
     cCompany = cMid.company
     
     #List of current mid's billets
-   lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
     PMO = False
     for p in lBillets :
