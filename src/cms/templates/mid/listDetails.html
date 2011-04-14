@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block title %}Subordinate Details{% endblock %}
+{% block content %}
+
+<h1>{{ cMid }}</h1>
+
+<h3>Uniform Inspections: </h3>
+<table>
+{% for p in lUI %}
+    <tr>
+        <form action="uInsView" method = "post">
+        {% csrf_token %}
+        <td>{% if p.fail %}FAIL{% else %}PASS{% endif %}</td>
+        <td>{{ p.score }}/19</td>
+        <td>{{ p.inspectionDate }}</td>
+        <td>{{ p.inspector.LName }} ({{ p.inspector.alpha }})</td>
+        <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+            </td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>No uniform inspections.</td></tr>
+{% endfor %}
+</table>
+
+<h3>Bravo Room Inspections: </h3>
+<table>
+{% for p in lRI %}
+    <tr>
+        <form action="bInsView" method = "post">
+        {% csrf_token %}
+        <td>{% if p.fail %}FAIL{% else %}PASS{% endif %}</td>
+        <td>{{ p.score }}/23</td>
+        <td>{{ p.inspectionDate }}</td>
+        <td>{{ p.inspector.LName }} ({{ p.inspector.alpha }})</td>
+        <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+            </td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>No Bravo room inspections.</td></tr>
+{% endfor %}
+</table>
+
+<h3>History of Form-1s: </h3>
+<table>
+{% for p in lF1 %}
+    <tr>
+        <form action="form1View" method = "post">
+        {% csrf_token %}
+        <td>{{ p.get_formType_display }}</td>
+        <td>{{ p.formDate }}</td>
+        <td>{{ p.get_reason_display }}</td>
+        <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+            </td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>No Form-1s.</td></tr>
+{% endfor %}
+</table>
+
+<h3>Special Request Chits: </h3>
+<table>
+{% for p in lSRC %}
+    <tr>
+        <form action="specReqView" method = "post">
+        {% csrf_token %}
+        <td>{{ p.date }}</td>
+        <td>{%if p.requestType == 'O' %}
+                {{ p.otherRequestType }}
+            {% else %}
+                {{ p.get_requestType_display }}
+            {%endif%}
+        </td>
+        <td>{% if p.approvalStatus == 10 %}APPROVED
+            {%else%}
+                {% if p.approvalStatus == 11 %}DENIED{%endif%}
+                {% if p.approvalStatus < 9 %}PENDING{%endif%}
+            {%endif%}
+        </td>
+            <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+                </td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>No Special Request Chits.</td></tr>
+{% endfor %}
+</table>
+
+<h3>Past ORM Chits: </h3>
+<table>
+{% for p in lORM %}
+    <tr>
+        <form action="ormView" method = "post">
+        {% csrf_token %}
+        <td>{{ p.dateDepart }}</td>
+        <td>{{ p.dateReturn }}</td>
+        <td>{% if p.approvalStatus == 0 %}APPROVED
+            {%else%}
+                {% if p.approvalStatus == -1 %}DENIED{%endif%}
+                {% if p.approvalStatus > 0 %}PENDING{%endif%}
+            {%endif%}
+        </td>
+            <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+                </td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>No ORM Chits.</td></tr>
+{% endfor %}
+</table>
+
+<h3>Medical chits: </h3>
+<table>
+{% for p in lMed %}
+    <tr>
+        <td>{{ p.startDate }} - {{ p.endDate }}</td>
+        <td>{{ p.get_disposition_display }}</td>
+        <td>{{ p.diagnosis }}</td>
+        <td>{{ p.adminNotes }}</td>
+    </tr>
+{% empty %}
+    <tr><td>No medical chits.</td></tr>
+{% endfor %}
+</table>
+
+<h3>History of Punishments: </h3>
+<table>
+    {%if lR%}
+    <h4>Restrictions:</h4>
+    <tr>
+        <td>Start Date: </td>
+        <td>Days Awarded: </td>
+        <td>Days Remaining: </td>
+        <td>Admin Notes </td>
+    </tr>
+    {%endif%}   
+    {% for p in lR %}
+            <tr>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.daysAwarded }} days</td>
+                <td>{{ p.daysRemaining }} days</td>
+                <td>{{ p.adminNotes }}</td>
+            </tr>
+    {% empty %}
+            <tr><td><h4>No past restrictions.</h4></td></tr>
+    {% endfor %}
+</table>
+<table> 
+    {%if lT%}
+    <h4>Tours:</h4>
+    <tr>
+        <td>Start Date: </td>
+        <td>Tours Awarded: </td>
+        <td>Tours Remaining: </td>
+        <td>Admin Notes </td>
+    </tr>
+    {%endif%}   
+    {% for p in lT %}
+            <tr>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.toursAwarded }} days</td>
+                <td>{{ p.toursRemaining }} days</td>
+                <td>{{ p.adminNotes }}</td>
+            </tr>
+    {% empty %}
+            <tr><td><h4>No past tours.</h4> </td></tr>
+    {% endfor %}
+</table>
+<table> 
+    {%if lP%}
+    <h4>Probations:</h4>
+    <tr>
+        <td>Start Date: </td>
+        <td>Days Awarded: </td>
+        <td>Admin Notes </td>
+    </tr>
+    {%endif%}   
+    {% for p in lP %}
+    <tr>
+        <td>{{ p.startDate }}</td>
+        <td>{{ p.daysAwarded }}</td>
+        <td>{{ p.description }}</td>
+    </tr>
+    {% empty %}
+        <tr><td><h4>No past probations. </h4></td></tr>
+    {% endfor %}
+</table>
+    
+{% endblock %}

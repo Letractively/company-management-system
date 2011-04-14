@@ -19,6 +19,7 @@ from medchits.models import Chit
 from movementorder.models import MOParticipant
 from movementorder.models import MovementOrder
 from unit.models import Unit
+from accountability.models import Attendance
 
 from specialrequestchit.models import SpecialRequestChit
 from orm.models import OrmChit
@@ -1884,17 +1885,45 @@ def viewSubordinates(request):
     
 @login_required(redirect_field_name='/')
 def listDetails(request):
+    username = request.user.username
+    
+    cMid = None
+    lBillets = []
+    CO = False
+    SEL = False
+    
+    if re.match("CO", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        CO = True
+        
+    elif re.match("SEL", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        SEL = True
+    
+    else :       
+        alpha = request.user.username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+        cCompany = cMid.company
+        lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    cUnit = Unit.objects.get(company = cCompany)
+    
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
         return HttpResponseRedirect("/")
     
-    CO = False
-    SEL = False
-    
     cMid = Mid.objects.get(alpha = request.POST['id'])
     
-    lUI = UniformInspection.objects.filter(mid = cMid)
-    lRI = BravoInspection.objects.filter(mid = cMid)
+    try :
+        cRoom = cMid.roomNumber
+    except :
+        cRoom = Room.objects.get(roomNumber = "0000")
+        
+    lRI = BravoInspection.objects.filter(room=cRoom).order_by('-inspectionDate')
+    lUI = UniformInspection.objects.filter(mid = cMid).order_by('-inspectionDate')
     lF1 = Form1.objects.filter(mid = cMid)
     lSRC = SpecialRequestChit.objects.filter(mid = cMid)
     lORM = OrmChit.objects.filter(mid = cMid)
@@ -1907,7 +1936,19 @@ def listDetails(request):
     return render_to_response('mid/listDetails.html', {'CO' : CO,
                                                        'SEL' : SEL,
                                                        'cMid' : cMid,
+                                                       'lBillets' : lBillets,
+                                                       'lUI' : lUI,
+                                                       'lRI' : lRI,
+                                                       'lF1' : lF1,
+                                                       'lSRC' : lSRC,
+                                                       'lORM' : lORM,
+                                                       'lAtt' : lAtt,
+                                                       'lMed' : lMed,
+                                                       'lR' : lR,
+                                                       'lT' : lT,
+                                                       'lP' : lP,
                                                        }, 
                                                        context_instance=RequestContext(request))
-    
+
+
     
