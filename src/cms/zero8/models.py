@@ -119,7 +119,7 @@ COMPANIES=(
 class InturmuralResults(models.Model):
     zero8 = models.ForeignKey(Zero8)
     sport = models.CharField(max_length=30)
-    oponant = models.CharField(max_length=2,choices=COMPANIES)
+    opponent = models.CharField(max_length=2,choices=COMPANIES)
     Win = models.BooleanField()
     scoreUs = models.IntegerField()
     scoreThem = models.IntegerField()
