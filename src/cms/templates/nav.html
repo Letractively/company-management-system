@@ -37,13 +37,13 @@
 			<li><a href='#' class='parent'><span>Personal Information</span></a>
 				<div>
 					<ul>
-						<li><a href="#"><span>View Discipline</span></a></li>
+						<li><a href="{% url mid:viewDiscipline %}"><span>View Discipline</span></a></li>
 						<li><a href="{% url mid:editPersonalInformation %}"><span>Personal Information</span></a></li>
 						<li><a href="{% url mid:passChange %}"><span>Change Password</span></a></li>
 					</ul>
 				</div>
 			</li>
-			{% if Aptitude %}
+			{% if APT in lBillets %}
 				<li><span>Aptitude/Conduct</span>
 					<div>
 						<ul>
@@ -54,7 +54,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if PMO %}
+			{% if PMO in lBillets %}
 				<li><span><acronym title="Physical Missions Officer">PMO</acronym><span>
 					<div>
 						<ul>
@@ -63,7 +63,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if admin%}
+			{% if ADM in lBillets %}
 				<li><span>Admin</span>
 					<div>
 						<ul>
@@ -74,7 +74,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if ADJ %}
+			{% if ADJ in lBillets %}
 				<li><span>Company Adjutant</span>
 					<div>
 						<ul>
@@ -82,7 +82,6 @@
 					</div>
 				</li>
 			{%endif%}
-			<li><a href="{% url logout %}"><span>Logout</span></a></li>
 		{% else %}
 		<li><a href='{% url switchboard %}'><span>Home</span></a></li>
 		<li><a href="#" class="parent"><span>Weekends</span></a>
@@ -94,8 +93,8 @@
 				</ul>
 			</div>
 		</li>
-		<li><a href = "logout">Log out</a></li>
 		{% endif %}
+		<li><a href="{% url logout %}"><span>Logout</span></a></li>
 	</ul>
 {% else %}
 	Please Login
