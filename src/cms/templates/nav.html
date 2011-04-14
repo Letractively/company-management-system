@@ -18,7 +18,7 @@
 				<li><a href='{% url form1:form1 %}'>Form-1s</a></li>
 				<li><a href='{% url medchits:medchits %}'>Medical Chits</a></li>
 				<li><a href='{% url specialrequestchit:specReq %}'>Special Request Chits</a></li>
-				<li><a href='#'>ORM Chits</a></li>
+				<li><a href='{% url orm %}'>ORM Chits</a></li>
 			</ul>                
 		</li>
 		<li><a href='#'>Inspections</a>                
@@ -45,12 +45,12 @@
 		{% if "CC" in lBillets|safe %}
 			<li><a href='#'>Company Commander</a>
 				<ul>
-					<li><a href = "zero8/selectReport">View 0800 report</a></li>
-					<li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
-					<li><a href = "mid/viewSubordinates">View Subordinates</a></li>
-					<li><a href = "accountability/cancelEvent">Cancel formation/Event</a></li>
-					<li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
-					<li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
+					<li><a href = "{% url zero8:selectReport %}">View 0800 report</a></li>
+					<li><a href = "{% url mid:pendingApproval %}">Chits Pending Approval</a></li>
+					<li><a href = "{% url mid:viewSubordinates %}">View Subordinates</a></li>
+					<li><a href = "{% url accountability:cancelEvent %}">Cancel formation/Event</a></li>
+					<li><a href = "{% url mid:assignCOC %}">Appoint midshipmen to Company leadership positions</a></li>
+					<li><a href = "{% url mid:assignBillets %}">Appoint midshipmen to Company Staff positions</a></li>
 				</ul>
 			</li>
 		{% endif %}
