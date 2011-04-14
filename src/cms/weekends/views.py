@@ -203,6 +203,7 @@ def viewList(request):
       
     return render_to_response('weekends/list.html', { 'CO' : True,
                                                       'SEL' : True,
+                                                      'cMid' : cMid,
                                                       'lBillets' : lBillets,
                                                       'cCompany' : cCompany,
                                                       'lWeekends' : lWeekends }, 
