@@ -8,4 +8,4 @@ from mid.models import Mid
 mids = Mid.objects.all()
 
 for mid in mids:
-    user = User.objects.create_user(username='m'+mid.alpha,'m'+mid.alpha+'@usna.edu','1')
+    user = User.objects.create_user('m'+mid.alpha,'m'+mid.alpha+'@usna.edu','1')
