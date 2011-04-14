@@ -2,9 +2,9 @@
 	<ul class="menu">
 		{% if cMid %}
       <table><tr>
-     {% for billet in lBillets %}
+     {% if "CC" in lBillets %}
         <td>{{ billet }}</td>
-     {% endfor %}
+     {% endif %}
         </tr></table>
 			<li><a href='{% url switchboard %}'><span>Home</span></a></li>
 			<li><a class="parent" href='#'><span>Weekends</span></a>
