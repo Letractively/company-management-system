@@ -66,7 +66,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if XO in lBillets %}
+			{% if "XO" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Executive Officer</span></a>
 					<div>
 						<ul>
@@ -75,7 +75,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if PC in lBillets %}
+			{% if "PC" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Platoon Commander</span></a>
 					<div>
 						<ul>
@@ -85,7 +85,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if PLTS in lBillets %}
+			{% if "PLTS" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Platoon Sergeant</span></a>
 					<div>
 						<ul>
@@ -94,7 +94,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if SL %}
+			{% if "SL" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Squad Leader</span></a>
 					<div>
 						<ul>
@@ -104,7 +104,7 @@
 					</div>
 				</li>
 			{%endif%}
-			{% if HA in lBillets %}
+			{% if "HA" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Honor Advisor</span></a>
 					<div>
 						<ul>
@@ -112,7 +112,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if OPS in lBillets %}
+			{% if "OPS" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Operations</span></a>
 					<div>
 						<ul>
@@ -120,7 +120,7 @@
 					</div>
 				</li>
 			{%endif%}	
-			{% if AC in lBillets %}
+			{% if "AC" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Academics</span></a>
 					<div>
 						<ul>
@@ -129,7 +129,7 @@
 					</div>
 				</li>
 			{%endif%}
-			{% if SAF in lBillets %}
+			{% if "SAF" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Saftey</span></a>
 					<div>
 						<ul>
@@ -138,7 +138,7 @@
 					</div>
 				</li>
 			{%endif%}
-			{% if APT in lBillets %}
+			{% if "APT" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Aptitude/Conduct</span></a>
 					<div>
 						<ul>
@@ -149,7 +149,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if PMO in lBillets %}
+			{% if "PMO" in lBillets|safe %}
 				<li><a href='#' class='parent'><span><acronym title="Physical Missions Officer">PMO</acronym><span></a>
 					<div>
 						<ul>
@@ -158,7 +158,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if ADM in lBillets %}
+			{% if "ADM" in lBillets|safe %}
 				<li><span>Admin</span>
 					<div>
 						<ul>
@@ -169,7 +169,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if ADJ in lBillets %}
+			{% if "ADJ" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Personal Information</span></a>
 					<div>
 						<ul>
@@ -178,7 +178,7 @@
 					</div>
 				</li>
 			{%endif%}
-			{% if PRO in lBillets %}
+			{% if "PRO" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Protocol</span></a>
 					<div>
 						<ul>
@@ -186,7 +186,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if WRD in lBillets %}
+			{% if "WRD" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Wardroom</span></a>
 					<div>
 						<ul>
@@ -194,7 +194,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if DRL in lBillets %}
+			{% if "DRL" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Drill</span></a>
 					<div>
 						<ul>
@@ -202,7 +202,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if SAVI in lBillets %}
+			{% if "SAVI" in lBillets|safe %}
 				<li><a href='#' class='parent'><span><acronym title="Sexual Assault Victim Intervention">SAVI</acronym></span></a>
 					<div>
 						<ul>
@@ -210,7 +210,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if CMEO in lBillets %}
+			{% if "CMEO" in lBillets|safe %}
 				<li><a href='#' class='parent'><span><acronym title="Command Managed Equal Opportunity">CMEO</acronym></span></a>
 					<div>
 						<ul>
@@ -218,7 +218,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if FIN in lBillets %}
+			{% if "FIN" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Financial</span></a>
 					<div>
 						<ul>
@@ -226,7 +226,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if FSGT in lBillets %}
+			{% if "FSGT" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>1st Sergeant</span></a>
 					<div>
 						<ul>
@@ -236,7 +236,7 @@
 					</div>
 				</li>
 			{% endif %}			
-			{% if TRNS1 in lBillets or TRNS2 in lBillets %}
+			{% if "TRNS1" in lBillets|safe or "TRNS2" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Training Sergeant</span></a>
 					<div>
 						<ul>
@@ -244,7 +244,7 @@
 					</div>
 				</li>
 			{%endif%}
-			{% if DRLS in lBillets %}
+			{% if "DRLS" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Drill Sergeant</span></a>
 					<div>
 						<ul>
@@ -252,7 +252,7 @@
 					</div>
 				</li>
 			{%endif%}			
-			{% if ADMC in lBillets %}
+			{% if "ADMC" in lBillets|safe %}
 				<li><a href='#' class='parent'><span>Admin</span></a>
 					<div>
 						<ul>
@@ -262,7 +262,7 @@
 					</div>
 				</li>
 			{% endif %}
-			{% if MISLO in lBillets %}
+			{% if "MISLO" in lBillets|safe %}
 				<li><a href='#' class='parent'><span><acronym title="Midshipman Information Systems Liason Officer">MISLO</acronym></span></a>
 					<div>
 						<ul>
