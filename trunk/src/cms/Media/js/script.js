@@ -1,5 +1,6 @@
 $(document).ready(
 	function() {
+    initMenu();
 		$(".datepicker").datepicker();
 		$(".datepicker").datepicker("option","dateFormat","yy-mm-dd");
 		$(".timepicker").timepicker();
@@ -7,6 +8,17 @@ $(document).ready(
 	}
 	
 );
+
+// Begin: Menu
+function initMenu() {
+	$('#menu ul').hide();
+	$('#menu li span.link').click(function() 
+	{
+		$(this).next().slideToggle("fast"); 
+	}
+	);
+}
+// End: Menu
 
 // Begin: Form Validation
 
