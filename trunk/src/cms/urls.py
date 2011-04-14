@@ -16,7 +16,9 @@ urlpatterns = patterns('',
     
     #Do NOT "fix" logIn/logOut to be login/logout, it'll break stuff
 
-    url(r'^$', 'mid.views.loginPage', name = "base"),
+    url(r'^$', 'mid.views.log', name = "base"),
+    url(r'^LP$', 'mid.views.loginPage', name = "LP"),
+    
     
     # We do not want any functionality at /cms.  We only want functionality at /cms/
     #(r'^/$', 'mid.views.loginPage'),
@@ -24,6 +26,7 @@ urlpatterns = patterns('',
     
     (r'^login$', 'mid.views.logIn'),
     url(r'^logout$', 'mid.views.logOut', name="logout"),
+    url(r'^log$', 'mid.views.logIn', name = "log"),
     url(r'^switchboard$', 'mid.views.renderSwitchboard', name = "switchboard"),
     
     (r'^mid/', include('mid.urls', namespace="mid", app_name="mid")),

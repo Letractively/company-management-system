@@ -1,4 +1,5 @@
 from mid.models import Mid
+from mid.models import Billet
 
 from uniforminspection.models import UniformInspection
 
