@@ -11,8 +11,8 @@ $(document).ready(
 
 // Begin: Menu
 function initMenu() {
-	$('#menu ul').hide();
-	$('#menu li span.link').click(function() 
+	$('nav ul').hide();
+	$('nav li a').click(function() 
 	{
 		$(this).next().slideToggle("fast"); 
 	}
