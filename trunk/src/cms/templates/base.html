@@ -21,9 +21,9 @@
       <section id="notification">
       </section>
       {% if user.is_authenticated %}
-      <div id="menu">
+      <menu>
         {% include "nav.html" %}
-      </div>
+      </menu>
       {% endif %}
       <section id="main">
         {% block content %}
