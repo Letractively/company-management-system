@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('orm.views',
 
-    url(r'^$', 'ormDefault', name = "orm"),
+    url(r'^$', 'ormDefault', name = "ormDefault"),
     (r'^/$', 'ormDefault'),
     
     url(r'addLeisure$', 'addLeisure', name = "addLeisure"),
