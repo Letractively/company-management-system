@@ -16,7 +16,7 @@ urlpatterns = patterns('orm.views',
     url(r'addRMP$', 'addRMP', name = "addRMP"),
     (r'saveRMP$', 'saveRMP'),
     
-    #(r'ormSubmit$', 'ormSubmit'),
+    (r'ormSubmit$', 'ormSubmit'),
     (r'ormView$', 'ormView'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
