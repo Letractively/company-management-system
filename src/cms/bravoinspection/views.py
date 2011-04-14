@@ -1,4 +1,5 @@
 from mid.models import Mid
+from mid.models import Billet
 from mid.models import Room
 
 from bravoinspection.models import BravoInspection

@@ -20,9 +20,10 @@ urlpatterns = patterns('zero8.views',
     url(r'studyHour$', 'studyHour', name = "studyHour"),
     (r'saveStudyHour$', 'saveStudyHour'),
     url(r'BAC$', 'BAC', name = "BAC"),
-    (r'saveBAC$', 'saveBAC'),
+    (r'saveB$', 'saveB'),
     url(r'restrictees$', 'restrictees', name = "restrictees"),
     (r'saveRestrictees$', 'saveRestrictees'),
+    (r'selectReport$', 'selectReport'),
     
     url(r'viewReport$', 'viewReport', name = "viewReport"),
 

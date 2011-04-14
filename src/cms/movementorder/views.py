@@ -4,6 +4,7 @@
 # Author: Dimitri Hatley
 
 from mid.models import Mid
+from mid.models import Billet
 
 from movementorder.models import MovementOrder
 from movementorder.models import MOParticipant

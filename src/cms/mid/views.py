@@ -18,12 +18,14 @@ from form1.models import Form1
 from medchits.models import Chit
 from movementorder.models import MOParticipant
 from movementorder.models import MovementOrder
+from unit.models import Unit
 
 from specialrequestchit.models import SpecialRequestChit
 from orm.models import OrmChit
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 
 from django.template import RequestContext
@@ -40,14 +42,19 @@ from datetime import datetime
 from datetime import timedelta
 
 import re
-
-def loginPage(request):
-    #if request.user.is_authenticated:
-    #    return HttpResponseRedirect('switchboard')
-    #else:
+        
+def log(request):
+    if not request.user.is_authenticated() :
         return render_to_response('mid/loginPage.html', {}, 
                                   context_instance=RequestContext(request))
-
+    
+    return HttpResponseRedirect('switchboard')
+        
+def loginPage(request):
+    return render_to_response('mid/loginPage.html', {}, 
+                                  context_instance=RequestContext(request))
+        
+    
 def logIn(request):
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -274,7 +281,7 @@ def renderSwitchboard(request) :
             SL = True
     
     init = False
-    if Zero8.objects.filter(reportDate = date.today()).filter(company = cMid.company).exists():
+    if Zero8.objects.filter(reportDate = date.today(), company = Unit.objects.get(company = cMid.company)):
         init = True
                                                  
    
@@ -1827,6 +1834,7 @@ def viewSubordinates(request):
     username = request.user.username
     
     lMids = []
+    lBillets = []
     CO = False
     SEL = False
     
@@ -1868,6 +1876,7 @@ def viewSubordinates(request):
     
     return render_to_response('mid/viewSubordinates.html', { 'CO' : CO,
                                                              'SEL' : SEL,
+                                                             'lBillets' : lBillets,
                                                              'cCompany' : cCompany,
                                                              'lMids' : lMids
                                                              }, 

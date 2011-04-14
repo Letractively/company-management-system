@@ -45,16 +45,31 @@ import re
 
 @login_required(redirect_field_name='/')
 def viewReport(request):
+    username = request.user.username
     
-    #ADD CO/SEL ABILITY
+    cMid = None
+    lBillets = []
+    CO = False
+    SEL = False
+    
+    if re.match("CO", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        CO = True
         
-    alpha = request.user.username.split('m')
-    alpha = alpha[1]
-    cMid = Mid.objects.get(alpha=alpha)
-    cCompany = cMid.company
-    cUnit = Unit.objects.get(company = cCompany)
+    elif re.match("SEL", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        SEL = True
     
-    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    else :       
+        alpha = request.user.username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+        cCompany = cMid.company
+        lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    cUnit = Unit.objects.get(company = cCompany)
     
     if request.method != "POST" :
         if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
@@ -172,7 +187,7 @@ def viewReport(request):
     lBAC = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
     cBAC = lBAC.count()
     
-    return render_to_response('zero8/viewReport.html', {#'cMid':cMid,
+    return render_to_response('zero8/viewReport.html', {'cMid':cMid,
                                                         'CO' : CO,
                                                         'SEL' : SEL,
                                                         'CC' : CC,
@@ -404,6 +419,12 @@ def saveDutySectionMuster(request):
         cDate = date.today()
     
     cReport = Zero8.objects.get(reportDate = cDate)
+    SAT = request.POST['SAT']
+    
+    if SAT == "True" :
+        SAT = True
+    else :
+        SAT = False
     
     cInspection = Inspections(zero8 = cReport,
                               type = "W",
@@ -412,7 +433,7 @@ def saveDutySectionMuster(request):
                               time = time(8,0,0),
                               scoreEarned = 0,
                               scorePossible = 0,
-                              SAT = request.POST['SAT'],
+                              SAT = SAT,
                               comment = request.POST['comment']
                               )
     cInspection.save()
@@ -461,6 +482,12 @@ def saveBedCheck(request):
         cDate = date.today()
     
     cReport = Zero8.objects.get(reportDate = cDate)
+    SAT = request.POST['SAT']
+    
+    if SAT == "True" :
+        SAT = True
+    else :
+        SAT = False
     
     cInspection = Inspections(zero8 = cReport,
                               type = "B",
@@ -469,7 +496,7 @@ def saveBedCheck(request):
                               time = time(8,0,0),
                               scoreEarned = request.POST['people'],
                               scorePossible = 0,
-                              SAT = request.POST['SAT'],
+                              SAT = SAT,
                               comment = request.POST['comment']
                               )
     cInspection.save()
@@ -519,6 +546,13 @@ def saveStudyHour(request):
     
     cReport = Zero8.objects.get(reportDate = cDate)
     
+    SAT = request.POST['SAT']
+    
+    if SAT == "True" :
+        SAT = True
+    else :
+        SAT = False
+    
     cInspection = Inspections(zero8 = cReport,
                               type = "S",
                               inspector = cMid,
@@ -526,7 +560,7 @@ def saveStudyHour(request):
                               time = time(8,0,0),
                               scoreEarned = 0,
                               scorePossible = 0,
-                              SAT = request.POST['SAT'],
+                              SAT = SAT,
                               comment = request.POST['comment']
                               )
     cInspection.save()
@@ -558,9 +592,9 @@ def BAC(request):
                                                  'lMusters' : lMusters
                                                  }, 
                                                  context_instance=RequestContext(request))
-    
+
 @login_required(redirect_field_name='/')
-def saveBAC(request):
+def saveB(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
@@ -575,6 +609,12 @@ def saveBAC(request):
         cDate = date.today()
     
     cReport = Zero8.objects.get(reportDate = cDate)
+    SAT = request.POST['SAT']
+    
+    if SAT == "True" :
+        SAT = True
+    else :
+        SAT = False
     
     cInspection = Inspections(zero8 = cReport,
                               type = "A",
@@ -583,7 +623,7 @@ def saveBAC(request):
                               time = time(8,0,0),
                               scoreEarned = 0,
                               scorePossible = 0,
-                              SAT = request.POST['SAT'],
+                              SAT = SAT,
                               comment = request.POST['comment']
                               )
     cInspection.save()
@@ -644,3 +684,41 @@ def saveRestrictees(request):
     cInspection.save()
     
     return HttpResponseRedirect(reverse('zero8:restrictees'))
+
+@login_required(redirect_field_name='/')
+def selectReport(request):
+    username = request.user.username
+    
+    lBillets = []
+    cMid = None
+    CO = False
+    SEL = False
+    
+    if re.match("CO", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        CO = True
+        
+    elif re.match("SEL", username) is not None :
+        username = username.split('_')
+        cCompany = username[1]
+        SEL = True
+    
+    else :       
+        alpha = request.user.username.split('m')
+        alpha = alpha[1]
+        cMid = Mid.objects.get(alpha=alpha)
+        cCompany = cMid.company
+        lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    lReports = Zero8.objects.filter(company = cUnit).order_by("-reportDate")[:20]
+    
+    return render_to_response('zero8/selectReport.html', {'cMid':cMid,
+                                                         'CO' : CO,
+                                                         'SEL' : SEL, 
+                                                         'lBillets' : lBillets,
+                                                         'lReports' : lReports,
+                                                         }, 
+                                                         context_instance=RequestContext(request))

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>View a 0800 report:</h3>
+
+    <li><a href = "zero8/viewReport">View current 0800 Report</a></li><br />
+
+<p>Select a date to review...</p>
+
+<form action="viewReport" method="post">
+{% csrf_token %}
+    <input type = "text" name = "date" />
+    <input type = "submit" value = "Select" />
+</form>
+
+<h3>Previous reports: </h3>
+<table>
+    {% if lReports %}
+    <tr>
+        <td>Date: </td>
+        <td>CDO: </td>
+    </tr>
+    {% endif %}
+
+    {% for p in lReports %}
+        <form action="viewReport" method="post">
+        {% csrf_token %}
+        <tr>
+            <td>{{ p.reportDate }}</td>
+            <td>{{ p.offgoingCDO }} </td>
+            <td><input type = "hidden" name = "date" 
+                    value = "{{ p.reportDate.year }}-{{ p.reportDate.month }}-{{ p.reportDate.day }}"/>
+                <input type = "submit" value = "Review" /></td>
+        </tr>
+        </form>
+    {% empty %}
+        <tr><td colspan = 6>No past 0800 reports.</td></tr>
+   {%endfor%}
+</table>
+
+{% endblock %}
+

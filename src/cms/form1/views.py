@@ -2,6 +2,7 @@
 #Author: Dimitri Hatley
 
 from mid.models import Mid
+from mid.models import Billet
 
 from form1.models import Form1
 
