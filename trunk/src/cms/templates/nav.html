@@ -1,6 +1,6 @@
 {% if user.is_authenticated %}
 	<ul class="menu">
-		{% if cMid not none %}
+		{% if cMid %}
 			<li><a href='{% url switchboard %}'><span>Home</span></a></li>
 			<li><a class="parent" href='#'><span>Weekends</span></a>
 				<div>
