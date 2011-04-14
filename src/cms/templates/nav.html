@@ -1,6 +1,11 @@
 {% if user.is_authenticated %}
 	<ul class="menu">
 		{% if cMid %}
+      <table><tr>
+     {% for billet in lBillet %}
+        <td>{{ p }}</td>
+     {% endfor %}
+        </tr></table>
 			<li><a href='{% url switchboard %}'><span>Home</span></a></li>
 			<li><a class="parent" href='#'><span>Weekends</span></a>
 				<div>
@@ -56,12 +61,12 @@
 				<li><a href='#' class='parent'><span>Company Commander</span></a>
 					<div>
 						<ul>
-							<li><a href = "zero8/selectReport">View 0800 report</a></li>
-							<li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
-							<li><a href = "mid/viewSubordinates">View Subordinates</a></li>
-							<li><a href = "accountability/cancelEvent">Cancel formation/Event</a></li>
-							<li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
-							<li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
+							<li><a href = "zero8/selectReport"><span>View 0800 report</span></a></li>
+							<li><a href = "mid/pendingApproval"><span>Chits Pending Approval</span></a></li>
+							<li><a href = "mid/viewSubordinates"><span>View Subordinates</span></a></li>
+							<li><a href = "accountability/cancelEvent"><span>Cancel formation/Event</span></a></li>
+							<li><a href = "mid/assignCOC"><span>Appoint midshipmen to Company leadership positions</span></a></li>
+							<li><a href = "mid/assignBillets"><span>Appoint midshipmen to Company Staff positions</span></a></li>
 						</ul>
 					</div>
 				</li>
