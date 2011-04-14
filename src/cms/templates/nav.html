@@ -1,103 +1,101 @@
 {% if user.is_authenticated %}
 	<ul class="menu">
-	{% if CO %}
-		<li><a href='{% url switchboard %}'><span>Home</span></a></li>
-        <li><a href="#" class="parent"><span>Weekends</span></a>
-            <div>
-	            <ul>
-                 <li><a href = "{% url weekends:coApproval %}"><span>Approve Weekends</span></a></li>
-                 <li><a href = "{% url weekends:grantWeekends %}"><span>Manually Add Midshipmen</span></a></li>
-                 <li><a href = "{% url weekends:weekendIndex %}"><span>View Weekend List</span></a></li>
-	            </ul>
-        	</div>
-        </li>
-        <li><a href = "logout">Log out</a></li >
+		{% if cMid not none %}
+			<li><a href='{% url switchboard %}'><span>Home</span></a></li>
+			<li><a class="parent" href='#'><span>Weekends</span></a>
+				<div>
+					<ul>
+						<li><a href='{% url weekends:weekendIndex %}'><span>Request Weekends</span></a></li>
+						<li><a href='#'><span>View Weekend List</span></a></li>
+					</ul>
+				</div>
+			</li>
+			<li><a class="parent" href='#'><span>Forms</span></a>
+				<div>
+					<ul>
+						<li><a href='{% url form1:form1 %}'><span>Review Form-1s</span></a></li>
+						<li><a href='{% url medchits:medchits %}'><span>Medical Chits</span></a></li>
+						<li><a href='{% url specialrequestchit:specReq %}'><span>Special Request Chits</span></a></li>
+						<li><a href='#'><span>ORM Chits</span></a></li>
+					</ul>
+				</div>
+			</li>
+			<li><a href='#' class='parent'><span>Inspections</span></a>
+				<div>
+					<ul>
+						<li><a href="{% url bIns:bravoinspection %}"><span>Review Room Inspections</span></a></li>
+						{% if cMid.rank == "1" %}
+							<li><a href="{% url bIns:bInsSelect %}"><span>Enter Bravo Room Inspection</span></a></li>
+						{% endif %}
+						<li><a href="{% url uIns:uIns %}"><span>Review Uniform Inspections</span></a></li>
+						{% if cMid.rank == "1"  %}
+							<li><a href="{% url uIns:uInsSelect %}"><span>Enter Uniform Inspection</span></a></li>
+						{% endif %}
+					</ul>
+				</div>
+			</li>
+			<li><a href='#' class='parent'><span>Personal Information</span></a>
+				<div>
+					<ul>
+						<li><a href="#"><span>View Discipline</span></a></li>
+						<li><a href="{% url mid:editPersonalInformation %}"><span>Personal Information</span></a></li>
+						<li><a href="{% url mid:passChange %}"><span>Change Password</span></a></li>
+					</ul>
+				</div>
+			</li>
+			{% if Aptitude %}
+				<li><span>Aptitude/Conduct</span>
+					<div>
+						<ul>
+							<li><a href="{% url mid:assessDiscipline %}"><span>Maintain Restriction/Tours</span></a></li>
+							<li><a href="{% url mid:enterDiscipline %}"><span>Enter Restriction/Tours</span></a></li>
+							<li><a href="{% url mid:enterProbation %}"><span>Enter Probation</span></a></li>
+						</ul>
+					</div>
+				</li>
+			{% endif %}
+			{% if PMO %}
+				<li><span><acronym title="Physical Missions Officer">PMO</acronym><span>
+					<div>
+						<ul>
+							<li><a href="{% url mid:PRTSat %}"><span>Physical Status</span></a></li>
+						</ul>
+					</div>
+				</li>
+			{% endif %}
+			{% if admin%}
+				<li><span>Admin</span>
+					<div>
+						<ul>
+							<li><a href="{% url weekends:weekendAdmin %}"><span>View/Edit number of weekends</span></a></li>
+							<li><a href="{% url mid:selectUser %}"><span>Edit/Add user</span></a></li>
+							<li><a href="{% url mid:selectPassReset %}"><span>Restore user's password</span></a></li>
+						</ul>
+					</div>
+				</li>
+			{% endif %}
+			{% if ADJ %}
+				<li><span>Company Adjutant</span>
+					<div>
+						<ul>
+						</ul>
+					</div>
+				</li>
+			{%endif%}
+			<li><a href="{% url logout %}"><span>Logout</span></a></li>
+		{% endfor %}
 	{% else %}
-	    <li><a href='{% url switchboard %}'><span>Home</span></a></li>
-		<li><a class="parent" href='#'><span>Weekends</span></a>
+		<li><a href='{% url switchboard %}'><span>Home</span></a></li>
+		<li><a href="#" class="parent"><span>Weekends</span></a>
 			<div>
 				<ul>
-					<li><a href='{% url weekends:weekendIndex %}'><span>Request Weekends</span></a></li>
-					<li><a href='#'><span>View Weekend List</span></a></li>
+					<li><a href = "{% url weekends:coApproval %}"><span>Approve Weekends</span></a></li>
+					<li><a href = "{% url weekends:grantWeekends %}"><span>Manually Add Midshipmen</span></a></li>
+					<li><a href = "{% url weekends:weekendIndex %}"><span>View Weekend List</span></a></li>
 				</ul>
 			</div>
 		</li>
-		<li><a class="parent" href='#'><span>Forms</span></a>
-			<div>
-				<ul>
-					<li><a href='{% url form1:form1 %}'><span>Review Form-1s</span></a></li>
-					<li><a href='{% url medchits:medchits %}'><span>Medical Chits</span></a></li>
-					<li><a href='{% url specialrequestchit:specReq %}'><span>Special Request Chits</span></a></li>
-				    <li><a href='#'><span>ORM Chits</span></a></li>
-				</ul>
-			</div>
-		</li>
-		<li>
-			<a href='#' class='parent'><span>Inspections</span></a>
-			<div>
-				<ul>
-					<li><a href="{% url bIns:bravoinspection %}"><span>Review Room Inspections</span></a></li>
-					{% if firstie %}
-					<li><a href="{% url bIns:bInsSelect %}"><span>Enter Bravo Room Inspection</span></a></li>
-					{% endif %}
-				    <li><a href="{% url uIns:uIns %}"><span>Review Uniform Inspections</span></a></li>
-				    {% if firstie %}
-				    <li><a href="{% url uIns:uInsSelect %}"><span>Enter Uniform Inspection</span></a></li>
-				    {% endif %}
-				</ul>
-			</div>
-		</li>
-		<li><a href='#' class='parent'><span>Personal Information</span></a>
-			<div>
-				<ul>
-					<li><a href="#"><span>View Discipline</span></a></li>
-        			<li><a href="{% url mid:editPersonalInformation %}"><span>Personal Information</span></a></li>
-					<li><a href="{% url mid:passChange %}"><span>Change Password</span></a></li>
-				</ul>
-			</div>
-		</li>
-		{% if Aptitude %}
-		<li><span>Aptitude/Conduct</span>
-			<div>
-				<ul>
-			        <li><a href="{% url mid:assessDiscipline %}"><span>Maintain Restriction/Tours</span></a></li>
-			        <li><a href="{% url mid:enterDiscipline %}"><span>Enter Restriction/Tours</span></a></li>
-			        <li><a href="{% url mid:enterProbation %}"><span>Enter Probation</span></a></li>
-			    </ul>
-			</div>
-		</li>
-		{% endif %}
-		{% if PMO %}
-		<li><span><acronym title="Physical Missions Officer">PMO</acronym><span>
-		    <div>
-			    <ul>
-			        <li><a href="{% url mid:PRTSat %}"><span>Physical Status</span></a></li>
-			    </ul>
-		    </div>
-		</li>
-		{% endif %}
-		{% if admin%}
-	    <li><span>Admin</span>
-		    <div>
-			    <ul>
-			        <li><a href="{% url weekends:weekendAdmin %}"><span>View/Edit number of weekends</span></a></li>
-			        <li><a href="{% url mid:selectUser %}"><span>Edit/Add user</span></a></li>
-			        <li><a href="{% url mid:selectPassReset %}"><span>Restore user's password</span></a></li>
-			    </ul>
-		    </div>
-	    </li>
-	    {% endif %}
-	    {% if ADJ %}
-	    <li><span>Company Adjutant</span>
-		    <div>
-			    <ul>
-			      
-			    </ul>
-		    </div>
-	    </li>
-	    {%endif%}
-		<li><a href="{% url logout %}"><span>Logout</span></a></li>
-	{% endif %}
+		<li><a href = "logout">Log out</a></li >
 	</ul>
 {% else %}
 	Please Login
