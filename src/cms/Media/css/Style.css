@@ -45,48 +45,48 @@ section #main {
 	overflow: auto;
 }
 
-/** Begin: Menu Section **/
-menu {
+/** Begin: Nav Section **/
+nav {
 	float:left;
 	padding: 0px 5px 5px 0px;
 	width: 200px;
 }
 
-menu ul, menu ul ul {
+nav ul, nav ul ul {
 	list-style-type:none;
 	margin: 0;
 	padding: 0;
 	opacity:0.8;
 }
 
-menu ul a {
+nav ul a {
 	display: block;
 	text-decoration: none;	
 }
 
-menu ul li {
+nav ul li {
 	margin-top: 0.1em;
 }
 
-menu ul li a {
+nav ul li a {
 	background: #001F7A;
 	color: #FFFFFF;	
 	padding: 0.5em;
 	border:hidden 5px #181919;
 }
 
-menu ul li a:hover {
+nav ul li a:hover {
 	background: #000F3D;
 }
 
-menu ul li ul li a{
+nav ul li ul li a{
 	background: #AFADE0;
 	color: #000000;
 	padding-left: 0.5em;
 	border:hidden 5px #181919;
 }
 
-menu ul li ul li a:hover {
+nav ul li ul li a:hover {
 	background: #8884E3;
 	border-left: 0.3em #000000 solid;
 	padding-left: 0.15;
