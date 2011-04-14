@@ -286,7 +286,7 @@ def renderSwitchboard(request) :
         init = True
                                                  
    
-    return render_to_response('mid/switchboard.html', { 'mid' : cMid,
+    return render_to_response('mid/switchboard.html', { 'cMid' : cMid,
                                                         'lBillets' : lBillets,
                                                         'firstie' : firstie,
                                                         'init' : init,
