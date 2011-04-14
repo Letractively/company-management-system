@@ -1,288 +1,228 @@
 {% if user.is_authenticated %}
-	<ul class="menu">
-		{% if cMid %}
-			<li><a href='{% url switchboard %}'><span>Home</span></a></li>
-			<li><a class="parent" href='#'><span>Weekends</span></a>
-				<div>
-					<ul>
-						<li><a href='{% url weekends:weekendIndex %}'><span>Request Weekends</span></a></li>
-						<li><a href='{% url weekends:viewList %}'><span>View Weekend List</span></a></li>
-					</ul>
-				</div>
-			</li>
-			<li><a class="parent" href="#"><span>Movement Orders</span></a>
-				<div>
-					<ul>
-						<li><a href="{% url movementorder:MO %}"><span>Check In/Out<span></a></li>
-					</ul>
-				</div>
-			</li>
-			<li><a class="parent" href='#'><span>Forms</span></a>
-				<div>
-					<ul>
-						<li><a href='{% url form1:form1 %}'><span>Form-1s</span></a></li>
-						<li><a href='{% url medchits:medchits %}'><span>Medical Chits</span></a></li>
-						<li><a href='{% url specialrequestchit:specReq %}'><span>Special Request Chits</span></a></li>
-						<li><a href='#'><span>ORM Chits</span></a></li>
-					</ul>
-				</div>
-			</li>
-			<li><a class="parent" href='#'><span>Inspections</span></a>
-				<div>
-					<ul>
-						<li><a href="{% url bIns:bravoinspection %}"><span>Review Room Inspections</span></a></li>
-						{% if cMid.rank == "1" %}
-							<li><a href="{% url bIns:bInsSelect %}"><span>Enter Bravo Room Inspection</span></a></li>
-						{% endif %}
-						<li><a href="{% url uIns:uIns %}"><span>Review Uniform Inspections</span></a></li>
-						{% if cMid.rank == "1"  %}
-							<li><a href="{% url uIns:uInsSelect %}"><span>Enter Uniform Inspection</span></a></li>
-						{% endif %}
-					</ul>
-				</div>
-			</li>
-			<li><a href='#' class='parent'><span>Personal Information</span></a>
-				<div>
-					<ul>
-						<li><a href="{% url mid:viewDiscipline %}"><span>View Discipline</span></a></li>
-						<li><a href="{% url accountability:viewAttendance %}"><span>View Attendance</span></a></li>
-						<li><a href="{% url mid:editPersonalInformation %}"><span>Personal Information</span></a></li>
-						<li><a href="{% url mid:passChange %}"><span>Change Password</span></a></li>
-					</ul>
-				</div>
-			</li>
-			<li><a href="#" class="parent"><span>CDO Options</span></a></li>
-			{% if "CC" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Company Commander</span></a>
-					<div>
-						<ul>
-							<li><a href = "zero8/selectReport"><span>View 0800 report</span></a></li>
-							<li><a href = "mid/pendingApproval"><span>Chits Pending Approval</span></a></li>
-							<li><a href = "mid/viewSubordinates"><span>View Subordinates</span></a></li>
-							<li><a href = "accountability/cancelEvent"><span>Cancel formation/Event</span></a></li>
-							<li><a href = "mid/assignCOC"><span>Appoint midshipmen to Company leadership positions</span></a></li>
-							<li><a href = "mid/assignBillets"><span>Appoint midshipmen to Company Staff positions</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "XO" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Executive Officer</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url mid:viewSubordinates %}"><span>View Subordinates</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "PC" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Platoon Commander</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url mid:viewSubordinates %}"><span>View Subordinates</span></a></li>
-							<li><a href = "{% url mid:pendingApproval %}"><span>Chits Pending Approval</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "PLTS" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Platoon Sergeant</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url accountability:enterAttendance %}"><span>Enter Attendance</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "SL" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Squad Leader</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url mid:viewSubordinates %}"><span>View Subordinates</span></a></li>
-							<li><a href = "{% url mid:pendingApproval %}"><span>Chits Pending Approval</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{%endif%}
-			{% if "HA" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Honor Advisor</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "OPS" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Operations</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}	
-			{% if "AC" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Academics</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url mid:ACSat %}"><span>Academic Status</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{%endif%}
-			{% if "SAF" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Saftey</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url mid:pendingApproval %}"><span>Chits Pending Approval</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{%endif%}
-			{% if "APT" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Aptitude/Conduct</span></a>
-					<div>
-						<ul>
-							<li><a href="{% url mid:assessDiscipline %}"><span>Maintain Restriction/Tours</span></a></li>
-							<li><a href="{% url mid:enterDiscipline %}"><span>Enter Restriction/Tours</span></a></li>
-							<li><a href="{% url mid:enterProbation %}"><span>Enter Probation</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "PMO" in lBillets|safe %}
-				<li><a href='#' class='parent'><span><acronym title="Physical Missions Officer">PMO</acronym><span></a>
-					<div>
-						<ul>
-							<li><a href="{% url mid:PRTSat %}"><span>Physical Status</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "ADM" in lBillets|safe %}
-				<li><span>Admin</span>
-					<div>
-						<ul>
-							<li><a href="{% url weekends:weekendAdmin %}"><span>View/Edit number of weekends</span></a></li>
-							<li><a href="{% url mid:selectUser %}"><span>Edit/Add user</span></a></li>
-							<li><a href="{% url mid:selectPassReset %}"><span>Restore user's password</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "ADJ" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Personal Information</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url companywatch:AcYearView %}"><span>Create Duty Calendar</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{%endif%}
-			{% if "PRO" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Protocol</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "WRD" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Wardroom</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "DRL" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Drill</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "SAVI" in lBillets|safe %}
-				<li><a href='#' class='parent'><span><acronym title="Sexual Assault Victim Intervention">SAVI</acronym></span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "CMEO" in lBillets|safe %}
-				<li><a href='#' class='parent'><span><acronym title="Command Managed Equal Opportunity">CMEO</acronym></span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "FIN" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Financial</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "FSGT" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>1st Sergeant</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url accountability:createEvent %}"><span>Create a New Event</span></a></li>
-							<li><a href = "{% url accountability:selectEvent %}"><span>Review Attendance</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}			
-			{% if "TRNS1" in lBillets|safe or "TRNS2" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Training Sergeant</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}
-			{% if "DRLS" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Drill Sergeant</span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}			
-			{% if "ADMC" in lBillets|safe %}
-				<li><a href='#' class='parent'><span>Admin</span></a>
-					<div>
-						<ul>
-							<li><a href = "{% url mid:selectUser %}"><span>Edit/Add User</span></a></li>
-							<li><a href = "{% url mid:selectPassReset %}"><span>Restore User's Password</span></a></li>
-						</ul>
-					</div>
-				</li>
-			{% endif %}
-			{% if "MISLO" in lBillets|safe %}
-				<li><a href='#' class='parent'><span><acronym title="Midshipman Information Systems Liason Officer">MISLO</acronym></span></a>
-					<div>
-						<ul>
-						</ul>
-					</div>
-				</li>
-			{%endif%}
-		{% else %}
-		<li><a href='{% url switchboard %}'><span>Home</span></a></li>
-		<li><a href="#" class="parent"><span>Weekends</span></a>
-			<div>
-				<ul>
-					<li><a href = "{% url weekends:coApproval %}"><span>Approve Weekends</span></a></li>
-					<li><a href = "{% url weekends:grantWeekends %}"><span>Manually Add Midshipmen</span></a></li>
-					<li><a href = "{% url weekends:weekendIndex %}"><span>View Weekend List</span></a></li>
-				</ul>
-			</div>
+	<ul>
+	{% if cMid %}
+		<li><a href='{% url switchboard %}'>Home</a></li>
+		<li><a href='#'>Weekends</a>
+			<ul>
+				<li><a href='{% url weekends:weekendIndex %}'>Request Weekends</a></li>
+				<li><a href='{% url weekends:viewList %}'>View Weekend List</a></li>
+			</ul>
 		</li>
+		<li><a href="#">Movement Orders</a>                
+			<ul>
+				<li><a href="{% url movementorder:MO %}">Check In/Out</a></li>
+			</ul>                
+		</li>
+		<li><a href='#'>Forms</a>                
+			<ul>
+				<li><a href='{% url form1:form1 %}'>Form-1s</a></li>
+				<li><a href='{% url medchits:medchits %}'>Medical Chits</a></li>
+				<li><a href='{% url specialrequestchit:specReq %}'>Special Request Chits</a></li>
+				<li><a href='#'>ORM Chits</a></li>
+			</ul>                
+		</li>
+		<li><a href='#'>Inspections</a>                
+			<ul>
+				<li><a href="{% url bIns:bravoinspection %}">Review Room Inspections</a></li>
+				{% if cMid.rank == "1" %}
+					<li><a href="{% url bIns:bInsSelect %}">Enter Bravo Room Inspection</a></li>
+				{% endif %}
+				<li><a href="{% url uIns:uIns %}">Review Uniform Inspections</a></li>
+				{% if cMid.rank == "1"  %}
+					<li><a href="{% url uIns:uInsSelect %}">Enter Uniform Inspection</a></li>
+				{% endif %}
+			</ul>                
+		</li>
+		<li><a href='#'>Personal Information</a>                
+			<ul>
+				<li><a href="{% url mid:viewDiscipline %}">View Discipline</a></li>
+				<li><a href="{% url accountability:viewAttendance %}">View Attendance</a></li>
+				<li><a href="{% url mid:editPersonalInformation %}">Personal Information</a></li>
+				<li><a href="{% url mid:passChange %}">Change Password</a></li>
+			</ul>
+		</li>
+		<li><a href="#" class="parent">CDO Options</a></li>
+		{% if "CC" in lBillets|safe %}
+			<li><a href='#'>Company Commander</a>
+				<ul>
+					<li><a href = "zero8/selectReport">View 0800 report</a></li>
+					<li><a href = "mid/pendingApproval">Chits Pending Approval</a></li>
+					<li><a href = "mid/viewSubordinates">View Subordinates</a></li>
+					<li><a href = "accountability/cancelEvent">Cancel formation/Event</a></li>
+					<li><a href = "mid/assignCOC">Appoint midshipmen to Company leadership positions</a></li>
+					<li><a href = "mid/assignBillets">Appoint midshipmen to Company Staff positions</a></li>
+				</ul>
+			</li>
 		{% endif %}
-		<li><a href="{% url logout %}"><span>Logout</span></a></li>
+		{% if "XO" in lBillets|safe %}
+			<li><a href='#'>Executive Officer</a>
+				<ul>
+					<li><a href = "{% url mid:viewSubordinates %}">View Subordinates</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "PC" in lBillets|safe %}
+			<li><a href='#'>Platoon Commander</a>
+				<ul>
+					<li><a href = "{% url mid:viewSubordinates %}">View Subordinates</a></li>
+					<li><a href = "{% url mid:pendingApproval %}">Chits Pending Approval</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "PLTS" in lBillets|safe %}
+			<li><a href='#'>Platoon Sergeant</a>
+				<ul>
+					<li><a href = "{% url accountability:enterAttendance %}">Enter Attendance</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "SL" in lBillets|safe %}
+			<li><a href='#'>Squad Leader</a>
+				<ul>
+					<li><a href = "{% url mid:viewSubordinates %}">View Subordinates</a></li>
+					<li><a href = "{% url mid:pendingApproval %}">Chits Pending Approval</a></li>
+				</ul>
+			</li>
+		{%endif%}
+		{% if "HA" in lBillets|safe %}
+			<li><a href='#'>Honor Advisor</a>
+				<ul>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "OPS" in lBillets|safe %}
+			<li><a href='#'>Operations</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}    
+		{% if "AC" in lBillets|safe %}
+			<li><a href='#'>Academics</a>
+				<ul>
+					<li><a href = "{% url mid:ACSat %}">Academic Status</a></li>
+				</ul>
+			</li>
+		{%endif%}
+		{% if "SAF" in lBillets|safe %}
+			<li><a href='#'>Saftey</a>
+				<ul>
+					<li><a href = "{% url mid:pendingApproval %}">Chits Pending Approval</a></li>
+				</ul>
+			</li>
+		{%endif%}
+		{% if "APT" in lBillets|safe %}
+			<li><a href='#'>Aptitude/Conduct</a>
+				<ul>
+					<li><a href="{% url mid:assessDiscipline %}">Maintain Restriction/Tours</a></li>
+					<li><a href="{% url mid:enterDiscipline %}">Enter Restriction/Tours</a></li>
+					<li><a href="{% url mid:enterProbation %}">Enter Probation</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "PMO" in lBillets|safe %}
+			<li><a href='#'><acronym title="Physical Missions Officer">PMO</acronym></a>
+				<ul>
+					<li><a href="{% url mid:PRTSat %}">Physical Status</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "ADM" in lBillets|safe %}
+			<li>Admin
+				<ul>
+					<li><a href="{% url weekends:weekendAdmin %}">View/Edit number of weekends</a></li>
+					<li><a href="{% url mid:selectUser %}">Edit/Add user</a></li>
+					<li><a href="{% url mid:selectPassReset %}">Restore user's password</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "ADJ" in lBillets|safe %}
+			<li><a href='#'>Personal Information</a>
+				<ul>
+					<li><a href = "{% url companywatch:AcYearView %}">Create Duty Calendar</a></li>
+				</ul>
+			</li>
+		{%endif%}
+		{% if "PRO" in lBillets|safe %}
+			<li><a href='#'>Protocol</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "WRD" in lBillets|safe %}
+			<li><a href='#'>Wardroom</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "DRL" in lBillets|safe %}
+			<li><a href='#'>Drill</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "SAVI" in lBillets|safe %}
+			<li><a href='#'><acronym title="Sexual Assault Victim Intervention">SAVI</acronym></a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "CMEO" in lBillets|safe %}
+			<li><a href='#'><acronym title="Command Managed Equal Opportunity">CMEO</acronym></a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "FIN" in lBillets|safe %}
+			<li><a href='#'>Financial</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "FSGT" in lBillets|safe %}
+			<li><a href='#'>1st Sergeant</a>
+				<ul>
+					<li><a href = "{% url accountability:createEvent %}">Create a New Event</a></li>
+					<li><a href = "{% url accountability:selectEvent %}">Review Attendance</a></li>
+				</ul>
+			</li>
+		{% endif %}            
+		{% if "TRNS1" in lBillets|safe or "TRNS2" in lBillets|safe %}
+			<li><a href='#'>Training Sergeant</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}
+		{% if "DRLS" in lBillets|safe %}
+			<li><a href='#'>Drill Sergeant</a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}            
+		{% if "ADMC" in lBillets|safe %}
+			<li><a href='#'>Admin</a>
+				<ul>
+					<li><a href = "{% url mid:selectUser %}">Edit/Add User</a></li>
+					<li><a href = "{% url mid:selectPassReset %}">Restore User's Password</a></li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if "MISLO" in lBillets|safe %}
+			<li><a href='#'><acronym title="Midshipman Information Systems Liason Officer">MISLO</acronym></a>
+				<ul>
+				</ul>
+			</li>
+		{%endif%}
+	{% else %}
+		<li><a href='{% url switchboard %}'>Home</a></li>
+		<li><a href="#" class="parent">Weekends</a>
+			<ul>
+				<li><a href = "{% url weekends:coApproval %}">Approve Weekends</a></li>
+				<li><a href = "{% url weekends:grantWeekends %}">Manually Add Midshipmen</a></li>
+				<li><a href = "{% url weekends:weekendIndex %}">View Weekend List</a></li>
+			</ul>
+		</li>
+	{% endif %}
+	<li><a href="{% url logout %}">Logout</a></li>
 	</ul>
 {% else %}
 	Please Login
