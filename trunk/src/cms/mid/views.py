@@ -331,8 +331,16 @@ def logOut(request):
 
 @login_required(redirect_field_name='/')
 def selectPassChange(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
     
-    return render_to_response('mid/selectPassChange.html', { },
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    return render_to_response('mid/selectPassChange.html', { 'cMid' : cMid,
+                                                             'lBillets' : lBillets
+                                                             },
                               context_instance=RequestContext(request))
 
 @login_required(redirect_field_name='/')    
