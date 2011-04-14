@@ -2,7 +2,7 @@
 	<ul class="menu">
 		{% if cMid %}
       <table><tr>
-        <td>{% if p in lBillets.Billet %}yay{% endif%}</td><td>{{ cMid }}</td>
+        <td>{% for p in lBillets %}{{ p }}{% endfor %}</td><td>{{ cMid }}</td>
         </tr></table>
 			<li><a href='{% url switchboard %}'><span>Home</span></a></li>
 			<li><a class="parent" href='#'><span>Weekends</span></a>
