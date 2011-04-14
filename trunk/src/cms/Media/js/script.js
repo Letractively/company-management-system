@@ -14,6 +14,7 @@ function initMenu() {
 	$('nav ul ul').hide();
 	$('nav ul li a').click(function() 
 	{
+    $('nav ul ul').hide();
 		$(this).next().slideToggle("fast"); 
 	}
 	);
