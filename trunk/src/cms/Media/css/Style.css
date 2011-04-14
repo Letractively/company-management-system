@@ -1,72 +1,117 @@
 body, header, footer, section, div, nav, menu {
-  display: block;
+	display: block;
 }
 
 body {
-  background-color: rgba(107, 144, 218, 1);
-  width: 800px;
-  position: relative;
-  margin-left:auto;
-  margin-right:auto;
+	background-color: rgba(107, 144, 218, 1);
+	width: 1000px;
+	position: relative;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 #wrapper {
-  position: relative;
-  top: 10px;
-  margin-left:auto;
-  margin-right:auto;
-  padding: 10px;
-  background-color: rgba(100, 125, 150, 1);
-  width: 800px;
-  border-radius: 5px;
-  -moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
-  -webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
-  box-shadow: 10px 10px 5px #888888;
+	position: relative;
+	top: 10px;
+	margin-left:auto;
+	margin-right:auto;
+	padding: 10px;
+	background-color: rgba(100, 125, 150, 1);
+	width: 1000px;
+	border-radius: 5px;
+	-moz-box-shadow: 10px 10px 5px #888888; /* Firefox */
+	-webkit-box-shadow: 10px 10px 5px #888888; /* Safari and Chrome */
+	box-shadow: 10px 10px 5px #888888;
 }
 
 header, #notification, #main, nav, footer {
-  padding: 2px;
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, .3);
-  width: 800px;
+	padding: 2px;
+	color: #ffffff;
+	background-color: rgba(255, 255, 255, .3);
+	width: 1000px;
 }
 
 header {
-  height: 50px;
+	height: 50px;
 }
 
 section #notification {
-  height: 10px;
-  visibility:hidden;
+	height: 10px;
+	visibility:hidden;
 }
 
 section #main {
-  height: 550px;
-  overflow: auto;
+	height: 550px;
+	overflow: auto;
 }
 
 /** Begin: Menu Section **/
+menu {
+	float:left;
+	padding: 0px 5px 5px 0px;
+	width: 200px;
+}
 
+menu ul, menu ul ul {
+	list-style-type:none;
+	margin: 0;
+	padding: 0;
+	opacity:0.8;
+}
+
+menu ul a {
+	display: block;
+	text-decoration: none;	
+}
+
+menu ul li {
+	margin-top: 0.1em;
+}
+
+menu ul li a {
+	background: #001F7A;
+	color: #FFFFFF;	
+	padding: 0.5em;
+	border:hidden 5px #181919;
+}
+
+menu ul li a:hover {
+	background: #000F3D;
+}
+
+menu ul li ul li a{
+	background: #AFADE0;
+	color: #000000;
+	padding-left: 0.5em;
+	border:hidden 5px #181919;
+}
+
+menu ul li ul li a:hover {
+	background: #8884E3;
+	border-left: 0.3em #000000 solid;
+	padding-left: 0.15;
+}
 /** End: Menu Section **/
 
 footer {
-  height: 10px;
+	height: 10px;
 }
 
-/** Begin: Table **/
+/** Begin: Table Formatting **/
 th {
-  color: rgba(0, 0, 0, 1);
-  background-color: rgba(0, 0, 240, .8);
+	color: rgba(0, 0, 0, 1);
+	background-color: rgba(0, 0, 240, .8);
 }
 
 td {
-    color: rgba(255, 255, 255, 1);
+	color: rgba(255, 255, 255, 1);
 }
 
 td #row1 {
-  background-color: rgba(50, 50, 255, .8);
+	background-color: rgba(50, 50, 255, .8);
 }
 
 td #row2 {
-  background-color: rgba(50, 150, 255, .8);
+	background-color: rgba(50, 150, 255, .8);
 }
+/** End: Table Formatting **/
