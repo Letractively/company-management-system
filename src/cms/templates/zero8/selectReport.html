@@ -10,7 +10,7 @@
 
 <form action="viewReport" method="post">
 {% csrf_token %}
-    <input type = "text" name = "date" />
+    <input type = "text" class="datepicker" id="date" readonly="readonly" name = "date" />
     <input type = "submit" value = "Select" />
 </form>
 
