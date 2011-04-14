@@ -14,6 +14,8 @@ urlpatterns = patterns('mid.views',
     url(r'selectPassChange$', 'selectPassChange', name = "passChange"),
     (r'passChange$', 'passChange'),
     (r'viewSubordinates$', 'viewSubordinates'),
+    (r'listDetails$', 'listDetails'),
+
 
     #CC Options
     url(r'assignCOC$', 'assignCOC', name = "assignCOC"),

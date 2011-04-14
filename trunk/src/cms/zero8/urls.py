@@ -24,6 +24,12 @@ urlpatterns = patterns('zero8.views',
     url(r'restrictees$', 'restrictees', name = "restrictees"),
     (r'saveRestrictees$', 'saveRestrictees'),
     (r'selectReport$', 'selectReport'),
+    url(r'setFPC$', 'setFPC', name = "setFPC"),
+    (r'saveFPC$', 'saveFPC'),
+    url(r'addIntramurals$', 'addIntramurals', name = "addIntramurals"),
+    (r'saveIntramurals$', 'saveIntramurals'),
+    url(r'addNDE$', 'addNDE', name = "addNDE"),
+    (r'saveNDE$', 'saveNDE'),
     
     url(r'viewReport$', 'viewReport', name = "viewReport"),
 

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Set a Force Protection Confition:</h3>
+
+<form action="saveFPC" method="post">
+{% csrf_token %}
+    <select name = "FPC">
+        <option value = "A" {% if cReport.forceProtectionCondition == "A" %} selected {% endif %}>Alpha</option>
+        <option value = "B" {% if cReport.forceProtectionCondition == "B" %} selected {% endif %}>Bravo</option>
+        <option value = "C" {% if cReport.forceProtectionCondition == "C" %} selected {% endif %}>Charlie</option>
+        <option value = "D" {% if cReport.forceProtectionCondition == "D" %} selected {% endif %}>Delta</option>
+    </select>
+    <input type = "submit" value = "Set" />
+</form>
+
+{% endblock %}
+

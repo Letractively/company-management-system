@@ -23,6 +23,8 @@ from zero8.models import Candidates
 from zero8.models import Inspections
 from uniforminspection.models import UniformInspection
 from bravoinspection.models import BravoInspection
+from zero8.models import InturmuralResults
+from zero8.models import NextDayEvents
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -187,6 +189,9 @@ def viewReport(request):
     lBAC = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
     cBAC = lBAC.count()
     
+    lIntra = InturmuralResults.objects.filter(zero8 = cReport)
+    cIntra = lIntra.count()
+    
     return render_to_response('zero8/viewReport.html', {'cMid':cMid,
                                                         'CO' : CO,
                                                         'SEL' : SEL,
@@ -264,6 +269,8 @@ def viewReport(request):
                                                         'cRestCheck' : cRestCheck, 
                                                         'lBAC' : lBAC,
                                                         'cBAC' : cBAC,
+                                                        'lIntra' : lIntra,
+                                                        'cIntra' : cIntra,
                                                        }, 
                                                        context_instance=RequestContext(request))
 
@@ -273,6 +280,7 @@ def createSignificantEvent(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -290,6 +298,7 @@ def saveSignificantEvent(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -299,9 +308,8 @@ def saveSignificantEvent(request):
         cDate = date.today() - timedelta(days = 1)
     else :
         cDate = date.today()
-        
-    
-    cReport = Zero8.objects.get(reportDate = cDate)
+          
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     
     cEvent = SignificantEvents(zero8 = cReport,
                                section = request.POST['section'],
@@ -319,6 +327,7 @@ def candidates(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -338,6 +347,7 @@ def saveCandidate(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -365,6 +375,7 @@ def removeCandidate(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -383,6 +394,7 @@ def dutySectionMuster(request):
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
     cDuty = cMid.dutySection
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -391,7 +403,7 @@ def dutySectionMuster(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     
     lMids = Mid.objects.filter(company = cCompany).filter(dutySection = cDuty)
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "W")
@@ -408,6 +420,8 @@ def saveDutySectionMuster(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -418,7 +432,7 @@ def saveDutySectionMuster(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     SAT = request.POST['SAT']
     
     if SAT == "True" :
@@ -446,6 +460,7 @@ def bedCheck(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -454,7 +469,7 @@ def bedCheck(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     
     lRooms = Room.objects.filter(company = cCompany)
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "B")
@@ -471,6 +486,8 @@ def saveBedCheck(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -481,7 +498,7 @@ def saveBedCheck(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     SAT = request.POST['SAT']
     
     if SAT == "True" :
@@ -509,6 +526,7 @@ def studyHour(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -517,7 +535,7 @@ def studyHour(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     
     lRooms = Room.objects.filter(company = cCompany)
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "S")
@@ -534,6 +552,8 @@ def saveStudyHour(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -544,7 +564,7 @@ def saveStudyHour(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     
     SAT = request.POST['SAT']
     
@@ -573,6 +593,7 @@ def BAC(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -581,7 +602,7 @@ def BAC(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     
     lMids = Mid.objects.filter(company = cCompany)
     lMusters = Inspections.objects.filter(zero8 = cReport).filter(type = "A")
@@ -598,6 +619,8 @@ def saveB(request):
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     #Safety feature, makes sure we POST data to this view
     if request.method != "POST" :
@@ -608,7 +631,7 @@ def saveB(request):
     else :
         cDate = date.today()
     
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
     SAT = request.POST['SAT']
     
     if SAT == "True" :
@@ -636,6 +659,7 @@ def restrictees(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
     
@@ -656,6 +680,7 @@ def saveRestrictees(request):
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
     cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
     
     if request.method != "POST" :
         return HttpResponseRedirect('/')
@@ -669,7 +694,7 @@ def saveRestrictees(request):
     else :
         cDate = date.today()
         
-    cReport = Zero8.objects.get(reportDate = cDate)
+    cReport = Zero8.objects.get(reportDate = reportDate, company = cUnit)
     
     cInspection = Inspections(zero8 = cReport,
                               type = "C",
@@ -722,3 +747,175 @@ def selectReport(request):
                                                          'lReports' : lReports,
                                                          }, 
                                                          context_instance=RequestContext(request))
+    
+@login_required(redirect_field_name='/')
+def setFPC(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
+    
+    return render_to_response('zero8/setFPC.html', {'cMid':cMid,
+                                                    'lBillets' : lBillets,
+                                                    'cReport' : cReport,
+                                                    }, 
+                                                    context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def saveFPC(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
+    
+    cReport.forceProtectionCondition = request.POST['FPC']
+    cReport.save()
+    
+    return HttpResponseRedirect(reverse('zero8:setFPC'))
+
+@login_required(redirect_field_name='/')
+def addIntramurals(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
+    lMusters = InturmuralResults.objects.filter(zero8 = cReport)
+    
+    return render_to_response('zero8/addIntramurals.html', {'cMid':cMid,
+                                                            'lBillets' : lBillets,
+                                                            'cReport' : cReport,
+                                                            'lMusters' : lMusters,
+                                                            }, 
+                                                            context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def saveIntramurals(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
+    
+    cGame = InturmuralResults(zero8 = cReport,
+                              sport = request.POST['sport'],
+                              oponant = request.POST['oponant'],
+                              Win = True,
+                              scoreUs = request.POST['scoreUs'],
+                              scoreThem = request.POST['scoreThem'],
+                              adminNote = request.POST['adminNote'],
+                              )
+    cGame.save()
+    
+    return HttpResponseRedirect(reverse('zero8:addIntramurals'))
+
+@login_required(redirect_field_name='/')
+def addNDE(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
+    
+    return render_to_response('zero8/addNDE.html', {'cMid':cMid,
+                                                    'lBillets' : lBillets,
+                                                    'cReport' : cReport,
+                                                    }, 
+                                                    context_instance=RequestContext(request))
+
+@login_required(redirect_field_name='/')
+def saveNDE(request):
+    alpha = request.user.username.split('m')
+    alpha = alpha[1]
+    cMid = Mid.objects.get(alpha=alpha)
+    cCompany = cMid.company
+    cUnit = Unit.objects.get(company = cCompany)
+    
+    lBillets = Billet.objects.filter(mid = cMid).filter(current = True)
+    
+    #Safety feature, makes sure we POST data to this view
+    if request.method != "POST" :
+        return HttpResponseRedirect('/')
+    
+    if time(datetime.now().hour, datetime.now().minute, 0) < time(8, 0, 0):
+        cDate = date.today() - timedelta(days = 1)
+    else :
+        cDate = date.today()
+        
+    cReport = Zero8.objects.get(reportDate = cDate, company = cUnit)
+    
+    cReport.forceProtectionCondition = request.POST['FPC']
+    cReport.save()
+    
+    return HttpResponseRedirect(reverse('zero8:setFPC'))
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
