@@ -6,7 +6,7 @@
 				<div>
 					<ul>
 						<li><a href='{% url weekends:weekendIndex %}'><span>Request Weekends</span></a></li>
-						<li><a href='#'><span>View Weekend List</span></a></li>
+						<li><a href='{% url weekends:viewList %}'><span>View Weekend List</span></a></li>
 					</ul>
 				</div>
 			</li>
@@ -16,7 +16,7 @@
 						<li><a href='{% url form1:form1 %}'><span>Review Form-1s</span></a></li>
 						<li><a href='{% url medchits:medchits %}'><span>Medical Chits</span></a></li>
 						<li><a href='{% url specialrequestchit:specReq %}'><span>Special Request Chits</span></a></li>
-						<li><a href='#'><span>ORM Chits</span></a></li>
+						<li><a href='{% url orm:orm %}'><span>ORM Chits</span></a></li>
 					</ul>
 				</div>
 			</li>
