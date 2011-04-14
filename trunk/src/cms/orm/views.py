@@ -22,7 +22,7 @@ from datetime import date
 from datetime import timedelta
 
 @login_required(redirect_field_name='/')
-def orm(request):    
+def ormDefault(request):    
     alpha = request.user.username.split('m')
     alpha = alpha[1]
     cMid = Mid.objects.get(alpha=alpha)
