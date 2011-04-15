@@ -19,7 +19,7 @@ class RoomAdmin(admin.ModelAdmin):
     list_filter = ['company']
 
 admin.site.register(Mid, MidAdmin)
-admin.site.register(Room)
+admin.site.register(Room,RoomAdmin)
 admin.site.register(Billet)
 admin.site.register(Grade)
 admin.site.register(PRT)
