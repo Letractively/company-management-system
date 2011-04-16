@@ -95,6 +95,7 @@ class AcYear(models.Model):
     
 class AcWatch(models.Model):
     acYear = models.ForeignKey(AcYear)
+    company = models.ForeignKey('unit.unit',null=True,blank=True)
     semester = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     week = models.CharField(max_length=1, choices=SEMESTER_CHOICES)
     dayOfWeek = models.IntegerField(max_length=1, choices=DAY_CHOICES)
@@ -107,6 +108,7 @@ class AcWatch(models.Model):
 
 class WatchBill(models.Model):
     date = models.DateField()
+    company = models.Foreignkey('unit.unit',null=True,blank=True)
     type = models.CharField(max_length=1, choices=WATCHBILL_TYPE_CHOICES)
     dutySection = models.CharField(max_length=1, choices=DS_CHOICES, null=True, blank=True)
     CDO = models.ForeignKey("mid.Mid", related_name='+', null=True, blank=True)
