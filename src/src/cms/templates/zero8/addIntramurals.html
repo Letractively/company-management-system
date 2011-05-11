@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Record an Intraural Game Result :</h3>
+
+<table>
+<form action="saveIntramurals" method="post">
+{% csrf_token %}
+
+<tr>
+    <td>Sport:</td>
+    <td><input type = "text" name = "sport" /></td>
+</tr>
+
+<tr>
+    <td>Opponent:</td>
+    <td>
+        <select name = "oponant">
+            <option value = "1">1st Company</option>
+            <option value = "2">2nd Company</option>
+            <option value = "3">3rd Company</option>
+            <option value = "4">4th Company</option>
+            <option value = "5">5th Company</option>
+            <option value = "6">6th Company</option>
+            <option value = "7">7th Company</option>
+            <option value = "8">8th Company</option>
+            <option value = "9">9th Company</option>
+            <option value = "10">10th Company</option>
+            <option value = "11">11th Company</option>
+            <option value = "12">12th Company</option>
+            <option value = "13">13th Company</option>
+            <option value = "14">14th Company</option>
+            <option value = "15">15th Company</option>
+            <option value = "16">16th Company</option>
+            <option value = "17">17th Company</option>
+            <option value = "18">18th Company</option>
+            <option value = "19">19th Company</option>
+            <option value = "20">20th Company</option>
+            <option value = "21">21st Company</option>
+            <option value = "22">22nd Company</option>
+            <option value = "23">23rd Company</option>
+            <option value = "24">24th Company</option>
+            <option value = "25">25th Company</option>
+            <option value = "26">26th Company</option>
+            <option value = "27">27th Company</option>
+            <option value = "28">28th Company</option>
+            <option value = "29">29th Company</option>
+            <option value = "30">30th Company</option> 
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Our score:</td>
+    <td><input type = "text" name = "scoreUs" /></td>
+</tr>
+
+<tr>
+    <td>Their score:</td>
+    <td><input type = "text" name = "scoreThem" /></td>
+</tr>
+<tr>
+    <td>Comments:</td>
+    <td><textarea cols = 80 rows = 6 name = "adminNote"></textarea></td>
+</tr>
+<tr>
+    <td colspan = 2><input type="submit" value="Record" /></td>
+</tr>
+
+</form>
+</table>
+
+<h3>Recorded games for today: </h3>
+<table>
+    {% if lMusters %}
+    <tr>
+        <td>Sport: </td>
+        <td>Opponent: </td>
+        <td>Score: </td>
+        <td>Comment: </td>
+    </tr>
+    {% endif %}
+
+    {% for p in lMusters %}
+        <tr>
+            <td>{{ p.sport }}</td>
+            <td>{{ p.oponant }} </td>
+            <td>{{ p.scoreUs }} : {{ p.scoreThem }}</td>
+            <td>{{ p.adminNote }} </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan = 6>No games were recorded.</td></tr>
+   {%endfor%}
+</table>
+
+{% endblock %}
+

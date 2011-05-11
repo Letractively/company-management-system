@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Current Duty Calendar for {{ cCompany|numberToText }} Company: {% endblock %}
+
+{% block content %}
+
+{% csrf_token %}
+<table border=1>
+<caption>Fall Semester</caption>
+    <tr>
+        <td>Start Date: </td><td>"{{ acYear.fallStart }}"</td>
+    </tr>
+    <tr>
+        <td>6 weeks: </td><td>"{{ acYear.fall6Weeks }}"</td>
+    </tr>
+    <tr>
+        <td>12 weeks</td><td>"{{ acYear.fall12Weeks }}"</td>
+    </tr>
+    <tr>
+        <td>Ac Watch</td><td>"{{ acYear.fallGoldWeekStart }}"</td>
+    </tr>
+    <tr>
+        <td>End Date: </td><td>"{{ acYear.fallEnd }}"</td>
+    </tr>
+    <tr>
+        <td>Exam Week Start: </td><td>"{{ acYear.fallXWeekStart }}"</td>
+    </tr>
+    <tr>
+        <td>Exam Week End: </td><td>"{{ acYear.fallXWeekEnd }}"</td>
+    </tr>
+    <tr>
+        <td>Fall Intersessional Leave Start: </td><td>"{{ acYear.christmasIntersessionalStart }}"</td>
+    </tr>
+    <tr>
+        <td>Fall Intersessional Leave End:</td><td>"{{ acYear.christmasIntersessionalEnd }}"</td>
+    </tr>
+</table>
+<table border=1>
+<caption>Spring Semester</caption>
+    <tr>
+        <td>Start Date: </td><td>"{{ acYear.springStart }}"</td>
+    </tr>
+    <tr>
+        <td>6 weeks: </td><td>"{{ acYear.spring6Weeks }}"</td>
+    </tr>
+    <tr>
+        <td>12 weeks: </td><td>"{{ acYear.spring12Weeks }}"</td>
+    </tr>
+    <tr>
+        <td>End Date: </td><td>"{{ acYear.springEnd }}"</td>
+    </tr>
+    <tr>
+        <td>Exam Week Start: </td><td>"{{ acYear.springXWeekStart }}"</td>
+    </tr>
+    <tr>
+        <td>Examp Week End: </td><td>"{{ acYear.springXWeekEnd }}"</td>
+    </tr>
+    <tr>
+        <td>Spring Intersessional Leave Start: </td><td>"{{ acYear.springIntersessionalStart }}"</td>
+    </tr>
+    <tr>
+        <td>Spring Intersessional Leave End: </td><td>"{{ acYear.springIntersessionalEnd }}"</td>
+    </tr>
+</table>
+<table border=1>
+<caption>Leave Dates</caption>
+    <tr>
+        <td>Thanksgiving Start: </td><td>"{{ acYear.thanksgivingStart }}"</td>
+    </tr>
+    <tr>
+        <td>Thanksgiving End: </td><td>"{{ acYear.thanksgivingEnd }}"</td>
+    </tr>
+    <tr>
+        <td>Chrismas Leave Start: </td><td>"{{ acYear.christmasStart }}"</td>
+    </tr>
+    <tr>
+        <td>Christmas Leave End: </td><td>"{{ acYear.christmasEnd }}"</td>
+    </tr>
+</table>
+<table border=1>
+<caption>Holidays</caption>
+    <tr>
+        <td>Labor Day: </td><td>"{{ acYear.laborDay }}"</td>
+    </tr>
+    <tr>
+        <td>Columbus Day: </td><td>"{{ acYear.columbusDay }}"</td>
+    </tr>
+    <tr>
+        <td>Veterans Day: </td><td>"{{ acYear.veteransDay }}"</td>
+    </tr>
+    <tr>
+        <td>MLK Day: </td><td>"{{ acYear.mlkDay }}"</td>
+    </tr>
+    <tr>
+        <td>Washingon Birthday</td><td>"{{ acYear.washingtonsBirthday }}"</td>
+    </tr>
+</table>
+<form action="AcYearEdit" method="post">
+{% csrf_token %}
+<input type="submit" value="Edit this Ac Year" />
+</form>
+{% endblock %}

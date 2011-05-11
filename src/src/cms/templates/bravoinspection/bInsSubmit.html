@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Bravo Inspection{% endblock %}
+{% block content %}
+
+<h1>Enter Bravo Inspection for room {{ cRoom.roomNumber }}.</h1>
+
+<form action="bInsSave" method="post">
+{% csrf_token %}
+<table>
+    <tr>
+        <td><input type="checkbox" name="deck" checked="true" /></td>
+        <td> Deck mopped clean, swept </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="laundry" checked="true"/></td>
+        <td> No excessive dirty laundry in locker/ No odor emanating </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="mold" checked="true"/></td>
+        <td> No mold in shower and/or shower curtain </td>
+    </tr>   
+    <tr>
+        <td><input type="checkbox" name="door" checked="true"/></td>
+        <td> Door is open at a 90 degree angle when the room is unoccupied </td>
+    </tr>
+    <tr>
+        <td><br /><input type="checkbox" name="electronics" checked="true"/></td>
+        <td><br /> All lights and electrical equipment is shut off </td>
+    </tr>   
+    <tr>
+        <td><input type="checkbox" name="dust" checked="true"/></td>
+        <td> All surfaces clean and dusted </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="bulkheads" checked="true"/></td>
+        <td> Nothing hung from bulkhead, overheads, closets, racks, or doors </td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="racks" checked="true"/></td>
+        <td> Racks neatly made with clean linen/pillow in place/no blankets on rack </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="furniture" checked="true"/></td>
+        <td> No unauthorized furniture or appliances present (up to one non issued desk chair allowed per desk) </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="felt" checked="true"/></td>
+        <td> Protective felt pads on sled style chairs </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="gear" checked="true"/></td>
+        <td> No gear adrift </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="conLockers" checked="true"/></td>
+        <td> Confidential lockers locked </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="blinds" checked="true"/></td>
+        <td> Blinds at half mast and open</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="boxes" checked="true"/></td>
+        <td> All boxes and plastic containers are in closet or on shelves </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="corkBoard" checked="true"/></td>
+        <td> Cork board/blotter/desk material appropriate and neatly arranged </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="computer" checked="true"/></td>
+        <td> Computer screensavers are appropriate and in good taste </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="rugs" checked="true"/></td>
+        <td> No rugs in room except shower mat, which must be clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="midRegs" checked="true"/></td>
+        <td> Mid Regs/ Uniform Regs and Honor Instruction binders in bracket </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="shower" checked="true"/></td>
+        <td> Shower walls, curtain, and deck clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="medicineCabinets" checked="true"/></td>
+        <td> Medicine cabinet clean and neatly arranged </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="brightWork" checked="true"/></td>
+        <td> Brightwork work and mirros clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="materialDeficiencies" checked="true"/></td>
+        <td> Material deficiencies documented on the room check-in sheet or updated on ZIDL </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="rifles" checked="true"/></td>
+        <td> All rifles and swords locked </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Comment: <input type = "text" name = "comment" /> </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br /><input type = "submit" value="Submit Inspection" />
+            <input type="hidden" name="roomNumber" value="{{cRoom.roomNumber}}"></td>
+    </tr>
+    
+</form>
+</table>
+
+{% endblock %}

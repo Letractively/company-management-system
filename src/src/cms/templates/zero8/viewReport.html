@@ -1,0 +1,864 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<table>
+    <tr>
+        <td colspan = 9>FOR OFFICIAL USE ONLY – PRIVACY SENSITIVE</td>
+    </tr>
+    <tr>
+        <td colspan = 9>Any misuse or unauthorized disclosure can result in both civil and criminal penalties.</td>
+    </tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colspan = 3>{{ cReport.reportDate }}</td>
+    </tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td colspan = 9> {{ cCompany }} COMPANY DAILY 0800 REPORT</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr>
+    <td>FROM:</td><td colspan = 8> {{ cReport.offgoingCDO }}, USN, {{ cCompany }} COMPANY DUTY OFFICER</td>
+</tr>
+<tr>
+    <td>TO:</td><td colspan = 8>{{ CO }}, USN {{ cCompany }} Company Officer</td>
+</tr>
+<tr>
+    <td></td><td colspan = 8>{{ SEL }}, USN, {{ cCompany }} Company Senior Enlisted Leader</td>
+</tr>
+<tr>
+    <td></td><td colspan = 8>{{ CC.mid }}, USN, {{ cCompany }} Company Commander</td>
+</tr>
+<tr>
+    <td>SUBJ: </td><td colspan = 8> 25TH COMPANY 0800 REPORT FROM 0800 {{ cReport.reportDate }} to 0800 {{ cDate }}</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>1.</td>
+    <td colspan = 9>Oncoming CDO: {{ cReport.oncomingCDO }}</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>2.</td>
+    <td colspan = 9>Current Force Protection Condition: {{ cReport.get_forceProtectionCondition_display }}</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>3.</td>
+    <td colspan = 9>Significant Events: </td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>A.</td>
+    <td colspan = 6>FAMILY CRISIS/HOSPITALIZATION/DEATH NOTIFICATION/OTHER: </td>
+    <td colspan = 1>{{ cSigEventsA }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+    {% if cSigEventsA > 0 %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
+    {% for p in lSigEventsA %}
+    <tr><td></td><td></td>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.section}}{{p.id}}">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>    
+<tr>
+    <td></td>
+    <td>B.</td>
+    <td colspan = 6>MAJOR CONDUCT OFFENSES THAT OCCURRED THIS DATE: </td>
+    <td colspan = 1>{{ cSigEventsB }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lSigEventsB %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td>MIDN</td>
+        <td>Company</td>
+        <td colspan = 4>Description</td>
+        <td>Admin Note</td>
+    </tr>
+    {% endif %}
+    
+    {% for p in lSigEventsB %}
+    <tr><td></td><td></td>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.section}}{{p.id}}">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>    
+<tr>
+    <td></td>
+    <td>C.</td>
+    <td colspan = 6>BANCROFT HALL THEFTS: </td>
+    <td colspan = 1>{{ cSigEventsC }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lSigEventsC %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
+    
+    {% for p in lSigEventsC %}
+    <tr><td></td><td></td>
+        <td>{{ p.name }}</td><td>{{ p.name.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.section}}{{p.id}}">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+    
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>4.</td>
+    <td colspan = 6>Accountability at TAPS: </td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>A.</td>
+    <td colspan = 7>TAPS Report: </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Rank:</td>
+            <td>Present:</td>
+            <td>AA:</td>
+            <td>WKND:</td>
+            <td>MO:</td>
+            <td>UA:</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 1/C:</td>
+            <td>{{ cTAPS1P }}</td>
+            <td>{{ cTAPS1A }}</td>
+            <td>{{ cTAPS1W }}</td>
+            <td>{{ cTAPS1M }}</td>
+            <td>{{ cTAPS1U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 2/C:</td>
+            <td>{{ cTAPS2P }}</td>
+            <td>{{ cTAPS2A }}</td>
+            <td>{{ cTAPS2W }}</td>
+            <td>{{ cTAPS2M }}</td>
+            <td>{{ cTAPS2U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 3/C:</td>
+            <td>{{ cTAPS3P }}</td>
+            <td>{{ cTAPS3A }}</td>
+            <td>{{ cTAPS3W }}</td>
+            <td>{{ cTAPS3M }}</td>
+            <td>{{ cTAPS3U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td></td>
+            <td>MIDN 4/C:</td>
+            <td>{{ cTAPS4P }}</td>
+            <td>{{ cTAPS4A }}</td>
+            <td>{{ cTAPS4W }}</td>
+            <td>{{ cTAPS4M }}</td>
+            <td>{{ cTAPS4U }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total: </td>
+            <td>{{ cTotalP }}</td>
+            <td>{{ cTotalA }}</td>
+            <td>{{ cTotalW }}</td>
+            <td>{{ cTotalM }}</td>
+            <td>{{ cTotalU }}</td>
+            <td>ASSIGNED:</td>
+        </tr>
+    </table>
+</td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr>
+    <td></td>
+    <td>B.</td>
+    <td colspan = 6>Unauthorised Absences: {{ cU }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+    {% if lU %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
+    {% for p in lU %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.id}}ATT">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>C.</td>
+    <td colspan = 7>Authorised Absences - Special Liberty/Leave: {{ cA }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lA %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 4>Description</td>
+        <td>Admin Note</td></tr>
+    {% endif %}
+    {% for p in lA %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 4>{{ p.description }}</td>
+        <td>
+        {%if p.adminNote %}
+        <a href="#{{p.id}}ATT">INFO</a>
+        {% endif %}
+        </td></tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>    
+<tr>
+    <td></td>
+    <td>D.</td>
+    <td colspan = 7>Weekend List: {{ cW }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lW %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 5>Destination (Phone)</td>
+        </tr>
+    {% endif %}
+    {% for p in lW %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 5>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+ 
+<tr><td>&nbsp;</td></tr>   
+<tr>
+    <td></td>
+    <td>E.</td>
+    <td colspan = 7>Movement Orders: {{ cM }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>    
+    <table>
+        {% if lM %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Organization:</td><td>MO Code:</td><td colspan = 2>Assigned:</td><td>Depart:</td><td>Return:</td>
+            </tr>
+        {% endif %}
+        {% for p in lM %}
+        <tr><td></td><td></td>
+            <td>{{ p.organization }}</td><td>{{ p.movementOrderCode }}</td>
+            <td colspan = 2>
+                {% for x in p.moparticipant_set.all %}
+                {% if x.participant.company == cCompany %}
+                    {{ x.participant }} <br />
+                {% endif %}
+                {%endfor%}
+            </td><td>{{ p.departDate }}</td><td>{{ p.returnDateProjected }}</td>
+            </tr>
+        {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td></tr>
+        {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>F.</td>
+    <td colspan = 7>Pending Separation: {{ cPS }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lPS %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 5>Note</td></tr>
+    {% endif %}
+    {% for p in lPS %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 5>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>    
+<tr>
+    <td></td>
+    <td>G.</td>
+    <td colspan = 7>Separated: {{ cFS }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lFS %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td colspan = 5>Note</td></tr>
+    {% endif %}
+    {% for p in lFS %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td colspan = 5>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>H.</td>
+    <td colspan = 7>Restricted Personnel: {{ cR }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lR %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td>Days Remaining</td><td colspan = 4>Note</td></tr>
+    {% endif %}
+    {% for p in lR %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td> {{ p.daysRemaining }}</td><td colspan = 4>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>I.</td>
+    <td colspan = 7>Tours: {{ cT }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lT %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td>Tours Remaining</td><td colspan = 4>Note</td></tr>
+    {% endif %}
+    {% for p in lT %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td><td> {{ p.toursRemaining }}</td><td colspan = 4>{{ p.comment }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>    
+<tr>
+    <td></td>
+    <td>J.</td>
+    <td colspan = 7>Sick in Quarters and Medical Isolation: {{ cSChit }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lSChit %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td>Start:</td><td>End:</td><td colspan = 3>Diagnosis</td></tr>
+    {% endif %}
+    {% for p in lSChit %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td>
+        <td>{{ p.startDate }}</td><td> {{ p.endDate }}</td><td colspan = 3>{{ p.diagnosis }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>    
+<tr>
+    <td></td>
+    <td>K.</td>
+    <td colspan = 7>Medical Chits: {{ cMChit }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+    {% if lMChit %}
+    <tr><td></td><td></td>
+        <td>MIDN</td><td>Company</td><td>Start:</td><td>End:</td><td colspan = 3>Diagnosis</td></tr>
+    {% endif %}
+    {% for p in lMChit %}
+    <tr><td></td><td></td>
+        <td>{{ p.mid }}</td><td>{{ p.mid.company }}</td>
+        <td>{{ p.startDate }}</td><td> {{ p.endDate }}</td><td colspan = 3>{{ p.diagnosis }}</td>
+        </tr>
+    {%empty%}
+    <tr><td></td><td></td><td>None</td></tr>
+    {%endfor%}
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>L.</td>
+    <td colspan = 7>Candidates: {{ cCand }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lCand %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Name: </td>
+            <td>Host: </td>
+            <td>Room: </td>
+            <td>Source: </td>
+            <td>Arrive: </td>
+            <td colspan = 3>Admin Note: </td>
+        </tr>
+    {% endif %}
+    {% for p in lCand %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.host }}</td>
+            <td>{{ p.host.roomNumber }}</td>
+            <td>{{ p.source }}</td>
+            <td>{{ p.arriveDate }}</td>
+            <td colspan = 3>{{ p.adminNote }}</td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>5.</td>
+    <td colspan = 6>Inspections: </td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>A.</td>
+    <td colspan = 7>Watch Inspections/Surprise Duty Section Muster: {{ cDutySectionMuster }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lDutySectionMuster %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Watchstander: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lDutySectionMuster %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.inspectee }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>B.</td>
+    <td colspan = 7>Uniform Inspections: {{ cUniform }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lUniform %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Inspectee: </td>
+            <td>Score: </td>
+            <td>Pass/Fail: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lUniform %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.mid }}</td>
+            <td>{{ p.score }}/19</td>
+            <td>
+                {% if p.fail %}Fail{% else %}Pass{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>C.</td>
+    <td colspan = 7>Room Inspections: {{ cRoom }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lRoom %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Room: </td>
+            <td>Score:</td>
+            <td>Pass/Fail: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lRoom %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.room }}</td>
+            <td>{{ p.score }}/23</td>
+            <td>
+                {% if p.fail %}Fail{% else %}Pass{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+    
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>D.</td>
+    <td colspan = 7>Bed Checks: {{ cBedCheck }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lBedCheck %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Room: </td>
+            <td>Present:</td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lBedCheck %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.room }}</td>
+            <td>{{ p.scoreEarned }}/{{ p.room.maxOccupants }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>E.</td>
+    <td colspan = 7>Study Hour Checks: {{ cStudyHour }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lStudyHour %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Room: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lStudyHour %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.room }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>F.</td>
+    <td colspan = 7>Restrictee Checks: {{ cRestCheck }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td colspan = 9>
+    <table>
+    {% if lRestCheck %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>MIDN: </td>
+            <td>Room: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lRestCheck %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.inspectee }}</td>
+            <td>{{ p.inspectee.roomNumber }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td></td>
+    <td>G.</td>
+    <td colspan = 7>BAC Checks: {{ cBAC }}</td>
+</tr>
+<tr><td>&nbsp;</td></tr> 
+
+<tr><td colspan = 9>
+    <table>
+    {% if lBAC %}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>MIDN: </td>
+            <td>SAT/UNSAT: </td>
+            <td>Inspector: </td>
+            <td>Comments: </td>
+        </tr>
+    {% endif %}
+    {% for p in lBAC %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ p.inspectee }}</td>
+            <td>
+                {% if p.SAT %}SAT{% else %}UNSAT{%endif%}
+            </td>
+            <td>{{ p.inspector }} </td>
+            <td>{{ p.comment }} </td>
+        </tr>
+    {%empty%}
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>None</td>
+        </tr>
+    {%endfor%}
+    </table>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>6.</td>
+    <td colspan = 6>Material Readiness: 0</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>7.</td>
+    <td colspan = 6>Material Readiness: 0</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>8.</td>
+    <td colspan = 6>Company Intramural Sports Results: 0</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+    
+<tr><td>&nbsp;</td></tr>
+<tr>
+    <td>9.</td>
+    <td colspan = 6>Next Duty Day Significant Events: 0</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+</table>
+
+<ol>
+    {% for p in lSigEventsA %}
+    <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+    {% for p in lSigEventsB %}
+    <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+    {% for p in lSigEventsC %}
+    <li><a name="{{p.section}}{{p.id}}">{{ p.adminNote }}</a></li>
+    {%endfor%}
+    {% for p in lUA %}
+    <li><a name="{{p.id}}ATT">{{ p.comment }}</a></li>
+    {%endfor%}
+    {% for p in lA %}
+    <li><a name="{{p.id}}ATT">{{ p.comment }}</a></li>
+    {%endfor%}
+
+</ol>
+
+{% endblock %}
+

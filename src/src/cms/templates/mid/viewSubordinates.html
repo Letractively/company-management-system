@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Subordinates{% endblock %}
+{% block content %}
+
+<h3>Review Subordinates:</h3>
+
+<table>
+    <tr>
+        <td>MIDN:</td>
+        <td>Squad:</td>
+        <td>Platoon:</td>
+        <td>Duty Section:</td>
+        <td>Room:</td>
+        <td>AcSat:</td>
+        <td>PRTSat:</td>
+        <td>CQPR</td>
+        <td>SQPR</td>
+        <td>Performance:</td>
+        <td>Conduct:</td>
+        <td>PRT:</td>
+        <td>Phone: </td>
+        <td>Details:</td>
+    </tr>
+
+{% for p in lMids %}
+    <tr>
+        <td>{{ p }}</td>
+        <td>{{ p.squad }}</td>
+        <td>{{ p.platoon }}</td>
+        <td>{{ p.dutySection }}</td>
+        <td>{{ p.roomNumber }}</td>
+        <td>{{ p.acSAT }}</td>
+        <td>{{ p.PRTSat }}</td>
+        <td>{{ p.CQPR }}</td>
+        <td>{{ p.SQPR }}</td>
+        <td>{{ p.performanceGrade }}</td>
+        <td>{{ p.conductGrade }}</td>
+        <td>{{ p.PRT }}</td>
+        <td>{{ p.phoneNumber }}</td>
+        <td>
+            <form action="listDetails" method="post">
+            {% csrf_token %}
+            <input type = "hidden" name = "id" value = "{{ p.alpha }}" />
+            <input type="submit" value="View Details" />
+            </form>
+        </td>
+    </tr>    
+{% endfor %}
+</table>
+
+
+{% endblock %}
+
