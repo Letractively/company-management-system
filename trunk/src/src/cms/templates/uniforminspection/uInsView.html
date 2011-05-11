@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Uniform Inspection{% endblock %}
+{% block content %}
+
+<h1>Uniform Inspection for {{ cMid.fName }} {{ cMid.LName }}, submitted on {{ cuIns.inspectionDate }}.</h1>
+
+<table>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.groomingShave %} checked {% endif %}/></td>
+        <td> Grooming: Shaved </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.groomingLength %} checked {% endif %}/></td>
+        <td> Grooming: Hair within regs </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.groomingAppearance %} checked {% endif %}/></td>
+        <td> Grooming: Neat appearance </td>
+    </tr>
+    
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.missingItems %} checked {% endif %}/></td>
+        <td><br /> Uniform: No missing articles </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.appearance %} checked {% endif %}/></td>
+        <td> Uniform: Neat appearance </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.IPs %} checked {% endif %}/></td>
+        <td> Uniform: No IP-s present </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.dust %} checked {% endif %}/></td>
+        <td> Uniform: No specks of dust/dirt </td>
+    </tr>
+
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.coverDirtRing %} checked {% endif %}/></td>
+        <td><br /> Cover: Clean </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.coverCleanBill %} checked {% endif %}/></td>
+        <td> Cover: No scratches on bill </td>
+    </tr>
+    
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.ribbons %} checked {% endif %}/></td>
+        <td><br /> Shirt: Ribbons/nametag properly placed/not tarnished </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.shirtInsigniaPlacement %} checked {% endif %}/></td>
+        <td> Shirt: Collar devices properly placed/not tarnished </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.shirtProperTie %} checked {% endif %}/></td>
+        <td> Shirt: Good tie knot/neck tab </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.IDProperlyDisplayed %} checked {% endif %}/></td>
+        <td> Shirt: Proper ID placement </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.shirtUndershirt %} checked {% endif %}/></td>
+        <td> Shirt: No undershirt showing</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.creasesPresent %} checked {% endif %}/></td>
+        <td> Shirt: Good creases </td>
+    </tr>
+    
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.beltBuckleTip %} checked {% endif %}/></td>
+        <td><br /> Belt: Buckle shiny and not scratched </td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" disabled = "true" {% if cuIns.gigLine %} checked {% endif %}/></td>
+        <td> Belt: Good gig-line </td>
+    </tr>
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.trousersProperLength %} checked {% endif %}/></td>
+        <td><br /> Trousers: Proper length/fit </td>
+    </tr>
+    <tr>
+        <td><br /><input type="checkbox" disabled = "true" {% if cuIns.shinedShoes %} checked {% endif %}/></td>
+        <td><br /> Shoes: Well shined </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br /><br />Comment: {{ cuIns.other }} </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Inspector: {{ cuIns.inspector.LName }} ({{ cuIns.inspector.alpha }}) </td>
+    </tr>
+    
+    <tr>
+        <td colspan = 2><br />Result: {% if cuIns.fail %}FAIL{% else %}PASS{% endif %}, {{ cuIns.score }}/19 </td>
+    </tr>
+    
+</form>
+</table>
+
+{% endblock %}

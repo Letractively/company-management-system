@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Password Reset{% endblock %}
+
+{% block content %}
+
+<h3>Select user for Password Reset</h3>
+
+<form action="passReset" method="post">
+{% csrf_token %}
+    <select name = 'alpha'>    
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
+        {% endfor %}
+    </select><br /><br />
+    <input type="submit" value="Reset Password" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Modify user{% endblock %}
+
+{% block content %}
+
+<h3>Select user from the list, or add a new user</h3>
+
+<form action="saveUser" method="post">
+{% csrf_token %}
+    <table>
+    {% if not cMid %}
+        <tr><td>Alpha:</td><td><input type = "text" name = "alpha" size=6 /></td></tr>
+        <tr><td>First name:</td><td><input type = "text" name = "fName" size=20 /></td></tr>
+        <tr><td>Middle initial:</td><td><input type = "text" name = "mName" size=1 /></td></tr>
+        <tr><td>Last name:</td><td><input type = "text" name = "lName" size=20 /></td></tr>
+        <tr>
+            <td>Room number:</td>
+            <td>
+                <select name = "roomNumber" />
+                    {% for p in lRooms %}
+                        <option value="{{ p.roomNumber }}">{{ p.roomNumber }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr><td>Phone number:</td><td><input type = "text" name = "phoneNumber" size=10 /></td></tr>
+        <tr><td>Weekends granted:</td><td><input type = "text" name = "weekends" size=2 />
+                <input type = "hidden" name = "newUser" value = "true" /></td></tr>  
+    {% else %}
+        <tr><td>First name:</td><td><input type = "text" name = "fName" value = "{{ cMid.fName }}" size=20 />
+                <input type = "hidden" name = "alpha" value = "{{ cMid.alpha }}" /></td></tr>
+        <tr><td>Middle initial:</td><td><input type = "text" name = "mName" value = "{{ cMid.mName }}" size=1 /></td></tr>
+        <tr><td>Last name:</td><td><input type = "text" name = "lName"  value = "{{ cMid.LName }}" size=20 /></td></tr>
+        <tr>
+            <td>Room number:</td>
+            <td>
+                <select name = "roomNumber">
+                    <option value="{{ cMid.roomNumber }}">{{ cMid.roomNumber }}</option>
+                    {% for p in lRooms %}
+                        <option value="{{ p.roomNumber }}">{{ p.roomNumber }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr><td>Phone number:</td><td><input type = "text" name = "phoneNumber" value = "{{ cMid.phoneNumber }}" size=10 /></td></tr>
+        <tr><td>Weekends granted:</td><td><input type = "text" name = "weekends" value = "{{ cMid.weekends }}" size=2 />
+                <input type = "hidden" name = "newUser" value = "false" /></td></tr>
+    {% endif %}
+    
+    <tr><td colspan = 2><input type="submit" value="Save" /></td></tr>
+    </table>
+</form>
+
+{% endblock %}

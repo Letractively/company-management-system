@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}CMS - Login{% endblock %}
+
+
+{% block content %}
+  <h1>Login to the Company Management Database</h1>
+  
+  {% if error_message %}
+      <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+  
+  {% if repeat %}
+      <h3>Incorrect credentials. Try again.</h3>
+  {% endif %}
+  
+  {% if noUser %}
+      <h3>User exists, but is not in MIDS database. Contact your system administrator.</h3>
+  {% endif %}
+  
+  <form action="login" method="post">
+      {% csrf_token %}
+     <input type="text" name="username" /><br /><br />
+     <input type="password" name="password" /><br /><br />
+     <input type="submit" value="Login" />
+     <input type="button" value="Forgot Password?" onclick="alert('Please Contact Your Company Administration Officer');" />
+  </form>
+  
+<p><a href = "http://code.google.com/p/company-management-system/issues/">Please submit an issue to our tracker here</a></p>
+<p> All mids have accounts to login with for testing purposes in the format (user/pass).  The passwords for all the users is 1, so m113666/1 will work with your alpha.</p>
+<p> The password reset form resets the users password to their alpha </p>
+<p> Seriously, any mid should work... we put ~4000+ users into the system </p>
+<p> The first thing that needs to be done upon login is modify your personal information and give yourself a room.  We know that you won't get a list that contain's your actual room.  Just roll with it and give yourself a room.  The second thing you need to do is change your password.  Having the number 1 as a password - that everyone knows you have - is kinda rediculous. </p>
+
+<p> Please look at our <a href = "https://code.google.com/p/company-management-system/w/list">wiki</a> for further functional information.  We know it kinda sucks right now.  It will be filling out with content soon </p>
+
+<p>Thanks!</p>
+  
+{% endblock %}

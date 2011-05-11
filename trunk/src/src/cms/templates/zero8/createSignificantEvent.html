@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Enter a new Significant Event:</h3>
+
+<table>
+<form action="saveSignificantEvent" method="post">
+{% csrf_token %}
+
+<tr>
+    <td>MIDN:</td>
+    <td>
+        <select name = "alpha">
+        {% for p in lMids %}
+            <option value = "{{ p.alpha }}">{{ p }}</option>
+        {% endfor %}
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Type:</td>
+    <td>
+        <select name = "section">
+            <option value = "A">Family Crisis/Hospitalization/Death Notifications</option>
+            <option value = "B">Major Conduct Offense</option>
+            <option value = "C">Bancroft Hall Thefts</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Description/Action:</td>
+    <td><input type = "text" name = "description" size = 70</td>
+</tr>
+<tr>
+    <td>Admin Note:</td>
+    <td><textarea cols = 80 rows = 6 name = "adminNote"></textarea></td>
+</tr>
+<tr>
+    <td colspan = 2><input type="submit" value="Save" /></td>
+</tr>
+</form>
+
+</table>
+
+{% endblock %}
+

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Form-1{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Form-1 module.</h1>
+
+<h3>Enter Form-1: </h3>
+
+{% if firstie%}
+<table>
+<form action="form1Save" method="post">
+{% csrf_token %}
+    <tr>
+        <td>
+            Recipient:
+        </td>
+        <td>
+            <select name = 'mid'>    
+            {% for p in lMids %}
+                <option value="{{ p.alpha }}">{{ p }} </option>
+            {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr><td>Form type: </td>
+        <td>
+            <select name = "type">
+                <option value = "P">Positive</option>
+                <option value = "N">Negative</option>
+            </select>
+        </td>
+    </tr>
+    <tr><td>Reason: </td>
+        <td>
+        <select name = "reason">
+            <option value = "A">Appearance</option>
+            <option value = "B">Bearing</option>
+            <option value = "MT">Motivation</option>
+            <option value = "CP">Competence</option>
+            <option value = "PRO">Professionalism</option>
+            <option value = "PHY">Physical Ability</option>
+            <option value = "D">Decision Making</option>
+            <option value = "CM">Commitment</option>
+            <option value = "MO">Moral</option>
+        </select>
+        </td>
+    </tr>
+    <tr><td>Comment: </td>
+        <td>
+            <textarea name = "comment" cols = 80 rows = 6></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td colspan = 2>
+            <input type = "submit" value="Submit Form-1" />
+        </td>
+    </tr>
+</form>
+</table>
+{% endif %}
+
+<h3>History of Form-1s: </h3>
+<table>
+{% for p in lFormOnes %}
+    <tr>
+        <form action="form1View" method = "post">
+        {% csrf_token %}
+        <td>{{ p.get_formType_display }}</td>
+        <td>{{ p.formDate }}</td>
+        <td>{{ p.get_reason_display }}</td>
+        <td><input type = "hidden" name = "id" value = "{{ p.id }}" />
+            <input type = "submit" value = "View Form-1" /></td>
+        </form>
+    </tr>
+{% empty %}
+    <tr><td>You have not been given any Form-1s.</td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}

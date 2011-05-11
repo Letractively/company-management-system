@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Current Room Assignments for {{ cCompany|numberToText }} Company: {% endblock %}
+
+{% block content %}
+<table>
+<form action= "saveRoomAssignment" method="post"> 
+{% csrf_token %}
+
+    <tr>
+        <td>MIDN</td>
+        <td>Current Room</td>
+        <td>Change?</td>
+    </tr>
+{% for p in lMids %}
+    <tr>
+        <td>{{ p }}</td>
+        <td>{{ p.roomNumber }}</td>
+        <td>
+            <select name = "{{ p.alpha }}P">
+                <option value="0000">No change</option>
+                
+                {% for x in lRooms %}
+                    <option value= "{{ x.roomNumber }}">{{ x }}</option>
+                {%endfor%}
+                
+            </select>
+        </td>
+    </tr>
+{% empty %}
+    <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
+{% endfor %}
+    <tr>
+        <td colspan="3">
+            <input type="submit" value="Save" />
+        </td>
+    </tr>
+</form>
+</table>
+   
+{% endblock %}

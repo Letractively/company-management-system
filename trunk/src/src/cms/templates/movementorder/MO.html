@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}MO Module{% endblock %}
+
+{% block content %}
+
+<h3>Select MO from the list, or add a new MO</h3>
+
+{% if not cMO %}
+<form action="checkOutMO" method="post">
+{% csrf_token %}
+    <select name = 'code'>
+        <option value="0000000">Add new MO</option>     
+        {% for p in lAllMO %}
+            <option value="{{ p.movementOrderCode }}">{{ p.movementOrderCode }}: {{ p.organization }} {{ p.departDate }} - {{ p.returnDateProjected }}</option>
+        {% endfor %}
+    </select>
+    
+    <p></p>If entering a new MO, please fill out those fields; if departing on an already
+    entered MO, skip the fields and just click "Check-out on MO."</p><br /><br />
+    
+    <table>
+        <tr><td>Movement Order Code:</td><td><input type = "text" name = "movementOrderCode" size = 7 /></td></tr>
+        <tr><td>Organization:</td><td><input type = "text" name = "organization" /></td></tr>
+        <tr><td>Projected Return Date:</td><td><input type = "text" class="datepicker" readonly="readonly" name = "returnDateProjected" /></td></tr>
+        <tr><td>Projected Return Time:</td><td><input type = "text" class="timepicker" readonly="readonly" name = "returnTimeProjected" /></td></tr>
+        <tr><td>Admin Notes:</td><td><textarea cols = 80 rows = 6 name = "adminNotes"></textarea></td></tr>
+    </table>
+    
+    <input type="submit" value="Check-out on MO" />
+</form>
+
+{%else%}
+<form action="checkInMO" method="post">
+{% csrf_token %}
+    You are currently on the MO number {{ cMO.movementOrderCode }} with {{ cMO.organization }}.<br />
+    Your projected return date is {{ cMO.returnDateProjected }}.<br />
+    Would you like to check back from the MO and close it?<br /><br />
+    <input type="hidden" value = "{{ cMO.movementOrderCode }}" name = "code">
+    <input type="submit" value="Check-in from MO and close it." />
+</form>
+{%endif%}
+
+<h3>MO-s so far: </h3>
+<table>
+{% for p in lMO %}
+    <tr>
+        <td>{{ p.movementOrderCode }}</td>
+        <td>{{ p.organization }}</td>
+        <td>{{ p.departDate }} - {{ p.returnDate }}</td>
+        <td>{{ p.adminNote }}</td>
+    </tr>
+{% empty %}
+    <tr><td>You have not been on any MO-s.</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

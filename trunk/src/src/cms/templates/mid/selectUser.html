@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Select User{% endblock %}
+
+{% block content %}
+
+<h3>Select user from the list, or add a new user</h3>
+
+<form action="modifyUser" method="post">
+{% csrf_token %}
+    <select name = 'alpha'>
+        <option value="000000">Add new user</option>     
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.fName }} {{ p.mName }} {{ p.LName }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Edit/Add User" />
+</form>
+
+{% endblock %}
