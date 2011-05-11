@@ -1,5 +1,5 @@
 #companywatch veiws.py
-# Author: Michael Harrison
+# Author: Michael Harrison  edited on 10May2011
 
 from mid.models import Mid
 from mid.models import Billet
