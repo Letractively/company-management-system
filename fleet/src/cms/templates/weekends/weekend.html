@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Weekends Module{% endblock %}
+{% block content %}
+<h1>Welcome to the weekends module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<p>You have been awarded {{ cMid.weekends }} weekends. {{ cMid.weekendsComment }}</p>
+<p>You have taken {{ WT }} weekends; you have {{ WL }} weekends left.</p>
+
+{% if not cWeekend %}
+    {% if late %}
+        <p>You can only request a weekend before Thursday. Sorry, them are the rules. </p> 
+    {% else %}
+    
+        {% if WE %}
+            Would you like to request a weekend from {{ NWB }} to {{ NWE }}?
+            <br /><br />
+            <form action="reqWeekend" method="post">
+                {% csrf_token %}
+                Where are you going? <input type = "input" name = "location" />
+                <br /><br />
+                <input type = "submit" value = "Request a weekend" />
+            </form>
+        {% endif %}
+    
+        {% if not WE %}
+            <p>Sorry, you are NOT eligible for a weekend.</p>
+        {% endif %}
+    
+    {% endif %}
+{% else %}
+    
+    {% if cWeekend.status == "P" %}
+        You have applied for the weekend from {{ NWB }} to {{ NWE }}. 
+        <br /><br />
+        Pending approval by your Company Officer... 
+        <br /><br />
+        
+        <form action="cancelReqWeekend" method="post"> 
+        {% csrf_token %}
+             <input type = "submit" value = "Cancel weekend request" />
+        </form>
+    {% endif %}
+    
+    {% if cWeekend.status == "A" %}
+        You have been approved for the weekend from {{ NWB }} to {{ NWE }}.
+    {% endif%}
+    
+    {% if cWeekend.status == "D" %}
+        You have been disapproved for the weekend from {{ NWB }} to {{ NWE }}.
+    {% endif%}
+
+{% endif %}
+
+<h3>Weekends taken so far: </h3>
+<table>
+{% for p in lWeekends %}
+    {% if p.status != "P" %}
+        <tr>
+            <td>{{ p.startDate }} - {{ p.endDate }}</td>
+            <td>{{ p.contactNumber }}</td>
+            <td>{{ p.location }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
+    {% endif %}
+{% empty %}
+    <tr><td>You have not taken any weekends.</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

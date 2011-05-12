@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block title %}Current weekends counts for {{ cCompany|numberToText }} Company: {% endblock %}
+
+{% block content %}
+<table>
+<form action="saveWeekendCount" method="post"> 
+{% csrf_token %}
+
+{% for p in lMids %}
+    <tr>
+        <td>{{ p.alpha }}</td>
+        <td>{{ p.LName }}, {{ p.fName }} {{ p.mName }}</td>
+        <td><input type="text" size=2 value="{{ p.weekends }}" name="{{ p.alpha }}C"</td>
+        <td><input type="text" size=100 value="{{ p.weekendsComment }}" name="{{ p.alpha }}Comm"</td>
+    </tr>
+{% empty %}
+    <tr><td>No midshipmen found. Contact your system administrator. </td></tr>
+{% endfor %}
+{% if lMids %}    
+    <tr>
+        <td colspan="8">
+            <input type="submit" value="Save" />
+        </td>
+    </tr>
+{% endif %}
+{% endblock %}

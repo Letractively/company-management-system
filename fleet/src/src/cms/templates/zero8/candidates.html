@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Check-in a MIDN Candidate:</h3>
+
+<table>
+<form action="saveCandidate" method="post">
+{% csrf_token %}
+
+<tr>
+    <td>Host:</td>
+    <td>
+        <select name = "alpha">
+        {% for p in lMids %}
+            <option value = "{{ p.alpha }}">{{ p }}</option>
+        {% endfor %}
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>Name:</td>
+    <td>
+        <input type = "text" name = "name" />
+    </td>
+</tr>
+<tr>
+    <td>Source:</td>
+    <td>
+        <input type = "text" name = "source" />
+    </td>
+</tr>
+<tr>
+    <td>Admin Note:</td>
+    <td><textarea cols = 80 rows = 6 name = "adminNote"></textarea></td>
+</tr>
+<tr>
+    <td colspan = 2><input type="submit" value="Check-in" /></td>
+</tr>
+
+</form>
+</table>
+
+<h3>Current candidate check-out: </h3>
+<table>
+    {% if lCand %}
+    <tr>
+        <td>Name: </td>
+        <td>Host: </td>
+        <td>Source: </td>
+        <td>Arrival: </td>
+        <td>Admin Note: </td>
+    </tr>
+    {% endif %}
+
+    {% for p in lCand %}
+        <tr>
+        <form action="removeCandidate" method="post">
+        {% csrf_token %}
+            <td>{{ p.name }}</td>
+            <td>{{ p.host }} </td>
+            <td>{{ p.source }}</td>
+            <td>{{ p.arriveDate }} </td>
+            <td>{{ p.adminNote }} </td>
+            <td><input type = "hidden" name = "id" value = "{{ p.id }}">
+                <input type = "submit" value="Check-out" /></td>
+        </form>
+        </tr>
+    {% empty %}
+        <tr><td colspan = 6>Currently there are no candidates in this company.</td></tr>
+   {%endfor%}
+</table>
+
+{% endblock %}
+

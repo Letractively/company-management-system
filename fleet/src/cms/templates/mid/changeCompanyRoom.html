@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Move room to another company's jurisdiction{% endblock %}
+
+{% block content %}
+
+<h3>Move a room to another company's jurisdiction.</h3>
+
+<form action="saveChangeCompanyRoom" method="post">
+{% csrf_token %}
+    <select name = 'roomNumber'>    
+        {% for p in lRooms %}
+            <option value="{{ p.roomNumber }}"> {{ p }} </option>
+        {% empty %}
+            <option value = "null">N/A</option>
+        {% endfor %}
+    </select><br /><br />
+    
+    New company: <input type = "input" name = "company" size = 2/><br /><br />
+    
+    <input type="submit" value="Move companies" />
+</form>
+
+{% endblock %}

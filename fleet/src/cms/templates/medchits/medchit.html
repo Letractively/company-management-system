@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Medical Chits{% endblock %}
+{% block content %}
+
+<h1>Welcome to the medical Chits module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+{% if cChit %}
+    You are currently on {{ cChit.disposition }} due to {{cChit.diagnosis}}.<br />
+    Your chit will expire on {{ cChit.endDate }}. 
+{% endif %}
+
+<h3>Enter a medical chit:</h3>
+
+<form action="medChitSubmit" method="post">
+{% csrf_token %}
+<table>
+    <tr><td>Start date:</td><td><input type = "text" class="datepicker" 
+    id="departDate" name = "startDate" size=10 readonly="readonly" /></td></tr>
+    <tr><td>End date:</td><td><input type = "text" class="datepicker" 
+    id="returnDate name = "endDate" size=10 readonly="readonly" /></td></tr>
+    <tr><td>Diagnosis:</td><td><input type = "text" name = "diagnosis" size = 20 /></td></tr>
+    <tr>
+        <td>Disposition:</td>
+        <td>
+                <select name = "disposition" />
+                    <option value="SIQ">SIQ</option>
+                    <option value="CLA">SIQ with class option</option>
+                    <option value="LLD">Light/Limited Duty</option>
+                </select>
+            </td>
+    </tr>
+    <tr><td>Admin notes:</td><td><input type = "text" name = "adminNotes" size=20 /></td></tr>
+    <tr><td colspan = 2><input type="submit" value="Save" /></td></tr>
+</table>
+</form>
+
+<h3>Past medical chits: </h3>
+<table>
+{% for p in lChits %}
+    <tr>
+        <td>{{ p.startDate }} - {{ p.endDate }}</td>
+        <td>{{ p.get_disposition_display }}</td>
+        <td>{{ p.diagnosis }}</td>
+        <td>{{ p.adminNotes }}</td>
+    </tr>
+{% empty %}
+    <tr><td>You have not been issued any medical chits.</td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}

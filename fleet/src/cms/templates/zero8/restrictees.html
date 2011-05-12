@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}0800 REPORT{% endblock %}
+{% block content %}
+
+<h3>Record a Restrictee Check:</h3>
+
+<table>
+    {% if lRest %}
+        <tr>
+            <td>Mid: </td>
+            <td>Start date: </td>
+            <td>Days Awarded: </td>
+            <td>Days Remaining: </td>
+            <td>Admin Notes: </td>
+        </tr>
+    {% endif %}
+
+    {% for p in lRest %}
+            <tr>
+                <td>{{ p.mid }}</td>
+                <td>{{ p.startDate }}</td>
+                <td>{{ p.daysAwarded }} days</td>
+                <td>{{ p.daysRemaining }} days</td>
+                <td>{{ p.adminNotes }}</td>
+                <form action="saveRestrictees" method="post">
+                {% csrf_token %}
+                    <td>
+                        <input type = "hidden" name = "alpha" value = "{{ p.mid.alpha }}" />
+                        <input type="submit" value="Successful Check" />
+                    </td>
+                </form>
+            </tr>
+    {% empty %}
+            <tr><td>No restrictees to check. </td></tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

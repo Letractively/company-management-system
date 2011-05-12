@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Attendance{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Attendance module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Enter a new attendance record:</h3>
+
+<table>
+<form action="saveEvent" method="post">
+{% csrf_token %}
+<tr><td>Date and Time:</td><td><input type = "text" name = "dateTime"</td></tr>
+
+<tr><td>Location:</td><td><input type = "text" name = "location"</td></tr>
+<tr><td>Type:</td><td>
+    <select name = 'type'>
+        <option value = "FOR">Forrestal Lecture</option>
+        <option value = "DRL">Drill</option>
+        <option value = "CAL">Officers Call</option>
+        <option value = "OTH">Other Special Event</option>
+    </select>
+
+</td></tr>
+    <tr><td colspan = 2><input type="submit" value="Save" /></td></tr>
+</form>
+
+</table>
+
+{% endblock %}
+
