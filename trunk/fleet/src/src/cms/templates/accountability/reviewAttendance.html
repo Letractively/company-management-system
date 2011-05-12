@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Attendance{% endblock %}
+{% block content %}
+
+<h1>Welcome to the Attendance module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Review attendance record for {{ cEvent.dateTime }} {{ cEvent.get_type_display }} {{ cEvent.location }}</h3>
+
+<table>
+{% for p in lAttendance %}
+    <tr>
+        <td> {{ p.mid }} </td>
+        <td> {{ p.get_status_display }}</td>
+    </tr>
+{%empty%}
+    Zero attendance. Huh?
+{%endfor%}
+</table>
+
+{% endblock %}

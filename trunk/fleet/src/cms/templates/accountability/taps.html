@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}TAPS{% endblock %}
+{% block content %}
+
+<h1>Welcome to the TAPS module, {{ cMid.fName }} {{ cMid.LName }}.</h1>
+
+<h3>Enter TAPS:</h3>
+
+{{ cEvent.dateTime }}
+{{ cEvent.type }}
+
+<table>
+
+</tr>
+{% for p in lAttendance%}
+    <tr>
+    <td>{{ p.mid }}</td>
+    <td>
+        <form action="saveTAPS" method="post">
+        {% csrf_token %}
+        <select name = "{{ p.mid.alpha }}A">
+            <option value = "P">Present</option>
+            <option value = "A">Absent</option>
+            <option value = "U">U/A</option>
+            <option value = "E">Excused</option>
+        </select>
+    </td>
+    <td><input type = "hidden" name = "alpha" value = "{{ p.mid.alpha }}">
+        <input type="submit" value="Confirm Status" /></td></form>
+    </tr>
+{%endfor%}
+</table>
+
+{% endblock %}

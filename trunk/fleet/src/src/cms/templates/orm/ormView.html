@@ -1,0 +1,535 @@
+{% extends "base.html" %}
+{% block title %}ORM Chits{% endblock %}
+{% block content %}
+
+<h1>Reviewing ORM Chit {{ cChit.id }}.</h1>
+
+        <table border="1" cellpadding="1" cellspacing="0" style="width: 800px; " summary="ORM Safety Worksheet">
+            <caption>
+                ORM CHIT</caption>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Name:</strong></td>
+                    <td colspan="2">
+                        &nbsp;</td>
+                    <td colspan="2">
+                        <strong>Leave Address:</strong></td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Date of Departure:</strong></td>
+                    <td>
+                        {{cChit.dateDepart}}</td>
+                    <td style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                    <td rowspan="2">
+                        Street</td>
+                    <td>
+                        {{cChit.street1}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Date of Return:</strong></td>
+                    <td>
+                        {{cChit.dateReturn}}</td>
+                    <td style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                    <td>
+                        {{cChit.street2}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Total Days of Leave:</strong></td>
+                    <td>
+                        &nbsp;</td>
+                    <td style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                    <td>
+                        City</td>
+                    <td>
+                        {{cChit.city}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Total Days of Travel:</strong></td>
+                    <td>
+                        {{cChit.daysTravel}}</td>
+                    <td style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                    <td>
+                        State</td>
+                    <td>
+                        {{cChit.state}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Travel Ratio:</strong></td>
+                    <td>
+                        &nbsp;</td>
+                    <td style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                    <td>
+                        Zip</td>
+                    <td>
+                        {{cChit.zip}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="1">
+                        Travel Ratio should be less than 1/3 of your total leave period</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align: center; ">
+                        <strong>Leisure Activities</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="3" rowspan="1" style="text-align: center; ">
+                        <strong>Activity</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Duration</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>RAC</strong></td>
+                </tr>
+                
+                {% for p in lLeisure %}               
+                <tr>
+                    <td colspan="3" rowspan="1">
+                        {{ p.activity }}</td>
+                    <td>
+                        {{ p.duration }} </td>
+                    <td>
+                        {{ p.RAC }}</td>
+                </tr>      
+                {%endfor%}
+                
+                <tr>
+                    <td colspan="5" style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="5" style="text-align: center; ">
+                        <strong>Methods of Travel</strong></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; ">
+                        <strong>Departure Time</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Arrival Time</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Method</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>Distance (miles)</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>RAC</strong></td>
+                </tr>            
+                
+                {% for p in lTravel %}
+                <tr>
+                    <td>
+                        {{ p.estimatedDepartTime }}</td>
+                    <td>
+                        {{ p.estimatedArrivalTime }} </td>
+                    <td>
+                        {{ p.methodOfTravel }}</td>
+                    <td>
+                        {{ p.distance }}</td>
+                    <td>
+                        {{ p.RAC }}</td>
+                </tr>              
+                {%endfor%}
+                
+                 <tr>
+                    <td colspan="5">
+                        Use the RAC chart below to calculate the risks of your travel.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; ">
+                        <strong>Hazard Severity</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>A (Likely to Occur)</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>B (Probably will Occur)</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>C (May Occur)</strong></td>
+                    <td style="text-align: center; ">
+                        <strong>D (Unlikely to Occur)</strong></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; ">
+                        <strong>I</strong></td>
+                    <td style="text-align: center; ">
+                        1</td>
+                    <td style="text-align: center; ">
+                        1</td>
+                    <td style="text-align: center; ">
+                        2</td>
+                    <td style="text-align: center; ">
+                        3</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; ">
+                        <strong>II</strong></td>
+                    <td style="text-align: center; ">
+                        1</td>
+                    <td style="text-align: center; ">
+                        2</td>
+                    <td style="text-align: center; ">
+                        3</td>
+                    <td style="text-align: center; ">
+                        4</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; ">
+                        <strong>III</strong></td>
+                    <td style="text-align: center; ">
+                        2</td>
+                    <td style="text-align: center; ">
+                        3</td>
+                    <td style="text-align: center; ">
+                        4</td>
+                    <td style="text-align: center; ">
+                        5</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; ">
+                        <strong>IV</strong></td>
+                    <td style="text-align: center; ">
+                        3</td>
+                    <td style="text-align: center; ">
+                        4</td>
+                    <td style="text-align: center; ">
+                        5</td>
+                    <td style="text-align: center; ">
+                        5</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="5" style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="5">
+                        <strong>Category I</strong> - The hazard may cause death.</td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <strong>Category II</strong> - The hazard may cause severe injury, illness, and/or property damage.</td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <strong>Category III</strong> - The hazard may cause minor injury, illness, and/or property damage.</td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <strong>Category IV</strong> - The hazard presents a minimal threat to personnel safety or health, and/or property.</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="background-color: rgb(204, 204, 204); ">
+                        &nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="3" rowspan="6">
+                        {{ cChit.riskMitigationPlan }}</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="3" rowspan="1" style="text-align: center; ">
+                        <strong>Reviewed by*</strong></td>
+                </tr>
+                
+<tr>
+    <td>Squad Leader: </td><td>{%if cChit.slApproval == None %}
+                                    PENDING
+                               {% else %}
+                                    {% if cChit.slApproval %} APPROVED {% endif %}
+                                    {% if not cChit.slApproval %} DENIED {% endif %}
+                               {%endif%}
+    </td>
+    <td colspan = 3>{{ cChit.slComment }}</td>
+</tr>
+
+{%if cChit.approvalLevel > 1 and cChit.approvalStatus > 1%}
+<tr>
+    <td>Platoon Commander: </td><td>{%if cChit.pcApproval == None %}
+                                    PENDING
+                               {% else %}
+                                    {% if cChit.pcApproval %} APPROVED {% endif %}
+                                    {% if not cChit.pcApproval %} DENIED {% endif %}
+                               {% endif %}
+    </td>
+    <td colspan = 3>{{ cChit.pcComment }}</td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 2 and cChit.approvalStatus > 2%}
+<tr>
+    <td>Safety Officer: </td><td>{%if cChit.safApproval == None %}
+                                    PENDING
+                               {% else %}
+                                    {% if cChit.safApproval %} APPROVED {% endif %}
+                                    {% if not cChit.safApproval %} DENIED {% endif %}
+                               {% endif %}
+    </td>
+    <td colspan = 3>{{ cChit.safComment }}</td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 3 and cChit.approvalStatus > 3%}
+<tr>
+    <td>Company Commander: </td><td>{%if cChit.ccApproval == None %}
+                                    PENDING
+                               {% else %}
+                                    {% if cChit.ccApproval %} APPROVED {% endif %}
+                                    {% if not cChit.ccApproval %} DENIED {% endif %}
+                               {% endif %}
+    </td>
+    <td colspan = 3>{{ cChit.ccComment }}</td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 4 and cChit.approvalStatus > 4%}
+<tr>
+    <td>SEL: </td><td>{%if cChit.selApproval == None %}
+                                     PENDING
+                               {% else %}
+                                    {%if cChit.selApproval %} APPROVED {%endif%}
+                                    {%if not cChit.selApproval %} DENIED {%endif%}
+                               {% endif %}
+    </td>
+    <td colspan = 3>{{ cChit.selComment }}</td>
+</tr>
+{%endif%}
+
+{%if cChit.approvalLevel > 5 and cChit.approvalStatus > 5%}
+<tr>
+    <td>Company Officer: </td><td>{%if cChit.coApproval == None %}
+                                    PENDING
+                               {% else %}
+                                    {% if cChit.coApproval %} APPROVED {% endif %}
+                                    {% if not cChit.coApproval %} DENIED {% endif %}
+                               {% endif %}
+    </td>
+    <td colspan = 3>{{ cChit.coComment }}</td>
+</tr>
+{%endif%}
+
+</tbody>
+</table>
+
+<table>
+
+{%if SL%}
+<tr>
+    <form action="approveChit" method="post">
+    {% csrf_token %}
+    <td>
+        <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+        <input type = "hidden" name = "level" value = "1" />
+        <input type = "hidden" name = "type" value = "orm" />
+        <select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 1 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if PC%}
+<tr>
+    <form action="approveChit" method="post">
+    {% csrf_token %}
+    <td>
+        <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+        <input type = "hidden" name = "level" value = "2" />
+        <input type = "hidden" name = "type" value = "orm" />
+        <select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 2 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if SAF%}
+<tr>
+    <form action="approveChit" method="post">
+    {% csrf_token %}
+    <td>
+        <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+        <input type = "hidden" name = "level" value = "3" />
+        <input type = "hidden" name = "type" value = "orm" />
+        <select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 3 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if CC%}
+<tr>
+    <form action="approveChit" method="post">
+    {% csrf_token %}
+    <td>
+        <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+        <input type = "hidden" name = "level" value = "4" />
+        <input type = "hidden" name = "type" value = "orm" />
+        <select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 4 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if SEL%}
+<tr>
+    <form action="approveChit" method="post">
+    {% csrf_token %}
+    <td>
+        <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+        <input type = "hidden" name = "level" value = "5" />
+        <input type = "hidden" name = "type" value = "orm" />
+        <select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 5 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+
+{%if CO%}
+<tr>
+    <form action="approveChit" method="post">
+    {% csrf_token %}
+    <td>
+        <input type = "hidden" name = "id" value = "{{ cChit.id }}" />
+        <input type = "hidden" name = "level" value = "6" />
+        <input type = "hidden" name = "type" value = "orm" />
+        <select name = "action">
+            <option value="1">Approve</option>
+            <option value="0">Deny</option>
+        </select>
+    </td>
+    <td>
+        <input type = "text" name = "comment" size = "20" />
+    </td>
+    <td>
+    {%if cChit.approvalLevel > 6 %}
+        <input type = "submit" value = "Recommend" />
+    {% else%}
+        <input type = "submit" value = "Complete" />
+    {% endif%}
+    </td>
+    </form>
+</tr>
+{%endif%}
+</table>
+
+{% endblock%}

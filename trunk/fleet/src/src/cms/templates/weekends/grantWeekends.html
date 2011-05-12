@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Manually add a midshipman to a weekend list{% endblock %}
+
+{% block content %}
+
+<h3>Select a user to manually add to the weekend list.</h3>
+<p>User will be granted an approved weekend from {{ NWB }} to {{ NWE }}.</p>
+
+<form action="commitWeekendGrant" method="post">
+{% csrf_token %}
+    <select name = 'alpha'>    
+        {% for p in lMids %}
+            <option value="{{ p.alpha }}">{{ p.alpha }} - {{ p.LName }}, {{ p.fName }} {{ p.mName }} </option>
+        {% empty %}
+            <option value = "null">N/A</option>
+        {% endfor %}
+    </select><br /><br />
+    
+    Weekend location? <input type = "input" name = "location" /><br /><br />
+    
+    <input type="submit" value="Grant Weekend" />
+</form>
+
+{% endblock %}
